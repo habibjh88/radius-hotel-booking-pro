@@ -108,7 +108,12 @@ function FeatureRow( { feature, enabled, missing, onChange } ) {
  * @param {boolean}  props.saving   Whether a save is in flight.
  * @return {JSX.Element} Section.
  */
-export default function ProFeaturesSection( { value, setField, save, saving } ) {
+export default function ProFeaturesSection( {
+	value,
+	setField,
+	save,
+	saving,
+} ) {
 	const isOn = ( key ) => !! value?.[ key ];
 
 	const missingFor = ( feature ) =>
@@ -140,34 +145,36 @@ export default function ProFeaturesSection( { value, setField, save, saving } ) 
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-4">
-				{ Object.entries( data.groups ).map( ( [ group, groupLabel ] ) => {
-					const features = data.features.filter(
-						( feature ) => feature.group === group
-					);
+				{ Object.entries( data.groups ).map(
+					( [ group, groupLabel ] ) => {
+						const features = data.features.filter(
+							( feature ) => feature.group === group
+						);
 
-					if ( ! features.length ) {
-						return null;
+						if ( ! features.length ) {
+							return null;
+						}
+
+						return (
+							<section key={ group } className="space-y-2">
+								<h3 className="m-0 text-sm font-semibold">
+									{ groupLabel }
+								</h3>
+								{ features.map( ( feature ) => (
+									<FeatureRow
+										key={ feature.key }
+										feature={ feature }
+										enabled={ isOn( feature.key ) }
+										missing={ missingFor( feature ) }
+										onChange={ ( next ) =>
+											toggle( feature.key, next )
+										}
+									/>
+								) ) }
+							</section>
+						);
 					}
-
-					return (
-						<section key={ group } className="space-y-2">
-							<h3 className="m-0 text-sm font-semibold">
-								{ groupLabel }
-							</h3>
-							{ features.map( ( feature ) => (
-								<FeatureRow
-									key={ feature.key }
-									feature={ feature }
-									enabled={ isOn( feature.key ) }
-									missing={ missingFor( feature ) }
-									onChange={ ( next ) =>
-										toggle( feature.key, next )
-									}
-								/>
-							) ) }
-						</section>
-					);
-				} ) }
+				) }
 
 				<Button disabled={ saving } onClick={ save }>
 					{ saving

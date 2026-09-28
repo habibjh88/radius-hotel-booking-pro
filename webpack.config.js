@@ -25,6 +25,8 @@ module.exports = {
 		...( defaults.externals || {} ),
 		'@rtbp/ui': [ 'rtbp', 'ui' ],
 		'@rtbp/lib': [ 'rtbp', 'lib' ],
+		// One React Query instance and cache, the free app's.
+		'@tanstack/react-query': [ 'rtbp', 'ReactQuery' ],
 	},
 	resolve: {
 		...defaults.resolve,
