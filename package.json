@@ -1,0 +1,21 @@
+{
+  "name": "radius-hotel-booking-pro",
+  "version": "1.0.0",
+  "description": "Pro features for Radius Hotel Booking. Extends the free plugin's admin app through window.rtbp and the rtbp.* filters.",
+  "author": "RadiusTheme",
+  "license": "GPL-2.0-or-later",
+  "private": true,
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build",
+    "format": "wp-scripts format src",
+    "i18n:pot": "wp i18n make-pot . languages/radius-hotel-booking-pro.pot --domain=radius-hotel-booking-pro --exclude=node_modules,build,vendor"
+  },
+  "dependencies": {
+    "@wordpress/hooks": "^4.32.0",
+    "@wordpress/i18n": "^5.6.0"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.7.0"
+  }
+}
