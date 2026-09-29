@@ -50,3 +50,4 @@ New Activity log screen: filter by staff, date, kind and action, search, and see
 Automatic and on-demand log archives (CSV and JSON), with optional removal after the file is checked.
 Fixed: the Pro features and Passcodes settings tabs were hidden.
 The activity log is sealed with a secret key: back up its key file with the site.
+Moving a room to another room type now asks for a PIN by default.

@@ -41,6 +41,8 @@ final class AdvancedAccessFeature extends AbstractFeature {
 		'guests.ban',
 		'guests.note_remove',
 		'reports.export',
+		// Free 1.0.0.1+ (M06); skipped while the free plugin lacks the key.
+		'rooms.move',
 	);
 
 	/**
