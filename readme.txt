@@ -37,3 +37,10 @@ A feature that is switched off adds nothing to the site; its data is kept.
 
 = 1.0.0 ( UNRELEASE ) =
 Added a Pro features screen to switch each Pro feature on or off.
+Passcode-protected actions: staff confirm with a personal PIN or a shared fallback PIN.
+Five wrong PINs lock a staff member out of unlocking for 15 minutes.
+Protected actions now ask for the PIN in a dialog, then continue without a second click.
+New Settings → Passcodes tab: PIN validity, scope, fallback PIN and the locked message.
+Named access roles with six editable templates, and per-person permission overrides.
+New Access roles and Staff access screens; Settings → Permissions gains the Passcode level.
+Choose which profile fields staff may change: default, per access role and per person.

@@ -20,6 +20,9 @@ module.exports = {
 	output: {
 		...defaults.output,
 		path: path.resolve( __dirname, 'build' ),
+		// Lazy chunks carry a content hash: the entry's version string does
+		// not cover them, so a plain `530.js` could stay cached after an update.
+		chunkFilename: '[name].[contenthash:8].js',
 	},
 	externals: {
 		...( defaults.externals || {} ),
@@ -27,6 +30,8 @@ module.exports = {
 		'@rtbp/lib': [ 'rtbp', 'lib' ],
 		// One React Query instance and cache, the free app's.
 		'@tanstack/react-query': [ 'rtbp', 'ReactQuery' ],
+		// The app's router: a bundled copy would not see its router context.
+		'react-router-dom': [ 'rtbp', 'router' ],
 	},
 	resolve: {
 		...defaults.resolve,

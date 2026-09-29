@@ -8,6 +8,7 @@
 namespace RadiusTheme\RadiusHotelBookingPro;
 
 use RadiusTheme\RadiusHotelBookingPro\Assets\Assets;
+use RadiusTheme\RadiusHotelBookingPro\Databases\Installer;
 use RadiusTheme\RadiusHotelBookingPro\Features\FeatureManager;
 use RadiusTheme\RadiusHotelBookingPro\Settings\FeatureSettings;
 
@@ -117,6 +118,9 @@ final class Plugin {
 		if ( null !== $this->features || ! self::free_is_compatible() ) {
 			return;
 		}
+
+		// Tables exist whatever features are on (ADR-017).
+		Installer::init();
 
 		( new FeatureSettings() )->register();
 		( new Assets() )->register();
