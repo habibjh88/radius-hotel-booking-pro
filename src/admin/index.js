@@ -9,7 +9,13 @@
 import { lazy } from 'react';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
-import { History, KeyRound, ShieldHalf, UserCog } from 'lucide-react';
+import {
+	BadgePercent,
+	History,
+	KeyRound,
+	ShieldHalf,
+	UserCog,
+} from 'lucide-react';
 
 import ProFeaturesSection from './ProFeaturesSection';
 import { registerPasscode } from './access/passcode';
@@ -43,6 +49,30 @@ addFilter(
 	]
 );
 
+// M07: pricing templates and seasonal rules (T5b); occupancy and booking window (T6b).
+if ( featureActive( 'pricing_rules' ) ) {
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/pricing',
+		( routes ) => [
+			...routes,
+			{
+				path: '/pricing',
+				group: 'hotel',
+				label: __( 'Pricing rules', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Seasonal, occupancy and booking-window prices',
+					'radius-hotel-booking-pro'
+				),
+				icon: BadgePercent,
+				capability: 'rtbp_view_dashboard',
+				accessKey: 'pricing.manage',
+				element: lazy( () => import( './pricing/PricingScreen' ) ),
+			},
+		]
+	);
+}
+
 // M13: the passcode level (PIN prompt) and Settings → Passcodes.
 if ( featureActive( 'advanced_access' ) ) {
 	registerPasscode();
@@ -56,7 +86,9 @@ if ( featureActive( 'advanced_access' ) ) {
 				value: 'passcode',
 				label: __( 'Passcode', 'radius-hotel-booking-pro' ),
 			};
-			const list = ( levels || [] ).filter( ( l ) => l.value !== 'passcode' );
+			const list = ( levels || [] ).filter(
+				( l ) => l.value !== 'passcode'
+			);
 			const at = list.findIndex( ( l ) => l.value === 'locked' );
 			return at < 0
 				? [ ...list, passcode ]
@@ -140,7 +172,9 @@ if ( featureActive( 'activity_log' ) ) {
 				),
 				icon: History,
 				accessKey: 'activity.archive',
-				Component: lazy( () => import( './activity/ActivitySettingsSection' ) ),
+				Component: lazy( () =>
+					import( './activity/ActivitySettingsSection' )
+				),
 			},
 		]
 	);

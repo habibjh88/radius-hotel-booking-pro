@@ -51,3 +51,7 @@ Automatic and on-demand log archives (CSV and JSON), with optional removal after
 Fixed: the Pro features and Passcodes settings tabs were hidden.
 The activity log is sealed with a secret key: back up its key file with the site.
 Moving a room to another room type now asks for a PIN by default.
+Seasonal pricing: reusable adjustment templates applied to date ranges, with priorities and room scopes.
+New Pricing rules screen: seasonal rules on a year timeline, and their templates.
+Occupancy pricing, early-bird and last-minute discounts, applied in one documented order.
+Pricing rules screen gains Occupancy and Booking window tabs to manage those rules.
