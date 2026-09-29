@@ -129,6 +129,15 @@ async function tokenFor( keys ) {
 }
 
 /**
+ * A live grant covering these keys, for requests the API client does not
+ * make (file downloads with fetch). Null when none is cached.
+ *
+ * @param {string[]} keys Access keys.
+ * @return {string|null} Token.
+ */
+export const grantFor = ( keys ) => cachedToken( keys );
+
+/**
  * Register the interceptor.
  *
  * @return {void}

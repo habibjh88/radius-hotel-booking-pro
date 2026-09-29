@@ -44,3 +44,9 @@ New Settings → Passcodes tab: PIN validity, scope, fallback PIN and the locked
 Named access roles with six editable templates, and per-person permission overrides.
 New Access roles and Staff access screens; Settings → Permissions gains the Passcode level.
 Choose which profile fields staff may change: default, per access role and per person.
+New activity log: every staff action is stored with who, when, device and before-and-after values.
+New command wp radius-hotel-booking log:verify finds any activity log entry that was altered.
+New Activity log screen: filter by staff, date, kind and action, search, and see before-and-after values.
+Automatic and on-demand log archives (CSV and JSON), with optional removal after the file is checked.
+Fixed: the Pro features and Passcodes settings tabs were hidden.
+The activity log is sealed with a secret key: back up its key file with the site.

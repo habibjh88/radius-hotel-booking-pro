@@ -33,6 +33,9 @@ final class Installer {
 	public static function tables(): array {
 		return array(
 			AccessRolesTable::class,
+			ActivityLogTable::class,
+			ActivityHeadTable::class,
+			LogArchivesTable::class,
 		);
 	}
 
@@ -45,6 +48,24 @@ final class Installer {
 		add_filter( 'rtbp_migration_classes', array( self::class, 'register' ) );
 		\RadiusTheme\RadiusHotelBookingPro\Access\RoleTemplates::init();
 		self::maybe_upgrade();
+	}
+
+	/**
+	 * Whether every Pro table exists.
+	 *
+	 * @return bool
+	 */
+	public static function all_tables_exist(): bool {
+		global $wpdb;
+		$prefix = rtbp_table_prefix();
+		$names  = array( 'pro_access_roles', 'pro_activity_log', 'pro_activity_head', 'pro_log_archives' );
+		foreach ( $names as $name ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- schema check during install.
+			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $prefix . $name ) ) !== $prefix . $name ) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -77,6 +98,12 @@ final class Installer {
 			}
 			foreach ( self::tables() as $class ) {
 				( new $class() )->up();
+			}
+
+			// Stamp the version only when every table exists: a failed CREATE
+			// is retried on the next request instead of being skipped for good.
+			if ( ! self::all_tables_exist() ) {
+				return;
 			}
 			update_option( self::OPTION, RADIUS_HOTEL_BOOKING_PRO_DB_VERSION );
 

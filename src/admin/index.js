@@ -9,10 +9,11 @@
 import { lazy } from 'react';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
-import { KeyRound, ShieldHalf, UserCog } from 'lucide-react';
+import { History, KeyRound, ShieldHalf, UserCog } from 'lucide-react';
 
 import ProFeaturesSection from './ProFeaturesSection';
 import { registerPasscode } from './access/passcode';
+import { registerTimeline } from './activity/timeline';
 
 const AccessSection = lazy( () => import( './access/AccessSection' ) );
 
@@ -35,6 +36,8 @@ addFilter(
 		{
 			key: 'pro_features',
 			label: __( 'Pro features', 'radius-hotel-booking-pro' ),
+			// Saved with access.manage (the section has no settings.* key).
+			accessKey: 'access.manage',
 			render: ( props ) => <ProFeaturesSection { ...props } />,
 		},
 	]
@@ -104,12 +107,61 @@ if ( featureActive( 'advanced_access' ) ) {
 			{
 				key: 'pro_access',
 				label: __( 'Passcodes', 'radius-hotel-booking-pro' ),
+				// Saved with access.manage (the section has no settings.* key).
+				accessKey: 'access.manage',
 				description: __(
 					'PIN confirmation, the fallback PIN and the locked message',
 					'radius-hotel-booking-pro'
 				),
 				icon: KeyRound,
 				Component: AccessSection,
+			},
+		]
+	);
+}
+
+// M14: the activity log screen.
+if ( featureActive( 'activity_log' ) ) {
+	// The history panel on booking and guest screens (T3b).
+	registerTimeline();
+
+	// Settings → Activity log (T4).
+	addFilter(
+		'rtbp.settings.sections',
+		'radius-hotel-booking-pro/activity',
+		( sections ) => [
+			...sections,
+			{
+				key: 'pro_activity',
+				label: __( 'Activity log', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Archiving, removing archived entries and page views',
+					'radius-hotel-booking-pro'
+				),
+				icon: History,
+				accessKey: 'activity.archive',
+				Component: lazy( () => import( './activity/ActivitySettingsSection' ) ),
+			},
+		]
+	);
+
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/activity',
+		( routes ) => [
+			...routes,
+			{
+				path: '/activity',
+				group: 'insights',
+				label: __( 'Activity log', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Who did what, when and from which device',
+					'radius-hotel-booking-pro'
+				),
+				icon: History,
+				capability: 'rtbp_view_dashboard',
+				accessKey: 'page.activity_log',
+				element: lazy( () => import( './activity/ActivityScreen' ) ),
 			},
 		]
 	);

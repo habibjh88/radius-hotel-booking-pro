@@ -9,7 +9,7 @@
  */
 import { Suspense, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { addFilter, removeFilter } from '@wordpress/hooks';
+import { addFilter, applyFilters, removeFilter } from '@wordpress/hooks';
 import { ListChecks, Plug } from 'lucide-react';
 import {
 	Button,
@@ -59,6 +59,40 @@ async function checkErrorFilter() {
 	} finally {
 		removeFilter( 'rtbp.api.error', 'rtbp-pro/runtime-check' );
 	}
+}
+
+/**
+ * The booking panels, applied the way the booking screen (M03) will.
+ *
+ * @return {JSX.Element} Panels.
+ */
+function BookingPanelsPreview() {
+	const [ id, setId ] = useState( '41' );
+	const panels = ( applyFilters( 'rtbp.booking.panels', [], { booking: { id } } ) || [] )
+		.slice()
+		.sort( ( a, b ) => ( a.order ?? 50 ) - ( b.order ?? 50 ) );
+
+	return (
+		<Panel
+			title="rtbp.booking.panels"
+			description={ `Panels registered for booking #${ id } (${ panels.map( ( p ) => p.key ).join( ', ' ) || 'none' })` }
+			actions={
+				<input
+					aria-label="Booking id"
+					value={ id }
+					onChange={ ( event ) => setId( event.target.value ) }
+					className="w-20 rounded-md border border-border px-2 py-1 text-sm"
+				/>
+			}
+		>
+			{ panels.map( ( p ) => (
+				<div key={ p.key } className="space-y-2">
+					<div className="text-sm font-semibold text-heading">{ p.label }</div>
+					{ p.render() }
+				</div>
+			) ) }
+		</Panel>
+	);
 }
 
 export default function RuntimeCheck() {
@@ -150,6 +184,7 @@ export default function RuntimeCheck() {
 					</Dialog>
 				</Suspense>
 			) : null }
+			<BookingPanelsPreview />
 		</div>
 	);
 }

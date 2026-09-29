@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
  */
 define( 'RADIUS_HOTEL_BOOKING_PRO_VERSION', '1.0.0' );
 // Bump whenever a Pro table changes; Databases\Installer re-runs the Pro tables.
-define( 'RADIUS_HOTEL_BOOKING_PRO_DB_VERSION', '1.0.0' );
+define( 'RADIUS_HOTEL_BOOKING_PRO_DB_VERSION', '1.3.0' );
 define( 'RADIUS_HOTEL_BOOKING_PRO_FILE', __FILE__ );
 define( 'RADIUS_HOTEL_BOOKING_PRO_DIR', plugin_dir_path( __FILE__ ) );
 define( 'RADIUS_HOTEL_BOOKING_PRO_URL', plugin_dir_url( __FILE__ ) );

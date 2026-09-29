@@ -142,6 +142,7 @@ final class RoleTemplates {
 					'payments.void'          => 'passcode',
 					'access.manage'          => 'passcode',
 					'access.reset_overrides' => 'passcode',
+					'activity.archive'       => 'passcode',
 				),
 			),
 		);
