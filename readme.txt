@@ -55,3 +55,5 @@ Seasonal pricing: reusable adjustment templates applied to date ranges, with pri
 New Pricing rules screen: seasonal rules on a year timeline, and their templates.
 Occupancy pricing, early-bird and last-minute discounts, applied in one documented order.
 Pricing rules screen gains Occupancy and Booking window tabs to manage those rules.
+Each room can publish its availability as a private iCal link for Booking.com, Airbnb and others.
+New Calendar sync screen: read Booking.com and Airbnb calendars into blocked dates automatically.

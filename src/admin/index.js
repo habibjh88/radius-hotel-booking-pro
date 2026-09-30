@@ -11,6 +11,7 @@ import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import {
 	BadgePercent,
+	CalendarSync,
 	History,
 	KeyRound,
 	ShieldHalf,
@@ -68,6 +69,30 @@ if ( featureActive( 'pricing_rules' ) ) {
 				capability: 'rtbp_view_dashboard',
 				accessKey: 'pricing.manage',
 				element: lazy( () => import( './pricing/PricingScreen' ) ),
+			},
+		]
+	);
+}
+
+// M08: calendar sync — share each room's calendar and read channel calendars (T6a–T6b).
+if ( featureActive( 'ical_sync' ) ) {
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/ical',
+		( routes ) => [
+			...routes,
+			{
+				path: '/calendar-sync',
+				group: 'overview',
+				label: __( 'Calendar sync', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Share and read room calendars with channels',
+					'radius-hotel-booking-pro'
+				),
+				icon: CalendarSync,
+				capability: 'rtbp_view_dashboard',
+				accessKey: 'availability.manage',
+				element: lazy( () => import( './ical/CalendarSyncScreen' ) ),
 			},
 		]
 	);

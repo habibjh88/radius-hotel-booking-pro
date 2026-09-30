@@ -39,6 +39,8 @@ final class Installer {
 			// Pricing rules (M07).
 			PricingTemplatesTable::class,
 			PricingRulesTable::class,
+			// iCal sync (M08).
+			IcalFeedsTable::class,
 		);
 	}
 
@@ -61,7 +63,7 @@ final class Installer {
 	public static function all_tables_exist(): bool {
 		global $wpdb;
 		$prefix = rtbp_table_prefix();
-		$names  = array( 'pro_access_roles', 'pro_activity_log', 'pro_activity_head', 'pro_log_archives', 'pro_pricing_templates', 'pro_pricing_rules' );
+		$names  = array( 'pro_access_roles', 'pro_activity_log', 'pro_activity_head', 'pro_log_archives', 'pro_pricing_templates', 'pro_pricing_rules', 'pro_ical_feeds' );
 		foreach ( $names as $name ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- schema check during install.
 			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $prefix . $name ) ) !== $prefix . $name ) {
