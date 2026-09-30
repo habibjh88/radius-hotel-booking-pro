@@ -57,3 +57,9 @@ Occupancy pricing, early-bird and last-minute discounts, applied in one document
 Pricing rules screen gains Occupancy and Booking window tabs to manage those rules.
 Each room can publish its availability as a private iCal link for Booking.com, Airbnb and others.
 New Calendar sync screen: read Booking.com and Airbnb calendars into blocked dates automatically.
+New Staff screen: employees with job, shift, access role; deactivate blocks sign-in immediately.
+Add employees with a guided form; set passwords, PINs and access roles from their file.
+Employee file tabs: personal, contact, emergency contact; CNPS and tax numbers stay masked until shown.
+New Employment tab: work shift and contract history; a new contract closes the previous one.
+New Documents tab: upload contracts and ID copies to protected storage; openings are logged.
+Employee files gain Notes (note, caution, warning) and a History tab of every change.

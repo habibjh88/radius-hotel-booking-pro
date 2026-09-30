@@ -16,6 +16,7 @@ import {
 	KeyRound,
 	ShieldHalf,
 	UserCog,
+	UsersRound,
 } from 'lucide-react';
 
 import ProFeaturesSection from './ProFeaturesSection';
@@ -93,6 +94,46 @@ if ( featureActive( 'ical_sync' ) ) {
 				capability: 'rtbp_view_dashboard',
 				accessKey: 'availability.manage',
 				element: lazy( () => import( './ical/CalendarSyncScreen' ) ),
+			},
+		]
+	);
+}
+
+// M12: staff records.
+if ( featureActive( 'staff_records' ) ) {
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/staff',
+		( routes ) => [
+			...routes,
+			{
+				path: '/staff',
+				group: 'system',
+				label: __( 'Staff', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Employee files, contracts and documents',
+					'radius-hotel-booking-pro'
+				),
+				icon: UsersRound,
+				capability: 'rtbp_view_dashboard',
+				accessKey: 'page.staff',
+				element: lazy( () => import( './staff/StaffListScreen' ) ),
+			},
+			{
+				path: '/staff/new',
+				hidden: true,
+				label: __( 'Add an employee', 'radius-hotel-booking-pro' ),
+				capability: 'rtbp_view_dashboard',
+				accessKey: 'staff.create',
+				element: lazy( () => import( './staff/CreateEmployeeScreen' ) ),
+			},
+			{
+				path: '/staff/:id',
+				hidden: true,
+				label: __( 'Employee', 'radius-hotel-booking-pro' ),
+				capability: 'rtbp_view_dashboard',
+				accessKey: 'page.staff',
+				element: lazy( () => import( './staff/StaffDetailScreen' ) ),
 			},
 		]
 	);
