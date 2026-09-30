@@ -19,7 +19,8 @@ defined( 'ABSPATH' ) || exit;
  * - HMAC chain: `hash = hmac_sha256( key, prev_hash | canonical row )` with a
  *   key kept outside the database (LogKey), so the chain cannot be recomputed
  *   by someone who can only edit tables. Rows are written one at a time in a
- *   transaction that locks the head record (`pro_activity_head`, `SELECT …
+ *   transaction of their own (after the caller's transaction commits, when
+ *   there is one — see record()) that locks the head record (`pro_activity_head`, `SELECT …
  *   FOR UPDATE`): the chain never forks, ids commit in order, and the head
  *   (last id, last hash, live rows, anchor; itself sealed with the key) lets
  *   `log:verify` catch deleted recent rows or an emptied table.
@@ -88,11 +89,23 @@ final class ActivityLogger {
 			return;
 		}
 
-		$row = self::row( $event );
+		$row   = self::row( $event );
+		$group = 'page.view' === $row['action'];
+
+		// Inside the free plugin's transaction (a booking, a hold, a guest…) the
+		// row waits for its commit: the logger's own START TRANSACTION would
+		// commit the caller's work early and release its row locks (the room
+		// locks of the booking engine). If the caller rolls back, the entry goes
+		// with it — the action never happened.
+		$tx = '\\RadiusTheme\\RadiusHotelBooking\\Core\\Database\\Transaction';
+		if ( class_exists( $tx ) && method_exists( $tx, 'active' ) && method_exists( $tx, 'afterCommit' ) && $tx::active() ) {
+			$tx::afterCommit( static fn() => self::insert( $row, $group ) );
+			return;
+		}
 
 		// Page views are grouped inside the same lock as the insert, so two
 		// parallel requests of one screen cannot both miss the row and add two.
-		self::insert( $row, 'page.view' === $row['action'] );
+		self::insert( $row, $group );
 	}
 
 	/**
