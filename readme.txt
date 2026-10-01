@@ -66,3 +66,6 @@ Employee files gain Notes (note, caution, warning) and a History tab of every ch
 Download the invoice as a PDF from the booking screen.
 Booking and payment e-mails now attach the PDF invoice or receipt.
 Unpaid bookings can be released automatically after their payment deadline, with an optional grace period.
+New Occupancy report: occupancy rate per day and period, peak rooms, and rate per room type.
+New Revenue breakdown report: sales by room type, rate plan and staff member.
+Every report can be exported to Excel (XLSX), one sheet per table.

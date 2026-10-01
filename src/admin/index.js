@@ -11,6 +11,8 @@ import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import {
 	BadgePercent,
+	Banknote,
+	ChartPie,
 	CalendarSync,
 	History,
 	Hourglass,
@@ -309,6 +311,33 @@ if ( window.radius_hotel_booking_param?.dev_ui ) {
 				description:
 					'The extension seams, exercised from the Pro bundle (WP_DEBUG only)',
 				element: lazy( () => import( './dev/RuntimeCheck' ) ),
+			},
+		]
+	);
+}
+
+// M10: occupancy rate (T6a) and revenue breakdowns (T6b) as tabs of the free Reports screen.
+if ( featureActive( 'advanced_reports' ) ) {
+	addFilter(
+		'rtbp.reports.tabs',
+		'radius-hotel-booking-pro/reports',
+		( tabs ) => [
+			...tabs,
+			{
+				key: 'occupancy',
+				label: __( 'Occupancy', 'radius-hotel-booking-pro' ),
+				icon: ChartPie,
+				accessKey: 'page.reports_rooms',
+				// Occupancy is about stays: no arrival / booking-date switch.
+				mode: false,
+				Component: lazy( () => import( './reports/OccupancyTab' ) ),
+			},
+			{
+				key: 'revenue',
+				label: __( 'Revenue breakdown', 'radius-hotel-booking-pro' ),
+				icon: Banknote,
+				accessKey: 'page.reports_sales',
+				Component: lazy( () => import( './reports/RevenueTab' ) ),
 			},
 		]
 	);
