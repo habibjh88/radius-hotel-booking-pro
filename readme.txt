@@ -75,3 +75,5 @@ Scheduled exports: weekly or monthly files of the previous week or month, with t
 Archive and remove now checks every booking line is in the file before deleting it.
 Fixed: a failed delete during archive and remove could leave a booking partly removed.
 Fixed: scheduled exports could overwrite schedule edits, run twice, or retry a failed run repeatedly.
+New My profile screen: staff update their own details; restricted fields show a lock.
+Staff profile changes to a restricted field are refused with a message, never silently dropped.

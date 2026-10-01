@@ -19,6 +19,7 @@ import {
 	KeyRound,
 	ShieldHalf,
 	UserCog,
+	UserRound,
 	UsersRound,
 } from 'lucide-react';
 
@@ -137,6 +138,38 @@ if ( featureActive( 'staff_records' ) ) {
 				capability: 'rtbp_view_dashboard',
 				accessKey: 'page.staff',
 				element: lazy( () => import( './staff/StaffDetailScreen' ) ),
+			},
+		]
+	);
+}
+
+// M16: staff self-service — My profile, on the account menu.
+if ( featureActive( 'staff_self_service' ) ) {
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/self-service',
+		( routes ) => [
+			...routes,
+			{
+				path: '/me/profile',
+				hidden: true,
+				label: __( 'My profile', 'radius-hotel-booking-pro' ),
+				// Any dashboard user, on their own profile (no access key).
+				capability: 'rtbp_view_dashboard',
+				element: lazy( () => import( './self/ProfileScreen' ) ),
+			},
+		]
+	);
+	addFilter(
+		'rtbp.user.menu',
+		'radius-hotel-booking-pro/self-service',
+		( items ) => [
+			...( items || [] ),
+			{
+				key: 'profile',
+				label: __( 'My profile', 'radius-hotel-booking-pro' ),
+				icon: UserRound,
+				to: '/me/profile',
 			},
 		]
 	);

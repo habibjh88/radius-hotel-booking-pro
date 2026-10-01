@@ -207,12 +207,14 @@ class EmployeeService {
 	 * Change an employee file (12.3, 12.6–12.8, 12.10). Only the fields given
 	 * change; the user's name and e-mail follow.
 	 *
-	 * @param int   $id    Employee id.
-	 * @param array $input File fields.
+	 * @param int    $id     Employee id.
+	 * @param array  $input  File fields.
+	 * @param string $action Activity action: `staff.edit`, or `self.profile_update`
+	 *                       when the employee changes their own file (M16).
 	 * @return Employee
 	 * @throws DomainException 404, 422.
 	 */
-	public function update( int $id, array $input ): Employee {
+	public function update( int $id, array $input, string $action = 'staff.edit' ): Employee {
 		$employee = $this->get( $id );
 		self::guardTarget( $employee );
 		$data     = $this->validate( $input, $employee );
@@ -233,7 +235,7 @@ class EmployeeService {
 		// Raw values: the emitter masks the personal ones (the secret pattern).
 
 		Transaction::run(
-			function () use ( $id, $data, $diff, $employee ) {
+			function () use ( $id, $data, $diff, $employee, $action ) {
 				$this->employees->lock( $id );
 				$this->employees->update( $id, $data );
 				$user = array( 'ID' => (int) $employee->user_id );
@@ -253,13 +255,16 @@ class EmployeeService {
 					}
 				}
 				rtbp_activity(
-					'staff.edit',
+					$action,
 					self::subject( $employee ),
 					array_merge(
 						$diff,
 						array(
-							/* translators: %s: employee name. */
-							'description' => sprintf( __( 'Changed the file of %s', 'radius-hotel-booking-pro' ), $employee->fullName() ),
+							'description' => 'self.profile_update' === $action
+								/* translators: %s: employee name. */
+								? sprintf( __( '%s updated their own profile', 'radius-hotel-booking-pro' ), $employee->fullName() )
+								/* translators: %s: employee name. */
+								: sprintf( __( 'Changed the file of %s', 'radius-hotel-booking-pro' ), $employee->fullName() ),
 						)
 					)
 				);

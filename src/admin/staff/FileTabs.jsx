@@ -156,7 +156,13 @@ export function FormActions( { form, canEdit } ) {
  * @param {boolean}  props.disabled Read-only.
  * @return {JSX.Element} Select.
  */
-function ChoiceSelect( { value, choices, onChange, disabled, ...rest } ) {
+export function ChoiceSelect( {
+	value,
+	choices,
+	onChange,
+	disabled,
+	...rest
+} ) {
 	return (
 		<Select
 			value={ value || 'none' }
