@@ -13,6 +13,7 @@ import {
 	BadgePercent,
 	CalendarSync,
 	History,
+	Hourglass,
 	KeyRound,
 	ShieldHalf,
 	UserCog,
@@ -213,6 +214,30 @@ if ( featureActive( 'advanced_access' ) ) {
 				),
 				icon: KeyRound,
 				Component: AccessSection,
+			},
+		]
+	);
+}
+
+// M05 T8: Settings → Automatic release (the grace period).
+if ( featureActive( 'auto_release' ) ) {
+	addFilter(
+		'rtbp.settings.sections',
+		'radius-hotel-booking-pro/auto-release',
+		( sections ) => [
+			...sections,
+			{
+				key: 'pro_auto_release',
+				label: __( 'Automatic release', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Free the room when a booking stays unpaid past its deadline',
+					'radius-hotel-booking-pro'
+				),
+				icon: Hourglass,
+				accessKey: 'settings.payments',
+				Component: lazy( () =>
+					import( './payments/AutoReleaseSettingsSection' )
+				),
 			},
 		]
 	);

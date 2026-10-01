@@ -30,6 +30,10 @@
     },
     "scripts": {
         "phpcs": "./vendor/bin/phpcs --standard=phpcs.xml",
-        "phpcs:fix": "./vendor/bin/phpcbf --standard=phpcs.xml"
+        "phpcs:fix": "./vendor/bin/phpcbf --standard=phpcs.xml",
+        "scope": "bin/scope.sh"
+    },
+    "scripts-descriptions": {
+        "scope": "Build vendor-prefixed/ (dompdf, prefixed with PHP-Scoper; needs PHP 8.2-8.4, see PHP_BIN in bin/scope.sh)."
     }
 }

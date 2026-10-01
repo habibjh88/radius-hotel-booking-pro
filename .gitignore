@@ -127,3 +127,6 @@ production
 # Translation editor backups (Loco/gettext) — never ship or commit these
 languages/*.po~
 languages/*-backup-*.po~
+
+# PHP-Scoper output (composer scope) — built, shipped in the release zip, never committed
+vendor-prefixed

@@ -1,0 +1,9 @@
+{
+    "name": "radiustheme/radius-hotel-booking-pro-scoper-tools",
+    "description": "PHP-Scoper, the build tool that prefixes ../vendor (needs PHP 8.2+; never shipped).",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "humbug/php-scoper": "^0.18"
+    }
+}

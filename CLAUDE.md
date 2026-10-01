@@ -39,6 +39,10 @@ Run the commands from the free repo. They switch into this repo for `[Pro]` task
 
 ```bash
 composer install          # autoloader (+ phpcs dev deps)
+composer scope            # vendor-prefixed/: dompdf under RadiusTheme\RadiusHotelBookingPro\Vendor (ADR-005).
+                          # Needs PHP 8.2–8.4 (PHP_BIN=/path/to/php8.4 composer scope); gitignored,
+                          # must be built before zipping a release. Re-check the patchers in
+                          # scoper/scoper.inc.php after updating dompdf.
 npm install && npm run build
 ../radius-hotel-booking/vendor/bin/phpcs --standard=phpcs.xml radius-hotel-booking-pro.php includes
 ```

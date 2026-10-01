@@ -1,0 +1,15 @@
+{
+    "name": "radiustheme/radius-hotel-booking-pro-scoper",
+    "description": "Third-party libraries for Radius Hotel Booking Pro, prefixed with PHP-Scoper into ../vendor-prefixed (ADR-005).",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.30"
+        }
+    },
+    "require": {
+        "dompdf/dompdf": "^3.1"
+    }
+}

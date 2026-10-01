@@ -63,3 +63,6 @@ Employee file tabs: personal, contact, emergency contact; CNPS and tax numbers s
 New Employment tab: work shift and contract history; a new contract closes the previous one.
 New Documents tab: upload contracts and ID copies to protected storage; openings are logged.
 Employee files gain Notes (note, caution, warning) and a History tab of every change.
+Download the invoice as a PDF from the booking screen.
+Booking and payment e-mails now attach the PDF invoice or receipt.
+Unpaid bookings can be released automatically after their payment deadline, with an optional grace period.
