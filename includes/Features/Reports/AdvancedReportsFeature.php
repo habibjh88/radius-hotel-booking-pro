@@ -68,12 +68,7 @@ final class AdvancedReportsFeature extends AbstractFeature {
 	 */
 	public function formats( $formats ): array {
 		$formats         = (array) $formats;
-		$formats['xlsx'] = array(
-			'label'     => __( 'Excel (XLSX)', 'radius-hotel-booking-pro' ),
-			'extension' => 'xlsx',
-			'mime'      => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-			'write'     => array( XlsxWriter::class, 'write' ),
-		);
+		$formats['xlsx'] = XlsxWriter::format();
 		return $formats;
 	}
 

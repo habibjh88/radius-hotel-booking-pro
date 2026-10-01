@@ -342,3 +342,22 @@ if ( featureActive( 'advanced_reports' ) ) {
 		]
 	);
 }
+
+// M11: archive and remove (T3b) and scheduled exports (T4), panels of the free Exports screen.
+if ( featureActive( 'advanced_exports' ) ) {
+	addFilter(
+		'rtbp.exports.panels',
+		'radius-hotel-booking-pro/archive',
+		( panels ) => [
+			...panels,
+			{
+				key: 'archive',
+				Component: lazy( () => import( './exports/ArchivePanel' ) ),
+			},
+			{
+				key: 'schedules',
+				Component: lazy( () => import( './exports/SchedulesPanel' ) ),
+			},
+		]
+	);
+}

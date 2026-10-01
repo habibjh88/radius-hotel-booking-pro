@@ -70,11 +70,9 @@ class XlsxWriter {
 				$sheets[] = self::sheet( (array) ( $table['columns'] ?? array() ), (array) ( $table['rows'] ?? array() ) );
 			}
 
-			$zip->addFromString( '[Content_Types].xml', self::contentTypes( count( $sheets ) ) );
-			$zip->addFromString( '_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n" . '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>' );
-			$zip->addFromString( 'xl/workbook.xml', self::workbook( $names ) );
-			$zip->addFromString( 'xl/_rels/workbook.xml.rels', self::workbookRels( count( $sheets ) ) );
-			$zip->addFromString( 'xl/styles.xml', self::styles() );
+			foreach ( self::packageParts( $names ) as $part => $xml ) {
+				$zip->addFromString( $part, $xml );
+			}
 			foreach ( $sheets as $index => $xml ) {
 				$zip->addFromString( 'xl/worksheets/sheet' . ( $index + 1 ) . '.xml', $xml );
 			}
@@ -99,35 +97,97 @@ class XlsxWriter {
 		$data   = '';
 		$all    = array_merge( $columns ? array( $columns ) : array(), $rows );
 		foreach ( array_values( $all ) as $r => $row ) {
-			$cells = '';
-			foreach ( array_values( (array) $row ) as $c => $value ) {
-				$ref   = self::column( $c ) . ( $r + 1 );
-				$bold  = $columns && 0 === $r ? ' s="1"' : '';
-				$text  = is_float( $value ) || is_int( $value ) ? (string) $value : (string) $value;
-				$width = function_exists( 'mb_strlen' ) ? mb_strlen( $text ) : strlen( $text );
-
-				$widths[ $c ] = max( $widths[ $c ] ?? 0, $width );
-				if ( is_int( $value ) || is_float( $value ) ) {
-					$cells .= '<c r="' . $ref . '"' . $bold . '><v>' . self::number( $value ) . '</v></c>';
-				} elseif ( '' !== $text ) {
-					$cells .= '<c r="' . $ref . '" t="inlineStr"' . $bold . '><is><t xml:space="preserve">' . self::escape( $text ) . '</t></is></c>';
-				}
-			}
-			$data .= '<row r="' . ( $r + 1 ) . '">' . $cells . '</row>';
+			$data .= self::rowXml( $r + 1, (array) $row, $columns && 0 === $r, $widths );
 		}
+		return self::sheetOpen( $widths, (bool) $columns ) . $data . self::SHEET_CLOSE;
+	}
 
+	/**
+	 * The end of a worksheet.
+	 */
+	public const SHEET_CLOSE = '</sheetData></worksheet>';
+
+	/**
+	 * One row's XML; widens `$widths` to the longest value per column.
+	 *
+	 * @param int   $number  Row number (1-based).
+	 * @param array $values  Values in column order.
+	 * @param bool  $bold    The header row.
+	 * @param array $widths  Column index => longest value (updated).
+	 * @return string
+	 */
+	public static function rowXml( int $number, array $values, bool $bold, array &$widths ): string {
+		$cells = '';
+		$style = $bold ? ' s="1"' : '';
+		foreach ( array_values( $values ) as $c => $value ) {
+			$ref  = self::column( $c ) . $number;
+			$text = (string) $value;
+			$len  = function_exists( 'mb_strlen' ) ? mb_strlen( $text ) : strlen( $text );
+
+			$widths[ $c ] = max( $widths[ $c ] ?? 0, $len );
+			if ( is_int( $value ) || is_float( $value ) ) {
+				$cells .= '<c r="' . $ref . '"' . $style . '><v>' . self::number( $value ) . '</v></c>';
+			} elseif ( '' !== $text ) {
+				$cells .= '<c r="' . $ref . '" t="inlineStr"' . $style . '><is><t xml:space="preserve">' . self::escape( $text ) . '</t></is></c>';
+			}
+		}
+		return '<row r="' . $number . '">' . $cells . '</row>';
+	}
+
+	/**
+	 * The start of a worksheet, up to `<sheetData>`: the frozen header row and
+	 * the column widths (8–60 characters).
+	 *
+	 * @param array $widths Column index => longest value.
+	 * @param bool  $header The first row is a header (frozen).
+	 * @return string
+	 */
+	public static function sheetOpen( array $widths, bool $header ): string {
 		$cols = '';
 		foreach ( $widths as $c => $width ) {
 			$cols .= '<col min="' . ( $c + 1 ) . '" max="' . ( $c + 1 ) . '" width="' . max( 8, min( 60, $width + 2 ) ) . '" customWidth="1"/>';
 		}
-		$freeze = $columns ? '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>' : '';
-
+		$freeze = $header ? '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>' : '';
 		return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n"
 			. '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'
 			. $freeze
 			. ( '' !== $cols ? '<cols>' . $cols . '</cols>' : '' )
-			. '<sheetData>' . $data . '</sheetData>'
-			. '</worksheet>';
+			. '<sheetData>';
+	}
+
+	/**
+	 * Every part of the package but the worksheets.
+	 *
+	 * @param string[] $names Sheet names, in order.
+	 * @return array<string, string> Part path => XML.
+	 */
+	public static function packageParts( array $names ): array {
+		return array(
+			'[Content_Types].xml'        => self::contentTypes( count( $names ) ),
+			'_rels/.rels'                => '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . "\n" . '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>',
+			'xl/workbook.xml'            => self::workbook( $names ),
+			'xl/_rels/workbook.xml.rels' => self::workbookRels( count( $names ) ),
+			'xl/styles.xml'              => self::styles(),
+		);
+	}
+
+	/**
+	 * The `xlsx` entry of `rtbp_export_formats`: tables (reports) and, where
+	 * free offers streaming, row-by-row files (M11 exports).
+	 *
+	 * @return array
+	 */
+	public static function format(): array {
+		$format = array(
+			'label'     => __( 'Excel (XLSX)', 'radius-hotel-booking-pro' ),
+			'extension' => 'xlsx',
+			'mime'      => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+			'write'     => array( self::class, 'write' ),
+		);
+		if ( interface_exists( 'RadiusTheme\\RadiusHotelBooking\\Services\\Export\\ExportStream' ) ) {
+			$format['stream'] = static fn() => new XlsxStream();
+		}
+		return $format;
 	}
 
 	/**

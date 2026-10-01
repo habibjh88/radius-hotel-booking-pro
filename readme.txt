@@ -69,3 +69,9 @@ Unpaid bookings can be released automatically after their payment deadline, with
 New Occupancy report: occupancy rate per day and period, peak rooms, and rate per room type.
 New Revenue breakdown report: sales by room type, rate plan and staff member.
 Every report can be exported to Excel (XLSX), one sheet per table.
+Booking and guest exports can be made in Excel (XLSX), however many rows.
+Archive and remove: export a past period, verify the file, then delete its finished bookings.
+Scheduled exports: weekly or monthly files of the previous week or month, with the next run shown.
+Archive and remove now checks every booking line is in the file before deleting it.
+Fixed: a failed delete during archive and remove could leave a booking partly removed.
+Fixed: scheduled exports could overwrite schedule edits, run twice, or retry a failed run repeatedly.

@@ -57,7 +57,8 @@ abstract class AbstractFeature {
 	 */
 	final public function free_symbols_present(): bool {
 		foreach ( $this->requires_free() as $symbol ) {
-			if ( ! function_exists( $symbol ) && ! class_exists( $symbol ) ) {
+			// Functions, classes and interfaces (an add-on may implement a free interface).
+			if ( ! function_exists( $symbol ) && ! class_exists( $symbol ) && ! interface_exists( $symbol ) ) {
 				return false;
 			}
 		}
