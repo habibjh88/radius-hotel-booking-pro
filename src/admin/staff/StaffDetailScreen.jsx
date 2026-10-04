@@ -3,9 +3,11 @@
  * job and state (deactivate / reactivate with `staff.deactivate`) and the
  * file's tabs: Personal, Contact, Emergency contact, Employment, Notes,
  * History (while the activity log runs), Documents (with `staff.edit`) and
- * Account.
+ * Account — plus the tabs add-ons add on `rtbp.staff.tabs` (the client
+ * add-on's *Pay*, M15 T4b).
  */
 import { lazy, Suspense, useState } from 'react';
+import { applyFilters } from '@wordpress/hooks';
 import { __, sprintf } from '@wordpress/i18n';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Power, PowerOff, UsersRound } from 'lucide-react';
@@ -45,13 +47,43 @@ const activityLogActive = () =>
 	);
 
 /**
- * The tabs of the file, in order.
+ * The tabs of the file, in order, after `rtbp.staff.tabs`.
+ *
+ * Add-ons add (or remove) tabs with
+ * `addFilter( 'rtbp.staff.tabs', ns, ( tabs, { employee, can } ) => tabs )`:
+ * a tab is `{ key, label, render() }`; use `findIndex` on a known key to place
+ * it. An entry without a key, a label or a render function is dropped, and a
+ * filter that does not return a list leaves Pro's tabs as they are.
  *
  * @param {Object}  employee Employee.
  * @param {Object}  can      `{ edit, contracts }`.
  * @return {Array<{key: string, label: string, render: Function}>} Tabs.
  */
-const fileTabs = ( employee, can ) =>
+const fileTabs = ( employee, can ) => {
+	const own = baseTabs( employee, can );
+	const filtered = applyFilters( 'rtbp.staff.tabs', own, { employee, can } );
+	const tabs = ( Array.isArray( filtered ) ? filtered : own ).filter(
+		( tab ) =>
+			tab &&
+			'string' === typeof tab.key &&
+			tab.label &&
+			'function' === typeof tab.render
+	);
+	// Keys must stay unique: the first wins.
+	return tabs.filter(
+		( tab, index ) =>
+			tabs.findIndex( ( other ) => other.key === tab.key ) === index
+	);
+};
+
+/**
+ * Pro's own tabs.
+ *
+ * @param {Object}  employee Employee.
+ * @param {Object}  can      `{ edit, contracts }`.
+ * @return {Array<{key: string, label: string, render: Function}>} Tabs.
+ */
+const baseTabs = ( employee, can ) =>
 	[
 		{
 			key: 'personal',
