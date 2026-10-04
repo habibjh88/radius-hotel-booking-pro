@@ -1,9 +1,9 @@
 /**
  * My profile (`#/me/profile`, M16 16.1, 16.2, 16.5, 16.6), opened from the
  * account menu: the signed-in user's own name, personal details, contact
- * and emergency contact. The fields the hotel restricts (M13's profile-field
- * map) are read-only with a lock; the server refuses them anyway. Only the
- * changed fields are sent.
+ * and emergency contact, then password and PIN (16.3, 16.4). The fields the
+ * hotel restricts (M13's profile-field map) are read-only with a lock; the
+ * server refuses them anyway. Only the changed fields are sent.
  */
 import { useEffect, useState } from 'react';
 import { __ } from '@wordpress/i18n';
@@ -22,6 +22,7 @@ import { toast, toastError } from '@rtbp/lib';
 
 import { ChoiceSelect } from '../staff/FileTabs';
 import { useProfile, useSaveProfile } from './api';
+import SecuritySection from './SecuritySection';
 
 /**
  * The form's values from the profile (strings, the emergency contact as an object).
@@ -186,7 +187,7 @@ function ProfileForm( { profile } ) {
 	const lockedContact = ! editable( 'emergency_contact' );
 
 	return (
-		<form className="space-y-4 pb-20" onSubmit={ submit } noValidate>
+		<form className="space-y-4" onSubmit={ submit } noValidate>
 			<SettingsSection
 				title={ __( 'About you', 'radius-hotel-booking-pro' ) }
 			>
@@ -466,6 +467,7 @@ export default function ProfileScreen() {
 				</div>
 			</Panel>
 			<ProfileForm profile={ profile } />
+			<SecuritySection security={ profile.security } />
 		</div>
 	);
 }

@@ -86,9 +86,11 @@ final class PasscodeService {
 	 *
 	 * @param int         $user_id User id.
 	 * @param string|null $pin     New PIN, or null to remove it.
+	 * @param array       $log     Optional `{ action, description }` for the
+	 *                             activity entry (self-service logs `self.pin_change`).
 	 * @return true|WP_Error
 	 */
-	public static function set_pin( int $user_id, ?string $pin ) {
+	public static function set_pin( int $user_id, ?string $pin, array $log = array() ) {
 		if ( null !== $pin && ! self::is_valid_pin( $pin ) ) {
 			return new WP_Error( 'pin_format', __( 'A PIN is 4 to 8 digits.', 'radius-hotel-booking-pro' ) );
 		}
@@ -112,13 +114,13 @@ final class PasscodeService {
 		do_action( 'rtbp_pro_pin_changed', $user_id, null === $pin );
 
 		self::activity(
-			'security.pin_changed',
+			(string) ( $log['action'] ?? 'security.pin_changed' ),
 			array(
 				'user_id'     => $user_id,
 				'after'       => array( 'pin' => null === $pin ? 'removed' : 'changed' ),
-				'description' => null === $pin
+				'description' => $log['description'] ?? ( null === $pin
 					? __( 'Removed a staff PIN', 'radius-hotel-booking-pro' )
-					: __( 'Set a staff PIN', 'radius-hotel-booking-pro' ),
+					: __( 'Set a staff PIN', 'radius-hotel-booking-pro' ) ),
 			)
 		);
 
@@ -202,16 +204,7 @@ final class PasscodeService {
 
 			$until = self::locked_until( $user_id );
 			if ( $until ) {
-				$minutes = (int) ceil( ( $until - time() ) / MINUTE_IN_SECONDS );
-				return new WP_Error(
-					'pin_locked',
-					sprintf(
-						/* translators: %d: minutes left. */
-						_n( 'Too many wrong PINs. Try again in %d minute.', 'Too many wrong PINs. Try again in %d minutes.', $minutes, 'radius-hotel-booking-pro' ),
-						$minutes
-					),
-					array( 'retry_after' => $until - time() )
-				);
+				return self::locked_error( $until );
 			}
 
 			$hash     = (string) get_user_meta( $user_id, self::META_PIN, true );
@@ -291,6 +284,77 @@ final class PasscodeService {
 		}
 
 		return new WP_Error( 'passcode_required', __( 'Enter your PIN to continue.', 'radius-hotel-booking-pro' ) );
+	}
+
+	/**
+	 * Check a user's own personal PIN (not the fallback PIN, which proves
+	 * nothing about who is at the keyboard) without issuing a grant — for
+	 * self-service, before the PIN is changed (M16). Counts towards the same
+	 * lockout as unlock(), under the same per-user lock, so asking for the
+	 * current PIN cannot be used to guess it.
+	 *
+	 * @param int    $user_id User id.
+	 * @param string $pin     PIN entered.
+	 * @return true|WP_Error `pin_locked`, `pin_not_set`, `pin_invalid`, `pin_busy`.
+	 */
+	public static function verify_own_pin( int $user_id, string $pin ) {
+		return self::locked(
+			$user_id,
+			static function () use ( $user_id, $pin ) {
+				$until = self::locked_until( $user_id );
+				if ( $until ) {
+					return self::locked_error( $until );
+				}
+				$hash = (string) get_user_meta( $user_id, self::META_PIN, true );
+				if ( '' === $hash ) {
+					return new WP_Error( 'pin_not_set', __( 'You do not have a PIN yet. Use your password instead.', 'radius-hotel-booking-pro' ) );
+				}
+				if ( ! self::is_valid_pin( $pin ) || ! wp_check_password( $pin, $hash ) ) {
+					return self::fail( $user_id, 'self.pin_change' );
+				}
+				delete_user_meta( $user_id, self::META_FAILURES );
+				return true;
+			}
+		);
+	}
+
+	/**
+	 * Run a check while holding the user's PIN-check lock (one check of a
+	 * user at a time; their meta is read fresh). Busy → `pin_busy`.
+	 *
+	 * @param int      $user_id User id.
+	 * @param callable $check   Returns the result.
+	 * @return mixed|WP_Error
+	 */
+	public static function locked( int $user_id, callable $check ) {
+		if ( ! self::acquire( $user_id ) ) {
+			return new WP_Error( 'pin_busy', __( 'Another PIN is being checked. Try again in a moment.', 'radius-hotel-booking-pro' ), array( 'retry_after' => 2 ) );
+		}
+		try {
+			wp_cache_delete( $user_id, 'user_meta' );
+			return $check();
+		} finally {
+			self::release( $user_id );
+		}
+	}
+
+	/**
+	 * The "locked out" error.
+	 *
+	 * @param int $until Unix time the lockout ends.
+	 * @return WP_Error
+	 */
+	private static function locked_error( int $until ): WP_Error {
+		$minutes = (int) ceil( ( $until - time() ) / MINUTE_IN_SECONDS );
+		return new WP_Error(
+			'pin_locked',
+			sprintf(
+				/* translators: %d: minutes left. */
+				_n( 'Too many wrong PINs. Try again in %d minute.', 'Too many wrong PINs. Try again in %d minutes.', $minutes, 'radius-hotel-booking-pro' ),
+				$minutes
+			),
+			array( 'retry_after' => $until - time() )
+		);
 	}
 
 	/**

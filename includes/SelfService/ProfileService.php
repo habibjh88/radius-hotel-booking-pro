@@ -92,6 +92,8 @@ class ProfileService {
 				'marital'       => $options['marital'],
 				'relationships' => $options['relationships'],
 			),
+			// Password and PIN (16.3, 16.4).
+			'security' => CredentialsService::summary( $user_id ),
 		);
 	}
 

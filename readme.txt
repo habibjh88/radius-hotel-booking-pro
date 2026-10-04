@@ -77,3 +77,5 @@ Fixed: a failed delete during archive and remove could leave a booking partly re
 Fixed: scheduled exports could overwrite schedule edits, run twice, or retry a failed run repeatedly.
 New My profile screen: staff update their own details; restricted fields show a lock.
 Staff profile changes to a restricted field are refused with a message, never silently dropped.
+Staff can change their own password on My profile; other devices are signed out.
+Staff can set their own PIN, confirming with the current PIN or password.
