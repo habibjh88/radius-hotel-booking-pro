@@ -8,6 +8,7 @@
 namespace RadiusTheme\RadiusHotelBookingPro\Staff;
 
 use RadiusTheme\RadiusHotelBooking\Core\Database\Transaction;
+use RadiusTheme\RadiusHotelBooking\Core\Permissions\Capabilities;
 use RadiusTheme\RadiusHotelBooking\Exceptions\DomainException;
 use RadiusTheme\RadiusHotelBooking\Support\Dates;
 use RadiusTheme\RadiusHotelBooking\Support\Sequence;
@@ -89,11 +90,13 @@ class EmployeeService {
 	 * @param array $input `username`, `password` (optional: a random one, to reset
 	 *                     later), `email`, the file fields (see validate()),
 	 *                     `access_role` (id), `pin`.
+	 * @param array $options `phone_optional` (bool): an empty phone is accepted —
+	 *                       the legacy import only (M18); the screens always ask for one.
 	 * @return Employee
 	 * @throws DomainException 422.
 	 * @throws \Throwable Whatever the write threw, after the user cache was cleaned.
 	 */
-	public function create( array $input ): Employee {
+	public function create( array $input, array $options = array() ): Employee {
 		$errors   = array();
 		$username = sanitize_user( (string) ( $input['username'] ?? '' ), true );
 		if ( '' === $username || mb_strlen( $username ) > 60 ) {
@@ -110,7 +113,7 @@ class EmployeeService {
 			$errors['pin'] = __( 'Enter a PIN of 4 to 8 digits.', 'radius-hotel-booking-pro' );
 		}
 		try {
-			$data = $this->validate( $input, null );
+			$data = $this->validate( $input, null, ! empty( $options['phone_optional'] ) );
 		} catch ( DomainException $e ) {
 			$errors = array_merge( $errors, $e->getFieldErrors() );
 			$data   = array();
@@ -137,6 +140,72 @@ class EmployeeService {
 			throw $e;
 		}
 
+		return $this->get( $id );
+	}
+
+	/**
+	 * Give an **existing** WordPress user an employee file (M18: on
+	 * production the legacy staff accounts are already in the site, with
+	 * their passwords; the import must not create new ones). The user is
+	 * not changed, except that it gains the `rtbp_staff` role when it has no
+	 * dashboard access yet. No access role or PIN here.
+	 *
+	 * @param int   $user_id User id.
+	 * @param array $input   The file fields (see validate()); `email` defaults to the user's.
+	 * @param array $options As create().
+	 * @return Employee
+	 * @throws DomainException 404 (no such user), 409 (the user already has a file), 422.
+	 */
+	public function attach( int $user_id, array $input, array $options = array() ): Employee {
+		$user = get_userdata( $user_id );
+		if ( ! $user ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON; React escapes it.
+			throw DomainException::notFound( __( 'This user does not exist.', 'radius-hotel-booking-pro' ) );
+		}
+		if ( $this->employees->forUser( $user_id ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON; React escapes it.
+			throw DomainException::conflict( 'employee_exists', __( 'This user already has an employee file.', 'radius-hotel-booking-pro' ) );
+		}
+		$input += array( 'email' => (string) $user->user_email );
+		$data   = $this->validate( $input, null, ! empty( $options['phone_optional'] ) );
+		if ( '' !== $data['email'] ) {
+			$owner = email_exists( $data['email'] );
+			if ( $owner && (int) $owner !== $user_id ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON; React escapes it.
+				throw DomainException::invalid( array( 'email' => __( 'Another account already uses this e-mail.', 'radius-hotel-booking-pro' ) ) );
+			}
+		}
+
+		$id = Transaction::run(
+			function () use ( $user, $user_id, $data ) {
+				$employee = $this->employees->create(
+					array_merge(
+						$data,
+						array(
+							'user_id'     => $user_id,
+							'employee_no' => self::number( Sequence::next( 'employee' ) ),
+							'is_active'   => true,
+						)
+					)
+				);
+				if ( ! $employee->id ) {
+					throw new \RuntimeException( 'The employee file could not be saved.' );
+				}
+				if ( ! user_can( $user_id, Capabilities::VIEW_DASHBOARD ) ) {
+					$user->add_role( 'rtbp_staff' );
+				}
+				rtbp_activity(
+					'staff.create',
+					self::subject( $employee ),
+					array(
+						'after'       => array_filter( self::logged( $data, array() ), static fn( $value ) => '' !== $value ),
+						/* translators: 1: employee name, 2: user name. */
+						'description' => sprintf( __( 'Added the employee file of %1$s (existing user %2$s)', 'radius-hotel-booking-pro' ), $employee->fullName(), $user->user_login ),
+					)
+				);
+				return (int) $employee->id;
+			}
+		);
 		return $this->get( $id );
 	}
 
@@ -532,10 +601,11 @@ class EmployeeService {
 	 *
 	 * @param array         $input    Input.
 	 * @param Employee|null $employee The file being changed.
+	 * @param bool          $phone_optional Accept an empty phone (the legacy import, M18).
 	 * @return array Columns.
 	 * @throws DomainException 422.
 	 */
-	private function validate( array $input, ?Employee $employee ): array {
+	private function validate( array $input, ?Employee $employee, bool $phone_optional = false ): array {
 		$has    = static fn( $key ) => null === $employee || array_key_exists( $key, $input );
 		$errors = array();
 		$data   = array();
@@ -590,7 +660,7 @@ class EmployeeService {
 			$phone              = sanitize_text_field( (string) ( $input['phone'] ?? '' ) );
 			$data['phone']      = $phone;
 			$data['phone_e164'] = class_exists( '\\RadiusTheme\\RadiusHotelBooking\\Support\\Phone' ) ? \RadiusTheme\RadiusHotelBooking\Support\Phone::toE164( $phone ) : null;
-			if ( '' === $phone || strlen( preg_replace( '/\D+/', '', $phone ) ) < 8 ) {
+			if ( ( '' === $phone && ! $phone_optional ) || ( '' !== $phone && strlen( preg_replace( '/\D+/', '', $phone ) ) < 8 ) ) {
 				$errors['phone'] = __( 'Enter the phone number.', 'radius-hotel-booking-pro' );
 			}
 		}

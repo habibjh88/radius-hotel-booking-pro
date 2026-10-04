@@ -1,0 +1,4324 @@
+# Copyright (C) 2026 RadiusTheme
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Radius Hotel Booking Pro 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/radius-hotel-booking-pro\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-04T06:17:17+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: radius-hotel-booking-pro\n"
+
+#. Plugin Name of the plugin
+#: radius-hotel-booking-pro.php
+msgid "Radius Hotel Booking Pro"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: radius-hotel-booking-pro.php
+msgid "https://radiustheme.com"
+msgstr ""
+
+#. Description of the plugin
+#: radius-hotel-booking-pro.php
+msgid "Pro features for Radius Hotel Booking: activity log, advanced staff access, advanced pricing, iCal sync, PDF documents, advanced reports and exports, staff records and self-service. Each feature can be switched on or off."
+msgstr ""
+
+#. Author of the plugin
+#: radius-hotel-booking-pro.php
+msgid "RadiusTheme"
+msgstr ""
+
+#: includes/Access/AccessRolesController.php:68
+msgid "Access role created."
+msgstr ""
+
+#: includes/Access/AccessRolesController.php:85
+#: src/admin/staff/AccountTab.jsx:319
+msgid "Access role saved."
+msgstr ""
+
+#: includes/Access/AccessRolesController.php:102
+msgid "Access role deleted."
+msgstr ""
+
+#. translators: %s: role name.
+#: includes/Access/AccessRoleService.php:80
+#, php-format
+msgid "Created the access role %s"
+msgstr ""
+
+#. translators: %s: role name.
+#: includes/Access/AccessRoleService.php:110
+#, php-format
+msgid "Changed the access role %s"
+msgstr ""
+
+#: includes/Access/AccessRoleService.php:127
+msgid "A template role can be changed but not deleted."
+msgstr ""
+
+#. translators: %s: role name.
+#: includes/Access/AccessRoleService.php:141
+#, php-format
+msgid "Deleted the access role %s"
+msgstr ""
+
+#: includes/Access/AccessRoleService.php:159
+#: includes/Access/ProfileFields.php:190
+#: includes/Access/ProfileFields.php:209
+msgid "This value is not valid."
+msgstr ""
+
+#: includes/Access/AccessRoleService.php:170
+msgid "Choose Open, Passcode or Locked."
+msgstr ""
+
+#: includes/Access/AccessRoleService.php:246
+#: includes/Access/UserAccessService.php:200
+msgid "This access role does not exist."
+msgstr ""
+
+#: includes/Access/AccessRoleService.php:266
+msgid "Give the role a name of up to 100 characters."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:88
+msgid "Unlocked."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:110
+#: includes/Access/UserAccessService.php:389
+msgid "This staff member does not exist."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:113
+msgid "Only an administrator can change an administrator’s PIN."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:127
+#: src/admin/staff/AccountTab.jsx:424
+msgid "PIN removed."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:127
+#: src/admin/staff/AccountTab.jsx:399
+msgid "PIN saved."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:155
+msgid "Fallback PIN removed."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:155
+msgid "Fallback PIN saved."
+msgstr ""
+
+#: includes/Access/PasscodeController.php:171
+msgid "Send a PIN, or null to remove it."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:95
+#: includes/Access/PasscodeService.php:138
+#: src/admin/access/PasscodeDialog.jsx:70
+msgid "A PIN is 4 to 8 digits."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:122
+msgid "Removed a staff PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:123
+msgid "Set a staff PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:154
+msgid "Removed the fallback PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:155
+msgid "Set the fallback PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:192
+msgid "Choose what to unlock."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:197
+#: includes/Access/PasscodeService.php:331
+msgid "Another PIN is being checked. Try again in a moment."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:217
+#: src/admin/access/PasscodeDialog.jsx:56
+msgid "You do not have a PIN yet. Ask a manager to set one for you."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:241
+msgid "Confirmed with a PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:286
+msgid "Enter your PIN to continue."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:310
+msgid "You do not have a PIN yet. Use your password instead."
+msgstr ""
+
+#. translators: %d: minutes left.
+#: includes/Access/PasscodeService.php:353
+#, php-format
+msgid "Too many wrong PINs. Try again in %d minute."
+msgid_plural "Too many wrong PINs. Try again in %d minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Access/PasscodeService.php:430
+msgid "Entered a wrong PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:439
+msgid "Locked out after too many wrong PINs"
+msgstr ""
+
+#. translators: %d: minutes.
+#: includes/Access/PasscodeService.php:447
+#, php-format
+msgid "Too many wrong PINs. Try again in %d minutes."
+msgstr ""
+
+#. translators: %d: attempts left.
+#: includes/Access/PasscodeService.php:459
+#, php-format
+msgid "Wrong PIN. %d attempt left."
+msgid_plural "Wrong PIN. %d attempts left."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Access/ProfileFields.php:39
+msgid "Username"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:40
+#: src/admin/staff/CreateEmployeeScreen.jsx:247
+#: src/admin/staff/FileTabs.jsx:427
+msgid "First name"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:41
+#: src/admin/staff/CreateEmployeeScreen.jsx:259
+#: src/admin/staff/FileTabs.jsx:434
+msgid "Last name"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:42
+#: src/admin/staff/FileTabs.jsx:441
+msgid "Date of birth"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:43
+#: src/admin/self/ProfileScreen.jsx:361
+#: src/admin/staff/FileTabs.jsx:481
+#: src/admin/staff/FileTabs.jsx:599
+msgid "Address"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:44
+#: src/admin/staff/FileTabs.jsx:450
+msgid "Marital status"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:45
+#: src/admin/staff/FileTabs.jsx:466
+msgid "Number of children"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:46
+#: includes/ActivityLog/DeviceParser.php:45
+#: src/admin/self/ProfileScreen.jsx:340
+#: src/admin/staff/CreateEmployeeScreen.jsx:269
+#: src/admin/staff/FileTabs.jsx:514
+#: src/admin/staff/FileTabs.jsx:589
+#: src/admin/staff/StaffListScreen.jsx:112
+msgid "Phone"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:47
+#: src/admin/staff/AccountTab.jsx:114
+#: src/admin/staff/CreateEmployeeScreen.jsx:283
+#: src/admin/staff/FileTabs.jsx:529
+msgid "E-mail"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:48
+#: src/admin/staff/StaffDetailScreen.jsx:72
+msgid "Emergency contact"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:49
+#: src/admin/access/StaffAccess.jsx:51
+#: src/admin/self/SecuritySection.jsx:258
+msgid "Personal PIN"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:50
+#: src/admin/self/SecuritySection.jsx:95
+#: src/admin/staff/CreateEmployeeScreen.jsx:374
+#: src/admin/staff/CreateEmployeeScreen.jsx:401
+msgid "Password"
+msgstr ""
+
+#: includes/Access/ProfileFields.php:195
+msgid "Choose Allowed or Restricted."
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:80
+msgid "Receptionist"
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:81
+msgid "Takes bookings, checks guests in and out, records payments."
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:85
+msgid "Night receptionist"
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:86
+msgid "The front desk at night: no cancellations, refunds or bans."
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:96
+msgid "Supervisor"
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:97
+msgid "Runs the shift: may cancel and change bookings, sees the sales report."
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:112
+msgid "Housekeeping"
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:113
+msgid "Sees rooms and availability; no bookings, payments or guests."
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:122
+msgid "Accountant"
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:123
+msgid "Payments, invoices, reports and exports; does not take bookings."
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:138
+msgid "Manager"
+msgstr ""
+
+#: includes/Access/RoleTemplates.php:139
+msgid "Everything, with a PIN for permissions and voiding payments."
+msgstr ""
+
+#: includes/Access/UserAccessController.php:73
+msgid "Only an administrator can change an administrator’s permissions."
+msgstr ""
+
+#: includes/Access/UserAccessController.php:79
+msgid "Permissions saved."
+msgstr ""
+
+#: includes/Access/UserAccessController.php:142
+msgid "Personal overrides removed."
+msgstr ""
+
+#. translators: %s: staff member name.
+#: includes/Access/UserAccessService.php:261
+#, php-format
+msgid "Changed the permissions of %s"
+msgstr ""
+
+#: includes/Access/UserAccessService.php:303
+msgid "Reset every personal permission override"
+msgstr ""
+
+#: includes/Access/UserAccessService.php:304
+#: includes/Features/Access/AdvancedAccessFeature.php:109
+msgid "Reset personal permission overrides"
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:61
+msgid "An archive is already being written. Try again in a minute."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:69
+#: includes/ActivityLog/ActivityArchiver.php:494
+msgid "There is nothing new to archive."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:101
+msgid "The archive file was written but could not be recorded."
+msgstr ""
+
+#. translators: %d: number of log entries.
+#: includes/ActivityLog/ActivityArchiver.php:116
+#, php-format
+msgid "Archived %d log entry"
+msgid_plural "Archived %d log entries"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/ActivityLog/ActivityArchiver.php:184
+msgid "Older entries must be removed first."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:190
+msgid "The archive file is missing or has changed."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:199
+msgid "The archive file does not verify."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:205
+msgid "The archive file does not hold the expected rows."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:212
+msgid "The log head record is missing or has changed."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:223
+msgid "The log does not continue from this archive."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:236
+#: includes/ActivityLog/ActivityArchiver.php:251
+msgid "The database no longer matches the archive file."
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:244
+msgid "The log changed during the removal; run it again."
+msgstr ""
+
+#. translators: %d: number of log entries.
+#: includes/ActivityLog/ActivityArchiver.php:284
+#, php-format
+msgid "Removed %d archived log entry"
+msgid_plural "Removed %d archived log entries"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/ActivityLog/ActivityArchiver.php:390
+msgid "Automatic"
+msgstr ""
+
+#: includes/ActivityLog/ActivityArchiver.php:441
+msgid "The archive file could not be written."
+msgstr ""
+
+#. translators: %s: why the entries were not removed.
+#: includes/ActivityLog/ActivityController.php:168
+#, php-format
+msgid "Archive written, but the entries were not removed: %s"
+msgstr ""
+
+#: includes/ActivityLog/ActivityController.php:172
+msgid "Archive written and the archived entries removed."
+msgstr ""
+
+#: includes/ActivityLog/ActivityController.php:174
+msgid "Archive written."
+msgstr ""
+
+#: includes/ActivityLog/ActivitySettings.php:95
+msgid "Choose 1, 2, 3, 6, 12 or 24 months, or off."
+msgstr ""
+
+#: includes/ActivityLog/DeviceParser.php:42
+msgid "Tablet"
+msgstr ""
+
+#: includes/ActivityLog/DeviceParser.php:48
+msgid "Script"
+msgstr ""
+
+#: includes/ActivityLog/DeviceParser.php:50
+msgid "Computer"
+msgstr ""
+
+#: includes/Export/ArchiveService.php:69
+msgid "Choose a period that ended before today."
+msgstr ""
+
+#: includes/Export/ArchiveService.php:72
+msgid "Say why these bookings are being removed."
+msgstr ""
+
+#: includes/Export/ArchiveService.php:197
+msgid "The archive file could not be verified, so nothing was removed. Try again."
+msgstr ""
+
+#. translators: 1: bookings removed, 2: first reference, 3: last reference, 4: first day, 5: last day, 6: reason.
+#: includes/Export/ArchiveService.php:311
+#, php-format
+msgid "Archived and removed %1$d bookings (%2$s to %3$s) of %4$s to %5$s: %6$s"
+msgstr ""
+
+#. translators: 1: first day, 2: last day, 3: bookings kept, 4: reason.
+#: includes/Export/ArchiveService.php:321
+#, php-format
+msgid "Archived %1$s to %2$s; no booking could be removed (%3$d kept): %4$s"
+msgstr ""
+
+#: includes/Export/ScheduleController.php:90
+msgid "The scheduled export was removed."
+msgstr ""
+
+#. translators: %d: most schedules.
+#: includes/Export/ScheduleService.php:81
+#, php-format
+msgid "At most %d scheduled exports."
+msgstr ""
+
+#. translators: %s: the schedule in words.
+#: includes/Export/ScheduleService.php:95
+#, php-format
+msgid "Added a scheduled export: %s"
+msgstr ""
+
+#. translators: %s: the schedule in words.
+#: includes/Export/ScheduleService.php:118
+#, php-format
+msgid "Changed a scheduled export: %s"
+msgstr ""
+
+#. translators: %s: the schedule in words.
+#: includes/Export/ScheduleService.php:135
+#, php-format
+msgid "Removed a scheduled export: %s"
+msgstr ""
+
+#: includes/Export/ScheduleService.php:306
+msgid "Choose what to export."
+msgstr ""
+
+#: includes/Export/ScheduleService.php:309
+msgid "Choose a file format."
+msgstr ""
+
+#: includes/Export/ScheduleService.php:312
+msgid "Choose a day of the week."
+msgstr ""
+
+#: includes/Export/ScheduleService.php:315
+msgid "Choose a day from 1 to 28 (every month has it)."
+msgstr ""
+
+#: includes/Export/ScheduleService.php:318
+msgid "Enter a time as HH:MM."
+msgstr ""
+
+#. translators: 1: what (Bookings), 2: day of the month, 3: time, 4: file format.
+#: includes/Export/ScheduleService.php:358
+#, php-format
+msgid "%1$s, monthly on day %2$d at %3$s, %4$s"
+msgstr ""
+
+#. translators: 1: what (Bookings), 2: weekday, 3: time, 4: file format.
+#: includes/Export/ScheduleService.php:363
+#, php-format
+msgid "%1$s, every %2$s at %3$s, %4$s"
+msgstr ""
+
+#: includes/Export/ScheduleService.php:400
+msgid "This scheduled export does not exist."
+msgstr ""
+
+#: includes/Features/Access/AdvancedAccessFeature.php:166
+msgid "Changed the passcode settings"
+msgstr ""
+
+#: includes/Features/ActivityLog/ActivityLogFeature.php:91
+#: includes/Features/ActivityLog/ActivityLogFeature.php:224
+#: includes/Features/FeatureRegistry.php:126
+#: src/admin/activity/ActivityScreen.jsx:107
+#: src/admin/index.js:294
+#: src/admin/index.js:316
+msgid "Activity log"
+msgstr ""
+
+#: includes/Features/ActivityLog/ActivityLogFeature.php:97
+msgid "Archive the activity log"
+msgstr ""
+
+#: includes/Features/ActivityLog/ActivityLogFeature.php:191
+msgid "Downloaded a log archive"
+msgstr ""
+
+#: includes/Features/Documents/PdfDocumentsFeature.php:62
+msgid "Radius Hotel Booking Pro: PDF invoices are switched on, but the PDF library is missing. Run `composer scope` in the plugin folder, or reinstall the plugin."
+msgstr ""
+
+#: includes/Features/Export/AdvancedExportsFeature.php:113
+msgid "Archive and remove bookings"
+msgstr ""
+
+#: includes/Features/Export/AdvancedExportsFeature.php:144
+msgid "Archived and removed bookings"
+msgstr ""
+
+#: includes/Features/Export/AdvancedExportsFeature.php:147
+msgid "Added a scheduled export"
+msgstr ""
+
+#: includes/Features/Export/AdvancedExportsFeature.php:148
+msgid "Changed a scheduled export"
+msgstr ""
+
+#: includes/Features/Export/AdvancedExportsFeature.php:149
+msgid "Removed a scheduled export"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:126
+msgid "Record who did what, with before-and-after values, tamper evidence and automatic archiving."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:127
+msgid "Advanced staff access"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:127
+msgid "Passcode-protected actions, personal PINs, custom access roles, per-person overrides and profile-field control."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:128
+msgid "Advanced pricing rules"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:128
+msgid "Seasonal pricing, occupancy pricing, early-bird and last-minute discounts."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:129
+msgid "iCal calendar sync"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:129
+msgid "Import and export room availability with Booking.com, Airbnb and similar channels."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:130
+msgid "PDF invoices and receipts"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:130
+msgid "Generate invoices and receipts as PDF files and attach them to guest e-mails."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:131
+msgid "Automatic release of unpaid bookings"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:131
+msgid "Free the room automatically when a booking passes its payment deadline."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:132
+msgid "Advanced reports"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:132
+msgid "Occupancy rate, revenue by room type, rate plan and staff member, and Excel export."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:133
+msgid "Advanced exports and archiving"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:133
+msgid "Excel exports, archive-and-remove of old bookings, and scheduled exports."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:134
+#: includes/Features/Staff/StaffRecordsFeature.php:144
+msgid "Staff records"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:134
+msgid "Full employee files: contracts, emergency contacts, documents, notes and history."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:135
+msgid "Staff self-service"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:135
+msgid "Staff manage their own profile, password and PIN within the fields you allow."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:163
+msgid "Operations and security"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:164
+msgid "Pricing and availability"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:165
+msgid "Payments and documents"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:166
+msgid "Reports and exports"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:167
+#: includes/Features/Staff/StaffRecordsFeature.php:85
+#: src/admin/index.js:116
+#: src/admin/staff/StaffListScreen.jsx:196
+#: src/admin/staff/StaffListScreen.jsx:272
+msgid "Staff"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:81
+#: src/admin/ical/CalendarSyncScreen.jsx:549
+#: src/admin/index.js:92
+msgid "Calendar sync"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:111
+msgid "Published a room calendar"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:112
+msgid "Gave a room calendar a new link"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:113
+msgid "Stopped publishing a room calendar"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:114
+msgid "Added a channel calendar"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:115
+msgid "Changed a channel calendar"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:116
+msgid "Removed a channel calendar"
+msgstr ""
+
+#: includes/Features/Ical/IcalSyncFeature.php:117
+msgid "Read a channel calendar"
+msgstr ""
+
+#: includes/Features/Payments/AutoReleaseFeature.php:112
+#: src/admin/index.js:266
+#: src/admin/payments/AutoReleaseSettingsSection.jsx:25
+msgid "Automatic release"
+msgstr ""
+
+#: includes/Features/Pricing/PricingRulesFeature.php:69
+msgid "Added a pricing template"
+msgstr ""
+
+#: includes/Features/Pricing/PricingRulesFeature.php:70
+msgid "Changed a pricing template"
+msgstr ""
+
+#: includes/Features/Pricing/PricingRulesFeature.php:71
+msgid "Deleted a pricing template"
+msgstr ""
+
+#: includes/Features/Pricing/PricingRulesFeature.php:72
+msgid "Added a pricing rule"
+msgstr ""
+
+#: includes/Features/Pricing/PricingRulesFeature.php:73
+msgid "Changed a pricing rule"
+msgstr ""
+
+#: includes/Features/Pricing/PricingRulesFeature.php:74
+msgid "Deleted a pricing rule"
+msgstr ""
+
+#: includes/Features/Reports/AdvancedReportsFeature.php:84
+#: src/admin/index.js:361
+#: src/admin/pricing/OccupancyTab.jsx:107
+#: src/admin/pricing/PricingScreen.jsx:43
+#: src/admin/reports/OccupancyTab.jsx:87
+msgid "Occupancy"
+msgstr ""
+
+#: includes/Features/Reports/AdvancedReportsFeature.php:92
+#: src/admin/index.js:370
+msgid "Revenue breakdown"
+msgstr ""
+
+#: includes/Features/SelfService/SelfServiceFeature.php:59
+msgid "Updated their own profile"
+msgstr ""
+
+#: includes/Features/SelfService/SelfServiceFeature.php:63
+msgid "Changed their own password"
+msgstr ""
+
+#: includes/Features/SelfService/SelfServiceFeature.php:67
+msgid "Entered a wrong current password"
+msgstr ""
+
+#: includes/Features/SelfService/SelfServiceFeature.php:71
+#: includes/SelfService/CredentialsService.php:150
+msgid "Changed their own PIN"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:86
+#: src/admin/index.js:129
+#: src/admin/staff/CreateEmployeeScreen.jsx:223
+msgid "Add an employee"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:87
+msgid "Edit an employee file"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:88
+msgid "Deactivate or reactivate an employee"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:89
+msgid "See CNPS and tax numbers"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:90
+msgid "Manage employment contracts"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:91
+msgid "Add an employee note"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:92
+msgid "Edit an employee note"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:93
+msgid "Remove an employee note"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:157
+msgid "Added an employee"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:158
+msgid "Changed an employee file"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:159
+msgid "Deactivated an employee"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:160
+msgid "Reactivated an employee"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:161
+msgid "Changed an employee account"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:162
+msgid "Viewed the CNPS and tax numbers of an employee"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:163
+msgid "Added an employment contract"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:164
+msgid "Changed an employment contract"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:165
+msgid "Ended an employment contract"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:166
+msgid "Deleted an employment contract"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:167
+msgid "Added a document to an employee file"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:168
+msgid "Deleted a document from an employee file"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:169
+msgid "Opened a document in an employee file"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:170
+msgid "Added an employee note"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:171
+msgid "Edited an employee note"
+msgstr ""
+
+#: includes/Features/Staff/StaffRecordsFeature.php:172
+msgid "Removed an employee note"
+msgstr ""
+
+#: includes/Ical/IcalController.php:91
+msgid "Channel calendar added."
+msgstr ""
+
+#: includes/Ical/IcalController.php:105
+#: src/admin/ical/ImportDialog.jsx:109
+msgid "Channel calendar saved."
+msgstr ""
+
+#: includes/Ical/IcalController.php:119
+#: src/admin/ical/CalendarSyncScreen.jsx:381
+msgid "Channel calendar removed."
+msgstr ""
+
+#: includes/Ical/IcalController.php:142
+msgid "Calendar read."
+msgstr ""
+
+#: includes/Ical/IcalController.php:170
+msgid "Calendar link ready."
+msgstr ""
+
+#: includes/Ical/IcalController.php:187
+msgid "Calendar no longer published."
+msgstr ""
+
+#: includes/Ical/IcalController.php:226
+#: includes/Ical/IcalController.php:233
+msgid "Too many requests. Try again later."
+msgstr ""
+
+#: includes/Ical/IcalController.php:241
+msgid "Calendar not found."
+msgstr ""
+
+#. translators: %s: room number.
+#: includes/Ical/IcalExportService.php:108
+#, php-format
+msgid "Gave the calendar of room %s a new link; the old link stopped working"
+msgstr ""
+
+#. translators: %s: room number.
+#: includes/Ical/IcalExportService.php:110
+#, php-format
+msgid "Published the calendar of room %s"
+msgstr ""
+
+#. translators: %s: room number.
+#: includes/Ical/IcalExportService.php:135
+#, php-format
+msgid "Stopped publishing the calendar of room %s"
+msgstr ""
+
+#. translators: 1: site name, 2: room number.
+#: includes/Ical/IcalExportService.php:167
+#, php-format
+msgid "%1$s – Room %2$s"
+msgstr ""
+
+#: includes/Ical/IcalExportService.php:171
+msgid "Not available"
+msgstr ""
+
+#: includes/Ical/IcalExportService.php:239
+msgid "This room does not exist."
+msgstr ""
+
+#. translators: %s: room number.
+#: includes/Ical/IcalExportService.php:253
+#: includes/Ical/IcalImportService.php:672
+#: src/admin/ical/CalendarSyncScreen.jsx:513
+#, php-format,js-format
+msgid "Room %s"
+msgstr ""
+
+#. translators: %d: most channel calendars per room.
+#: includes/Ical/IcalImportService.php:100
+#, php-format
+msgid "A room can read at most %d channel calendars."
+msgstr ""
+
+#. translators: 1: channel calendar name, 2: room number.
+#: includes/Ical/IcalImportService.php:119
+#, php-format
+msgid "Added the channel calendar %1$s to room %2$s"
+msgstr ""
+
+#. translators: 1: channel calendar name, 2: room number.
+#: includes/Ical/IcalImportService.php:158
+#, php-format
+msgid "Changed the channel calendar %1$s of room %2$s"
+msgstr ""
+
+#. translators: 1: channel calendar name, 2: room number, 3: blocks removed.
+#: includes/Ical/IcalImportService.php:196
+#, php-format
+msgid "Removed the channel calendar %1$s of room %2$s and its %3$d blocked periods"
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:229
+msgid "The room of this calendar was removed."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:240
+msgid "This address does not return a calendar (iCal)."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:243
+msgid "The calendar arrived incomplete (cut off or too large). The blocked dates were kept."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:271
+#: includes/Ical/IcalImportService.php:362
+msgid "The channel sent an empty calendar. Blocked dates kept; use Read now to accept it."
+msgstr ""
+
+#. translators: %s: the network error.
+#: includes/Ical/IcalImportService.php:460
+#, php-format
+msgid "The calendar could not be reached: %s"
+msgstr ""
+
+#. translators: %d: HTTP status code.
+#: includes/Ical/IcalImportService.php:473
+#, php-format
+msgid "The channel answered with error %d. Check the address."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:480
+msgid "The calendar is too large to read. The blocked dates were kept."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:490
+msgid "The calendar address redirects too many times."
+msgstr ""
+
+#. translators: 1: channel calendar name, 2: room number, 3: blocks added, 4: changed, 5: removed.
+#: includes/Ical/IcalImportService.php:552
+#, php-format
+msgid "Read %1$s for room %2$s: %3$d added, %4$d changed, %5$d removed"
+msgstr ""
+
+#. translators: 1: channel calendar name, 2: room number, 3: error.
+#: includes/Ical/IcalImportService.php:554
+#, php-format
+msgid "Could not read %1$s for room %2$s: %3$s"
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:572
+msgid "Name the channel, e.g. Booking.com (up to 100 characters)."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:578
+msgid "This room already reads this calendar."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:582
+msgid "Choose how often to read the calendar."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:621
+msgid "Choose a room."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:636
+msgid "Update Radius Hotel Booking to use calendar sync."
+msgstr ""
+
+#: includes/Ical/IcalImportService.php:647
+msgid "This channel calendar does not exist."
+msgstr ""
+
+#. translators: %d: bookings overlapping the channel's dates.
+#: includes/Ical/IcalImportService.php:658
+#, php-format
+msgid "%d booking here overlaps the channel’s dates: a possible double booking."
+msgid_plural "%d bookings here overlap the channel’s dates: possible double bookings."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Ical/IcalUrlGuard.php:41
+msgid "Paste the calendar address (iCal link) the channel gives you."
+msgstr ""
+
+#: includes/Ical/IcalUrlGuard.php:48
+msgid "The address must start with https:// (or webcal://)."
+msgstr ""
+
+#: includes/Ical/IcalUrlGuard.php:51
+msgid "The address must not contain a user name or password."
+msgstr ""
+
+#: includes/Ical/IcalUrlGuard.php:54
+msgid "The address uses a port that is not allowed."
+msgstr ""
+
+#: includes/Ical/IcalUrlGuard.php:57
+msgid "This address points to a private or local network, which is not allowed."
+msgstr ""
+
+#: includes/Ical/IcalUrlGuard.php:63
+msgid "This address could not be found. Check it and try again."
+msgstr ""
+
+#: includes/Payments/AutoReleaseJob.php:95
+msgid "Released automatically: not paid by the deadline."
+msgstr ""
+
+#. translators: %s: minimum free plugin version.
+#: includes/Plugin.php:93
+#, php-format
+msgid "Radius Hotel Booking Pro needs Radius Hotel Booking %s or later to be installed and active."
+msgstr ""
+
+#. translators: 1: rule name, 2: the discount, e.g. "−10 %".
+#. translators: 1: rule name, 2: the adjustment, e.g. "+15 %".
+#. translators: 1: rule or template name, 2: the adjustment, e.g. "+20 %".
+#: includes/Pricing/BookingWindowStep.php:80
+#: includes/Pricing/OccupancyStep.php:104
+#: includes/Pricing/SeasonalStep.php:63
+#, php-format
+msgid "%1$s (%2$s)"
+msgstr ""
+
+#: includes/Pricing/PricingController.php:65
+#: src/admin/pricing/TemplatesTab.jsx:189
+msgid "Template added."
+msgstr ""
+
+#: includes/Pricing/PricingController.php:82
+#: src/admin/pricing/TemplatesTab.jsx:188
+msgid "Template saved."
+msgstr ""
+
+#: includes/Pricing/PricingController.php:99
+#: src/admin/pricing/TemplatesTab.jsx:418
+msgid "Template deleted."
+msgstr ""
+
+#: includes/Pricing/PricingController.php:130
+#: src/admin/pricing/AdjustedRuleEditor.jsx:95
+#: src/admin/pricing/SeasonalTab.jsx:394
+msgid "Rule added."
+msgstr ""
+
+#: includes/Pricing/PricingController.php:147
+#: src/admin/pricing/AdjustedRuleEditor.jsx:94
+#: src/admin/pricing/SeasonalTab.jsx:393
+msgid "Rule saved."
+msgstr ""
+
+#: includes/Pricing/PricingController.php:164
+#: src/admin/pricing/AdjustedRuleEditor.jsx:399
+#: src/admin/pricing/SeasonalTab.jsx:633
+msgid "Rule deleted."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:87
+msgid "This pricing rule does not exist."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:106
+msgid "The rule could not be saved. Please try again."
+msgstr ""
+
+#. translators: %s: rule name.
+#: includes/Pricing/PricingRuleService.php:116
+#, php-format
+msgid "Added the pricing rule %s"
+msgstr ""
+
+#. translators: %s: rule name.
+#: includes/Pricing/PricingRuleService.php:144
+#, php-format
+msgid "Changed the pricing rule %s"
+msgstr ""
+
+#. translators: %s: rule name.
+#: includes/Pricing/PricingRuleService.php:169
+#, php-format
+msgid "Deleted the pricing rule %s"
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:208
+msgid "One of the room types no longer exists. Reload the page."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:209
+msgid "One of the rate plans no longer exists. Reload the page."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:216
+msgid "A whole number from -1000 to 1000."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:225
+msgid "Choose a pricing template."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:230
+msgid "Choose the first date."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:233
+msgid "Choose the last date."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:235
+msgid "The last date must not be before the first."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:274
+msgid "Choose increase or decrease."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:278
+#: includes/Pricing/PricingTemplateService.php:233
+msgid "Choose a percentage or a fixed amount."
+msgstr ""
+
+#. translators: %d: the largest percentage.
+#: includes/Pricing/PricingRuleService.php:285
+#, php-format
+msgid "A percentage above 0, up to %d."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:286
+msgid "An amount above 0."
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:291
+msgid "An occupancy from 1 to 100 %."
+msgstr ""
+
+#. translators: %d: the smallest number of days.
+#: includes/Pricing/PricingRuleService.php:298
+#, php-format
+msgid "A whole number of days from %d to 730."
+msgstr ""
+
+#. translators: %s: occupancy percentage.
+#: includes/Pricing/PricingRuleService.php:335
+#, php-format
+msgid "Occupancy %s %%+"
+msgstr ""
+
+#. translators: %s: number of days.
+#: includes/Pricing/PricingRuleService.php:338
+#, php-format
+msgid "Early bird %s+ days"
+msgstr ""
+
+#. translators: %s: number of days.
+#: includes/Pricing/PricingRuleService.php:341
+#, php-format
+msgid "Last minute ≤ %s days"
+msgstr ""
+
+#: includes/Pricing/PricingRuleService.php:376
+msgid "Unknown kind of pricing rule."
+msgstr ""
+
+#: includes/Pricing/PricingTemplateService.php:65
+#: includes/Pricing/PricingTemplateService.php:141
+msgid "This pricing template does not exist."
+msgstr ""
+
+#: includes/Pricing/PricingTemplateService.php:82
+msgid "The template could not be saved. Please try again."
+msgstr ""
+
+#. translators: %s: template name.
+#: includes/Pricing/PricingTemplateService.php:91
+#, php-format
+msgid "Added the pricing template %s"
+msgstr ""
+
+#. translators: %s: template name.
+#: includes/Pricing/PricingTemplateService.php:119
+#, php-format
+msgid "Changed the pricing template %s"
+msgstr ""
+
+#. translators: 1: template name, 2: number of rules.
+#: includes/Pricing/PricingTemplateService.php:147
+#, php-format
+msgid "%1$s is used by %2$d seasonal rule. Change or delete the rule first."
+msgid_plural "%1$s is used by %2$d seasonal rules. Change or delete them first."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: template name.
+#: includes/Pricing/PricingTemplateService.php:164
+#, php-format
+msgid "Deleted the pricing template %s"
+msgstr ""
+
+#. translators: %s: price.
+#: includes/Pricing/PricingTemplateService.php:180
+#, php-format
+msgid "= %s"
+msgstr ""
+
+#. translators: %s: a percentage number.
+#: includes/Pricing/PricingTemplateService.php:185
+#, php-format
+msgid "%s %%"
+msgstr ""
+
+#: includes/Pricing/PricingTemplateService.php:224
+msgid "Give the template a name of up to 120 characters."
+msgstr ""
+
+#: includes/Pricing/PricingTemplateService.php:228
+msgid "Choose increase, decrease or set."
+msgstr ""
+
+#. translators: %d: the largest percentage.
+#: includes/Pricing/PricingTemplateService.php:240
+#, php-format
+msgid "A percentage from 0 to %d."
+msgstr ""
+
+#: includes/Pricing/PricingTemplateService.php:241
+msgid "An amount of 0 or more."
+msgstr ""
+
+#. translators: 1: first day, 2: last day.
+#: includes/Reports/OccupancyReport.php:162
+#, php-format
+msgid "Occupancy, %1$s to %2$s"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:163
+msgid "Figure"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:163
+msgid "Value"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:165
+#: includes/Reports/OccupancyReport.php:175
+#: includes/Reports/OccupancyReport.php:180
+#: includes/Reports/OccupancyReport.php:216
+msgid "Occupancy (%)"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:166
+msgid "Sellable rooms"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:167
+#: includes/Reports/OccupancyReport.php:175
+msgid "Most rooms occupied at once"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:168
+#: src/admin/reports/OccupancyTab.jsx:116
+msgid "Rooms occupied on average"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:169
+#: includes/Reports/OccupancyReport.php:175
+#: src/admin/reports/OccupancyTab.jsx:132
+msgid "Occupied room-hours"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:170
+#: includes/Reports/OccupancyReport.php:175
+msgid "Sellable room-hours"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:174
+msgid "By day"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:175
+#: src/admin/exports/SchedulesPanel.jsx:391
+msgid "Day"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:179
+#: src/admin/reports/OccupancyTab.jsx:190
+#: src/admin/reports/RevenueTab.jsx:169
+msgid "By room type"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:180
+#: includes/Reports/RevenueReport.php:94
+#: src/admin/ical/CalendarSyncScreen.jsx:481
+msgid "Room type"
+msgstr ""
+
+#: includes/Reports/OccupancyReport.php:180
+#: includes/Reports/RevenueReport.php:87
+msgid "Rooms"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:58
+msgid "Unnamed"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:87
+msgid "Bookings"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:87
+msgid "Revenue"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:87
+msgid "Share (%)"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:89
+msgid "by booking date"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:89
+msgid "by arrival date"
+msgstr ""
+
+#. translators: 1: first day, 2: last day, 3: "by arrival date" or "by booking date".
+#: includes/Reports/RevenueReport.php:93
+#, php-format
+msgid "Revenue by room type, %1$s to %2$s, %3$s"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:98
+msgid "Revenue by rate plan"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:99
+msgid "Rate plan"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:103
+msgid "Revenue by staff member"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:104
+msgid "Taken by"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:161
+msgid "Website (guests)"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:164
+msgid "Imported or channel calendars"
+msgstr ""
+
+#: includes/Reports/RevenueReport.php:167
+msgid "Unknown staff"
+msgstr ""
+
+#. translators: %d: user id of a deleted account.
+#: includes/Reports/RevenueReport.php:171
+#, php-format
+msgid "Deleted user #%d"
+msgstr ""
+
+#: includes/Reports/XlsxWriter.php:182
+msgid "Excel (XLSX)"
+msgstr ""
+
+#: includes/SelfService/CredentialsController.php:47
+msgid "Your password is changed. You are signed out everywhere else."
+msgstr ""
+
+#: includes/SelfService/CredentialsController.php:64
+#: src/admin/self/SecuritySection.jsx:229
+msgid "Your PIN is changed."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:75
+msgid "Enter your current password."
+msgstr ""
+
+#. translators: %d: minimum length.
+#: includes/SelfService/CredentialsService.php:79
+#, php-format
+msgid "Use at least %d characters."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:81
+msgid "Choose a password different from the current one."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:98
+msgid "Changed their own password; other sessions signed out"
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:117
+msgid "PINs need the Advanced staff access feature (Settings → Pro features)."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:126
+#: includes/Staff/EmployeeService.php:113
+#: includes/Staff/EmployeeService.php:415
+msgid "Enter a PIN of 4 to 8 digits."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:130
+msgid "Enter your current PIN or your password."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:131
+msgid "Enter your password."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:179
+msgid "Please sign in again."
+msgstr ""
+
+#. translators: %s: field key.
+#. translators: %s: field keys.
+#: includes/SelfService/CredentialsService.php:204
+#: includes/SelfService/ProfileService.php:133
+#, php-format
+msgid "Tried to change a restricted profile field: %s"
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:208
+#: includes/SelfService/ProfileService.php:122
+msgid "You are not allowed to change this. Ask a manager."
+msgstr ""
+
+#. translators: %d: minutes left.
+#: includes/SelfService/CredentialsService.php:232
+#, php-format
+msgid "Too many wrong passwords. Try again in %d minute."
+msgid_plural "Too many wrong passwords. Try again in %d minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/SelfService/CredentialsService.php:260
+msgid "Entered a wrong current password in their profile"
+msgstr ""
+
+#. translators: %d: minutes.
+#: includes/SelfService/CredentialsService.php:269
+#, php-format
+msgid "Too many wrong passwords. Try again in %d minutes."
+msgstr ""
+
+#: includes/SelfService/CredentialsService.php:273
+msgid "Your current password is not right."
+msgstr ""
+
+#: includes/SelfService/ProfileController.php:62
+#: src/admin/self/ProfileScreen.jsx:109
+msgid "Your profile is saved."
+msgstr ""
+
+#: includes/SelfService/ProfileService.php:139
+msgid "Some of these fields cannot be changed from your profile."
+msgstr ""
+
+#: includes/SelfService/ProfileService.php:173
+#: includes/Staff/ContractService.php:376
+#: includes/Staff/ContractService.php:392
+#: includes/Staff/DocumentService.php:131
+#: includes/Staff/EmployeeService.php:617
+#: includes/Staff/EmployeeService.php:696
+msgid "This is too long."
+msgstr ""
+
+#: includes/SelfService/ProfileService.php:180
+msgid "Enter your first and last name."
+msgstr ""
+
+#: includes/SelfService/ProfileService.php:186
+#: includes/Staff/EmployeeService.php:670
+msgid "Enter a valid e-mail address."
+msgstr ""
+
+#: includes/SelfService/ProfileService.php:188
+#: includes/Staff/EmployeeService.php:125
+#: includes/Staff/EmployeeService.php:175
+#: includes/Staff/EmployeeService.php:294
+msgid "Another account already uses this e-mail."
+msgstr ""
+
+#. translators: %s: name.
+#. translators: %s: employee name.
+#: includes/SelfService/ProfileService.php:232
+#: includes/Staff/EmployeeService.php:334
+#, php-format
+msgid "%s updated their own profile"
+msgstr ""
+
+#: includes/Settings/FeatureSettings.php:182
+msgid "Changed the Pro features that are switched on."
+msgstr ""
+
+#: includes/Staff/ContractController.php:72
+#: src/admin/staff/EmploymentTab.jsx:145
+msgid "Contract added."
+msgstr ""
+
+#: includes/Staff/ContractController.php:89
+#: src/admin/staff/EmploymentTab.jsx:144
+msgid "Contract saved."
+msgstr ""
+
+#: includes/Staff/ContractController.php:117
+#: src/admin/staff/EmploymentTab.jsx:350
+msgid "Contract ended."
+msgstr ""
+
+#: includes/Staff/ContractController.php:135
+#: src/admin/staff/EmploymentTab.jsx:695
+msgid "Contract deleted."
+msgstr ""
+
+#. translators: 1: job title or type, 2: employee name.
+#: includes/Staff/ContractService.php:89
+#, php-format
+msgid "Added a contract (%1$s) for %2$s"
+msgstr ""
+
+#: includes/Staff/ContractService.php:124
+msgid "Another contract is active. End it first."
+msgstr ""
+
+#. translators: 1: job title or type, 2: employee name.
+#: includes/Staff/ContractService.php:140
+#, php-format
+msgid "Changed the contract (%1$s) of %2$s"
+msgstr ""
+
+#: includes/Staff/ContractService.php:175
+msgid "This contract has already ended."
+msgstr ""
+
+#: includes/Staff/ContractService.php:179
+#: includes/Staff/ContractService.php:403
+msgid "The end date must be on or after the start date."
+msgstr ""
+
+#. translators: 1: job title or type, 2: employee name.
+#: includes/Staff/ContractService.php:214
+#, php-format
+msgid "Deleted the contract (%1$s) of %2$s"
+msgstr ""
+
+#. translators: 1: job title or type, 2: employee name, 3: reason.
+#: includes/Staff/ContractService.php:216
+#, php-format
+msgid "Deleted the contract (%1$s) of %2$s: %3$s"
+msgstr ""
+
+#: includes/Staff/ContractService.php:235
+msgid "This contract does not exist."
+msgstr ""
+
+#: includes/Staff/ContractService.php:264
+msgid "This starts before the current contract. Record a past contract as Ended."
+msgstr ""
+
+#: includes/Staff/ContractService.php:284
+msgid "A new contract started."
+msgstr ""
+
+#. translators: 1: job title or type, 2: employee name.
+#: includes/Staff/ContractService.php:319
+#, php-format
+msgid "Ended the contract (%1$s) of %2$s"
+msgstr ""
+
+#. translators: 1: job title or type, 2: employee name, 3: reason.
+#: includes/Staff/ContractService.php:321
+#, php-format
+msgid "Ended the contract (%1$s) of %2$s: %3$s"
+msgstr ""
+
+#: includes/Staff/ContractService.php:363
+#: includes/Staff/ContractService.php:369
+#: includes/Staff/DocumentService.php:124
+#: includes/Staff/EmployeeService.php:643
+#: includes/Staff/EmployeeService.php:680
+msgid "Choose from the list."
+msgstr ""
+
+#: includes/Staff/ContractService.php:385
+msgid "Enter a valid date."
+msgstr ""
+
+#: includes/Staff/ContractService.php:400
+msgid "Enter the start date."
+msgstr ""
+
+#: includes/Staff/ContractService.php:406
+msgid "An ended contract needs its end date."
+msgstr ""
+
+#: includes/Staff/ContractService.php:476
+msgid "Full time"
+msgstr ""
+
+#: includes/Staff/ContractService.php:477
+msgid "Part time"
+msgstr ""
+
+#: includes/Staff/ContractService.php:478
+msgid "Fixed-term contract"
+msgstr ""
+
+#: includes/Staff/ContractService.php:479
+msgid "Internship"
+msgstr ""
+
+#: includes/Staff/ContractService.php:480
+#: includes/Staff/DocumentService.php:307
+#: includes/Staff/EmployeeService.php:526
+msgid "Other"
+msgstr ""
+
+#: includes/Staff/DocumentController.php:86
+#: src/admin/staff/DocumentsTab.jsx:116
+msgid "Document added."
+msgstr ""
+
+#: includes/Staff/DocumentController.php:104
+#: src/admin/staff/DocumentsTab.jsx:383
+msgid "Document deleted."
+msgstr ""
+
+#: includes/Staff/DocumentService.php:100
+#: src/admin/staff/DocumentsTab.jsx:101
+msgid "Choose a file to upload."
+msgstr ""
+
+#: includes/Staff/DocumentService.php:104
+msgid "This file is empty."
+msgstr ""
+
+#: includes/Staff/DocumentService.php:111
+msgid "Upload a PDF, an image (JPG, PNG, WebP) or a Word or OpenDocument file."
+msgstr ""
+
+#. translators: 1: document title, 2: employee name.
+#: includes/Staff/DocumentService.php:169
+#, php-format
+msgid "Added the document \"%1$s\" to the file of %2$s"
+msgstr ""
+
+#. translators: 1: document title, 2: employee name.
+#: includes/Staff/DocumentService.php:206
+#, php-format
+msgid "Deleted the document \"%1$s\" from the file of %2$s"
+msgstr ""
+
+#. translators: 1: document title, 2: employee name, 3: reason.
+#: includes/Staff/DocumentService.php:208
+#, php-format
+msgid "Deleted the document \"%1$s\" from the file of %2$s: %3$s"
+msgstr ""
+
+#: includes/Staff/DocumentService.php:225
+msgid "This document does not exist."
+msgstr ""
+
+#. translators: 1: document title, 2: employee name.
+#: includes/Staff/DocumentService.php:281
+#, php-format
+msgid "Opened the document \"%1$s\" in the file of %2$s"
+msgstr ""
+
+#: includes/Staff/DocumentService.php:303
+msgid "Contract"
+msgstr ""
+
+#: includes/Staff/DocumentService.php:304
+msgid "Identity document"
+msgstr ""
+
+#: includes/Staff/DocumentService.php:305
+msgid "Diploma or certificate"
+msgstr ""
+
+#: includes/Staff/DocumentService.php:306
+msgid "Medical"
+msgstr ""
+
+#. translators: %s: size such as "10 MB".
+#: includes/Staff/DocumentService.php:318
+#: src/admin/staff/DocumentsTab.jsx:85
+#, php-format,js-format
+msgid "This file is too large. The limit is %s."
+msgstr ""
+
+#: includes/Staff/EmployeeController.php:124
+#: src/admin/staff/CreateEmployeeScreen.jsx:172
+msgid "Employee added."
+msgstr ""
+
+#: includes/Staff/EmployeeController.php:141
+msgid "Employee saved."
+msgstr ""
+
+#: includes/Staff/EmployeeController.php:158
+msgid "Employee deactivated: they can no longer sign in."
+msgstr ""
+
+#: includes/Staff/EmployeeController.php:175
+#: src/admin/staff/StaffDetailScreen.jsx:370
+#: src/admin/staff/StaffListScreen.jsx:330
+msgid "Employee reactivated."
+msgstr ""
+
+#: includes/Staff/EmployeeController.php:202
+msgid "Account saved."
+msgstr ""
+
+#: includes/Staff/EmployeeController.php:219
+msgid "Password link sent."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:67
+msgid "This employee does not exist."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:103
+msgid "Choose a user name (letters, numbers, . _ - @)."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:105
+msgid "This user name is taken."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:109
+#: includes/Staff/EmployeeService.php:411
+#: src/admin/staff/AccountTab.jsx:129
+msgid "Use at least 8 characters."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:163
+msgid "This user does not exist."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:167
+msgid "This user already has an employee file."
+msgstr ""
+
+#. translators: 1: employee name, 2: user name.
+#: includes/Staff/EmployeeService.php:203
+#, php-format
+msgid "Added the employee file of %1$s (existing user %2$s)"
+msgstr ""
+
+#. translators: 1: employee name, 2: user name.
+#: includes/Staff/EmployeeService.php:267
+#, php-format
+msgid "Added the employee %1$s (user %2$s)"
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Staff/EmployeeService.php:336
+#, php-format
+msgid "Changed the file of %s"
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Staff/EmployeeService.php:360
+#, php-format
+msgid "Viewed the CNPS and tax numbers of %s"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:424
+msgid "PINs and access roles need the Advanced staff access feature (Settings → Pro features)."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:431
+#: src/admin/staff/AccountTab.jsx:263
+msgid "You cannot change your own access role."
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Staff/EmployeeService.php:443
+#, php-format
+msgid "Set a new password for %s"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:473
+msgid "Add an e-mail address first: the link is sent there."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:478
+msgid "The e-mail could not be sent. Check the site's e-mail settings, or set a password here."
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Staff/EmployeeService.php:486
+#, php-format
+msgid "Sent %s a link to set their password"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:511
+msgid "Single"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:512
+msgid "Married"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:513
+msgid "Divorced"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:514
+msgid "Separated"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:515
+msgid "Widowed"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:518
+msgid "Father"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:519
+msgid "Mother"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:520
+msgid "Spouse"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:521
+msgid "Brother"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:522
+msgid "Sister"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:523
+msgid "Friend"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:524
+msgid "Relative"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:525
+msgid "Guardian"
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:549
+msgid "This account is deactivated. Ask a manager."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:582
+msgid "Only an administrator can change an administrator's account."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:595
+msgid "Changing access roles and PINs needs the \"Manage permissions\" permission."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:624
+msgid "Enter the first and last name."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:632
+msgid "Enter a valid date of birth."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:653
+msgid "Enter a number from 0 to 30."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:664
+#: src/admin/staff/CreateEmployeeScreen.jsx:137
+msgid "Enter the phone number."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:724
+msgid "This employee is already active."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:724
+msgid "This employee is already deactivated."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:730
+msgid "You cannot deactivate your own account."
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Staff/EmployeeService.php:758
+#, php-format
+msgid "Reactivated %s"
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Staff/EmployeeService.php:760
+#, php-format
+msgid "Deactivated %s: they can no longer sign in"
+msgstr ""
+
+#: radius-hotel-booking-pro.php:39
+msgid "Radius Hotel Booking Pro is missing its vendor folder. Run `composer install` in the plugin directory."
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:58
+msgid "Fallback PIN"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:59
+msgid "4 to 8 digits. For administrators and staff without a personal PIN. It is stored securely and never shown again."
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:84
+msgid "Replace"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:85
+#: src/admin/access/StaffAccess.jsx:78
+#: src/admin/self/SecuritySection.jsx:360
+msgid "Set PIN"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:95
+#: src/admin/access/StaffAccess.jsx:87
+#: src/admin/exports/SchedulesPanel.jsx:275
+#: src/admin/exports/SchedulesPanel.jsx:555
+#: src/admin/ical/CalendarSyncScreen.jsx:375
+#: src/admin/ical/CalendarSyncScreen.jsx:388
+msgid "Remove"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:101
+msgid "Set"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:102
+msgid "Not set"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:163
+msgid "PIN confirmation"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:164
+msgid "Pages and actions set to Passcode ask for a PIN before they go through."
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:170
+msgid "A PIN stays valid for"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:176
+msgid "minutes"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:182
+#: src/admin/access/AccessSection.jsx:187
+msgid "One PIN covers"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:193
+msgid "Everything"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:200
+msgid "One page or action"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:211
+msgid "Allow the fallback PIN"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:215
+msgid "Staff without a personal PIN, and administrators, may confirm with a shared PIN."
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:228
+#: src/admin/access/RoleEditor.jsx:157
+#: src/admin/access/StaffAccess.jsx:284
+msgid "Profile fields"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:229
+msgid "Which fields staff may change on their own profile. An access role or a person can differ."
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:242
+msgid "Locked message"
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:243
+msgid "What staff see when they reach something they may not use."
+msgstr ""
+
+#: src/admin/access/AccessSection.jsx:253
+msgid "You do not have access to this. Ask a manager if you need it."
+msgstr ""
+
+#: src/admin/access/LevelMatrix.jsx:52
+#: src/admin/access/LevelMatrix.jsx:56
+msgid "Find a page or action"
+msgstr ""
+
+#. translators: %s: a page or action.
+#: src/admin/access/LevelMatrix.jsx:85
+#, js-format
+msgid "Level for %s"
+msgstr ""
+
+#: src/admin/access/levels.js:12
+#: src/admin/staff/DocumentsTab.jsx:312
+msgid "Open"
+msgstr ""
+
+#: src/admin/access/levels.js:15
+#: src/admin/index.js:189
+msgid "Passcode"
+msgstr ""
+
+#: src/admin/access/levels.js:17
+#: src/admin/self/ProfileScreen.jsx:149
+#: src/admin/self/ProfileScreen.jsx:274
+msgid "Locked"
+msgstr ""
+
+#: src/admin/access/levels.js:47
+#: src/admin/access/ProfileFieldsControl.jsx:36
+msgid "Personal override"
+msgstr ""
+
+#: src/admin/access/levels.js:48
+#: src/admin/access/ProfileFieldsControl.jsx:37
+#: src/admin/access/StaffAccess.jsx:184
+#: src/admin/staff/AccountTab.jsx:256
+#: src/admin/staff/CreateEmployeeScreen.jsx:504
+#: src/admin/staff/StaffListScreen.jsx:117
+msgid "Access role"
+msgstr ""
+
+#: src/admin/access/levels.js:49
+msgid "Staff role default"
+msgstr ""
+
+#: src/admin/access/levels.js:50
+#: src/admin/access/ProfileFieldsControl.jsx:38
+#: src/admin/access/ProfileFieldsControl.jsx:39
+#: src/admin/access/RoleEditor.jsx:137
+#: src/admin/access/RoleEditor.jsx:151
+#: src/admin/access/RoleEditor.jsx:166
+msgid "Default"
+msgstr ""
+
+#: src/admin/access/levels.js:51
+#: src/admin/access/ProfileFieldsControl.jsx:40
+#: src/admin/access/StaffAccess.jsx:178
+msgid "Administrator"
+msgstr ""
+
+#: src/admin/access/levels.js:52
+msgid "No dashboard access"
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:48
+msgid "Too many wrong PINs. Try again later."
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:112
+msgid "Enter your PIN"
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:118
+msgid "This action is protected. Confirm it with your personal PIN."
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:134
+#: src/admin/staff/AccountTab.jsx:336
+msgid "PIN"
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:161
+msgid "Close"
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:162
+#: src/admin/access/RoleEditor.jsx:188
+#: src/admin/exports/SchedulesPanel.jsx:531
+#: src/admin/ical/ImportDialog.jsx:257
+#: src/admin/pricing/AdjustedRuleEditor.jsx:152
+#: src/admin/pricing/SeasonalTab.jsx:448
+#: src/admin/pricing/TemplatesTab.jsx:252
+#: src/admin/staff/CreateEmployeeScreen.jsx:332
+#: src/admin/staff/EmploymentTab.jsx:301
+#: src/admin/staff/EmploymentTab.jsx:416
+#: src/admin/staff/FileTabs.jsx:363
+msgid "Cancel"
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:170
+msgid "Checking…"
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:174
+msgid "Confirm"
+msgstr ""
+
+#: src/admin/access/ProfileFieldsControl.jsx:29
+#: src/admin/access/ProfileFieldsControl.jsx:62
+msgid "Allowed"
+msgstr ""
+
+#: src/admin/access/ProfileFieldsControl.jsx:32
+#: src/admin/access/ProfileFieldsControl.jsx:63
+msgid "Restricted"
+msgstr ""
+
+#. translators: 1: Allowed or Restricted, 2: where it comes from.
+#. translators: 1: a level such as Open, 2: where it comes from, e.g. Access role.
+#: src/admin/access/ProfileFieldsControl.jsx:60
+#: src/admin/access/StaffAccess.jsx:273
+#, js-format
+msgid "Now: %1$s · %2$s"
+msgstr ""
+
+#: src/admin/access/protectedFile.js:34
+msgid "The file could not be downloaded."
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:85
+msgid "Edit access role"
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:86
+msgid "New access role"
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:88
+msgid "Everyone with this role gets these permissions. A key left on Default follows Settings → Permissions."
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:95
+#: src/admin/access/RolesScreen.jsx:130
+#: src/admin/pricing/SeasonalTab.jsx:483
+msgid "Template"
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:101
+#: src/admin/pricing/AdjustedRuleEditor.jsx:322
+#: src/admin/pricing/SeasonalTab.jsx:512
+#: src/admin/pricing/TemplatesTab.jsx:277
+msgid "Name"
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:112
+msgid "Description"
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:124
+#: src/admin/access/RoleEditor.jsx:132
+msgid "Everything else"
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:125
+msgid "The level of every page and action this role does not set below, including ones added later."
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:158
+msgid "Which fields people with this role may change on their own profile. Default follows Settings → Passcodes."
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:192
+#: src/admin/ProFeaturesSection.jsx:181
+msgid "Saving…"
+msgstr ""
+
+#: src/admin/access/RoleEditor.jsx:193
+#: src/admin/staff/AccountTab.jsx:326
+msgid "Save role"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:36
+#: src/admin/activity/ActivityScreen.jsx:186
+#: src/admin/activity/ActivityTimeline.jsx:88
+#: src/admin/ical/CalendarSyncScreen.jsx:448
+#: src/admin/reports/OccupancyTab.jsx:69
+#: src/admin/reports/RevenueTab.jsx:133
+#: src/admin/self/ProfileScreen.jsx:427
+#: src/admin/staff/DocumentsTab.jsx:244
+#: src/admin/staff/EmploymentTab.jsx:546
+#: src/admin/staff/StaffDetailScreen.jsx:181
+msgid "Try again"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:72
+#: src/admin/access/RolesScreen.jsx:189
+msgid "New role"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:110
+#: src/admin/index.js:210
+msgid "Access roles"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:111
+msgid "Set up a role once and assign it to each new member of staff. Changing a role changes everyone who has it."
+msgstr ""
+
+#. translators: %d: number of staff.
+#: src/admin/access/RolesScreen.jsx:139
+#, js-format
+msgid "%d person"
+msgid_plural "%d people"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/access/RolesScreen.jsx:161
+#: src/admin/exports/SchedulesPanel.jsx:263
+msgid "Edit"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:169
+#: src/admin/pricing/AdjustedRuleEditor.jsx:141
+#: src/admin/pricing/SeasonalTab.jsx:437
+#: src/admin/pricing/TemplatesTab.jsx:241
+#: src/admin/staff/DocumentsTab.jsx:345
+#: src/admin/staff/DocumentsTab.jsx:370
+#: src/admin/staff/EmploymentTab.jsx:636
+#: src/admin/staff/EmploymentTab.jsx:682
+msgid "Delete"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:182
+msgid "No access roles yet"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:183
+msgid "Create a role such as Receptionist and assign it to your staff."
+msgstr ""
+
+#. translators: %s: role name.
+#: src/admin/access/RolesScreen.jsx:203
+#, js-format
+msgid "Delete %s?"
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:206
+msgid "Everyone with this role goes back to the default permissions. Their personal overrides stay."
+msgstr ""
+
+#: src/admin/access/RolesScreen.jsx:210
+msgid "Delete role"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:52
+msgid "4 to 8 digits, used to confirm protected actions. Tell the person their PIN; it is never shown again."
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:77
+#: src/admin/self/SecuritySection.jsx:359
+msgid "Change PIN"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:92
+#: src/admin/access/StaffScreen.jsx:96
+msgid "PIN set"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:93
+#: src/admin/access/StaffScreen.jsx:97
+msgid "No PIN"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:169
+#: src/admin/activity/ActivityScreen.jsx:131
+#: src/admin/staff/CreateEmployeeScreen.jsx:220
+#: src/admin/staff/StaffDetailScreen.jsx:141
+msgid "All staff"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:185
+msgid "The role sets most permissions; the overrides below change single ones."
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:207
+msgid "No access role (defaults)"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:229
+msgid "Personal overrides"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:230
+msgid "Inherit keeps what the role or the defaults give. Anything else applies to this person only. “Now” shows what applies today and why."
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:241
+#: src/admin/access/StaffAccess.jsx:340
+msgid "Reset overrides"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:248
+msgid "This person has personal overrides."
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:249
+msgid "No personal overrides."
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:267
+#: src/admin/access/StaffAccess.jsx:293
+msgid "Inherit"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:285
+msgid "Which fields this person may change on their own profile. Inherit keeps the role or default."
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:315
+msgid "Discard"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:321
+msgid "Save overrides"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:332
+msgid "Reset this person’s overrides?"
+msgstr ""
+
+#: src/admin/access/StaffAccess.jsx:336
+msgid "Every personal override is removed; the access role and the defaults apply again."
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:31
+msgid "Reset all overrides"
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:55
+#: src/admin/index.js:223
+msgid "Staff access"
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:56
+msgid "Give each person an access role, a PIN, and single exceptions where needed."
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:78
+msgid "No access role"
+msgstr ""
+
+#. translators: %d: number of overrides.
+#: src/admin/access/StaffScreen.jsx:84
+#, js-format
+msgid "%d override"
+msgid_plural "%d overrides"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/access/StaffScreen.jsx:109
+msgid "Manage"
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:117
+msgid "No staff yet"
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:118
+msgid "People with the Manager or Staff role appear here."
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:131
+msgid "Reset everyone’s personal overrides?"
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:135
+msgid "Every personal override is removed. Access roles stay; everyone gets their role and the defaults again."
+msgstr ""
+
+#: src/admin/access/StaffScreen.jsx:139
+msgid "Reset all"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:108
+msgid "Who did what, when, and from which device. Entries cannot be changed."
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:116
+msgid "Archives"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:126
+#: src/admin/activity/ActivityScreen.jsx:127
+msgid "Search the log"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:140
+msgid "All kinds"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:156
+msgid "All actions"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:202
+msgid "Nothing recorded here"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:203
+msgid "Change the filters, or come back once staff have used the dashboard."
+msgstr ""
+
+#. translators: %d: how many times it happened.
+#: src/admin/activity/ActivityScreen.jsx:238
+#: src/admin/activity/ActivityTimeline.jsx:126
+#, js-format
+msgid "×%d"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:245
+msgid "Changes"
+msgstr ""
+
+#. translators: 1: page, 2: pages, 3: entries.
+#: src/admin/activity/ActivityScreen.jsx:260
+#, js-format
+msgid "Page %1$d of %2$d · %3$d entries"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:273
+msgid "Newer"
+msgstr ""
+
+#: src/admin/activity/ActivityScreen.jsx:283
+msgid "Older"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:26
+#: src/admin/pricing/BookingWindowTab.jsx:79
+#: src/admin/pricing/OccupancyTab.jsx:72
+#: src/admin/pricing/SeasonalTab.jsx:137
+#: src/admin/ProFeaturesSection.jsx:28
+msgid "Off"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:32
+msgid "Archiving"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:33
+msgid "The log is written to a file you can download. The next run date is shown under Activity log → Archives."
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:39
+#: src/admin/activity/ActivitySettingsSection.jsx:44
+msgid "Archive every (months)"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:52
+msgid "Remove archived entries"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:53
+msgid "After each archive, entries are removed from the database once the file has been checked. Off by default."
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:64
+msgid "Page views"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:65
+msgid "Which screens staff open. Repeated views of one screen become one line."
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:71
+msgid "Record page views"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:77
+msgid "Group repeated views within"
+msgstr ""
+
+#: src/admin/activity/ActivitySettingsSection.jsx:83
+msgid "seconds"
+msgstr ""
+
+#. translators: 1: field, 2: old value, 3: new value.
+#: src/admin/activity/ActivityTimeline.jsx:32
+#, js-format
+msgid "%1$s: %2$s → %3$s"
+msgstr ""
+
+#. translators: 1: the first changes, 2: how many more fields.
+#: src/admin/activity/ActivityTimeline.jsx:42
+#, js-format
+msgid "%1$s (+%2$d more)"
+msgstr ""
+
+#: src/admin/activity/ActivityTimeline.jsx:97
+msgid "No history yet"
+msgstr ""
+
+#: src/admin/activity/ActivityTimeline.jsx:98
+msgid "Actions on this record will appear here."
+msgstr ""
+
+#: src/admin/activity/ArchivesDialog.jsx:74
+msgid "Log archives"
+msgstr ""
+
+#. translators: %s: date and time.
+#: src/admin/activity/ArchivesDialog.jsx:80
+#, js-format
+msgid "Next automatic archive: %s"
+msgstr ""
+
+#: src/admin/activity/ArchivesDialog.jsx:83
+msgid "Automatic archiving is off, or nothing is logged yet."
+msgstr ""
+
+#: src/admin/activity/ArchivesDialog.jsx:101
+msgid "No archives yet"
+msgstr ""
+
+#: src/admin/activity/ArchivesDialog.jsx:102
+msgid "Archive now, or wait for the automatic archive."
+msgstr ""
+
+#. translators: 1: first date, 2: last date.
+#: src/admin/activity/ArchivesDialog.jsx:119
+#, js-format
+msgid "%1$s to %2$s"
+msgstr ""
+
+#. translators: %d: number of log entries.
+#: src/admin/activity/ArchivesDialog.jsx:128
+#, js-format
+msgid "%d entry"
+msgid_plural "%d entries"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/activity/ArchivesDialog.jsx:139
+msgid "Removed from the log"
+msgstr ""
+
+#: src/admin/activity/ArchivesDialog.jsx:162
+msgid "Remove the archived entries after checking the file"
+msgstr ""
+
+#: src/admin/activity/ArchivesDialog.jsx:172
+msgid "Archiving…"
+msgstr ""
+
+#: src/admin/activity/ArchivesDialog.jsx:173
+msgid "Archive now"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:28
+msgid "Yes"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:29
+msgid "No"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:47
+msgid "Who"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:47
+msgid "Nobody signed in"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:48
+msgid "When"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:49
+msgid "Record"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:50
+msgid "IP address"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:51
+msgid "Device"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:55
+msgid "Repeated"
+msgstr ""
+
+#. translators: 1: number of times, 2: date and time of the last one.
+#: src/admin/activity/EntryDialog.jsx:58
+#, js-format
+msgid "%1$d times, last %2$s"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:86
+msgid "What changed"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:92
+msgid "Field"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:93
+msgid "Before"
+msgstr ""
+
+#: src/admin/activity/EntryDialog.jsx:94
+msgid "After"
+msgstr ""
+
+#: src/admin/activity/timeline.js:26
+#: src/admin/staff/StaffDetailScreen.jsx:96
+msgid "History"
+msgstr ""
+
+#. translators: 1: bookings removed, 2: bookings kept.
+#: src/admin/exports/ArchivePanel.jsx:69
+#, js-format
+msgid "Archived: %1$d bookings removed, %2$d kept."
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:87
+#: src/admin/exports/ArchivePanel.jsx:195
+msgid "Archive and remove"
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:88
+msgid "Make the booking file for a past period, check it, then remove those finished bookings from the live system."
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:100
+msgid "Removed bookings disappear for good, with their payments, invoices and notes. Only checked-out, cancelled, declined and no-show stays go; future and in-house stays are kept. Keep the archive file and a server backup for as long as the law requires."
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:107
+msgid "Period"
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:123
+#: src/admin/exports/ArchivePanel.jsx:141
+#: src/admin/exports/SchedulesPanel.jsx:497
+#: src/admin/exports/SchedulesPanel.jsx:516
+msgid "File format"
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:156
+msgid "Archive and remove…"
+msgstr ""
+
+#. translators: 1: removed, 2: kept, 3: first reference, 4: last reference, 5: file name.
+#: src/admin/exports/ArchivePanel.jsx:165
+#, js-format
+msgid "%1$d bookings removed (%3$s to %4$s), %2$d kept. The file %5$s is in the library."
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:182
+msgid "Archive and remove these bookings?"
+msgstr ""
+
+#. translators: 1: first day, 2: last day.
+#: src/admin/exports/ArchivePanel.jsx:188
+#, js-format
+msgid "The finished bookings from %1$s to %2$s will be written to a file, checked, then removed for good with their payments and invoices."
+msgstr ""
+
+#: src/admin/exports/ArchivePanel.jsx:201
+msgid "Why are they being removed?"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:43
+msgid "Monday"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:44
+msgid "Tuesday"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:45
+msgid "Wednesday"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:46
+msgid "Thursday"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:47
+msgid "Friday"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:48
+msgid "Saturday"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:49
+msgid "Sunday"
+msgstr ""
+
+#. translators: 1: day of the month, 2: time.
+#: src/admin/exports/SchedulesPanel.jsx:101
+#, js-format
+msgid "Monthly, on day %1$d at %2$s — the previous month"
+msgstr ""
+
+#. translators: 1: weekday, 2: time.
+#: src/admin/exports/SchedulesPanel.jsx:110
+#, js-format
+msgid "Every %1$s at %2$s — the previous week"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:125
+msgid "Scheduled export saved."
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:148
+msgid "Scheduled exports"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:149
+msgid "Files made on their own into the library, weekly or monthly."
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:165
+#: src/admin/ical/CalendarSyncScreen.jsx:251
+msgid "Add"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:188
+msgid "Paused"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:200
+msgid "Last run failed"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:212
+msgid "Next:"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:223
+msgid "Last:"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:230
+msgid "not yet"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:250
+msgid "Run this schedule"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:291
+msgid "Loading…"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:292
+msgid "No scheduled export yet."
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:307
+msgid "Edit the schedule"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:311
+msgid "New scheduled export"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:317
+msgid "Times are the hotel’s. Files go to the library, marked “Scheduled”."
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:326
+msgid "Contents"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:354
+#: src/admin/exports/SchedulesPanel.jsx:381
+msgid "How often"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:364
+msgid "Weekly"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:371
+msgid "Monthly"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:422
+msgid "Day of the month"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:444
+msgid "Time"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:461
+#: src/admin/exports/SchedulesPanel.jsx:488
+msgid "Bookings by"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:471
+msgid "Arrival date"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:478
+msgid "Booking date"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:538
+#: src/admin/pricing/AdjustedRuleEditor.jsx:159
+#: src/admin/pricing/SeasonalTab.jsx:457
+#: src/admin/pricing/TemplatesTab.jsx:259
+#: src/admin/self/ProfileScreen.jsx:387
+#: src/admin/staff/EmploymentTab.jsx:305
+#: src/admin/staff/FileTabs.jsx:143
+#: src/admin/staff/FileTabs.jsx:366
+msgid "Save"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:547
+msgid "Remove this scheduled export?"
+msgstr ""
+
+#: src/admin/exports/SchedulesPanel.jsx:551
+msgid "No more files will be made by it. Files it already made stay in the library."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:76
+msgid "This room’s calendar is not shared."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:90
+msgid "Link ready: paste it into the channel."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:99
+msgid "Share calendar"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:111
+msgid "Link for the channels (keep it private)"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:132
+msgid "Link copied."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:143
+msgid "Copy"
+msgstr ""
+
+#. translators: %s: date and time.
+#: src/admin/ical/CalendarSyncScreen.jsx:152
+#, js-format
+msgid "Last read by a channel: %s"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:158
+msgid "No channel has read it yet."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:169
+msgid "Make a new link?"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:173
+msgid "The current link stops working at once. Paste the new one into every channel that uses it."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:177
+msgid "Make a new link"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:182
+msgid "New link ready."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:189
+msgid "New link"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:196
+msgid "Stop sharing this calendar?"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:200
+msgid "The link stops working; channels will no longer see when this room is taken."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:204
+#: src/admin/ical/CalendarSyncScreen.jsx:217
+msgid "Stop sharing"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:210
+msgid "Calendar no longer shared."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:243
+msgid "Channel calendars"
+msgstr ""
+
+#. translators: %s: date and time.
+#: src/admin/ical/CalendarSyncScreen.jsx:290
+#, js-format
+msgid "last read %s"
+msgstr ""
+
+#. translators: %d: blocked periods.
+#: src/admin/ical/CalendarSyncScreen.jsx:301
+#, js-format
+msgid "%d blocked period"
+msgid_plural "%d blocked periods"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:333
+#: src/admin/ical/ImportDialog.jsx:261
+msgid "Reading…"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:337
+msgid "Read now"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:347
+#: src/admin/staff/EmploymentTab.jsx:607
+#: src/admin/staff/FileTabs.jsx:321
+msgid "Change"
+msgstr ""
+
+#. translators: %s: channel name.
+#: src/admin/ical/CalendarSyncScreen.jsx:359
+#, js-format
+msgid "Stop reading %s?"
+msgstr ""
+
+#. translators: %d: blocked periods.
+#: src/admin/ical/CalendarSyncScreen.jsx:367
+#, js-format
+msgid "Its %d blocked period is removed and those dates can be sold again."
+msgid_plural "Its %d blocked periods are removed and those dates can be sold again."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:399
+msgid "Not reading any channel calendar."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:456
+msgid "No rooms yet"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:457
+msgid "Add rooms first; each room shares and reads its own calendar."
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:464
+msgid "Go to Rooms"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:490
+#: src/admin/pricing/scope.jsx:123
+#: src/admin/pricing/SeasonalTab.jsx:75
+msgid "All room types"
+msgstr ""
+
+#: src/admin/ical/CalendarSyncScreen.jsx:550
+msgid "Share each room’s calendar with Booking.com, Airbnb and similar sites, and read theirs back as blocked dates, so a night is never sold twice."
+msgstr ""
+
+#. translators: 1: blocked periods added, 2: changed, 3: removed.
+#: src/admin/ical/ImportDialog.jsx:49
+#, js-format
+msgid "Calendar read: %1$d added, %2$d changed, %3$d removed."
+msgstr ""
+
+#. translators: %d: bookings overlapping the channel's dates.
+#: src/admin/ical/ImportDialog.jsx:62
+#, js-format
+msgid "%d booking in this room overlaps the channel’s dates: check for a double booking."
+msgid_plural "%d bookings in this room overlap the channel’s dates: check for double bookings."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/ical/ImportDialog.jsx:146
+#, js-format
+msgid "Channel calendar of room %s"
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:150
+#, js-format
+msgid "Read a channel calendar into room %s"
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:158
+msgid "Dates booked on the channel become blocked dates here, so the room is not sold twice."
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:170
+msgid "Channel"
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:176
+msgid "Booking.com, Airbnb…"
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:193
+msgid "Calendar address"
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:213
+msgid "Copy the “export calendar” or iCal link from the channel’s extranet for this room."
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:226
+msgid "Read it"
+msgstr ""
+
+#: src/admin/ical/ImportDialog.jsx:262
+msgid "Save and read"
+msgstr ""
+
+#: src/admin/ical/labels.js:14
+msgid "Once a day"
+msgstr ""
+
+#: src/admin/ical/labels.js:19
+msgid "Every hour"
+msgstr ""
+
+#. translators: %d: hours.
+#: src/admin/ical/labels.js:22
+#, js-format
+msgid "Every %d hour"
+msgid_plural "Every %d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: minutes.
+#: src/admin/ical/labels.js:33
+#, js-format
+msgid "Every %d minute"
+msgid_plural "Every %d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/index.js:50
+#: src/admin/ProFeaturesSection.jsx:138
+msgid "Pro features"
+msgstr ""
+
+#: src/admin/index.js:68
+msgid "Pricing rules"
+msgstr ""
+
+#: src/admin/index.js:69
+msgid "Seasonal, occupancy and booking-window prices"
+msgstr ""
+
+#: src/admin/index.js:93
+msgid "Share and read room calendars with channels"
+msgstr ""
+
+#: src/admin/index.js:117
+msgid "Employee files, contracts and documents"
+msgstr ""
+
+#: src/admin/index.js:137
+#: src/admin/staff/StaffListScreen.jsx:83
+msgid "Employee"
+msgstr ""
+
+#: src/admin/index.js:156
+#: src/admin/index.js:170
+msgid "My profile"
+msgstr ""
+
+#: src/admin/index.js:211
+msgid "Named roles such as Receptionist, with their permissions"
+msgstr ""
+
+#: src/admin/index.js:224
+msgid "Each person’s access role, PIN and personal overrides"
+msgstr ""
+
+#: src/admin/index.js:243
+msgid "Passcodes"
+msgstr ""
+
+#: src/admin/index.js:246
+msgid "PIN confirmation, the fallback PIN and the locked message"
+msgstr ""
+
+#: src/admin/index.js:267
+msgid "Free the room when a booking stays unpaid past its deadline"
+msgstr ""
+
+#: src/admin/index.js:295
+msgid "Archiving, removing archived entries and page views"
+msgstr ""
+
+#: src/admin/index.js:317
+msgid "Who did what, when and from which device"
+msgstr ""
+
+#: src/admin/payments/AutoReleaseSettingsSection.jsx:26
+msgid "An unpaid or partly paid booking is cancelled and its rooms freed once its payment deadline has passed by this long. The guest is e-mailed. Bookings on hold are never released automatically. Checked every 15 minutes."
+msgstr ""
+
+#: src/admin/payments/AutoReleaseSettingsSection.jsx:32
+msgid "Release after the deadline"
+msgstr ""
+
+#: src/admin/payments/AutoReleaseSettingsSection.jsx:36
+msgid "0 releases the booking as soon as the deadline passes."
+msgstr ""
+
+#: src/admin/payments/AutoReleaseSettingsSection.jsx:45
+msgid "hours"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:72
+msgid "Occupancy rule"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:73
+msgid "Early-bird discount"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:74
+msgid "Last-minute discount"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:117
+msgid "The most specific rule applies, then the highest occupancy reached."
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:121
+msgid "Counted in days between the booking and the arrival."
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:178
+msgid "Kind of discount"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:192
+msgid "Early bird"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:199
+msgid "Last minute"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:211
+msgid "When the room type is at least (% full)"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:216
+msgid "Booked at least (days before arrival)"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:220
+msgid "Booked at most (days before arrival)"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:244
+#: src/admin/pricing/TemplatesTab.jsx:295
+#: src/admin/pricing/TemplatesTab.jsx:298
+msgid "Adjustment"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:253
+#: src/admin/pricing/TemplatesTab.jsx:307
+msgid "Increase"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:260
+#: src/admin/pricing/TemplatesTab.jsx:314
+msgid "Decrease"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:269
+#: src/admin/pricing/TemplatesTab.jsx:331
+msgid "Amount type"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:278
+#: src/admin/pricing/TemplatesTab.jsx:342
+msgid "Percentage"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:285
+#: src/admin/pricing/TemplatesTab.jsx:349
+msgid "Fixed amount"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:295
+#: src/admin/pricing/TemplatesTab.jsx:361
+msgid "Amount"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:296
+msgid "Discount"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:331
+msgid "Named automatically when empty"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:339
+#: src/admin/pricing/SeasonalTab.jsx:554
+msgid "Room types"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:343
+#: src/admin/pricing/SeasonalTab.jsx:558
+msgid "None ticked: every room type."
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:354
+#: src/admin/pricing/SeasonalTab.jsx:569
+msgid "Rate plans"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:358
+#: src/admin/pricing/SeasonalTab.jsx:573
+msgid "None ticked: every rate plan."
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:369
+#: src/admin/pricing/SeasonalTab.jsx:603
+#: src/admin/ProFeaturesSection.jsx:27
+#: src/admin/staff/EmploymentTab.jsx:199
+#: src/admin/staff/StaffListScreen.jsx:225
+msgid "Active"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:383
+#: src/admin/pricing/SeasonalTab.jsx:617
+msgid "Delete this rule?"
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:387
+msgid "Bookings keep their price."
+msgstr ""
+
+#: src/admin/pricing/AdjustedRuleEditor.jsx:391
+#: src/admin/pricing/SeasonalTab.jsx:625
+msgid "Delete rule"
+msgstr ""
+
+#: src/admin/pricing/BookingWindowTab.jsx:48
+msgid "No booking-window discounts yet"
+msgstr ""
+
+#: src/admin/pricing/BookingWindowTab.jsx:52
+msgid "For example, −10 % when booked 30 days or more before arrival."
+msgstr ""
+
+#. translators: %d: number of days.
+#: src/admin/pricing/BookingWindowTab.jsx:90
+#, js-format
+msgid "Early bird · booked %d days or more before arrival"
+msgstr ""
+
+#. translators: %d: number of days.
+#: src/admin/pricing/BookingWindowTab.jsx:98
+#, js-format
+msgid "Last minute · booked %d days or less before arrival"
+msgstr ""
+
+#: src/admin/pricing/BookingWindowTab.jsx:123
+#: src/admin/pricing/PricingScreen.jsx:46
+msgid "Booking window"
+msgstr ""
+
+#: src/admin/pricing/BookingWindowTab.jsx:124
+msgid "One discount per stay: the most specific rule, then early bird over last minute."
+msgstr ""
+
+#: src/admin/pricing/BookingWindowTab.jsx:132
+msgid "Add discount"
+msgstr ""
+
+#: src/admin/pricing/OccupancyTab.jsx:41
+msgid "No occupancy rules yet"
+msgstr ""
+
+#: src/admin/pricing/OccupancyTab.jsx:45
+msgid "For example, +15 % once a room type is 80 % full on a night."
+msgstr ""
+
+#. translators: %s: occupancy percentage.
+#: src/admin/pricing/OccupancyTab.jsx:82
+#, js-format
+msgid "From %s %% full"
+msgstr ""
+
+#: src/admin/pricing/OccupancyTab.jsx:108
+msgid "Occupancy is the room type’s booked rooms on the night, out of the rooms it can sell."
+msgstr ""
+
+#: src/admin/pricing/OccupancyTab.jsx:116
+msgid "Add rule"
+msgstr ""
+
+#: src/admin/pricing/PricingScreen.jsx:40
+msgid "Seasonal"
+msgstr ""
+
+#: src/admin/pricing/PricingScreen.jsx:52
+#: src/admin/pricing/TemplatesTab.jsx:126
+msgid "Templates"
+msgstr ""
+
+#: src/admin/pricing/scope.jsx:80
+msgid "Some it applied to were deleted: tick the ones it should cover, or it will cover all."
+msgstr ""
+
+#: src/admin/pricing/scope.jsx:128
+#: src/admin/pricing/SeasonalTab.jsx:80
+msgid "all rate plans"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:97
+msgid "No seasonal rules yet"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:101
+msgid "Apply a template to dates, e.g. +20 % from 20 to 31 December."
+msgstr ""
+
+#. translators: 1: first date, 2: last date, 3: priority number.
+#: src/admin/pricing/SeasonalTab.jsx:147
+#, js-format
+msgid "%1$s – %2$s · priority %3$d"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:175
+msgid "Seasonal rules"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:176
+msgid "When rules overlap on a date, the highest priority wins, then the most specific, then the newest."
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:184
+msgid "Add seasonal rule"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:247
+msgid "Previous year"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:263
+msgid "Next year"
+msgstr ""
+
+#. translators: %d: year.
+#: src/admin/pricing/SeasonalTab.jsx:331
+#, js-format
+msgid "No seasonal rule in %d."
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:416
+msgid "New seasonal rule"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:418
+msgid "Applies from the first to the last date, both included."
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:466
+msgid "Create a template first, on the Templates tab."
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:493
+msgid "Choose a template"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:526
+msgid "From"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:539
+msgid "To"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:583
+msgid "Priority"
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:585
+msgid "Higher wins when rules overlap on a date."
+msgstr ""
+
+#: src/admin/pricing/SeasonalTab.jsx:621
+msgid "Prices go back to what they would be without it. Bookings keep their price."
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:67
+msgid "No templates yet"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:68
+msgid "A template is an adjustment you reuse, such as “increase 20 %” for the festive season."
+msgstr ""
+
+#. translators: %d: number of rules.
+#: src/admin/pricing/TemplatesTab.jsx:98
+#, js-format
+msgid "Used by %d seasonal rule"
+msgid_plural "Used by %d seasonal rules"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/pricing/TemplatesTab.jsx:106
+msgid "Not used yet"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:127
+msgid "Changing a template changes every rule that uses it, for new bookings."
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:135
+msgid "Add template"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:211
+msgid "New template"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:213
+msgid "An adjustment you can use in seasonal rules."
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:229
+msgid "A template used by rules cannot be deleted."
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:287
+msgid "e.g. Festive season +20 %"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:321
+msgid "Set a price"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:360
+msgid "Price"
+msgstr ""
+
+#. translators: 1: example price, 2: adjusted price.
+#: src/admin/pricing/TemplatesTab.jsx:389
+#, js-format
+msgid "Example: %1$s becomes %2$s"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:406
+msgid "Delete this template?"
+msgstr ""
+
+#: src/admin/pricing/TemplatesTab.jsx:410
+msgid "Delete template"
+msgstr ""
+
+#: src/admin/ProFeaturesSection.jsx:29
+msgid "Waiting for a required feature"
+msgstr ""
+
+#: src/admin/ProFeaturesSection.jsx:30
+msgid "Needs a newer Radius Hotel Booking"
+msgstr ""
+
+#: src/admin/ProFeaturesSection.jsx:34
+msgid "In development"
+msgstr ""
+
+#. translators: %s: comma-separated feature names.
+#: src/admin/ProFeaturesSection.jsx:84
+#, js-format
+msgid "Requires: %s"
+msgstr ""
+
+#: src/admin/ProFeaturesSection.jsx:141
+msgid "Switch each Pro feature on or off. A feature that is off adds nothing to the site, and its data is kept for when you switch it back on. Changes apply on the next page load."
+msgstr ""
+
+#: src/admin/ProFeaturesSection.jsx:182
+msgid "Save changes"
+msgstr ""
+
+#. translators: %s: a percentage figure, e.g. 72.5.
+#. translators: %s: a percentage figure.
+#: src/admin/reports/OccupancyTab.jsx:30
+#: src/admin/reports/RevenueTab.jsx:66
+#, js-format
+msgid "%s%%"
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:60
+#: src/admin/reports/RevenueTab.jsx:124
+msgid "The report could not be loaded."
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:89
+msgid "Occupied room-hours of the sellable ones"
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:97
+msgid "Most rooms at once"
+msgstr ""
+
+#. translators: %d: number of rooms.
+#: src/admin/reports/OccupancyTab.jsx:104
+#, js-format
+msgid "of %d sellable room"
+msgid_plural "of %d sellable rooms"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/reports/OccupancyTab.jsx:124
+msgid "At any moment of the period"
+msgstr ""
+
+#. translators: %s: number of hours.
+#: src/admin/reports/OccupancyTab.jsx:141
+#, js-format
+msgid "of %s sellable"
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:151
+#: src/admin/reports/OccupancyTab.jsx:169
+msgid "Occupancy rate"
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:154
+msgid "Per month"
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:155
+msgid "Per day"
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:178
+msgid "No room to sell"
+msgstr ""
+
+#: src/admin/reports/OccupancyTab.jsx:182
+msgid "Occupancy needs rooms in the available state."
+msgstr ""
+
+#. translators: %d: number of rooms.
+#. translators: %d: number of booked rooms.
+#: src/admin/reports/OccupancyTab.jsx:203
+#: src/admin/reports/RevenueTab.jsx:48
+#, js-format
+msgid "%d room"
+msgid_plural "%d rooms"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/reports/OccupancyTab.jsx:238
+msgid "Occupied = a confirmed, in-house or departed stay in the room. Sellable = rooms in the available state today, less blocked hours. Rooms are counted as they are now, also for past periods."
+msgstr ""
+
+#. translators: %d: number of bookings.
+#: src/admin/reports/RevenueTab.jsx:38
+#, js-format
+msgid "%d booking"
+msgid_plural "%d bookings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/reports/RevenueTab.jsx:94
+msgid "No sales in this period."
+msgstr ""
+
+#: src/admin/reports/RevenueTab.jsx:145
+msgid "Sales with tax included"
+msgstr ""
+
+#: src/admin/reports/RevenueTab.jsx:150
+msgid "The same figure as the Sales tab"
+msgstr ""
+
+#: src/admin/reports/RevenueTab.jsx:158
+msgid "Rooms sold"
+msgstr ""
+
+#: src/admin/reports/RevenueTab.jsx:160
+msgid "Booked rooms counted in the sales"
+msgstr ""
+
+#: src/admin/reports/RevenueTab.jsx:174
+msgid "By rate plan"
+msgstr ""
+
+#: src/admin/reports/RevenueTab.jsx:180
+msgid "By staff member"
+msgstr ""
+
+#: src/admin/reports/RevenueTab.jsx:185
+msgid "Rate plans show the name they had when booked. Staff is who took the booking; website bookings and imported ones are listed apart."
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:161
+msgid "Only a manager can change this."
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:192
+msgid "About you"
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:241
+#: src/admin/staff/StaffDetailScreen.jsx:65
+msgid "Contact"
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:248
+msgid "Also the e-mail of your account: password links go here."
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:261
+msgid "Only a manager can change your emergency contact."
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:265
+msgid "Who the hotel calls if something happens to you at work."
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:299
+#: src/admin/staff/FileTabs.jsx:570
+msgid "Full name"
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:319
+#: src/admin/staff/FileTabs.jsx:579
+msgid "Relationship"
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:384
+#: src/admin/staff/FileTabs.jsx:139
+msgid "Undo changes"
+msgstr ""
+
+#: src/admin/self/ProfileScreen.jsx:417
+msgid "Your profile could not be loaded"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:65
+msgid "The two passwords do not match."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:96
+msgid "Changing it signs you out on every other device."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:104
+msgid "Current password"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:120
+#: src/admin/staff/AccountTab.jsx:152
+msgid "New password"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:124
+msgid "At least 8 characters."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:139
+msgid "Repeat the new password"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:163
+msgid "Change password"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:172
+msgid "Only a manager can change your password."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:211
+msgid "The two PINs do not match."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:261
+msgid "You confirm protected actions with it. Changing it ends any PIN confirmation still open."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:265
+msgid "You do not have a PIN yet. Choose one to confirm protected actions."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:276
+msgid "Your password"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:280
+msgid "Current PIN"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:313
+msgid "Use my current PIN instead"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:317
+msgid "Forgot your PIN? Use your password"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:325
+#: src/admin/staff/AccountTab.jsx:359
+msgid "New PIN"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:329
+msgid "4 to 8 digits."
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:339
+msgid "Repeat the new PIN"
+msgstr ""
+
+#: src/admin/self/SecuritySection.jsx:366
+msgid "Only a manager can change your PIN."
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:101
+msgid "Sign-in"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:106
+#: src/admin/staff/CreateEmployeeScreen.jsx:350
+msgid "User name"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:118
+msgid "None"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:139
+msgid "Password changed."
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:178
+#: src/admin/staff/CreateEmployeeScreen.jsx:440
+msgid "Hide password"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:182
+#: src/admin/staff/CreateEmployeeScreen.jsx:444
+msgid "Show password"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:208
+msgid "Set password"
+msgstr ""
+
+#. translators: %s: e-mail address.
+#: src/admin/staff/AccountTab.jsx:225
+#, js-format
+msgid "Link sent to %s."
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:238
+msgid "E-mail a password link"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:251
+msgid "Access and PIN"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:280
+#: src/admin/staff/CreateEmployeeScreen.jsx:532
+msgid "Staff defaults"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:340
+msgid "A personal PIN is set."
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:344
+msgid "No personal PIN."
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:363
+msgid "Set a PIN"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:409
+msgid "Save PIN"
+msgstr ""
+
+#: src/admin/staff/AccountTab.jsx:431
+msgid "Remove PIN"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:125
+msgid "Enter the first name."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:131
+msgid "Enter the last name."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:156
+msgid "Add an e-mail address: the link is sent there."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:178
+msgid "A link to set the password was e-mailed."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:229
+msgid "Step 1 of 2 — who they are."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:233
+msgid "Step 2 of 2 — how they sign in."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:288
+msgid "Needed to e-mail them a password link."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:296
+#: src/admin/staff/EmploymentTab.jsx:245
+#: src/admin/staff/EmploymentTab.jsx:477
+msgid "Job title"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:305
+#: src/admin/staff/EmploymentTab.jsx:254
+#: src/admin/staff/EmploymentTab.jsx:486
+msgid "Department"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:316
+#: src/admin/staff/EmploymentTab.jsx:495
+msgid "Work shift"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:321
+#: src/admin/staff/EmploymentTab.jsx:500
+msgid "For example Morning, Day or Night."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:339
+msgid "Next"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:355
+msgid "They sign in with it. It cannot be changed later."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:385
+msgid "Set a password"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:392
+msgid "E-mail them a link"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:406
+msgid "At least 8 characters. Give it to them in person."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:473
+msgid "Suggest a password"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:488
+msgid "After saving, a link to choose their password is sent to their e-mail."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:492
+msgid "Add their e-mail in step 1 to send the link."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:509
+msgid "What they may open and do. Without one, the staff defaults apply."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:551
+msgid "PIN (optional)"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:556
+msgid "4 to 8 digits, to confirm protected actions."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:577
+msgid "Back"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:583
+#: src/admin/staff/StaffListScreen.jsx:47
+msgid "Add employee"
+msgstr ""
+
+#. translators: %s: size in megabytes.
+#: src/admin/staff/DocumentsTab.jsx:47
+#, js-format
+msgid "%s MB"
+msgstr ""
+
+#. translators: %s: size in kilobytes.
+#: src/admin/staff/DocumentsTab.jsx:53
+#, js-format
+msgid "%s KB"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:149
+msgid "Add a document"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:153
+msgid "File"
+msgstr ""
+
+#. translators: %s: size such as "10 MB".
+#: src/admin/staff/DocumentsTab.jsx:159
+#, js-format
+msgid "PDF, image, Word or OpenDocument, up to %s."
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:177
+msgid "Category"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:199
+msgid "Title"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:201
+msgid "Leave empty to use the file name."
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:218
+msgid "Uploading…"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:219
+msgid "Upload"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:230
+#: src/admin/staff/StaffDetailScreen.jsx:105
+msgid "Documents"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:251
+msgid "No documents yet"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:255
+msgid "Keep the contract, ID copies and diplomas here. Only staff who may edit employee files can open them."
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:333
+msgid "Download"
+msgstr ""
+
+#. translators: %s: document title.
+#: src/admin/staff/DocumentsTab.jsx:363
+#, js-format
+msgid "Delete \"%s\"?"
+msgstr ""
+
+#: src/admin/staff/DocumentsTab.jsx:366
+msgid "The file is removed for good. The history keeps its title and who deleted it."
+msgstr ""
+
+#. translators: 1: start date, 2: end date.
+#: src/admin/staff/EmploymentTab.jsx:73
+#, js-format
+msgid "%1$s – %2$s"
+msgstr ""
+
+#. translators: %s: start date.
+#: src/admin/staff/EmploymentTab.jsx:79
+#, js-format
+msgid "Since %s"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:174
+msgid "Change the contract"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:178
+msgid "Add a contract"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:185
+msgid "An active contract ends the current one on the day before it starts."
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:193
+#: src/admin/staff/StaffListScreen.jsx:122
+msgid "Status"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:206
+msgid "Ended"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:215
+msgid "Job type"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:264
+msgid "Start date"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:274
+msgid "End date"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:285
+#: src/admin/staff/StaffDetailScreen.jsx:91
+msgid "Notes"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:306
+#: src/admin/staff/EmploymentTab.jsx:529
+msgid "Add contract"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:372
+msgid "End this contract?"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:378
+msgid "The employee stays active and can still sign in. Deactivate them separately if they leave."
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:385
+msgid "Last day"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:399
+msgid "Reason (optional)"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:423
+msgid "End contract"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:472
+msgid "Current job"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:519
+msgid "Contracts"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:553
+msgid "No contracts yet"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:557
+msgid "Record each contract: its type, job, and start and end dates."
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:621
+msgid "End"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:674
+msgid "Delete this contract?"
+msgstr ""
+
+#: src/admin/staff/EmploymentTab.jsx:678
+msgid "Only for a contract entered by mistake: it leaves the history. To close a contract, end it instead."
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:88
+#: src/admin/staff/FileTabs.jsx:235
+msgid "Saved."
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:179
+msgid "Not given"
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:256
+msgid "CNPS number"
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:261
+msgid "Tax number"
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:274
+msgid "Statutory numbers"
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:302
+msgid "Hide"
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:303
+msgid "Show numbers"
+msgstr ""
+
+#: src/admin/staff/FileTabs.jsx:531
+msgid "Also the e-mail of their account: password links go here."
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:58
+msgid "Personal"
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:79
+msgid "Employment"
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:110
+msgid "Account"
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:163
+msgid "This employee does not exist"
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:167
+msgid "The employee could not be loaded"
+msgstr ""
+
+#. translators: %s: access role name
+#: src/admin/staff/StaffDetailScreen.jsx:230
+#, js-format
+msgid "Access: %s"
+msgstr ""
+
+#. translators: %s: date and time.
+#: src/admin/staff/StaffDetailScreen.jsx:245
+#, js-format
+msgid "Deactivated %s: cannot sign in."
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:276
+#: src/admin/staff/StaffDetailScreen.jsx:350
+#: src/admin/staff/StaffListScreen.jsx:137
+#: src/admin/staff/StaffListScreen.jsx:313
+msgid "Deactivate"
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:280
+#: src/admin/staff/StaffDetailScreen.jsx:351
+#: src/admin/staff/StaffListScreen.jsx:150
+#: src/admin/staff/StaffListScreen.jsx:314
+msgid "Reactivate"
+msgstr ""
+
+#. translators: %s: employee name.
+#: src/admin/staff/StaffDetailScreen.jsx:322
+#: src/admin/staff/StaffListScreen.jsx:288
+#, js-format
+msgid "Deactivate %s?"
+msgstr ""
+
+#. translators: %s: employee name.
+#: src/admin/staff/StaffDetailScreen.jsx:330
+#: src/admin/staff/StaffListScreen.jsx:292
+#, js-format
+msgid "Reactivate %s?"
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:339
+#: src/admin/staff/StaffListScreen.jsx:302
+msgid "They are signed out now and cannot sign in again. Their file, bookings and history are kept."
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:343
+#: src/admin/staff/StaffListScreen.jsx:306
+msgid "They can sign in again with their user name and password."
+msgstr ""
+
+#: src/admin/staff/StaffDetailScreen.jsx:366
+#: src/admin/staff/StaffListScreen.jsx:326
+msgid "Employee deactivated."
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:98
+msgid "Job"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:107
+msgid "Shift"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:169
+msgid "No employee matches"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:171
+msgid "No deactivated employees"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:175
+msgid "No employees yet"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:179
+msgid "Try part of the name, the number, the phone or the job."
+msgstr ""
+
+#. translators: %d: number of employees.
+#: src/admin/staff/StaffListScreen.jsx:201
+#, js-format
+msgid "%d employee"
+msgid_plural "%d employees"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/staff/StaffListScreen.jsx:214
+msgid "Show"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:232
+msgid "Deactivated"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:239
+msgid "All"
+msgstr ""
+
+#: src/admin/staff/StaffListScreen.jsx:262
+msgid "Name, number, phone or job"
+msgstr ""
