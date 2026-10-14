@@ -33,6 +33,7 @@ import {
 } from '@rtbp/ui';
 import { format, toast, toastError } from '@rtbp/lib';
 
+import { DateField } from '../pickers';
 import { useContractMutation, useContracts } from './api';
 import { FormActions, useFileForm } from './FileTabs';
 
@@ -268,7 +269,10 @@ function ContractDialog( {
 							error={ errors.start_date }
 							required
 						>
-							{ input( 'start_date', { type: 'date' } ) }
+							<DateField
+								value={ values.start_date }
+								onChange={ ( day ) => set( 'start_date', day ) }
+							/>
 						</Field>
 						<Field
 							label={ __(
@@ -278,7 +282,12 @@ function ContractDialog( {
 							error={ errors.end_date }
 							required={ 'terminated' === values.status }
 						>
-							{ input( 'end_date', { type: 'date' } ) }
+							<DateField
+								value={ values.end_date }
+								min={ values.start_date || undefined }
+								onChange={ ( day ) => set( 'end_date', day ) }
+								clearable
+							/>
 						</Field>
 					</div>
 					<Field
@@ -386,11 +395,10 @@ function EndDialog( { contract, onClose, mutation } ) {
 						error={ error }
 						required
 					>
-						<Input
-							type="date"
+						<DateField
 							value={ endDate }
-							onChange={ ( e ) => {
-								setEndDate( e.target.value );
+							onChange={ ( day ) => {
+								setEndDate( day );
 								setError( '' );
 							} }
 						/>

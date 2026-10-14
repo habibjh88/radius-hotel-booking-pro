@@ -19,8 +19,9 @@ import {
 	SelectValue,
 	Textarea,
 } from '@rtbp/ui';
-import { toast, toastError } from '@rtbp/lib';
+import { format, toast, toastError } from '@rtbp/lib';
 
+import { DateField, PhoneField } from '../pickers';
 import { revealIdentifiers, useStaffOptions, useUpdateEmployee } from './api';
 
 // Revealed numbers hide again after a minute.
@@ -189,7 +190,7 @@ export function ChoiceSelect( {
 }
 
 /**
- * The CNPS and tax numbers (12.10): masked; revealed on request (logged)
+ * The social security and tax numbers (12.10): masked; revealed on request (logged)
  * for `staff.view_ids`, and changed from the revealed values.
  *
  * @param {Object}  props          Props.
@@ -253,7 +254,7 @@ function StatutoryNumbers( { employee, canEdit } ) {
 	const rows = [
 		{
 			key: 'cnps_no',
-			label: __( 'CNPS number', 'radius-hotel-booking-pro' ),
+			label: __( 'Social security number', 'radius-hotel-booking-pro' ),
 			masked: employee.cnps_no_masked,
 		},
 		{
@@ -444,7 +445,14 @@ export function PersonalTab( { employee, canEdit } ) {
 						) }
 						error={ form.errors.dob }
 					>
-						{ input( 'dob', { type: 'date' } ) }
+						<DateField
+							value={ form.values.dob }
+							onChange={ ( day ) => form.set( 'dob', day ) }
+							disabled={ ! canEdit }
+							max={ format.siteToday() }
+							yearDropdown
+							clearable
+						/>
 					</Field>
 					<Field
 						label={ __(
@@ -515,14 +523,10 @@ export function ContactTab( { employee, canEdit } ) {
 					error={ form.errors.phone }
 					required
 				>
-					<Input
-						type="tel"
+					<PhoneField
 						value={ form.values.phone }
-						onChange={ ( e ) =>
-							form.set( 'phone', e.target.value )
-						}
+						onChange={ ( phone ) => form.set( 'phone', phone ) }
 						disabled={ ! canEdit }
-						autoComplete="off"
 					/>
 				</Field>
 				<Field
@@ -587,12 +591,10 @@ export function EmergencyTab( { employee, canEdit } ) {
 					/>
 				</Field>
 				<Field label={ __( 'Phone', 'radius-hotel-booking-pro' ) }>
-					<Input
-						type="tel"
+					<PhoneField
 						value={ contact.phone || '' }
-						onChange={ ( e ) => set( 'phone', e.target.value ) }
+						onChange={ ( phone ) => set( 'phone', phone ) }
 						disabled={ ! canEdit }
-						autoComplete="off"
 					/>
 				</Field>
 			</div>

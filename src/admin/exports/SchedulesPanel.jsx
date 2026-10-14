@@ -32,6 +32,8 @@ import {
 } from '@rtbp/ui';
 import { access, api, toast, toastError } from '@rtbp/lib';
 
+import { TimeField } from '../pickers';
+
 const KEY = [ 'exports', 'schedules' ];
 
 /**
@@ -447,12 +449,9 @@ export default function SchedulesPanel( { kinds = [], formats = [] } ) {
 									) }
 									error={ errors.time }
 								>
-									<Input
-										type="time"
+									<TimeField
 										value={ editing.time }
-										onChange={ ( e ) =>
-											set( { time: e.target.value } )
-										}
+										onChange={ ( time ) => set( { time } ) }
 									/>
 								</Field>
 							</div>

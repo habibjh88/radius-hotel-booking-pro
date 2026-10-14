@@ -59,7 +59,7 @@ Each room can publish its availability as a private iCal link for Booking.com, A
 New Calendar sync screen: read Booking.com and Airbnb calendars into blocked dates automatically.
 New Staff screen: employees with job, shift, access role; deactivate blocks sign-in immediately.
 Add employees with a guided form; set passwords, PINs and access roles from their file.
-Employee file tabs: personal, contact, emergency contact; CNPS and tax numbers stay masked until shown.
+Employee file tabs: personal, contact, emergency contact; social security and tax numbers stay masked until shown.
 New Employment tab: work shift and contract history; a new contract closes the previous one.
 New Documents tab: upload contracts and ID copies to protected storage; openings are logged.
 Employee files gain Notes (note, caution, warning) and a History tab of every change.
@@ -80,3 +80,10 @@ Staff profile changes to a restricted field are refused with a message, never si
 Staff can change their own password on My profile; other devices are signed out.
 Staff can set their own PIN, confirming with the current PIN or password.
 Add-ons can now add their own tabs to the staff file (for example payroll).
+Date and time fields now use the modern calendar and time pickers.
+Staff phone fields use the country picker with flags and number validation.
+Staff files say "Social security number" instead of "CNPS number".
+New Payroll and HR feature: pay runs, payslips, deductions, shifts, time off and My payroll.
+Settings → Payroll: set your own social contributions and income tax brackets for any country.
+Country add-ons can supply their own tax and contribution calculator instead.
+Payroll data from the Residence TATA add-on is moved over automatically on update.

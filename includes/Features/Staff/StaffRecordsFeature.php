@@ -64,7 +64,7 @@ final class StaffRecordsFeature extends AbstractFeature {
 		add_filter( 'rtbp_access_keys', array( $this, 'keys' ) );
 		add_filter( 'rtbp_access_groups', array( $this, 'groups' ) );
 		add_filter( 'rtbp_activity_actions', array( $this, 'actions' ) );
-		// DoB, address, CNPS / tax numbers and the emergency contact: logged as "changed" only.
+		// DoB, address, social security / tax numbers and the emergency contact: logged as "changed" only.
 		add_filter( 'rtbp_activity_secret_pattern', array( EmployeeService::class, 'secretPattern' ) );
 		// After WordPress checked the password (priority 20), before the result is used.
 		add_filter( 'authenticate', array( EmployeeService::class, 'signInBlock' ), 99 );
@@ -86,7 +86,7 @@ final class StaffRecordsFeature extends AbstractFeature {
 			'staff.create'     => array( 'staff', __( 'Add an employee', 'radius-hotel-booking-pro' ), 'add-new-staff' ),
 			'staff.edit'       => array( 'staff', __( 'Edit an employee file', 'radius-hotel-booking-pro' ), 'edit-staff' ),
 			'staff.deactivate' => array( 'staff', __( 'Deactivate or reactivate an employee', 'radius-hotel-booking-pro' ), '' ),
-			'staff.view_ids'   => array( 'staff', __( 'See CNPS and tax numbers', 'radius-hotel-booking-pro' ), '' ),
+			'staff.view_ids'   => array( 'staff', __( 'See social security and tax numbers', 'radius-hotel-booking-pro' ), '' ),
 			'staff.contracts'  => array( 'staff', __( 'Manage employment contracts', 'radius-hotel-booking-pro' ), '' ),
 			'staff.note_add'   => array( 'staff', __( 'Add an employee note', 'radius-hotel-booking-pro' ), 'add-staff-note' ),
 			'staff.note_edit'  => array( 'staff', __( 'Edit an employee note', 'radius-hotel-booking-pro' ), 'edit-staff-note' ),
@@ -159,7 +159,7 @@ final class StaffRecordsFeature extends AbstractFeature {
 			'staff.deactivate' => __( 'Deactivated an employee', 'radius-hotel-booking-pro' ),
 			'staff.activate'   => __( 'Reactivated an employee', 'radius-hotel-booking-pro' ),
 			'staff.account'    => __( 'Changed an employee account', 'radius-hotel-booking-pro' ),
-			'staff.view_ids'   => __( 'Viewed the CNPS and tax numbers of an employee', 'radius-hotel-booking-pro' ),
+			'staff.view_ids'   => __( 'Viewed the social security and tax numbers of an employee', 'radius-hotel-booking-pro' ),
 			'staff.contract_create' => __( 'Added an employment contract', 'radius-hotel-booking-pro' ),
 			'staff.contract_edit'   => __( 'Changed an employment contract', 'radius-hotel-booking-pro' ),
 			'staff.contract_end'    => __( 'Ended an employment contract', 'radius-hotel-booking-pro' ),

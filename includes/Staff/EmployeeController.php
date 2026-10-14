@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  *   `POST employees/{id}/password-link` (`staff.edit`);
  * - `GET employees/options` (`page.staff`): access roles and the lists for the forms;
  * - `GET employees/{id}/identifiers` (`staff.view_ids`, logged): the only way to the
- *   full CNPS and tax numbers.
+ *   full social security and tax numbers.
  */
 class EmployeeController {
 

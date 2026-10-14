@@ -24,6 +24,7 @@ import {
 import { access, toast, toastError } from '@rtbp/lib';
 
 import { sendPasswordLink, useCreateEmployee, useStaffOptions } from './api';
+import { PhoneField } from '../pickers';
 
 const STEP_ONE = [
 	'first_name',
@@ -273,11 +274,12 @@ export default function CreateEmployeeScreen() {
 									error={ errors.phone }
 									required
 								>
-									{ input( 'phone', {
-										type: 'tel',
-										inputMode: 'tel',
-										placeholder: '07 07 12 34 56',
-									} ) }
+									<PhoneField
+										value={ values.phone }
+										onChange={ ( phone ) =>
+											set( 'phone', phone )
+										}
+									/>
 								</Field>
 								<Field
 									label={ __(

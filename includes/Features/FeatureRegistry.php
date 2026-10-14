@@ -104,6 +104,13 @@ final class FeatureRegistry {
 				'requires'    => array( 'staff_records' ),
 				'default'     => true,
 			),
+			'payroll'            => array(
+				'group'       => 'staff',
+				'module'      => 'M15',
+				'class'       => __NAMESPACE__ . '\\Payroll\\PayrollFeature',
+				'requires'    => array( 'staff_records' ),
+				'default'     => true,
+			),
 		);
 
 		/**
@@ -133,6 +140,7 @@ final class FeatureRegistry {
 			'advanced_exports' => array( __( 'Advanced exports and archiving', 'radius-hotel-booking-pro' ), __( 'Excel exports, archive-and-remove of old bookings, and scheduled exports.', 'radius-hotel-booking-pro' ) ),
 			'staff_records' => array( __( 'Staff records', 'radius-hotel-booking-pro' ), __( 'Full employee files: contracts, emergency contacts, documents, notes and history.', 'radius-hotel-booking-pro' ) ),
 			'staff_self_service' => array( __( 'Staff self-service', 'radius-hotel-booking-pro' ), __( 'Staff manage their own profile, password and PIN within the fields you allow.', 'radius-hotel-booking-pro' ) ),
+			'payroll' => array( __( 'Payroll and HR', 'radius-hotel-booking-pro' ), __( 'Pay runs and payslips, taxes and contributions, deductions, shifts, time off and staff self-service payslips.', 'radius-hotel-booking-pro' ) ),
 		);
 
 		/**

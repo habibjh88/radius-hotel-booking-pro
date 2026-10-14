@@ -357,7 +357,7 @@ class EmployeeService {
 				self::subject( $employee ),
 				array(
 					/* translators: %s: employee name. */
-					'description' => sprintf( __( 'Viewed the CNPS and tax numbers of %s', 'radius-hotel-booking-pro' ), $employee->fullName() ),
+					'description' => sprintf( __( 'Viewed the social security and tax numbers of %s', 'radius-hotel-booking-pro' ), $employee->fullName() ),
 				)
 			);
 		}

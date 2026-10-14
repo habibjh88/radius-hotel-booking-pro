@@ -27,6 +27,7 @@ import {
 } from '@rtbp/ui';
 import { cn, format, toast, toastError } from '@rtbp/lib';
 
+import { DateField } from '../pickers';
 import Drawer from './Drawer';
 import { ScopePicker, scopeText } from './scope';
 import {
@@ -527,12 +528,9 @@ function RuleEditor( { rule, templates, scope, readOnly, onClose } ) {
 							error={ errors.date_from }
 							required
 						>
-							<Input
-								type="date"
+							<DateField
 								value={ values.date_from }
-								onChange={ ( e ) =>
-									set( 'date_from' )( e.target.value )
-								}
+								onChange={ set( 'date_from' ) }
 							/>
 						</Field>
 						<Field
@@ -540,12 +538,10 @@ function RuleEditor( { rule, templates, scope, readOnly, onClose } ) {
 							error={ errors.date_to }
 							required
 						>
-							<Input
-								type="date"
+							<DateField
 								value={ values.date_to }
-								onChange={ ( e ) =>
-									set( 'date_to' )( e.target.value )
-								}
+								min={ values.date_from || undefined }
+								onChange={ set( 'date_to' ) }
 							/>
 						</Field>
 					</div>

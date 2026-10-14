@@ -6,7 +6,7 @@
  * and is added through the `rtbp.*` filters (ADR-015) — Pro has no screens of
  * its own outside it.
  */
-import { lazy } from 'react';
+import { createElement, lazy, Suspense } from 'react';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import {
@@ -21,6 +21,7 @@ import {
 	UserCog,
 	UserRound,
 	UsersRound,
+	Wallet,
 } from 'lucide-react';
 
 import ProFeaturesSection from './ProFeaturesSection';
@@ -392,5 +393,159 @@ if ( featureActive( 'advanced_exports' ) ) {
 				Component: lazy( () => import( './exports/SchedulesPanel' ) ),
 			},
 		]
+	);
+}
+
+// M15: payroll and HR — the Payroll screen, Settings → Payroll, the payroll
+// reports, the Pay tab of employee files and the staff's own My payroll.
+if ( featureActive( 'payroll' ) ) {
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/payroll',
+		( routes ) => [
+			...routes,
+			{
+				path: '/payroll',
+				group: 'system',
+				label: __( 'Payroll', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Pay runs, payslips, taxes and contributions, and time off',
+					'radius-hotel-booking-pro'
+				),
+				icon: Banknote,
+				accessKey: 'page.payroll',
+				element: lazy( () => import( './payroll/PayrollScreen' ) ),
+			},
+			{
+				path: '/payroll/runs/:id',
+				hidden: true,
+				group: 'system',
+				label: __( 'Pay run', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Lines, totals and what can be done next',
+					'radius-hotel-booking-pro'
+				),
+				accessKey: 'page.payroll',
+				element: lazy( () => import( './payroll/RunScreen' ) ),
+			},
+			{
+				path: '/me/payroll',
+				hidden: true,
+				label: __( 'My payroll', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Your payslips and time off',
+					'radius-hotel-booking-pro'
+				),
+				accessKey: 'page.my_payroll',
+				element: lazy( () =>
+					import( './payroll/self/MyPayrollScreen' )
+				),
+			},
+		]
+	);
+
+	addFilter(
+		'rtbp.settings.sections',
+		'radius-hotel-booking-pro/payroll',
+		( sections ) => [
+			...sections,
+			{
+				key: 'payroll',
+				label: __( 'Payroll', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Taxes and contributions, and the vacation quota',
+					'radius-hotel-booking-pro'
+				),
+				icon: Banknote,
+				accessKey: 'payroll.tax_settings',
+				Component: lazy( () =>
+					import( './payroll/PayrollSettingsSection' )
+				),
+			},
+		]
+	);
+
+	addFilter(
+		'rtbp.reports.tabs',
+		'radius-hotel-booking-pro/payroll',
+		( tabs ) => [
+			...tabs,
+			{
+				key: 'payroll',
+				label: __( 'Payroll', 'radius-hotel-booking-pro' ),
+				icon: Banknote,
+				accessKey: 'page.payroll',
+				mode: false,
+				Component: lazy( () =>
+					import( './payroll/reports' ).then( ( m ) => ( {
+						default: m.PayrollReportTab,
+					} ) )
+				),
+			},
+			{
+				key: 'payroll-statutory',
+				label: __(
+					'Taxes and contributions',
+					'radius-hotel-booking-pro'
+				),
+				icon: Banknote,
+				accessKey: 'page.payroll',
+				mode: false,
+				Component: lazy( () =>
+					import( './payroll/reports' ).then( ( m ) => ( {
+						default: m.StatutoryReportTab,
+					} ) )
+				),
+			},
+		]
+	);
+
+	// The Pay tab of an employee file, after Employment, for whoever may open payroll.
+	const PayTab = lazy( () => import( './payroll/PayTab' ) );
+	addFilter(
+		'rtbp.staff.tabs',
+		'radius-hotel-booking-pro/pay',
+		( tabs, { employee } ) => {
+			const level =
+				window.rtbp?.lib?.access?.getAccessLevel?.( 'page.payroll' );
+			if ( 'locked' === level ) {
+				return tabs;
+			}
+			const tab = {
+				key: 'pay',
+				label: __( 'Pay', 'radius-hotel-booking-pro' ),
+				render: () =>
+					createElement(
+						Suspense,
+						{ fallback: null },
+						createElement( PayTab, { employee } )
+					),
+			};
+			const after = tabs.findIndex( ( t ) => 'employment' === t.key );
+			const next = [ ...tabs ];
+			next.splice( after < 0 ? next.length : after + 1, 0, tab );
+			return next;
+		}
+	);
+
+	addFilter(
+		'rtbp.user.menu',
+		'radius-hotel-booking-pro/my-payroll',
+		( items ) => {
+			const level =
+				window.rtbp?.lib?.access?.getAccessLevel?.( 'page.my_payroll' );
+			if ( 'locked' === level ) {
+				return items;
+			}
+			return [
+				...( items || [] ),
+				{
+					key: 'my-payroll',
+					label: __( 'My payroll', 'radius-hotel-booking-pro' ),
+					icon: Wallet,
+					to: '/me/payroll',
+				},
+			];
+		}
 	);
 }

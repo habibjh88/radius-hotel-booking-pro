@@ -121,7 +121,7 @@ export const sendPasswordLink = ( id ) =>
 	api.post( `employees/${ id }/password-link` );
 
 /**
- * The full CNPS and tax numbers of an employee (`staff.view_ids`; each
+ * The full social security and tax numbers of an employee (`staff.view_ids`; each
  * reveal is logged).
  *
  * @param {number} id Employee id.

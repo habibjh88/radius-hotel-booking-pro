@@ -167,7 +167,7 @@ class PricingTemplateService {
 	}
 
 	/**
-	 * An adjustment in words: "+20 %", "−5 000 CFA", "= 25 000 CFA".
+	 * An adjustment in words: "+20 %", "−$5.00", "= $25.00".
 	 *
 	 * @param string $mode        Mode.
 	 * @param string $amount_type Amount type.

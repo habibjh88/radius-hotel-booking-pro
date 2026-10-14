@@ -9,6 +9,7 @@
     "start": "wp-scripts start",
     "build": "wp-scripts build",
     "format": "wp-scripts format src",
+    "package": "bash ./bin/build-plugin-zip.sh",
     "i18n:pot": "wp i18n make-pot . languages/radius-hotel-booking-pro.pot --domain=radius-hotel-booking-pro --exclude=node_modules,build,vendor"
   },
   "dependencies": {

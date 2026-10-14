@@ -45,6 +45,19 @@ final class Installer {
 			EmployeesTable::class,
 			EmployeeContractsTable::class,
 			EmployeeDocumentsTable::class,
+			// Payroll (M15).
+			PayScheduleTable::class,
+			WorkShiftTable::class,
+			WorkShiftDayTable::class,
+			EmployeePayTable::class,
+			EmployeePayItemTable::class,
+			EmployeeDeductionTable::class,
+			PayrollRunTable::class,
+			PayrollLineTable::class,
+			PayrollLedgerTable::class,
+			PayrollStatutoryTable::class,
+			StatutoryPaymentTable::class,
+			TimeOffTable::class,
 		);
 	}
 
@@ -67,7 +80,7 @@ final class Installer {
 	public static function all_tables_exist(): bool {
 		global $wpdb;
 		$prefix = rtbp_table_prefix();
-		$names  = array( 'pro_access_roles', 'pro_activity_log', 'pro_activity_head', 'pro_log_archives', 'pro_pricing_templates', 'pro_pricing_rules', 'pro_ical_feeds', 'pro_employees', 'pro_employee_contracts', 'pro_employee_documents' );
+		$names  = array( 'pro_access_roles', 'pro_activity_log', 'pro_activity_head', 'pro_log_archives', 'pro_pricing_templates', 'pro_pricing_rules', 'pro_ical_feeds', 'pro_employees', 'pro_employee_contracts', 'pro_employee_documents', 'pro_pay_schedules', 'pro_work_shifts', 'pro_work_shift_days', 'pro_employee_pay', 'pro_employee_pay_items', 'pro_employee_deductions', 'pro_payroll_runs', 'pro_payroll_lines', 'pro_payroll_ledger', 'pro_payroll_statutory', 'pro_statutory_payments', 'pro_time_off' );
 		foreach ( $names as $name ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- schema check during install.
 			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $prefix . $name ) ) !== $prefix . $name ) {

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-04T06:17:17+00:00\n"
+"POT-Creation-Date: 2026-10-14T11:20:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: radius-hotel-booking-pro\n"
@@ -207,58 +207,58 @@ msgid "Username"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:40
-#: src/admin/staff/CreateEmployeeScreen.jsx:247
-#: src/admin/staff/FileTabs.jsx:427
+#: src/admin/staff/CreateEmployeeScreen.jsx:248
+#: src/admin/staff/FileTabs.jsx:428
 msgid "First name"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:41
-#: src/admin/staff/CreateEmployeeScreen.jsx:259
-#: src/admin/staff/FileTabs.jsx:434
+#: src/admin/staff/CreateEmployeeScreen.jsx:260
+#: src/admin/staff/FileTabs.jsx:435
 msgid "Last name"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:42
-#: src/admin/staff/FileTabs.jsx:441
+#: src/admin/staff/FileTabs.jsx:442
 msgid "Date of birth"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:43
-#: src/admin/self/ProfileScreen.jsx:361
-#: src/admin/staff/FileTabs.jsx:481
-#: src/admin/staff/FileTabs.jsx:599
+#: src/admin/self/ProfileScreen.jsx:379
+#: src/admin/staff/FileTabs.jsx:489
+#: src/admin/staff/FileTabs.jsx:601
 msgid "Address"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:44
-#: src/admin/staff/FileTabs.jsx:450
+#: src/admin/staff/FileTabs.jsx:458
 msgid "Marital status"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:45
-#: src/admin/staff/FileTabs.jsx:466
+#: src/admin/staff/FileTabs.jsx:474
 msgid "Number of children"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:46
 #: includes/ActivityLog/DeviceParser.php:45
-#: src/admin/self/ProfileScreen.jsx:340
-#: src/admin/staff/CreateEmployeeScreen.jsx:269
-#: src/admin/staff/FileTabs.jsx:514
-#: src/admin/staff/FileTabs.jsx:589
+#: src/admin/self/ProfileScreen.jsx:358
+#: src/admin/staff/CreateEmployeeScreen.jsx:270
+#: src/admin/staff/FileTabs.jsx:522
+#: src/admin/staff/FileTabs.jsx:593
 #: src/admin/staff/StaffListScreen.jsx:112
 msgid "Phone"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:47
 #: src/admin/staff/AccountTab.jsx:114
-#: src/admin/staff/CreateEmployeeScreen.jsx:283
-#: src/admin/staff/FileTabs.jsx:529
+#: src/admin/staff/CreateEmployeeScreen.jsx:285
+#: src/admin/staff/FileTabs.jsx:533
 msgid "E-mail"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:48
-#: src/admin/staff/StaffDetailScreen.jsx:72
+#: src/admin/staff/StaffDetailScreen.jsx:104
 msgid "Emergency contact"
 msgstr ""
 
@@ -270,8 +270,8 @@ msgstr ""
 
 #: includes/Access/ProfileFields.php:50
 #: src/admin/self/SecuritySection.jsx:95
-#: src/admin/staff/CreateEmployeeScreen.jsx:374
-#: src/admin/staff/CreateEmployeeScreen.jsx:401
+#: src/admin/staff/CreateEmployeeScreen.jsx:376
+#: src/admin/staff/CreateEmployeeScreen.jsx:403
 msgid "Password"
 msgstr ""
 
@@ -548,10 +548,10 @@ msgstr ""
 
 #: includes/Features/ActivityLog/ActivityLogFeature.php:91
 #: includes/Features/ActivityLog/ActivityLogFeature.php:224
-#: includes/Features/FeatureRegistry.php:126
+#: includes/Features/FeatureRegistry.php:133
 #: src/admin/activity/ActivityScreen.jsx:107
-#: src/admin/index.js:294
-#: src/admin/index.js:316
+#: src/admin/index.js:295
+#: src/admin/index.js:317
 msgid "Activity log"
 msgstr ""
 
@@ -587,102 +587,110 @@ msgstr ""
 msgid "Removed a scheduled export"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:126
+#: includes/Features/FeatureRegistry.php:133
 msgid "Record who did what, with before-and-after values, tamper evidence and automatic archiving."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:127
+#: includes/Features/FeatureRegistry.php:134
 msgid "Advanced staff access"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:127
+#: includes/Features/FeatureRegistry.php:134
 msgid "Passcode-protected actions, personal PINs, custom access roles, per-person overrides and profile-field control."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:128
+#: includes/Features/FeatureRegistry.php:135
 msgid "Advanced pricing rules"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:128
+#: includes/Features/FeatureRegistry.php:135
 msgid "Seasonal pricing, occupancy pricing, early-bird and last-minute discounts."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:129
+#: includes/Features/FeatureRegistry.php:136
 msgid "iCal calendar sync"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:129
+#: includes/Features/FeatureRegistry.php:136
 msgid "Import and export room availability with Booking.com, Airbnb and similar channels."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:130
+#: includes/Features/FeatureRegistry.php:137
 msgid "PDF invoices and receipts"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:130
+#: includes/Features/FeatureRegistry.php:137
 msgid "Generate invoices and receipts as PDF files and attach them to guest e-mails."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:131
+#: includes/Features/FeatureRegistry.php:138
 msgid "Automatic release of unpaid bookings"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:131
+#: includes/Features/FeatureRegistry.php:138
 msgid "Free the room automatically when a booking passes its payment deadline."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:132
+#: includes/Features/FeatureRegistry.php:139
 msgid "Advanced reports"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:132
+#: includes/Features/FeatureRegistry.php:139
 msgid "Occupancy rate, revenue by room type, rate plan and staff member, and Excel export."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:133
+#: includes/Features/FeatureRegistry.php:140
 msgid "Advanced exports and archiving"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:133
+#: includes/Features/FeatureRegistry.php:140
 msgid "Excel exports, archive-and-remove of old bookings, and scheduled exports."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:134
+#: includes/Features/FeatureRegistry.php:141
 #: includes/Features/Staff/StaffRecordsFeature.php:144
 msgid "Staff records"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:134
+#: includes/Features/FeatureRegistry.php:141
 msgid "Full employee files: contracts, emergency contacts, documents, notes and history."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:135
+#: includes/Features/FeatureRegistry.php:142
 msgid "Staff self-service"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:135
+#: includes/Features/FeatureRegistry.php:142
 msgid "Staff manage their own profile, password and PIN within the fields you allow."
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:163
+#: includes/Features/FeatureRegistry.php:143
+msgid "Payroll and HR"
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:143
+msgid "Pay runs and payslips, taxes and contributions, deductions, shifts, time off and staff self-service payslips."
+msgstr ""
+
+#: includes/Features/FeatureRegistry.php:171
 msgid "Operations and security"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:164
+#: includes/Features/FeatureRegistry.php:172
 msgid "Pricing and availability"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:165
+#: includes/Features/FeatureRegistry.php:173
 msgid "Payments and documents"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:166
+#: includes/Features/FeatureRegistry.php:174
 msgid "Reports and exports"
 msgstr ""
 
-#: includes/Features/FeatureRegistry.php:167
+#: includes/Features/FeatureRegistry.php:175
 #: includes/Features/Staff/StaffRecordsFeature.php:85
-#: src/admin/index.js:116
+#: src/admin/index.js:117
 #: src/admin/staff/StaffListScreen.jsx:196
 #: src/admin/staff/StaffListScreen.jsx:272
 msgid "Staff"
@@ -690,7 +698,7 @@ msgstr ""
 
 #: includes/Features/Ical/IcalSyncFeature.php:81
 #: src/admin/ical/CalendarSyncScreen.jsx:549
-#: src/admin/index.js:92
+#: src/admin/index.js:93
 msgid "Calendar sync"
 msgstr ""
 
@@ -723,9 +731,13 @@ msgid "Read a channel calendar"
 msgstr ""
 
 #: includes/Features/Payments/AutoReleaseFeature.php:112
-#: src/admin/index.js:266
+#: src/admin/index.js:267
 #: src/admin/payments/AutoReleaseSettingsSection.jsx:25
 msgid "Automatic release"
+msgstr ""
+
+#: includes/Features/Payroll/PayrollFeature.php:119
+msgid "Payroll needs the PHP bcmath extension, which this server does not have. Ask your host to enable it."
 msgstr ""
 
 #: includes/Features/Pricing/PricingRulesFeature.php:69
@@ -753,7 +765,7 @@ msgid "Deleted a pricing rule"
 msgstr ""
 
 #: includes/Features/Reports/AdvancedReportsFeature.php:84
-#: src/admin/index.js:361
+#: src/admin/index.js:362
 #: src/admin/pricing/OccupancyTab.jsx:107
 #: src/admin/pricing/PricingScreen.jsx:43
 #: src/admin/reports/OccupancyTab.jsx:87
@@ -761,7 +773,7 @@ msgid "Occupancy"
 msgstr ""
 
 #: includes/Features/Reports/AdvancedReportsFeature.php:92
-#: src/admin/index.js:370
+#: src/admin/index.js:371
 msgid "Revenue breakdown"
 msgstr ""
 
@@ -783,8 +795,8 @@ msgid "Changed their own PIN"
 msgstr ""
 
 #: includes/Features/Staff/StaffRecordsFeature.php:86
-#: src/admin/index.js:129
-#: src/admin/staff/CreateEmployeeScreen.jsx:223
+#: src/admin/index.js:130
+#: src/admin/staff/CreateEmployeeScreen.jsx:224
 msgid "Add an employee"
 msgstr ""
 
@@ -797,7 +809,7 @@ msgid "Deactivate or reactivate an employee"
 msgstr ""
 
 #: includes/Features/Staff/StaffRecordsFeature.php:89
-msgid "See CNPS and tax numbers"
+msgid "See social security and tax numbers"
 msgstr ""
 
 #: includes/Features/Staff/StaffRecordsFeature.php:90
@@ -837,7 +849,7 @@ msgid "Changed an employee account"
 msgstr ""
 
 #: includes/Features/Staff/StaffRecordsFeature.php:162
-msgid "Viewed the CNPS and tax numbers of an employee"
+msgid "Viewed the social security and tax numbers of an employee"
 msgstr ""
 
 #: includes/Features/Staff/StaffRecordsFeature.php:163
@@ -1088,6 +1100,1103 @@ msgstr ""
 msgid "Released automatically: not paid by the deadline."
 msgstr ""
 
+#: includes/Payroll/DeductionController.php:67
+msgid "Deduction added."
+msgstr ""
+
+#: includes/Payroll/DeductionController.php:84
+msgid "Deduction saved."
+msgstr ""
+
+#: includes/Payroll/DeductionController.php:101
+msgid "Deduction deleted."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:85
+msgid "Added"
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:113
+#: includes/Payroll/DeductionService.php:184
+#: includes/Payroll/DeductionService.php:230
+#: includes/Payroll/EmployeePayService.php:318
+#: includes/Payroll/EmployeePayService.php:323
+#: includes/Payroll/PayItemTypes.php:167
+#: includes/Payroll/PayPeriods.php:131
+#: includes/Payroll/TimeOffService.php:349
+#: includes/Staff/ContractService.php:363
+#: includes/Staff/ContractService.php:369
+#: includes/Staff/DocumentService.php:124
+#: includes/Staff/EmployeeService.php:643
+#: includes/Staff/EmployeeService.php:680
+msgid "Choose from the list."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:125
+msgid "Changed"
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:152
+msgid "Deleted"
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:167
+msgid "This deduction does not exist."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:212
+msgid "Enter the description shown on the payslip."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:217
+#: includes/Payroll/DeductionService.php:256
+msgid "Enter a day from 1 to 31."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:237
+#: includes/Payroll/DeductionService.php:273
+#: includes/Payroll/PayrollRunService.php:835
+#: includes/Payroll/StatutoryService.php:182
+msgid "Enter an amount above zero."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:244
+#: includes/Payroll/DeductionService.php:280
+msgid "Enter a percentage above 0, up to 100."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:253
+msgid "Enter who the money is paid to."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:264
+#: includes/Payroll/DeductionService.php:267
+#: includes/Payroll/PayPeriods.php:134
+#: includes/Payroll/PayPeriods.php:137
+#: includes/Payroll/StatutoryService.php:186
+#: includes/Payroll/TimeOffService.php:352
+#: includes/Payroll/TimeOffService.php:355
+#: includes/Staff/ContractService.php:385
+msgid "Enter a valid date."
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:269
+msgid "The end cannot be before the start."
+msgstr ""
+
+#. translators: 1: Added / Changed / Deleted, 2: deduction name, 3: employee name.
+#: includes/Payroll/DeductionService.php:376
+#, php-format
+msgid "%1$s the deduction \"%2$s\" of %3$s"
+msgstr ""
+
+#: includes/Payroll/DeductionService.php:393
+#: includes/Payroll/EmployeePayService.php:397
+#: includes/Payroll/TimeOffService.php:151
+#: includes/Staff/EmployeeService.php:67
+msgid "This employee does not exist."
+msgstr ""
+
+#: includes/Payroll/EmployeePayController.php:73
+msgid "Pay saved."
+msgstr ""
+
+#: includes/Payroll/EmployeePayController.php:90
+msgid "Additional pay saved."
+msgstr ""
+
+#. translators: %d: number of employees.
+#: includes/Payroll/EmployeePayService.php:66
+#, php-format
+msgid "%d employee is on this pay schedule. Move them to another one first."
+msgid_plural "%d employees are on this pay schedule. Move them to another one first."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of employees.
+#: includes/Payroll/EmployeePayService.php:82
+#, php-format
+msgid "%d employee works this shift. Move them to another one first."
+msgid_plural "%d employees work this shift. Move them to another one first."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: employee name.
+#: includes/Payroll/EmployeePayService.php:155
+#, php-format
+msgid "Changed the pay of %s"
+msgstr ""
+
+#: includes/Payroll/EmployeePayService.php:179
+msgid "This pay type does not exist."
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Payroll/EmployeePayService.php:215
+#, php-format
+msgid "Changed the additional pay of %s"
+msgstr ""
+
+#: includes/Payroll/EmployeePayService.php:326
+#: includes/Payroll/PayItemTypes.php:184
+msgid "Enter an amount of 0 or more."
+msgstr ""
+
+#: includes/Payroll/EmployeePayService.php:329
+#: includes/Payroll/PayrollRunService.php:148
+#: includes/Payroll/PayScheduleService.php:71
+msgid "This pay schedule does not exist."
+msgstr ""
+
+#: includes/Payroll/EmployeePayService.php:332
+#: includes/Payroll/WorkShiftService.php:70
+msgid "This work shift does not exist."
+msgstr ""
+
+#: includes/Payroll/LineCalculator.php:87
+msgid "This employee has no pay set up."
+msgstr ""
+
+#: includes/Payroll/LineCalculator.php:99
+msgid "Give the employee a work shift first: their hourly rate comes from its hours."
+msgstr ""
+
+#: includes/Payroll/MyPayrollController.php:108
+msgid "Request sent for approval."
+msgstr ""
+
+#: includes/Payroll/MyPayrollController.php:123
+msgid "Request cancelled."
+msgstr ""
+
+#: includes/Payroll/MyPayrollService.php:36
+msgid "Your account has no employee file, so there is no payroll to show."
+msgstr ""
+
+#: includes/Payroll/MyPayrollService.php:80
+msgid "You can only download your own payslips."
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:36
+msgid "Overtime pay"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:48
+msgid "Paid time off"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:62
+msgid "Unpaid time off"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:75
+msgid "Sick pay"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:89
+#: templates/documents/payslip.php:137
+#: src/admin/payroll/LineDialog.jsx:136
+msgid "Vacation pay"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:114
+#: src/admin/payroll/AdditionalPay.jsx:68
+msgid "Bonus"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:120
+#: src/admin/payroll/AdditionalPay.jsx:69
+msgid "Commission"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:126
+msgid "Transport allowance"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:132
+msgid "Gratification"
+msgstr ""
+
+#: includes/Payroll/PayItemTypes.php:156
+msgid "This is required."
+msgstr ""
+
+#. translators: 1: smallest value, 2: largest value.
+#: includes/Payroll/PayItemTypes.php:183
+#, php-format
+msgid "Enter a number from %1$s to %2$s."
+msgstr ""
+
+#: includes/Payroll/PayPeriods.php:42
+#: src/admin/exports/SchedulesPanel.jsx:366
+msgid "Weekly"
+msgstr ""
+
+#: includes/Payroll/PayPeriods.php:43
+msgid "Every two weeks"
+msgstr ""
+
+#: includes/Payroll/PayPeriods.php:44
+msgid "Twice a month"
+msgstr ""
+
+#: includes/Payroll/PayPeriods.php:45
+#: src/admin/exports/SchedulesPanel.jsx:373
+msgid "Monthly"
+msgstr ""
+
+#: includes/Payroll/PayPeriods.php:144
+msgid "The pay day cannot be before the end of the pay period."
+msgstr ""
+
+#. translators: %d: number of days.
+#: includes/Payroll/PayPeriods.php:148
+#, php-format
+msgid "Pay at most %d day after the end of the pay period."
+msgid_plural "Pay at most %d days after the end of the pay period."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Payroll/PayPeriods.php:155
+msgid "Twice a month, a pay period ends on the 15th or on the last day of the month."
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:41
+#: includes/Payroll/PayrollReports.php:45
+#: src/admin/index.js:410
+#: src/admin/index.js:454
+#: src/admin/index.js:475
+#: src/admin/payroll/PayrollScreen.jsx:61
+msgid "Payroll"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:42
+msgid "My payslips and time off"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:43
+#: src/admin/payroll/RunsTab.jsx:101
+#: src/admin/payroll/RunsTab.jsx:193
+msgid "Run payroll"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:44
+msgid "Edit an employee's payroll line"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:45
+msgid "Finalise a payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:46
+msgid "Settle a payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:47
+msgid "Void a payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:48
+msgid "Revert a payroll run to draft"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:49
+msgid "Remove a draft payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:50
+msgid "Manage pay schedules"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:51
+msgid "Change an employee's pay"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:52
+msgid "Manage work shifts"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:53
+msgid "Record a statutory payment"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:54
+msgid "Change payroll settings"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:55
+msgid "Approve or decline time off"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:86
+msgid "Payroll and time off"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:99
+msgid "Ran payroll"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:100
+msgid "Changed an employee's payroll line"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:101
+msgid "Finalised a payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:102
+msgid "Settled a payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:103
+msgid "Voided a payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:104
+msgid "Reverted a payroll run to draft"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:105
+msgid "Removed a draft payroll run"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:106
+msgid "Changed a pay schedule"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:107
+msgid "Changed an employee's pay"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:108
+msgid "Changed a work shift"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:109
+msgid "Recorded a statutory payment"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:110
+msgid "Changed payroll settings"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:111
+msgid "Downloaded a payslip"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:112
+msgid "Requested time off"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:113
+msgid "Approved time off"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:114
+msgid "Declined time off"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:115
+msgid "Downloaded own payslip"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:116
+msgid "Requested own time off"
+msgstr ""
+
+#: includes/Payroll/PayrollAccess.php:117
+msgid "Cancelled own time off request"
+msgstr ""
+
+#. translators: %s: why, e.g. a database error.
+#: includes/Payroll/PayrollMigration.php:120
+#, php-format
+msgid "Payroll data from the Residence TATA add-on could not be moved to Pro yet (%s). Nothing was lost; it is tried again every hour."
+msgstr ""
+
+#: includes/Payroll/PayrollMigration.php:152
+msgid "Pro's payroll already has data, so the old payroll was left where it is"
+msgstr ""
+
+#: includes/Payroll/PayrollMigration.php:177
+msgid "a table could not be renamed"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:52
+#: src/admin/payroll/reports.jsx:369
+msgid "Statutory contributions"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:245
+#: src/admin/payroll/reports.jsx:163
+#: src/admin/payroll/reports.jsx:247
+#: src/admin/payroll/self/MyPayrollScreen.jsx:471
+msgid "Payslips"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:246
+#: templates/documents/payslip.php:145
+#: templates/documents/payslip.php:211
+#: src/admin/payroll/LineDialog.jsx:164
+#: src/admin/payroll/reports.jsx:83
+#: src/admin/payroll/reports.jsx:131
+msgid "Gross pay"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:247
+#: src/admin/payroll/reports.jsx:88
+msgid "Employee taxes and contributions"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:248
+#: templates/documents/payslip.php:151
+#: src/admin/payroll/reports.jsx:96
+msgid "Deductions"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:249
+#: src/admin/payroll/reports.jsx:101
+msgid "Garnishments"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:250
+#: src/admin/payroll/reports.jsx:106
+msgid "One-off items"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:251
+#: templates/documents/payslip.php:187
+#: templates/documents/payslip.php:213
+#: src/admin/payroll/LineDialog.jsx:216
+#: src/admin/payroll/reports.jsx:111
+#: src/admin/payroll/reports.jsx:137
+#: src/admin/payroll/RunScreen.jsx:445
+#: src/admin/payroll/RunScreen.jsx:600
+#: src/admin/payroll/RunsTab.jsx:252
+#: src/admin/payroll/self/MyPayrollScreen.jsx:129
+msgid "Net pay"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:252
+#: src/admin/payroll/reports.jsx:117
+msgid "Hotel contributions"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:253
+#: src/admin/payroll/LineDialog.jsx:231
+#: src/admin/payroll/reports.jsx:122
+#: src/admin/payroll/RunScreen.jsx:453
+#: src/admin/payroll/RunScreen.jsx:604
+msgid "Cost to the hotel"
+msgstr ""
+
+#. translators: 1: first day, 2: last day.
+#: includes/Payroll/PayrollReports.php:259
+#, php-format
+msgid "Payroll by month, %1$s to %2$s"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:260
+#: includes/Payroll/PayrollReports.php:297
+#: src/admin/payroll/PayTab.jsx:307
+#: src/admin/payroll/reports.jsx:202
+#: src/admin/payroll/reports.jsx:391
+#: src/admin/payroll/self/MyPayrollScreen.jsx:298
+msgid "Month"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:264
+#: src/admin/payroll/reports.jsx:259
+msgid "Payroll by employee"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:265
+#: templates/documents/payslip.php:92
+#: src/admin/index.js:138
+#: src/admin/payroll/PayrollSettingsSection.jsx:211
+#: src/admin/payroll/reports.jsx:234
+#: src/admin/payroll/RunScreen.jsx:420
+#: src/admin/payroll/timeOffParts.jsx:279
+#: src/admin/payroll/TimeOffTab.jsx:210
+#: src/admin/payroll/TimeOffTab.jsx:339
+#: src/admin/staff/StaffListScreen.jsx:83
+msgid "Employee"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:265
+#: templates/documents/payslip.php:83
+msgid "Number"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:281
+#: src/admin/payroll/reports.jsx:292
+#: src/admin/payroll/RunsTab.jsx:242
+#: src/admin/payroll/SchedulesTab.jsx:293
+#: src/admin/payroll/ShiftsTab.jsx:454
+msgid "Employees"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:282
+#: src/admin/payroll/PayrollSettingsSection.jsx:218
+#: src/admin/payroll/reports.jsx:297
+msgid "Hotel"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:283
+#: src/admin/payroll/reports.jsx:302
+#: src/admin/payroll/reports.jsx:322
+#: src/admin/payroll/StatutoryTab.jsx:396
+msgid "Due"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:284
+#: src/admin/payroll/PayTab.jsx:234
+#: src/admin/payroll/reports.jsx:308
+#: src/admin/payroll/reports.jsx:328
+#: src/admin/payroll/SchedulesTab.jsx:156
+#: src/admin/payroll/SchedulesTab.jsx:276
+#: src/admin/payroll/StatutoryTab.jsx:400
+msgid "Paid"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:285
+#: src/admin/payroll/reports.jsx:313
+#: src/admin/payroll/reports.jsx:334
+#: src/admin/payroll/StatutoryTab.jsx:407
+msgid "Left to pay"
+msgstr ""
+
+#. translators: 1: first day, 2: last day.
+#: includes/Payroll/PayrollReports.php:291
+#, php-format
+msgid "Statutory contributions, %1$s to %2$s"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:292
+msgid "Authority"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:292
+#: src/admin/payroll/reports.jsx:347
+msgid "Contribution"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:292
+#: src/admin/payroll/PayrollSettingsSection.jsx:168
+msgid "Code"
+msgstr ""
+
+#: includes/Payroll/PayrollReports.php:296
+#: src/admin/payroll/reports.jsx:401
+msgid "Statutory contributions by month"
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:88
+msgid "Pay run created."
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:113
+msgid "Line saved."
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:152
+msgid "Pay run recalculated."
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:162
+msgid "Pay run finalised."
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:172
+msgid "Pay run settled."
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:182
+msgid "Pay run voided."
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:192
+msgid "Pay run back to draft."
+msgstr ""
+
+#: includes/Payroll/PayrollRunController.php:207
+msgid "Draft pay run removed."
+msgstr ""
+
+#. translators: %d: number of pay runs.
+#: includes/Payroll/PayrollRunService.php:73
+#, php-format
+msgid "%d pay run was made with this pay schedule; it stays in the history."
+msgid_plural "%d pay runs were made with this pay schedule; they stay in the history."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of pay runs.
+#: includes/Payroll/PayrollRunService.php:86
+#, php-format
+msgid "%d pay run took it. Mark it completed instead."
+msgid_plural "%d pay runs took it. Mark it completed instead."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Payroll/PayrollRunService.php:166
+msgid "These days are already in a pay run of this schedule. Void it first to run them again."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:184
+msgid "No employee on this pay schedule can be paid for this period: put employees on it from their Pay tab (someone already paid for these days on another schedule is left out)."
+msgstr ""
+
+#. translators: %s: run (schedule and period).
+#: includes/Payroll/PayrollRunService.php:210
+#, php-format
+msgid "Ran payroll %s"
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:235
+msgid "This line is not on the pay run."
+msgstr ""
+
+#. translators: 1: employee, 2: run.
+#: includes/Payroll/PayrollRunService.php:248
+#, php-format
+msgid "Changed the payroll line of %1$s in %2$s"
+msgstr ""
+
+#. translators: %s: run.
+#: includes/Payroll/PayrollRunService.php:272
+#, php-format
+msgid "Recalculated payroll %s"
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:294
+msgid "This pay run cannot be finalised yet: its pay period has not ended."
+msgstr ""
+
+#. translators: %s: employee name.
+#: includes/Payroll/PayrollRunService.php:305
+#, php-format
+msgid "The net pay of %s is below zero. Correct the line first."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:337
+msgid "Enter how this employee was paid."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:347
+msgid "Enter the payment method for every employee."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:374
+msgid "Say why the pay run is voided."
+msgstr ""
+
+#. translators: %s: run.
+#: includes/Payroll/PayrollRunService.php:423
+#, php-format
+msgid "Removed the draft pay run %s"
+msgstr ""
+
+#. translators: %s: pay run.
+#: includes/Payroll/PayrollRunService.php:455
+#, php-format
+msgid "Finalised payroll %s"
+msgstr ""
+
+#. translators: %s: pay run.
+#: includes/Payroll/PayrollRunService.php:457
+#, php-format
+msgid "Settled payroll %s"
+msgstr ""
+
+#. translators: %s: pay run.
+#: includes/Payroll/PayrollRunService.php:459
+#, php-format
+msgid "Voided payroll %s"
+msgstr ""
+
+#. translators: %s: pay run.
+#: includes/Payroll/PayrollRunService.php:461
+#, php-format
+msgid "Reverted payroll %s to draft"
+msgstr ""
+
+#. translators: %s: the calculator in use now.
+#: includes/Payroll/PayrollRunService.php:502
+#, php-format
+msgid "This pay run was calculated with other tax rules than the ones in use now (%s). Re-activate the add-on that provided them, or void the run and start a new one."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:671
+msgid "Tax on one-off additions"
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:746
+#: includes/Payroll/PayrollRunService.php:775
+msgid "This pay run does not exist."
+msgstr ""
+
+#. translators: %s: run status.
+#: includes/Payroll/PayrollRunService.php:753
+#, php-format
+msgid "Not possible while the pay run is %s."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:819
+msgid "Enter a number of 0 or more."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:832
+#: includes/Payroll/PayScheduleService.php:198
+#: includes/Payroll/WorkShiftService.php:249
+msgid "Enter a name."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:848
+msgid "Enter the hours worked, from 0 to 744."
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:889
+msgid "draft"
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:890
+msgid "finalised"
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:891
+msgid "settled"
+msgstr ""
+
+#: includes/Payroll/PayrollRunService.php:892
+msgid "voided"
+msgstr ""
+
+#: includes/Payroll/PayrollSettings.php:68
+msgid "Payroll settings"
+msgstr ""
+
+#. translators: %d: most rows.
+#: includes/Payroll/PayrollSettings.php:145
+#, php-format
+msgid "List at most %d contributions."
+msgstr ""
+
+#. translators: %d: position in the list.
+#: includes/Payroll/PayrollSettings.php:154
+#, php-format
+msgid "Contribution %d needs a name of at most 60 characters."
+msgstr ""
+
+#. translators: %s: contribution name.
+#: includes/Payroll/PayrollSettings.php:160
+#, php-format
+msgid "\"%s\": the rate must be 0–100 %% and the ceiling 0 or more."
+msgstr ""
+
+#. translators: %s: contribution name.
+#: includes/Payroll/PayrollSettings.php:169
+#, php-format
+msgid "\"%s\" is listed twice for the same side."
+msgstr ""
+
+#. translators: %d: most rows.
+#: includes/Payroll/PayrollSettings.php:193
+#, php-format
+msgid "List at most %d tax brackets."
+msgstr ""
+
+#: includes/Payroll/PayrollSettings.php:203
+msgid "Each tax rate must be between 0 and 100 %."
+msgstr ""
+
+#: includes/Payroll/PayrollSettings.php:206
+msgid "Only the last tax bracket can have no upper limit."
+msgstr ""
+
+#: includes/Payroll/PayrollSettings.php:209
+msgid "Leave the last tax bracket without an upper limit, so higher pay is taxed too."
+msgstr ""
+
+#: includes/Payroll/PayrollSettings.php:212
+msgid "Tax brackets must go up: each limit higher than the one before."
+msgstr ""
+
+#: includes/Payroll/PayScheduleController.php:71
+msgid "Pay schedule added."
+msgstr ""
+
+#: includes/Payroll/PayScheduleController.php:88
+msgid "Pay schedule saved."
+msgstr ""
+
+#: includes/Payroll/PayScheduleController.php:105
+msgid "Pay schedule deleted."
+msgstr ""
+
+#: includes/Payroll/PayScheduleService.php:88
+#: includes/Payroll/PayScheduleService.php:202
+msgid "This name is already used by another pay schedule."
+msgstr ""
+
+#. translators: %s: pay schedule name.
+#: includes/Payroll/PayScheduleService.php:95
+#, php-format
+msgid "Added the pay schedule %s"
+msgstr ""
+
+#. translators: %s: pay schedule name.
+#: includes/Payroll/PayScheduleService.php:123
+#, php-format
+msgid "Changed the pay schedule %s"
+msgstr ""
+
+#. translators: %s: pay schedule name.
+#: includes/Payroll/PayScheduleService.php:154
+#, php-format
+msgid "Deleted the pay schedule %s"
+msgstr ""
+
+#: includes/Payroll/PayScheduleService.php:200
+#: includes/Payroll/WorkShiftService.php:251
+#: includes/Payroll/WorkShiftService.php:256
+#: includes/SelfService/ProfileService.php:173
+#: includes/Staff/ContractService.php:376
+#: includes/Staff/ContractService.php:392
+#: includes/Staff/DocumentService.php:131
+#: includes/Staff/EmployeeService.php:617
+#: includes/Staff/EmployeeService.php:696
+msgid "This is too long."
+msgstr ""
+
+#: includes/Payroll/PayslipService.php:84
+msgid "This payslip does not exist."
+msgstr ""
+
+#: includes/Payroll/PayslipService.php:88
+msgid "Payslips are made once the pay run is finalised."
+msgstr ""
+
+#: includes/Payroll/PayslipService.php:137
+msgid "Payslips need a newer Radius Hotel Booking."
+msgstr ""
+
+#. translators: 1: payslip number, 2: employee name.
+#: includes/Payroll/PayslipService.php:151
+#, php-format
+msgid "Opened payslip %1$s of %2$s"
+msgstr ""
+
+#: includes/Payroll/Statutory/RuleCalculator.php:60
+msgid "Rates set in Settings → Payroll"
+msgstr ""
+
+#: includes/Payroll/Statutory/RuleCalculator.php:70
+#: src/admin/payroll/PayrollSettingsSection.jsx:371
+msgid "Tax office"
+msgstr ""
+
+#: includes/Payroll/Statutory/RuleCalculator.php:121
+#: src/admin/payroll/PayrollSettingsSection.jsx:324
+#: src/admin/payroll/PayrollSettingsSection.jsx:350
+msgid "Income tax"
+msgstr ""
+
+#: includes/Payroll/StatutoryController.php:78
+msgid "Payment recorded."
+msgstr ""
+
+#: includes/Payroll/StatutoryController.php:93
+msgid "Payment voided."
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:188
+msgid "This is in the future."
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:198
+msgid "Enter an amount greater than zero."
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:207
+msgid "Someone else is recording a payment for this right now. Please try again."
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:218
+msgid "Nothing is due for this contribution this month."
+msgstr ""
+
+#. translators: %s: amount still due.
+#: includes/Payroll/StatutoryService.php:225
+#, php-format
+msgid "Only %s is still due."
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:227
+msgid "This is more than what is still due."
+msgstr ""
+
+#. translators: 1: amount, 2: contribution, 3: authority, 4: month (MM/YYYY).
+#: includes/Payroll/StatutoryService.php:261
+#, php-format
+msgid "Recorded a payment of %1$s for %2$s (%3$s), %4$s"
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:282
+msgid "Say why the payment is voided."
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:289
+msgid "This payment does not exist."
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:295
+msgid "This payment is already voided."
+msgstr ""
+
+#. translators: 1: amount, 2: reason.
+#: includes/Payroll/StatutoryService.php:308
+#, php-format
+msgid "Voided a statutory payment of %1$s: %2$s"
+msgstr ""
+
+#: includes/Payroll/StatutoryService.php:351
+msgid "Choose a month."
+msgstr ""
+
+#: includes/Payroll/TimeOffController.php:110
+msgid "Request added."
+msgstr ""
+
+#: includes/Payroll/TimeOffController.php:125
+msgid "Time off approved."
+msgstr ""
+
+#: includes/Payroll/TimeOffController.php:139
+msgid "Time off declined."
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:62
+msgid "Vacation day off"
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:63
+msgid "Sick"
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:64
+msgid "Absent"
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:65
+msgid "Late"
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:66
+msgid "Unpaid leave"
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:67
+#: includes/Staff/ContractService.php:480
+#: includes/Staff/DocumentService.php:307
+#: includes/Staff/EmployeeService.php:526
+msgid "Other"
+msgstr ""
+
+#. translators: 1: type, 2: days, 3: employee.
+#: includes/Payroll/TimeOffService.php:180
+#, php-format
+msgid "Requested %1$s, %2$d days, for %3$s"
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:238
+msgid "This request does not exist."
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:249
+msgid "This request was already decided."
+msgstr ""
+
+#. translators: 1: type, 2: days, 3: employee.
+#: includes/Payroll/TimeOffService.php:269
+#, php-format
+msgid "Approved %1$s, %2$d days, for %3$s"
+msgstr ""
+
+#. translators: 1: type, 2: days, 3: employee.
+#: includes/Payroll/TimeOffService.php:271
+#, php-format
+msgid "Declined %1$s, %2$d days, for %3$s"
+msgstr ""
+
+#. translators: 1: type, 2: days, 3: employee.
+#: includes/Payroll/TimeOffService.php:273
+#, php-format
+msgid "Cancelled the request for %1$s, %2$d days, of %3$s"
+msgstr ""
+
+#. translators: 1: first day, 2: last day.
+#: includes/Payroll/TimeOffService.php:309
+#, php-format
+msgid "Another request already covers some of these days (%1$s to %2$s)."
+msgstr ""
+
+#. translators: 1: days asked, 2: days left, 3: year.
+#: includes/Payroll/TimeOffService.php:324
+#, php-format
+msgid "%1$d vacation day asked, but only %2$d left in %3$d."
+msgid_plural "%1$d vacation days asked, but only %2$d left in %3$d."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Payroll/TimeOffService.php:357
+msgid "The last day cannot be before the first."
+msgstr ""
+
+#: includes/Payroll/TimeOffService.php:363
+msgid "A request covers at most a year."
+msgstr ""
+
+#: includes/Payroll/WorkShiftController.php:67
+msgid "Work shift added."
+msgstr ""
+
+#: includes/Payroll/WorkShiftController.php:88
+msgid "Work shift saved."
+msgstr ""
+
+#: includes/Payroll/WorkShiftController.php:106
+msgid "Work shift deleted."
+msgstr ""
+
+#: includes/Payroll/WorkShiftService.php:99
+#: includes/Payroll/WorkShiftService.php:253
+msgid "This name is already used by another work shift."
+msgstr ""
+
+#. translators: %s: work shift name.
+#: includes/Payroll/WorkShiftService.php:107
+#, php-format
+msgid "Added the work shift %s"
+msgstr ""
+
+#. translators: %s: work shift name.
+#: includes/Payroll/WorkShiftService.php:157
+#, php-format
+msgid "Changed the work shift %s"
+msgstr ""
+
+#. translators: %s: work shift name.
+#: includes/Payroll/WorkShiftService.php:197
+#, php-format
+msgid "Deleted the work shift %s"
+msgstr ""
+
+#: includes/Payroll/WorkShiftService.php:275
+#: includes/Payroll/WorkShiftService.php:278
+msgid "Enter a time."
+msgstr ""
+
 #. translators: %s: minimum free plugin version.
 #: includes/Plugin.php:93
 #, php-format
@@ -1097,10 +2206,12 @@ msgstr ""
 #. translators: 1: rule name, 2: the discount, e.g. "−10 %".
 #. translators: 1: rule name, 2: the adjustment, e.g. "+15 %".
 #. translators: 1: rule or template name, 2: the adjustment, e.g. "+20 %".
+#. translators: 1: name, 2: detail.
 #: includes/Pricing/BookingWindowStep.php:80
 #: includes/Pricing/OccupancyStep.php:104
 #: includes/Pricing/SeasonalStep.php:63
-#, php-format
+#: src/admin/payroll/PayTab.jsx:74
+#, php-format,js-format
 msgid "%1$s (%2$s)"
 msgstr ""
 
@@ -1121,19 +2232,19 @@ msgstr ""
 
 #: includes/Pricing/PricingController.php:130
 #: src/admin/pricing/AdjustedRuleEditor.jsx:95
-#: src/admin/pricing/SeasonalTab.jsx:394
+#: src/admin/pricing/SeasonalTab.jsx:395
 msgid "Rule added."
 msgstr ""
 
 #: includes/Pricing/PricingController.php:147
 #: src/admin/pricing/AdjustedRuleEditor.jsx:94
-#: src/admin/pricing/SeasonalTab.jsx:393
+#: src/admin/pricing/SeasonalTab.jsx:394
 msgid "Rule saved."
 msgstr ""
 
 #: includes/Pricing/PricingController.php:164
 #: src/admin/pricing/AdjustedRuleEditor.jsx:399
-#: src/admin/pricing/SeasonalTab.jsx:633
+#: src/admin/pricing/SeasonalTab.jsx:629
 msgid "Rule deleted."
 msgstr ""
 
@@ -1284,8 +2395,11 @@ msgid "= %s"
 msgstr ""
 
 #. translators: %s: a percentage number.
+#. translators: %s: percentage.
 #: includes/Pricing/PricingTemplateService.php:185
-#, php-format
+#: src/admin/payroll/Deductions.jsx:113
+#: src/admin/payroll/LineDialog.jsx:82
+#, php-format,js-format
 msgid "%s %%"
 msgstr ""
 
@@ -1358,7 +2472,7 @@ msgid "By day"
 msgstr ""
 
 #: includes/Reports/OccupancyReport.php:175
-#: src/admin/exports/SchedulesPanel.jsx:391
+#: src/admin/exports/SchedulesPanel.jsx:393
 msgid "Day"
 msgstr ""
 
@@ -1532,21 +2646,12 @@ msgid "Your current password is not right."
 msgstr ""
 
 #: includes/SelfService/ProfileController.php:62
-#: src/admin/self/ProfileScreen.jsx:109
+#: src/admin/self/ProfileScreen.jsx:110
 msgid "Your profile is saved."
 msgstr ""
 
 #: includes/SelfService/ProfileService.php:139
 msgid "Some of these fields cannot be changed from your profile."
-msgstr ""
-
-#: includes/SelfService/ProfileService.php:173
-#: includes/Staff/ContractService.php:376
-#: includes/Staff/ContractService.php:392
-#: includes/Staff/DocumentService.php:131
-#: includes/Staff/EmployeeService.php:617
-#: includes/Staff/EmployeeService.php:696
-msgid "This is too long."
 msgstr ""
 
 #: includes/SelfService/ProfileService.php:180
@@ -1578,22 +2683,22 @@ msgid "Changed the Pro features that are switched on."
 msgstr ""
 
 #: includes/Staff/ContractController.php:72
-#: src/admin/staff/EmploymentTab.jsx:145
+#: src/admin/staff/EmploymentTab.jsx:146
 msgid "Contract added."
 msgstr ""
 
 #: includes/Staff/ContractController.php:89
-#: src/admin/staff/EmploymentTab.jsx:144
+#: src/admin/staff/EmploymentTab.jsx:145
 msgid "Contract saved."
 msgstr ""
 
 #: includes/Staff/ContractController.php:117
-#: src/admin/staff/EmploymentTab.jsx:350
+#: src/admin/staff/EmploymentTab.jsx:359
 msgid "Contract ended."
 msgstr ""
 
 #: includes/Staff/ContractController.php:135
-#: src/admin/staff/EmploymentTab.jsx:695
+#: src/admin/staff/EmploymentTab.jsx:703
 msgid "Contract deleted."
 msgstr ""
 
@@ -1658,18 +2763,6 @@ msgstr ""
 msgid "Ended the contract (%1$s) of %2$s: %3$s"
 msgstr ""
 
-#: includes/Staff/ContractService.php:363
-#: includes/Staff/ContractService.php:369
-#: includes/Staff/DocumentService.php:124
-#: includes/Staff/EmployeeService.php:643
-#: includes/Staff/EmployeeService.php:680
-msgid "Choose from the list."
-msgstr ""
-
-#: includes/Staff/ContractService.php:385
-msgid "Enter a valid date."
-msgstr ""
-
 #: includes/Staff/ContractService.php:400
 msgid "Enter the start date."
 msgstr ""
@@ -1692,12 +2785,6 @@ msgstr ""
 
 #: includes/Staff/ContractService.php:479
 msgid "Internship"
-msgstr ""
-
-#: includes/Staff/ContractService.php:480
-#: includes/Staff/DocumentService.php:307
-#: includes/Staff/EmployeeService.php:526
-msgid "Other"
 msgstr ""
 
 #: includes/Staff/DocumentController.php:86
@@ -1775,7 +2862,7 @@ msgid "This file is too large. The limit is %s."
 msgstr ""
 
 #: includes/Staff/EmployeeController.php:124
-#: src/admin/staff/CreateEmployeeScreen.jsx:172
+#: src/admin/staff/CreateEmployeeScreen.jsx:173
 msgid "Employee added."
 msgstr ""
 
@@ -1788,7 +2875,7 @@ msgid "Employee deactivated: they can no longer sign in."
 msgstr ""
 
 #: includes/Staff/EmployeeController.php:175
-#: src/admin/staff/StaffDetailScreen.jsx:370
+#: src/admin/staff/StaffDetailScreen.jsx:402
 #: src/admin/staff/StaffListScreen.jsx:330
 msgid "Employee reactivated."
 msgstr ""
@@ -1799,10 +2886,6 @@ msgstr ""
 
 #: includes/Staff/EmployeeController.php:219
 msgid "Password link sent."
-msgstr ""
-
-#: includes/Staff/EmployeeService.php:67
-msgid "This employee does not exist."
 msgstr ""
 
 #: includes/Staff/EmployeeService.php:103
@@ -1848,7 +2931,7 @@ msgstr ""
 #. translators: %s: employee name.
 #: includes/Staff/EmployeeService.php:360
 #, php-format
-msgid "Viewed the CNPS and tax numbers of %s"
+msgid "Viewed the social security and tax numbers of %s"
 msgstr ""
 
 #: includes/Staff/EmployeeService.php:424
@@ -1957,7 +3040,7 @@ msgid "Enter a number from 0 to 30."
 msgstr ""
 
 #: includes/Staff/EmployeeService.php:664
-#: src/admin/staff/CreateEmployeeScreen.jsx:137
+#: src/admin/staff/CreateEmployeeScreen.jsx:138
 msgid "Enter the phone number."
 msgstr ""
 
@@ -1989,6 +3072,127 @@ msgstr ""
 msgid "Radius Hotel Booking Pro is missing its vendor folder. Run `composer install` in the plugin directory."
 msgstr ""
 
+#. translators: %s: payslip number.
+#: templates/documents/payslip.php:40
+#, php-format
+msgid "Payslip %s"
+msgstr ""
+
+#: templates/documents/payslip.php:47
+msgid "Print"
+msgstr ""
+
+#: templates/documents/payslip.php:51
+#: src/admin/payroll/RunsTab.jsx:291
+msgid "Voided"
+msgstr ""
+
+#. translators: %s: social security number.
+#: templates/documents/payslip.php:71
+#: templates/documents/payslip.php:104
+#, php-format
+msgid "Social security %s"
+msgstr ""
+
+#. translators: %s: tax number.
+#: templates/documents/payslip.php:72
+#: templates/documents/payslip.php:105
+#, php-format
+msgid "Tax no. %s"
+msgstr ""
+
+#: templates/documents/payslip.php:81
+#: src/admin/payroll/LineDialog.jsx:615
+msgid "Payslip"
+msgstr ""
+
+#: templates/documents/payslip.php:84
+#: src/admin/payroll/RunsTab.jsx:214
+#: src/admin/payroll/self/MyPayrollScreen.jsx:107
+msgid "Pay period"
+msgstr ""
+
+#: templates/documents/payslip.php:85
+#: src/admin/payroll/RunsTab.jsx:229
+#: src/admin/payroll/SchedulesTab.jsx:287
+#: src/admin/payroll/self/MyPayrollScreen.jsx:97
+msgid "Pay day"
+msgstr ""
+
+#: templates/documents/payslip.php:117
+msgid "Earnings"
+msgstr ""
+
+#: templates/documents/payslip.php:118
+msgid "Quantity"
+msgstr ""
+
+#: templates/documents/payslip.php:119
+#: templates/documents/payslip.php:154
+#: src/admin/payroll/Deductions.jsx:264
+#: src/admin/payroll/LineDialog.jsx:517
+#: src/admin/payroll/StatutoryTab.jsx:159
+#: src/admin/pricing/AdjustedRuleEditor.jsx:295
+#: src/admin/pricing/TemplatesTab.jsx:361
+msgid "Amount"
+msgstr ""
+
+#: templates/documents/payslip.php:124
+#: src/admin/payroll/LineDialog.jsx:89
+msgid "Base pay"
+msgstr ""
+
+#. translators: %s: hours.
+#. translators: %s: number of hours.
+#: templates/documents/payslip.php:125
+#: templates/documents/payslip.php:131
+#: src/admin/payroll/LineDialog.jsx:94
+#: src/admin/payroll/LineDialog.jsx:109
+#: src/admin/payroll/ShiftsTab.jsx:87
+#, php-format,js-format
+msgid "%s h"
+msgstr ""
+
+#: templates/documents/payslip.php:152
+msgid "Base"
+msgstr ""
+
+#: templates/documents/payslip.php:153
+msgid "Rate"
+msgstr ""
+
+#. translators: %s: amount.
+#: templates/documents/payslip.php:179
+#, php-format
+msgid "taxed %s"
+msgstr ""
+
+#: templates/documents/payslip.php:189
+#: src/admin/payroll/PayrollSettingsSection.jsx:191
+#: src/admin/payroll/PayrollSettingsSection.jsx:198
+#: src/admin/payroll/RunScreen.jsx:149
+#: src/admin/payroll/RunScreen.jsx:460
+#: src/admin/payroll/StatutoryTab.jsx:189
+msgid "Paid by"
+msgstr ""
+
+#: templates/documents/payslip.php:196
+msgid "Paid by the hotel"
+msgstr ""
+
+#: templates/documents/payslip.php:209
+msgid "Year to date"
+msgstr ""
+
+#: templates/documents/payslip.php:212
+#: src/admin/index.js:487
+#: src/admin/payroll/PayrollSettingsSection.jsx:541
+#: src/admin/payroll/reports.jsx:143
+#: src/admin/payroll/RunScreen.jsx:440
+#: src/admin/payroll/RunScreen.jsx:593
+msgid "Taxes and contributions"
+msgstr ""
+
 #: src/admin/access/AccessSection.jsx:58
 msgid "Fallback PIN"
 msgstr ""
@@ -2009,10 +3213,12 @@ msgstr ""
 
 #: src/admin/access/AccessSection.jsx:95
 #: src/admin/access/StaffAccess.jsx:87
-#: src/admin/exports/SchedulesPanel.jsx:275
-#: src/admin/exports/SchedulesPanel.jsx:555
+#: src/admin/exports/SchedulesPanel.jsx:277
+#: src/admin/exports/SchedulesPanel.jsx:554
 #: src/admin/ical/CalendarSyncScreen.jsx:375
 #: src/admin/ical/CalendarSyncScreen.jsx:388
+#: src/admin/payroll/LineDialog.jsx:482
+#: src/admin/payroll/RunScreen.jsx:402
 msgid "Remove"
 msgstr ""
 
@@ -2100,13 +3306,13 @@ msgid "Open"
 msgstr ""
 
 #: src/admin/access/levels.js:15
-#: src/admin/index.js:189
+#: src/admin/index.js:190
 msgid "Passcode"
 msgstr ""
 
 #: src/admin/access/levels.js:17
-#: src/admin/self/ProfileScreen.jsx:149
-#: src/admin/self/ProfileScreen.jsx:274
+#: src/admin/self/ProfileScreen.jsx:150
+#: src/admin/self/ProfileScreen.jsx:294
 msgid "Locked"
 msgstr ""
 
@@ -2119,7 +3325,7 @@ msgstr ""
 #: src/admin/access/ProfileFieldsControl.jsx:37
 #: src/admin/access/StaffAccess.jsx:184
 #: src/admin/staff/AccountTab.jsx:256
-#: src/admin/staff/CreateEmployeeScreen.jsx:504
+#: src/admin/staff/CreateEmployeeScreen.jsx:506
 #: src/admin/staff/StaffListScreen.jsx:117
 msgid "Access role"
 msgstr ""
@@ -2165,20 +3371,32 @@ msgid "PIN"
 msgstr ""
 
 #: src/admin/access/PasscodeDialog.jsx:161
+#: src/admin/payroll/LineDialog.jsx:628
 msgid "Close"
 msgstr ""
 
 #: src/admin/access/PasscodeDialog.jsx:162
 #: src/admin/access/RoleEditor.jsx:188
-#: src/admin/exports/SchedulesPanel.jsx:531
+#: src/admin/exports/SchedulesPanel.jsx:530
 #: src/admin/ical/ImportDialog.jsx:257
+#: src/admin/payroll/Deductions.jsx:565
+#: src/admin/payroll/LineDialog.jsx:627
+#: src/admin/payroll/RunScreen.jsx:205
+#: src/admin/payroll/RunScreen.jsx:286
+#: src/admin/payroll/RunsTab.jsx:160
+#: src/admin/payroll/SchedulesTab.jsx:223
+#: src/admin/payroll/ShiftsTab.jsx:348
+#: src/admin/payroll/StatutoryTab.jsx:223
+#: src/admin/payroll/StatutoryTab.jsx:306
+#: src/admin/payroll/timeOffParts.jsx:404
+#: src/admin/payroll/TimeOffTab.jsx:130
 #: src/admin/pricing/AdjustedRuleEditor.jsx:152
-#: src/admin/pricing/SeasonalTab.jsx:448
+#: src/admin/pricing/SeasonalTab.jsx:449
 #: src/admin/pricing/TemplatesTab.jsx:252
-#: src/admin/staff/CreateEmployeeScreen.jsx:332
-#: src/admin/staff/EmploymentTab.jsx:301
-#: src/admin/staff/EmploymentTab.jsx:416
-#: src/admin/staff/FileTabs.jsx:363
+#: src/admin/staff/CreateEmployeeScreen.jsx:334
+#: src/admin/staff/EmploymentTab.jsx:310
+#: src/admin/staff/EmploymentTab.jsx:424
+#: src/admin/staff/FileTabs.jsx:364
 msgid "Cancel"
 msgstr ""
 
@@ -2226,18 +3444,23 @@ msgstr ""
 
 #: src/admin/access/RoleEditor.jsx:95
 #: src/admin/access/RolesScreen.jsx:130
-#: src/admin/pricing/SeasonalTab.jsx:483
+#: src/admin/pricing/SeasonalTab.jsx:484
 msgid "Template"
 msgstr ""
 
 #: src/admin/access/RoleEditor.jsx:101
+#: src/admin/payroll/LineDialog.jsx:495
+#: src/admin/payroll/PayrollSettingsSection.jsx:126
+#: src/admin/payroll/SchedulesTab.jsx:142
+#: src/admin/payroll/ShiftsTab.jsx:207
 #: src/admin/pricing/AdjustedRuleEditor.jsx:322
-#: src/admin/pricing/SeasonalTab.jsx:512
+#: src/admin/pricing/SeasonalTab.jsx:513
 #: src/admin/pricing/TemplatesTab.jsx:277
 msgid "Name"
 msgstr ""
 
 #: src/admin/access/RoleEditor.jsx:112
+#: src/admin/payroll/ShiftsTab.jsx:327
 msgid "Description"
 msgstr ""
 
@@ -2268,12 +3491,14 @@ msgstr ""
 #: src/admin/activity/ActivityScreen.jsx:186
 #: src/admin/activity/ActivityTimeline.jsx:88
 #: src/admin/ical/CalendarSyncScreen.jsx:448
+#: src/admin/payroll/reports.jsx:61
+#: src/admin/payroll/RunScreen.jsx:356
 #: src/admin/reports/OccupancyTab.jsx:69
 #: src/admin/reports/RevenueTab.jsx:133
-#: src/admin/self/ProfileScreen.jsx:427
+#: src/admin/self/ProfileScreen.jsx:445
 #: src/admin/staff/DocumentsTab.jsx:244
-#: src/admin/staff/EmploymentTab.jsx:546
-#: src/admin/staff/StaffDetailScreen.jsx:181
+#: src/admin/staff/EmploymentTab.jsx:554
+#: src/admin/staff/StaffDetailScreen.jsx:213
 msgid "Try again"
 msgstr ""
 
@@ -2283,7 +3508,7 @@ msgid "New role"
 msgstr ""
 
 #: src/admin/access/RolesScreen.jsx:110
-#: src/admin/index.js:210
+#: src/admin/index.js:211
 msgid "Access roles"
 msgstr ""
 
@@ -2300,18 +3525,23 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/admin/access/RolesScreen.jsx:161
-#: src/admin/exports/SchedulesPanel.jsx:263
+#: src/admin/exports/SchedulesPanel.jsx:265
 msgid "Edit"
 msgstr ""
 
 #: src/admin/access/RolesScreen.jsx:169
+#: src/admin/payroll/Deductions.jsx:732
+#: src/admin/payroll/SchedulesTab.jsx:317
+#: src/admin/payroll/SchedulesTab.jsx:385
+#: src/admin/payroll/ShiftsTab.jsx:478
+#: src/admin/payroll/ShiftsTab.jsx:542
 #: src/admin/pricing/AdjustedRuleEditor.jsx:141
-#: src/admin/pricing/SeasonalTab.jsx:437
+#: src/admin/pricing/SeasonalTab.jsx:438
 #: src/admin/pricing/TemplatesTab.jsx:241
 #: src/admin/staff/DocumentsTab.jsx:345
 #: src/admin/staff/DocumentsTab.jsx:370
-#: src/admin/staff/EmploymentTab.jsx:636
-#: src/admin/staff/EmploymentTab.jsx:682
+#: src/admin/staff/EmploymentTab.jsx:644
+#: src/admin/staff/EmploymentTab.jsx:690
 msgid "Delete"
 msgstr ""
 
@@ -2324,7 +3554,13 @@ msgid "Create a role such as Receptionist and assign it to your staff."
 msgstr ""
 
 #. translators: %s: role name.
+#. translators: %s: deduction name.
+#. translators: %s: pay schedule name.
+#. translators: %s: work shift name.
 #: src/admin/access/RolesScreen.jsx:203
+#: src/admin/payroll/Deductions.jsx:723
+#: src/admin/payroll/SchedulesTab.jsx:376
+#: src/admin/payroll/ShiftsTab.jsx:533
 #, js-format
 msgid "Delete %s?"
 msgstr ""
@@ -2358,8 +3594,8 @@ msgstr ""
 
 #: src/admin/access/StaffAccess.jsx:169
 #: src/admin/activity/ActivityScreen.jsx:131
-#: src/admin/staff/CreateEmployeeScreen.jsx:220
-#: src/admin/staff/StaffDetailScreen.jsx:141
+#: src/admin/staff/CreateEmployeeScreen.jsx:221
+#: src/admin/staff/StaffDetailScreen.jsx:173
 msgid "All staff"
 msgstr ""
 
@@ -2422,7 +3658,7 @@ msgid "Reset all overrides"
 msgstr ""
 
 #: src/admin/access/StaffScreen.jsx:55
-#: src/admin/index.js:223
+#: src/admin/index.js:224
 msgid "Staff access"
 msgstr ""
 
@@ -2523,7 +3759,7 @@ msgstr ""
 #: src/admin/activity/ActivitySettingsSection.jsx:26
 #: src/admin/pricing/BookingWindowTab.jsx:79
 #: src/admin/pricing/OccupancyTab.jsx:72
-#: src/admin/pricing/SeasonalTab.jsx:137
+#: src/admin/pricing/SeasonalTab.jsx:138
 #: src/admin/ProFeaturesSection.jsx:28
 msgid "Off"
 msgstr ""
@@ -2662,6 +3898,7 @@ msgid "When"
 msgstr ""
 
 #: src/admin/activity/EntryDialog.jsx:49
+#: src/admin/payroll/StatutoryTab.jsx:226
 msgid "Record"
 msgstr ""
 
@@ -2700,7 +3937,7 @@ msgid "After"
 msgstr ""
 
 #: src/admin/activity/timeline.js:26
-#: src/admin/staff/StaffDetailScreen.jsx:96
+#: src/admin/staff/StaffDetailScreen.jsx:128
 msgid "History"
 msgstr ""
 
@@ -2729,8 +3966,8 @@ msgstr ""
 
 #: src/admin/exports/ArchivePanel.jsx:123
 #: src/admin/exports/ArchivePanel.jsx:141
-#: src/admin/exports/SchedulesPanel.jsx:497
-#: src/admin/exports/SchedulesPanel.jsx:516
+#: src/admin/exports/SchedulesPanel.jsx:496
+#: src/admin/exports/SchedulesPanel.jsx:515
 msgid "File format"
 msgstr ""
 
@@ -2758,161 +3995,168 @@ msgstr ""
 msgid "Why are they being removed?"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:43
+#: src/admin/exports/SchedulesPanel.jsx:45
+#: src/admin/payroll/ShiftsTab.jsx:41
 msgid "Monday"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:44
+#: src/admin/exports/SchedulesPanel.jsx:46
+#: src/admin/payroll/ShiftsTab.jsx:46
 msgid "Tuesday"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:45
+#: src/admin/exports/SchedulesPanel.jsx:47
+#: src/admin/payroll/ShiftsTab.jsx:51
 msgid "Wednesday"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:46
+#: src/admin/exports/SchedulesPanel.jsx:48
+#: src/admin/payroll/ShiftsTab.jsx:56
 msgid "Thursday"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:47
+#: src/admin/exports/SchedulesPanel.jsx:49
+#: src/admin/payroll/ShiftsTab.jsx:61
 msgid "Friday"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:48
+#: src/admin/exports/SchedulesPanel.jsx:50
+#: src/admin/payroll/ShiftsTab.jsx:66
 msgid "Saturday"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:49
+#: src/admin/exports/SchedulesPanel.jsx:51
+#: src/admin/payroll/ShiftsTab.jsx:71
 msgid "Sunday"
 msgstr ""
 
 #. translators: 1: day of the month, 2: time.
-#: src/admin/exports/SchedulesPanel.jsx:101
+#: src/admin/exports/SchedulesPanel.jsx:103
 #, js-format
 msgid "Monthly, on day %1$d at %2$s — the previous month"
 msgstr ""
 
 #. translators: 1: weekday, 2: time.
-#: src/admin/exports/SchedulesPanel.jsx:110
+#: src/admin/exports/SchedulesPanel.jsx:112
 #, js-format
 msgid "Every %1$s at %2$s — the previous week"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:125
+#: src/admin/exports/SchedulesPanel.jsx:127
 msgid "Scheduled export saved."
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:148
+#: src/admin/exports/SchedulesPanel.jsx:150
 msgid "Scheduled exports"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:149
+#: src/admin/exports/SchedulesPanel.jsx:151
 msgid "Files made on their own into the library, weekly or monthly."
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:165
+#: src/admin/exports/SchedulesPanel.jsx:167
 #: src/admin/ical/CalendarSyncScreen.jsx:251
+#: src/admin/payroll/Deductions.jsx:570
+#: src/admin/payroll/Deductions.jsx:619
+#: src/admin/payroll/LineDialog.jsx:422
 msgid "Add"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:188
+#: src/admin/exports/SchedulesPanel.jsx:190
 msgid "Paused"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:200
+#: src/admin/exports/SchedulesPanel.jsx:202
 msgid "Last run failed"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:212
+#: src/admin/exports/SchedulesPanel.jsx:214
 msgid "Next:"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:223
+#: src/admin/exports/SchedulesPanel.jsx:225
 msgid "Last:"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:230
+#: src/admin/exports/SchedulesPanel.jsx:232
 msgid "not yet"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:250
+#: src/admin/exports/SchedulesPanel.jsx:252
 msgid "Run this schedule"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:291
+#: src/admin/exports/SchedulesPanel.jsx:293
 msgid "Loading…"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:292
+#: src/admin/exports/SchedulesPanel.jsx:294
 msgid "No scheduled export yet."
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:307
+#: src/admin/exports/SchedulesPanel.jsx:309
 msgid "Edit the schedule"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:311
+#: src/admin/exports/SchedulesPanel.jsx:313
 msgid "New scheduled export"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:317
+#: src/admin/exports/SchedulesPanel.jsx:319
 msgid "Times are the hotel’s. Files go to the library, marked “Scheduled”."
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:326
+#: src/admin/exports/SchedulesPanel.jsx:328
 msgid "Contents"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:354
-#: src/admin/exports/SchedulesPanel.jsx:381
+#: src/admin/exports/SchedulesPanel.jsx:356
+#: src/admin/exports/SchedulesPanel.jsx:383
 msgid "How often"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:364
-msgid "Weekly"
-msgstr ""
-
-#: src/admin/exports/SchedulesPanel.jsx:371
-msgid "Monthly"
-msgstr ""
-
-#: src/admin/exports/SchedulesPanel.jsx:422
+#: src/admin/exports/SchedulesPanel.jsx:424
 msgid "Day of the month"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:444
+#: src/admin/exports/SchedulesPanel.jsx:446
 msgid "Time"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:461
-#: src/admin/exports/SchedulesPanel.jsx:488
+#: src/admin/exports/SchedulesPanel.jsx:460
+#: src/admin/exports/SchedulesPanel.jsx:487
 msgid "Bookings by"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:471
+#: src/admin/exports/SchedulesPanel.jsx:470
 msgid "Arrival date"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:478
+#: src/admin/exports/SchedulesPanel.jsx:477
 msgid "Booking date"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:538
+#: src/admin/exports/SchedulesPanel.jsx:537
+#: src/admin/payroll/AdditionalPay.jsx:345
+#: src/admin/payroll/Deductions.jsx:569
+#: src/admin/payroll/PayTab.jsx:385
+#: src/admin/payroll/SchedulesTab.jsx:227
+#: src/admin/payroll/ShiftsTab.jsx:352
 #: src/admin/pricing/AdjustedRuleEditor.jsx:159
-#: src/admin/pricing/SeasonalTab.jsx:457
+#: src/admin/pricing/SeasonalTab.jsx:458
 #: src/admin/pricing/TemplatesTab.jsx:259
-#: src/admin/self/ProfileScreen.jsx:387
-#: src/admin/staff/EmploymentTab.jsx:305
-#: src/admin/staff/FileTabs.jsx:143
-#: src/admin/staff/FileTabs.jsx:366
+#: src/admin/self/ProfileScreen.jsx:405
+#: src/admin/staff/EmploymentTab.jsx:314
+#: src/admin/staff/FileTabs.jsx:144
+#: src/admin/staff/FileTabs.jsx:367
 msgid "Save"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:547
+#: src/admin/exports/SchedulesPanel.jsx:546
 msgid "Remove this scheduled export?"
 msgstr ""
 
-#: src/admin/exports/SchedulesPanel.jsx:551
+#: src/admin/exports/SchedulesPanel.jsx:550
 msgid "No more files will be made by it. Files it already made stay in the library."
 msgstr ""
 
@@ -3015,8 +4259,10 @@ msgid "Read now"
 msgstr ""
 
 #: src/admin/ical/CalendarSyncScreen.jsx:347
-#: src/admin/staff/EmploymentTab.jsx:607
-#: src/admin/staff/FileTabs.jsx:321
+#: src/admin/payroll/SchedulesTab.jsx:312
+#: src/admin/payroll/ShiftsTab.jsx:473
+#: src/admin/staff/EmploymentTab.jsx:615
+#: src/admin/staff/FileTabs.jsx:322
 msgid "Change"
 msgstr ""
 
@@ -3052,7 +4298,7 @@ msgstr ""
 
 #: src/admin/ical/CalendarSyncScreen.jsx:490
 #: src/admin/pricing/scope.jsx:123
-#: src/admin/pricing/SeasonalTab.jsx:75
+#: src/admin/pricing/SeasonalTab.jsx:76
 msgid "All room types"
 msgstr ""
 
@@ -3136,63 +4382,88 @@ msgid_plural "Every %d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/index.js:50
+#: src/admin/index.js:51
 #: src/admin/ProFeaturesSection.jsx:138
 msgid "Pro features"
 msgstr ""
 
-#: src/admin/index.js:68
+#: src/admin/index.js:69
 msgid "Pricing rules"
 msgstr ""
 
-#: src/admin/index.js:69
+#: src/admin/index.js:70
 msgid "Seasonal, occupancy and booking-window prices"
 msgstr ""
 
-#: src/admin/index.js:93
+#: src/admin/index.js:94
 msgid "Share and read room calendars with channels"
 msgstr ""
 
-#: src/admin/index.js:117
+#: src/admin/index.js:118
 msgid "Employee files, contracts and documents"
 msgstr ""
 
-#: src/admin/index.js:137
-#: src/admin/staff/StaffListScreen.jsx:83
-msgid "Employee"
-msgstr ""
-
-#: src/admin/index.js:156
-#: src/admin/index.js:170
+#: src/admin/index.js:157
+#: src/admin/index.js:171
 msgid "My profile"
 msgstr ""
 
-#: src/admin/index.js:211
+#: src/admin/index.js:212
 msgid "Named roles such as Receptionist, with their permissions"
 msgstr ""
 
-#: src/admin/index.js:224
+#: src/admin/index.js:225
 msgid "Each person’s access role, PIN and personal overrides"
 msgstr ""
 
-#: src/admin/index.js:243
+#: src/admin/index.js:244
 msgid "Passcodes"
 msgstr ""
 
-#: src/admin/index.js:246
+#: src/admin/index.js:247
 msgid "PIN confirmation, the fallback PIN and the locked message"
 msgstr ""
 
-#: src/admin/index.js:267
+#: src/admin/index.js:268
 msgid "Free the room when a booking stays unpaid past its deadline"
 msgstr ""
 
-#: src/admin/index.js:295
+#: src/admin/index.js:296
 msgid "Archiving, removing archived entries and page views"
 msgstr ""
 
-#: src/admin/index.js:317
+#: src/admin/index.js:318
 msgid "Who did what, when and from which device"
+msgstr ""
+
+#: src/admin/index.js:411
+msgid "Pay runs, payslips, taxes and contributions, and time off"
+msgstr ""
+
+#: src/admin/index.js:423
+msgid "Pay run"
+msgstr ""
+
+#: src/admin/index.js:424
+msgid "Lines, totals and what can be done next"
+msgstr ""
+
+#: src/admin/index.js:434
+#: src/admin/index.js:544
+#: src/admin/payroll/self/MyPayrollScreen.jsx:492
+msgid "My payroll"
+msgstr ""
+
+#: src/admin/index.js:435
+msgid "Your payslips and time off"
+msgstr ""
+
+#: src/admin/index.js:455
+msgid "Taxes and contributions, and the vacation quota"
+msgstr ""
+
+#: src/admin/index.js:516
+msgid "Pay"
 msgstr ""
 
 #: src/admin/payments/AutoReleaseSettingsSection.jsx:26
@@ -3208,7 +4479,1264 @@ msgid "0 releases the booking as soon as the deadline passes."
 msgstr ""
 
 #: src/admin/payments/AutoReleaseSettingsSection.jsx:45
+#: src/admin/payroll/AdditionalPay.jsx:43
+#: src/admin/payroll/LineDialog.jsx:381
 msgid "hours"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:31
+msgid "Overtime rate"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:32
+msgid "per hour"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:33
+msgid "Empty: the employee’s hourly rate."
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:42
+msgid "Most hours"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:44
+msgid "0: no limit."
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:47
+msgid "Hours allowed"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:48
+msgid "hours a year"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:53
+#: src/admin/payroll/Deductions.jsx:279
+#: src/admin/pricing/AdjustedRuleEditor.jsx:278
+#: src/admin/pricing/TemplatesTab.jsx:342
+msgid "Percentage"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:58
+msgid "How"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:61
+msgid "Earnings that count"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:66
+msgid "Regular pay"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:67
+msgid "Overtime"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:80
+msgid "Hours are entered on each pay run."
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:82
+msgid "The amount is entered on each pay run."
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:86
+msgid "Worked out on each pay run."
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:182
+msgid "Add to every pay"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:189
+msgid "Keep through the year"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:269
+msgid "Additional pay"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:272
+msgid "What this employee can receive on top of their pay. Unpaid time off is taken off it."
+msgstr ""
+
+#. translators: %s: pay type.
+#: src/admin/payroll/AdditionalPay.jsx:309
+#, js-format
+msgid "Pays %s"
+msgstr ""
+
+#: src/admin/payroll/AdditionalPay.jsx:339
+#: src/admin/payroll/PayTab.jsx:376
+#: src/admin/self/ProfileScreen.jsx:402
+#: src/admin/staff/FileTabs.jsx:140
+msgid "Undo changes"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:45
+msgid "Health insurance"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:51
+msgid "Other deduction"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:57
+msgid "Court order"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:63
+msgid "Other garnishment"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:68
+#: src/admin/pricing/AdjustedRuleEditor.jsx:369
+#: src/admin/pricing/SeasonalTab.jsx:599
+#: src/admin/ProFeaturesSection.jsx:27
+#: src/admin/staff/EmploymentTab.jsx:200
+#: src/admin/staff/StaffListScreen.jsx:225
+msgid "Active"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:69
+msgid "Suspended"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:70
+msgid "Completed"
+msgstr ""
+
+#. translators: 1: amount, 2: percentage.
+#: src/admin/payroll/Deductions.jsx:101
+#, js-format
+msgid "%1$s a pay period, at most %2$s %% of take-home pay"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:119
+msgid "a month"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:120
+msgid "a payslip"
+msgstr ""
+
+#. translators: 1: amount or %, 2: "a month" / "a payslip", 3: amount left.
+#: src/admin/payroll/Deductions.jsx:124
+#, js-format
+msgid "%1$s %2$s — %3$s left to recover"
+msgstr ""
+
+#. translators: 1: amount or %, 2: "a month" / "a payslip".
+#: src/admin/payroll/Deductions.jsx:135
+#, js-format
+msgid "%1$s %2$s"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:235
+#: src/admin/staff/AccountTab.jsx:118
+msgid "None"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:241
+msgid "An amount"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:245
+msgid "A percentage"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:322
+#: src/admin/payroll/Deductions.jsx:326
+msgid "Taken"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:332
+msgid "Every payslip"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:339
+msgid "Once a month"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:353
+msgid "Change the deduction"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:357
+msgid "Add a deduction or garnishment"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:364
+#: src/admin/payroll/LineDialog.jsx:444
+msgid "Kind"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:389
+msgid "Description on the payslip"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:400
+#: src/admin/payroll/Deductions.jsx:455
+#: src/admin/payroll/PayrollSettingsSection.jsx:147
+#: src/admin/payroll/PayrollSettingsSection.jsx:362
+msgid "Paid to"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:408
+#: src/admin/payroll/Deductions.jsx:460
+msgid "Paid on day of the month"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:426
+msgid "Employee pays (before tax)"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:434
+msgid "The hotel adds"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:446
+msgid "Start"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:451
+#: src/admin/staff/EmploymentTab.jsx:629
+msgid "End"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:478
+msgid "Requested a pay period"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:494
+msgid "At most, % of take-home pay"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:514
+msgid "Total to recover"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:531
+msgid "Taken (after tax)"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:543
+#: src/admin/payroll/Deductions.jsx:547
+#: src/admin/payroll/RunsTab.jsx:235
+#: src/admin/payroll/RunsTab.jsx:262
+#: src/admin/payroll/self/MyPayrollScreen.jsx:365
+#: src/admin/payroll/TimeOffTab.jsx:244
+#: src/admin/payroll/TimeOffTab.jsx:267
+#: src/admin/staff/EmploymentTab.jsx:194
+#: src/admin/staff/StaffListScreen.jsx:122
+msgid "Status"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:601
+msgid "Deductions and garnishments"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:607
+msgid "Deductions are taken before tax; garnishments after tax."
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:633
+msgid "None."
+msgstr ""
+
+#. translators: %s: deduction name.
+#: src/admin/payroll/Deductions.jsx:673
+#, js-format
+msgid "Change %s"
+msgstr ""
+
+#. translators: %s: deduction name.
+#: src/admin/payroll/Deductions.jsx:692
+#, js-format
+msgid "Delete %s"
+msgstr ""
+
+#: src/admin/payroll/Deductions.jsx:728
+msgid "One that pay runs have already taken cannot be deleted: mark it completed instead."
+msgstr ""
+
+#. translators: %s: hours.
+#: src/admin/payroll/LineDialog.jsx:119
+#, js-format
+msgid "%s h over the yearly quota, taken off"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:142
+msgid "Kept for later, not paid now"
+msgstr ""
+
+#. translators: %s: percentage.
+#: src/admin/payroll/LineDialog.jsx:148
+#, js-format
+msgid "%s %% of the eligible pay"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:173
+msgid "Before tax"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:189
+msgid "After tax"
+msgstr ""
+
+#. translators: %s: amount.
+#: src/admin/payroll/LineDialog.jsx:200
+#, js-format
+msgid "Taxed %s"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:333
+msgid "Hours worked"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:337
+msgid "Empty: the work shift’s hours in the period. Used for hourly pay."
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:385
+msgid "amount"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:396
+msgid "One-off additions and deductions"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:455
+msgid "Addition"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:462
+msgid "Deduction"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:558
+msgid "Taxed at its own rate"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:611
+msgid "Payslip (PDF)"
+msgstr ""
+
+#: src/admin/payroll/LineDialog.jsx:632
+msgid "Save and recalculate"
+msgstr ""
+
+#: src/admin/payroll/PayrollScreen.jsx:20
+#: src/admin/payroll/RunsTab.jsx:331
+msgid "Pay runs"
+msgstr ""
+
+#: src/admin/payroll/PayrollScreen.jsx:25
+msgid "Statutory"
+msgstr ""
+
+#: src/admin/payroll/PayrollScreen.jsx:30
+#: src/admin/payroll/PayrollSettingsSection.jsx:560
+#: src/admin/payroll/self/MyPayrollScreen.jsx:306
+#: src/admin/payroll/self/MyPayrollScreen.jsx:476
+msgid "Time off"
+msgstr ""
+
+#: src/admin/payroll/PayrollScreen.jsx:35
+#: src/admin/payroll/SchedulesTab.jsx:355
+msgid "Pay schedules"
+msgstr ""
+
+#: src/admin/payroll/PayrollScreen.jsx:40
+#: src/admin/payroll/ShiftsTab.jsx:516
+msgid "Work shifts"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:100
+msgid "Social contributions"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:104
+msgid "Pension, health, unemployment or other contributions, as a percentage of taxable pay. A ceiling limits the monthly pay it applies to. Paid by the employee (taken from pay) or by the hotel (added to its cost)."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:134
+msgid "e.g. Pension fund"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:155
+msgid "e.g. Social security office"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:172
+msgid "Short, for reports. Made from the name when empty."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:228
+#: src/admin/payroll/PayrollSettingsSection.jsx:477
+msgid "Rate (%)"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:245
+msgid "Monthly ceiling"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:249
+msgid "0 = no ceiling."
+msgstr ""
+
+#. translators: %s: contribution name.
+#: src/admin/payroll/PayrollSettingsSection.jsx:279
+#, js-format
+msgid "Remove %s"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:284
+msgid "this contribution"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:298
+msgid "No contributions: pay is taxed only by the income tax below, if any."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:316
+msgid "Add a contribution"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:325
+msgid "Tax withheld from pay, by monthly brackets. Brackets apply to monthly taxable pay; weekly and other pay periods are converted."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:331
+msgid "Withhold income tax"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:341
+msgid "Name on payslips"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:384
+#: src/admin/payroll/PayrollSettingsSection.jsx:391
+msgid "How brackets apply"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:400
+msgid "Each slice at its rate"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:407
+msgid "One rate on the whole pay"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:417
+msgid "Take employee contributions off first"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:421
+msgid "The tax is worked out on pay less the employee’s contributions."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:432
+msgid "Brackets"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:451
+msgid "Up to"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:459
+msgid "and above"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:463
+msgid "Monthly pay up to"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:502
+msgid "Remove this bracket"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:512
+msgid "From the lowest. Leave the last limit empty for “and above”."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:530
+msgid "Add a bracket"
+msgstr ""
+
+#. translators: %s: the calculator's name, e.g. "Côte d'Ivoire (CNPS, IS, CN, IGR)".
+#: src/admin/payroll/PayrollSettingsSection.jsx:549
+#, js-format
+msgid "Worked out by: %s. Its rates come with the add-on that provides it."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:561
+msgid "Day-off requests beyond the quota are refused. Sick leave and other absences do not count against it."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:567
+msgid "Vacation days a year"
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:571
+msgid "Per employee, per calendar year. 0 means unlimited."
+msgstr ""
+
+#: src/admin/payroll/PayrollSettingsSection.jsx:580
+msgid "days"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:167
+#: src/admin/payroll/RunsTab.jsx:112
+#: src/admin/payroll/SchedulesTab.jsx:266
+msgid "Pay schedule"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:171
+msgid "How often they are paid."
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:187
+msgid "Not on a pay schedule"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:195
+#: src/admin/payroll/ShiftsTab.jsx:433
+#: src/admin/staff/CreateEmployeeScreen.jsx:318
+#: src/admin/staff/EmploymentTab.jsx:503
+msgid "Work shift"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:199
+msgid "Their working hours."
+msgstr ""
+
+#. translators: %s: hours a week.
+#: src/admin/payroll/PayTab.jsx:213
+#, js-format
+msgid "%s h a week"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:224
+msgid "No work shift"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:240
+msgid "A salary"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:247
+msgid "By the hour"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:259
+#: src/admin/payroll/PayTab.jsx:348
+msgid "Hourly rate"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:263
+msgid "Salary"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:282
+msgid "Per"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:289
+msgid "Salary period"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:300
+#: src/admin/payroll/ShiftsTab.jsx:443
+msgid "Week"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:314
+#: src/admin/payroll/TimeOffTab.jsx:312
+msgid "Year"
+msgstr ""
+
+#. translators: %s: pay schedule name.
+#: src/admin/payroll/PayTab.jsx:332
+#, js-format
+msgid "Salary per pay period (%s)"
+msgstr ""
+
+#: src/admin/payroll/PayTab.jsx:356
+msgid "Set a work shift to work it out."
+msgstr ""
+
+#: src/admin/payroll/reports.jsx:55
+#: src/admin/reports/OccupancyTab.jsx:60
+#: src/admin/reports/RevenueTab.jsx:124
+msgid "The report could not be loaded."
+msgstr ""
+
+#: src/admin/payroll/reports.jsx:155
+msgid "Employees’ and the hotel’s"
+msgstr ""
+
+#. translators: %d: number of employees.
+#: src/admin/payroll/reports.jsx:170
+#: src/admin/payroll/SchedulesTab.jsx:297
+#: src/admin/payroll/ShiftsTab.jsx:458
+#: src/admin/staff/StaffListScreen.jsx:201
+#, js-format
+msgid "%d employee"
+msgid_plural "%d employees"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of pay runs.
+#: src/admin/payroll/reports.jsx:180
+#, js-format
+msgid "%d pay run"
+msgid_plural "%d pay runs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/payroll/reports.jsx:196
+#: src/admin/payroll/reports.jsx:385
+msgid "By month"
+msgstr ""
+
+#: src/admin/payroll/reports.jsx:212
+msgid "Payroll by month"
+msgstr ""
+
+#: src/admin/payroll/reports.jsx:218
+#: src/admin/payroll/reports.jsx:265
+#: src/admin/payroll/reports.jsx:375
+#: src/admin/payroll/reports.jsx:407
+msgid "No settled pay run in this period."
+msgstr ""
+
+#: src/admin/payroll/reports.jsx:228
+msgid "By employee"
+msgstr ""
+
+#: src/admin/payroll/reports.jsx:341
+msgid "By contribution"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:90
+msgid "Settle the pay run"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:96
+msgid "How each employee was paid. The payslips are then final."
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:104
+msgid "Same method for everyone"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:112
+msgid "e.g. Bank transfer"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:130
+msgid "Apply"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:175
+#: src/admin/payroll/StatutoryTab.jsx:203
+msgid "Reference"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:208
+#: src/admin/payroll/RunScreen.jsx:557
+msgid "Settle"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:253
+msgid "Void the pay run?"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:259
+msgid "It stays in the history, marked voided; what it took from garnishments and time-off balances is given back. The period can then be run again."
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:266
+#: src/admin/payroll/StatutoryTab.jsx:286
+msgid "Why"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:293
+#: src/admin/payroll/RunScreen.jsx:569
+#: src/admin/payroll/StatutoryTab.jsx:313
+#: src/admin/payroll/StatutoryTab.jsx:537
+msgid "Void"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:333
+msgid "All pay runs"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:346
+msgid "This pay run could not be loaded"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:373
+msgid "Recalculate every line?"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:374
+msgid "With each employee’s current pay, additional pay and deductions. What was entered on the lines is kept."
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:378
+msgid "Recalculate"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:381
+msgid "Finalise the pay run?"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:382
+msgid "The lines are locked as they are. It can be reverted to draft until it is settled."
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:386
+msgid "Finalise"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:389
+msgid "Back to draft?"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:390
+msgid "The lines can be edited and recalculated again; finalise once more when done."
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:394
+msgid "Back to draft"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:397
+msgid "Remove this draft?"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:398
+msgid "The draft and its lines are deleted. The period can be run again."
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:435
+#: src/admin/payroll/RunScreen.jsx:589
+#: src/admin/payroll/RunsTab.jsx:247
+#: src/admin/payroll/self/MyPayrollScreen.jsx:123
+msgid "Gross"
+msgstr ""
+
+#. translators: 1: pay schedule, 2: pay day.
+#: src/admin/payroll/RunScreen.jsx:489
+#, js-format
+msgid "%1$s · paid on %2$s"
+msgstr ""
+
+#. translators: %s: reason.
+#: src/admin/payroll/RunScreen.jsx:500
+#: src/admin/payroll/StatutoryTab.jsx:521
+#, js-format
+msgid "Voided: %s"
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:537
+msgid "Possible once the pay period has ended."
+msgstr ""
+
+#. translators: %s: date.
+#: src/admin/payroll/RunScreen.jsx:578
+#, js-format
+msgid "It can be finalised from %s, the last day of the pay period."
+msgstr ""
+
+#: src/admin/payroll/RunScreen.jsx:628
+msgid "Lines"
+msgstr ""
+
+#. translators: 1: first day, 2: last day.
+#. translators: 1: start date, 2: end date.
+#: src/admin/payroll/RunsTab.jsx:46
+#: src/admin/payroll/SchedulesTab.jsx:51
+#: src/admin/payroll/timeOffParts.jsx:64
+#: src/admin/staff/EmploymentTab.jsx:74
+#, js-format
+msgid "%1$s – %2$s"
+msgstr ""
+
+#. translators: %s: employees with the run that already pays them.
+#: src/admin/payroll/RunsTab.jsx:81
+#, js-format
+msgid "Left out, already paid for some of these days: %s"
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:104
+msgid "A draft for the next pay period without a pay run, with a line for each active employee on the schedule. Nothing is paid until it is settled."
+msgstr ""
+
+#. translators: %d: number of employees.
+#: src/admin/payroll/RunsTab.jsx:120
+#, js-format
+msgid "%d employee on it (deactivated ones are left out)."
+msgid_plural "%d employees on it (deactivated ones are left out)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/payroll/RunsTab.jsx:152
+msgid "Add a pay schedule first, then put employees on it from their Pay tab."
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:166
+msgid "Create the draft"
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:266
+#: src/admin/payroll/TimeOffTab.jsx:299
+#: src/admin/staff/StaffListScreen.jsx:239
+msgid "All"
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:270
+msgid "Draft"
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:277
+msgid "Finalised"
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:284
+msgid "Settled"
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:320
+msgid "No pay runs yet"
+msgstr ""
+
+#: src/admin/payroll/RunsTab.jsx:324
+msgid "Run payroll for a pay schedule: a draft is made for its next pay period."
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:124
+msgid "Change the pay schedule"
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:128
+msgid "Add a pay schedule"
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:134
+msgid "Give the next pay period: its last day and the day it is paid. The periods after it follow."
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:181
+msgid "End of the next pay period"
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:187
+msgid "The 15th or the last day of a month."
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:202
+msgid "Its pay day"
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:228
+#: src/admin/payroll/SchedulesTab.jsx:257
+msgid "Add pay schedule"
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:282
+msgid "Next pay period"
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:344
+msgid "No pay schedules yet"
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:348
+msgid "A pay schedule says how often employees are paid. Add one, then put employees on it."
+msgstr ""
+
+#: src/admin/payroll/SchedulesTab.jsx:381
+msgid "A pay schedule with employees or pay runs cannot be deleted."
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:61
+msgid "No employee file"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:62
+msgid "Could not load"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:117
+#: src/admin/payroll/ShiftsTab.jsx:227
+msgid "Hours"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:150
+msgid "Download PDF"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:160
+msgid "No payslips yet"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:164
+msgid "Your payslips appear here once a pay run is paid out."
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:232
+#: src/admin/payroll/timeOffParts.jsx:264
+#: src/admin/payroll/TimeOffTab.jsx:175
+msgid "Request time off"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:262
+msgid "Your time off"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:270
+msgid "Previous month"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:286
+msgid "Next month"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:299
+msgid "Your time off this month"
+msgstr ""
+
+#. translators: 1: type of time off, 2: status.
+#: src/admin/payroll/self/MyPayrollScreen.jsx:323
+#, js-format
+msgid "%1$s, %2$s"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:329
+msgid "awaiting approval"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:333
+msgid "approved"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:348
+#: src/admin/payroll/TimeOffTab.jsx:227
+msgid "Dates"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:358
+#: src/admin/payroll/timeOffParts.jsx:316
+#: src/admin/payroll/TimeOffTab.jsx:233
+msgid "Type"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:375
+#: src/admin/payroll/TimeOffTab.jsx:249
+msgid "Reason / note"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:394
+#: src/admin/payroll/self/MyPayrollScreen.jsx:446
+msgid "Cancel request"
+msgstr ""
+
+#. translators: %d: year.
+#: src/admin/payroll/self/MyPayrollScreen.jsx:409
+#, js-format
+msgid "No time off in %d"
+msgstr ""
+
+#: src/admin/payroll/self/MyPayrollScreen.jsx:433
+msgid "Cancel this request?"
+msgstr ""
+
+#. translators: 1: type of time off, 2: dates.
+#: src/admin/payroll/self/MyPayrollScreen.jsx:439
+#, js-format
+msgid "%1$s, %2$s. You can ask again later."
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:42
+msgid "Mon"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:47
+msgid "Tue"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:52
+msgid "Wed"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:57
+msgid "Thu"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:62
+msgid "Fri"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:67
+msgid "Sat"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:72
+msgid "Sun"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:190
+msgid "Change the work shift"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:194
+msgid "Add a work shift"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:200
+msgid "The hours on each day of the week. An end at or before the start runs past midnight."
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:235
+msgid "Use Monday's hours every day"
+msgstr ""
+
+#. translators: %s: day of the week.
+#: src/admin/payroll/ShiftsTab.jsx:264
+#, js-format
+msgid "Works on %s"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:272
+msgid "Day off"
+msgstr ""
+
+#. translators: %s: day of the week.
+#: src/admin/payroll/ShiftsTab.jsx:285
+#, js-format
+msgid "%s start"
+msgstr ""
+
+#. translators: %s: day of the week.
+#: src/admin/payroll/ShiftsTab.jsx:303
+#, js-format
+msgid "%s end"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:353
+#: src/admin/payroll/ShiftsTab.jsx:424
+msgid "Add work shift"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:389
+msgid "off"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:394
+msgid "Past midnight"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:448
+msgid "Hours a week"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:505
+msgid "No work shifts yet"
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:509
+msgid "A work shift gives the working hours of each day, such as Jour, Nuit or Jour de repos."
+msgstr ""
+
+#: src/admin/payroll/ShiftsTab.jsx:538
+msgid "A work shift that employees work cannot be deleted."
+msgstr ""
+
+#: src/admin/payroll/StatutoryTab.jsx:138
+msgid "Record a payment"
+msgstr ""
+
+#. translators: 1: contribution, 2: authority, 3: month, 4: amount still due.
+#: src/admin/payroll/StatutoryTab.jsx:146
+#, js-format
+msgid "%1$s to %2$s for %3$s — %4$s still due."
+msgstr ""
+
+#: src/admin/payroll/StatutoryTab.jsx:175
+msgid "Paid on"
+msgstr ""
+
+#. translators: %s: amount.
+#: src/admin/payroll/StatutoryTab.jsx:271
+#, js-format
+msgid "Void the payment of %s?"
+msgstr ""
+
+#: src/admin/payroll/StatutoryTab.jsx:279
+msgid "It stays listed, crossed out; the amount is due again."
+msgstr ""
+
+#: src/admin/payroll/StatutoryTab.jsx:347
+msgid "No contributions yet"
+msgstr ""
+
+#: src/admin/payroll/StatutoryTab.jsx:351
+msgid "They appear here once a pay run is settled."
+msgstr ""
+
+#: src/admin/payroll/StatutoryTab.jsx:368
+msgid "Month the pay was paid"
+msgstr ""
+
+#. translators: 1: employee share, 2: employer share.
+#: src/admin/payroll/StatutoryTab.jsx:445
+#, js-format
+msgid "employees %1$s · hotel %2$s"
+msgstr ""
+
+#. translators: %s: amount left.
+#: src/admin/payroll/StatutoryTab.jsx:465
+#, js-format
+msgid "%s left"
+msgstr ""
+
+#: src/admin/payroll/StatutoryTab.jsx:487
+msgid "Record payment"
+msgstr ""
+
+#. translators: %d: number of days.
+#: src/admin/payroll/timeOffParts.jsx:49
+#, js-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: days used, 2: yearly quota, 3: days left, 4: year.
+#: src/admin/payroll/timeOffParts.jsx:99
+#, js-format
+msgid "Vacation: %1$d of %2$d days taken, %3$d left in %4$d."
+msgstr ""
+
+#. translators: 1: days used, 2: year.
+#: src/admin/payroll/timeOffParts.jsx:110
+#, js-format
+msgid "Vacation: %1$d days taken in %2$d, no yearly limit."
+msgstr ""
+
+#. translators: 1: employee, 2: year.
+#: src/admin/payroll/timeOffParts.jsx:137
+#, js-format
+msgid "%1$s — %2$d"
+msgstr ""
+
+#. translators: 1: type of time off, 2: "5 days".
+#: src/admin/payroll/timeOffParts.jsx:152
+#, js-format
+msgid "%1$s: %2$s"
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:164
+msgid "No approved time off this year."
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:229
+msgid "Choose an employee."
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:270
+msgid "The request waits for approval; vacation days count once approved."
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:294
+msgid "Choose…"
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:342
+msgid "First day"
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:355
+#: src/admin/staff/EmploymentTab.jsx:394
+msgid "Last day"
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:386
+msgid "Reason"
+msgstr ""
+
+#: src/admin/payroll/timeOffParts.jsx:407
+msgid "Add request"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:83
+msgid "Approve this time off?"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:87
+msgid "Decline this time off?"
+msgstr ""
+
+#. translators: 1: employee, 2: type of time off, 3: dates, 4: "5 days".
+#: src/admin/payroll/TimeOffTab.jsx:95
+#, js-format
+msgid "%1$s — %2$s, %3$s (%4$s)."
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:112
+msgid "Note (optional)"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:138
+#: src/admin/payroll/TimeOffTab.jsx:405
+msgid "Approve"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:139
+#: src/admin/payroll/TimeOffTab.jsx:419
+msgid "Decline"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:238
+msgid "Days"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:271
+msgid "Awaiting approval"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:278
+msgid "Approved"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:285
+msgid "Declined"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:292
+msgid "Cancelled"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:360
+msgid "All employees"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:441
+msgid "Nothing waiting for approval"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:445
+msgid "No time off here"
+msgstr ""
+
+#: src/admin/payroll/TimeOffTab.jsx:450
+msgid "Requests from staff and those added here are listed by status and year."
 msgstr ""
 
 #: src/admin/pricing/AdjustedRuleEditor.jsx:72
@@ -3276,19 +5804,9 @@ msgstr ""
 msgid "Amount type"
 msgstr ""
 
-#: src/admin/pricing/AdjustedRuleEditor.jsx:278
-#: src/admin/pricing/TemplatesTab.jsx:342
-msgid "Percentage"
-msgstr ""
-
 #: src/admin/pricing/AdjustedRuleEditor.jsx:285
 #: src/admin/pricing/TemplatesTab.jsx:349
 msgid "Fixed amount"
-msgstr ""
-
-#: src/admin/pricing/AdjustedRuleEditor.jsx:295
-#: src/admin/pricing/TemplatesTab.jsx:361
-msgid "Amount"
 msgstr ""
 
 #: src/admin/pricing/AdjustedRuleEditor.jsx:296
@@ -3300,35 +5818,27 @@ msgid "Named automatically when empty"
 msgstr ""
 
 #: src/admin/pricing/AdjustedRuleEditor.jsx:339
-#: src/admin/pricing/SeasonalTab.jsx:554
+#: src/admin/pricing/SeasonalTab.jsx:550
 msgid "Room types"
 msgstr ""
 
 #: src/admin/pricing/AdjustedRuleEditor.jsx:343
-#: src/admin/pricing/SeasonalTab.jsx:558
+#: src/admin/pricing/SeasonalTab.jsx:554
 msgid "None ticked: every room type."
 msgstr ""
 
 #: src/admin/pricing/AdjustedRuleEditor.jsx:354
-#: src/admin/pricing/SeasonalTab.jsx:569
+#: src/admin/pricing/SeasonalTab.jsx:565
 msgid "Rate plans"
 msgstr ""
 
 #: src/admin/pricing/AdjustedRuleEditor.jsx:358
-#: src/admin/pricing/SeasonalTab.jsx:573
+#: src/admin/pricing/SeasonalTab.jsx:569
 msgid "None ticked: every rate plan."
 msgstr ""
 
-#: src/admin/pricing/AdjustedRuleEditor.jsx:369
-#: src/admin/pricing/SeasonalTab.jsx:603
-#: src/admin/ProFeaturesSection.jsx:27
-#: src/admin/staff/EmploymentTab.jsx:199
-#: src/admin/staff/StaffListScreen.jsx:225
-msgid "Active"
-msgstr ""
-
 #: src/admin/pricing/AdjustedRuleEditor.jsx:383
-#: src/admin/pricing/SeasonalTab.jsx:617
+#: src/admin/pricing/SeasonalTab.jsx:613
 msgid "Delete this rule?"
 msgstr ""
 
@@ -3337,7 +5847,7 @@ msgid "Bookings keep their price."
 msgstr ""
 
 #: src/admin/pricing/AdjustedRuleEditor.jsx:391
-#: src/admin/pricing/SeasonalTab.jsx:625
+#: src/admin/pricing/SeasonalTab.jsx:621
 msgid "Delete rule"
 msgstr ""
 
@@ -3410,83 +5920,83 @@ msgid "Some it applied to were deleted: tick the ones it should cover, or it wil
 msgstr ""
 
 #: src/admin/pricing/scope.jsx:128
-#: src/admin/pricing/SeasonalTab.jsx:80
+#: src/admin/pricing/SeasonalTab.jsx:81
 msgid "all rate plans"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:97
+#: src/admin/pricing/SeasonalTab.jsx:98
 msgid "No seasonal rules yet"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:101
+#: src/admin/pricing/SeasonalTab.jsx:102
 msgid "Apply a template to dates, e.g. +20 % from 20 to 31 December."
 msgstr ""
 
 #. translators: 1: first date, 2: last date, 3: priority number.
-#: src/admin/pricing/SeasonalTab.jsx:147
+#: src/admin/pricing/SeasonalTab.jsx:148
 #, js-format
 msgid "%1$s – %2$s · priority %3$d"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:175
+#: src/admin/pricing/SeasonalTab.jsx:176
 msgid "Seasonal rules"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:176
+#: src/admin/pricing/SeasonalTab.jsx:177
 msgid "When rules overlap on a date, the highest priority wins, then the most specific, then the newest."
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:184
+#: src/admin/pricing/SeasonalTab.jsx:185
 msgid "Add seasonal rule"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:247
+#: src/admin/pricing/SeasonalTab.jsx:248
 msgid "Previous year"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:263
+#: src/admin/pricing/SeasonalTab.jsx:264
 msgid "Next year"
 msgstr ""
 
 #. translators: %d: year.
-#: src/admin/pricing/SeasonalTab.jsx:331
+#: src/admin/pricing/SeasonalTab.jsx:332
 #, js-format
 msgid "No seasonal rule in %d."
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:416
+#: src/admin/pricing/SeasonalTab.jsx:417
 msgid "New seasonal rule"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:418
+#: src/admin/pricing/SeasonalTab.jsx:419
 msgid "Applies from the first to the last date, both included."
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:466
+#: src/admin/pricing/SeasonalTab.jsx:467
 msgid "Create a template first, on the Templates tab."
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:493
+#: src/admin/pricing/SeasonalTab.jsx:494
 msgid "Choose a template"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:526
+#: src/admin/pricing/SeasonalTab.jsx:527
 msgid "From"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:539
+#: src/admin/pricing/SeasonalTab.jsx:537
 msgid "To"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:583
+#: src/admin/pricing/SeasonalTab.jsx:579
 msgid "Priority"
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:585
+#: src/admin/pricing/SeasonalTab.jsx:581
 msgid "Higher wins when rules overlap on a date."
 msgstr ""
 
-#: src/admin/pricing/SeasonalTab.jsx:621
+#: src/admin/pricing/SeasonalTab.jsx:617
 msgid "Prices go back to what they would be without it. Bookings keep their price."
 msgstr ""
 
@@ -3590,11 +6100,6 @@ msgstr ""
 msgid "%s%%"
 msgstr ""
 
-#: src/admin/reports/OccupancyTab.jsx:60
-#: src/admin/reports/RevenueTab.jsx:124
-msgid "The report could not be loaded."
-msgstr ""
-
 #: src/admin/reports/OccupancyTab.jsx:89
 msgid "Occupied room-hours of the sellable ones"
 msgstr ""
@@ -3696,47 +6201,42 @@ msgstr ""
 msgid "Rate plans show the name they had when booked. Staff is who took the booking; website bookings and imported ones are listed apart."
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:161
+#: src/admin/self/ProfileScreen.jsx:162
 msgid "Only a manager can change this."
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:192
+#: src/admin/self/ProfileScreen.jsx:193
 msgid "About you"
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:241
-#: src/admin/staff/StaffDetailScreen.jsx:65
+#: src/admin/self/ProfileScreen.jsx:251
+#: src/admin/staff/StaffDetailScreen.jsx:97
 msgid "Contact"
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:248
+#: src/admin/self/ProfileScreen.jsx:268
 msgid "Also the e-mail of your account: password links go here."
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:261
+#: src/admin/self/ProfileScreen.jsx:281
 msgid "Only a manager can change your emergency contact."
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:265
+#: src/admin/self/ProfileScreen.jsx:285
 msgid "Who the hotel calls if something happens to you at work."
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:299
-#: src/admin/staff/FileTabs.jsx:570
+#: src/admin/self/ProfileScreen.jsx:319
+#: src/admin/staff/FileTabs.jsx:574
 msgid "Full name"
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:319
-#: src/admin/staff/FileTabs.jsx:579
+#: src/admin/self/ProfileScreen.jsx:339
+#: src/admin/staff/FileTabs.jsx:583
 msgid "Relationship"
 msgstr ""
 
-#: src/admin/self/ProfileScreen.jsx:384
-#: src/admin/staff/FileTabs.jsx:139
-msgid "Undo changes"
-msgstr ""
-
-#: src/admin/self/ProfileScreen.jsx:417
+#: src/admin/self/ProfileScreen.jsx:435
 msgid "Your profile could not be loaded"
 msgstr ""
 
@@ -3823,12 +6323,8 @@ msgid "Sign-in"
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:106
-#: src/admin/staff/CreateEmployeeScreen.jsx:350
+#: src/admin/staff/CreateEmployeeScreen.jsx:352
 msgid "User name"
-msgstr ""
-
-#: src/admin/staff/AccountTab.jsx:118
-msgid "None"
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:139
@@ -3836,12 +6332,12 @@ msgid "Password changed."
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:178
-#: src/admin/staff/CreateEmployeeScreen.jsx:440
+#: src/admin/staff/CreateEmployeeScreen.jsx:442
 msgid "Hide password"
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:182
-#: src/admin/staff/CreateEmployeeScreen.jsx:444
+#: src/admin/staff/CreateEmployeeScreen.jsx:446
 msgid "Show password"
 msgstr ""
 
@@ -3864,7 +6360,7 @@ msgid "Access and PIN"
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:280
-#: src/admin/staff/CreateEmployeeScreen.jsx:532
+#: src/admin/staff/CreateEmployeeScreen.jsx:534
 msgid "Staff defaults"
 msgstr ""
 
@@ -3888,105 +6384,100 @@ msgstr ""
 msgid "Remove PIN"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:125
+#: src/admin/staff/CreateEmployeeScreen.jsx:126
 msgid "Enter the first name."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:131
+#: src/admin/staff/CreateEmployeeScreen.jsx:132
 msgid "Enter the last name."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:156
+#: src/admin/staff/CreateEmployeeScreen.jsx:157
 msgid "Add an e-mail address: the link is sent there."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:178
+#: src/admin/staff/CreateEmployeeScreen.jsx:179
 msgid "A link to set the password was e-mailed."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:229
+#: src/admin/staff/CreateEmployeeScreen.jsx:230
 msgid "Step 1 of 2 — who they are."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:233
+#: src/admin/staff/CreateEmployeeScreen.jsx:234
 msgid "Step 2 of 2 — how they sign in."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:288
+#: src/admin/staff/CreateEmployeeScreen.jsx:290
 msgid "Needed to e-mail them a password link."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:296
-#: src/admin/staff/EmploymentTab.jsx:245
-#: src/admin/staff/EmploymentTab.jsx:477
+#: src/admin/staff/CreateEmployeeScreen.jsx:298
+#: src/admin/staff/EmploymentTab.jsx:246
+#: src/admin/staff/EmploymentTab.jsx:485
 msgid "Job title"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:305
-#: src/admin/staff/EmploymentTab.jsx:254
-#: src/admin/staff/EmploymentTab.jsx:486
+#: src/admin/staff/CreateEmployeeScreen.jsx:307
+#: src/admin/staff/EmploymentTab.jsx:255
+#: src/admin/staff/EmploymentTab.jsx:494
 msgid "Department"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:316
-#: src/admin/staff/EmploymentTab.jsx:495
-msgid "Work shift"
-msgstr ""
-
-#: src/admin/staff/CreateEmployeeScreen.jsx:321
-#: src/admin/staff/EmploymentTab.jsx:500
+#: src/admin/staff/CreateEmployeeScreen.jsx:323
+#: src/admin/staff/EmploymentTab.jsx:508
 msgid "For example Morning, Day or Night."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:339
+#: src/admin/staff/CreateEmployeeScreen.jsx:341
 msgid "Next"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:355
+#: src/admin/staff/CreateEmployeeScreen.jsx:357
 msgid "They sign in with it. It cannot be changed later."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:385
+#: src/admin/staff/CreateEmployeeScreen.jsx:387
 msgid "Set a password"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:392
+#: src/admin/staff/CreateEmployeeScreen.jsx:394
 msgid "E-mail them a link"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:406
+#: src/admin/staff/CreateEmployeeScreen.jsx:408
 msgid "At least 8 characters. Give it to them in person."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:473
+#: src/admin/staff/CreateEmployeeScreen.jsx:475
 msgid "Suggest a password"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:488
+#: src/admin/staff/CreateEmployeeScreen.jsx:490
 msgid "After saving, a link to choose their password is sent to their e-mail."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:492
+#: src/admin/staff/CreateEmployeeScreen.jsx:494
 msgid "Add their e-mail in step 1 to send the link."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:509
+#: src/admin/staff/CreateEmployeeScreen.jsx:511
 msgid "What they may open and do. Without one, the staff defaults apply."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:551
+#: src/admin/staff/CreateEmployeeScreen.jsx:553
 msgid "PIN (optional)"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:556
+#: src/admin/staff/CreateEmployeeScreen.jsx:558
 msgid "4 to 8 digits, to confirm protected actions."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:577
+#: src/admin/staff/CreateEmployeeScreen.jsx:579
 msgid "Back"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:583
+#: src/admin/staff/CreateEmployeeScreen.jsx:585
 #: src/admin/staff/StaffListScreen.jsx:47
 msgid "Add employee"
 msgstr ""
@@ -4038,7 +6529,7 @@ msgid "Upload"
 msgstr ""
 
 #: src/admin/staff/DocumentsTab.jsx:230
-#: src/admin/staff/StaffDetailScreen.jsx:105
+#: src/admin/staff/StaffDetailScreen.jsx:137
 msgid "Documents"
 msgstr ""
 
@@ -4064,213 +6555,194 @@ msgstr ""
 msgid "The file is removed for good. The history keeps its title and who deleted it."
 msgstr ""
 
-#. translators: 1: start date, 2: end date.
-#: src/admin/staff/EmploymentTab.jsx:73
-#, js-format
-msgid "%1$s – %2$s"
-msgstr ""
-
 #. translators: %s: start date.
-#: src/admin/staff/EmploymentTab.jsx:79
+#: src/admin/staff/EmploymentTab.jsx:80
 #, js-format
 msgid "Since %s"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:174
+#: src/admin/staff/EmploymentTab.jsx:175
 msgid "Change the contract"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:178
+#: src/admin/staff/EmploymentTab.jsx:179
 msgid "Add a contract"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:185
+#: src/admin/staff/EmploymentTab.jsx:186
 msgid "An active contract ends the current one on the day before it starts."
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:193
-#: src/admin/staff/StaffListScreen.jsx:122
-msgid "Status"
-msgstr ""
-
-#: src/admin/staff/EmploymentTab.jsx:206
+#: src/admin/staff/EmploymentTab.jsx:207
 msgid "Ended"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:215
+#: src/admin/staff/EmploymentTab.jsx:216
 msgid "Job type"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:264
+#: src/admin/staff/EmploymentTab.jsx:265
 msgid "Start date"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:274
+#: src/admin/staff/EmploymentTab.jsx:278
 msgid "End date"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:285
-#: src/admin/staff/StaffDetailScreen.jsx:91
+#: src/admin/staff/EmploymentTab.jsx:294
+#: src/admin/staff/StaffDetailScreen.jsx:123
 msgid "Notes"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:306
-#: src/admin/staff/EmploymentTab.jsx:529
+#: src/admin/staff/EmploymentTab.jsx:315
+#: src/admin/staff/EmploymentTab.jsx:537
 msgid "Add contract"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:372
+#: src/admin/staff/EmploymentTab.jsx:381
 msgid "End this contract?"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:378
+#: src/admin/staff/EmploymentTab.jsx:387
 msgid "The employee stays active and can still sign in. Deactivate them separately if they leave."
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:385
-msgid "Last day"
-msgstr ""
-
-#: src/admin/staff/EmploymentTab.jsx:399
+#: src/admin/staff/EmploymentTab.jsx:407
 msgid "Reason (optional)"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:423
+#: src/admin/staff/EmploymentTab.jsx:431
 msgid "End contract"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:472
+#: src/admin/staff/EmploymentTab.jsx:480
 msgid "Current job"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:519
+#: src/admin/staff/EmploymentTab.jsx:527
 msgid "Contracts"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:553
+#: src/admin/staff/EmploymentTab.jsx:561
 msgid "No contracts yet"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:557
+#: src/admin/staff/EmploymentTab.jsx:565
 msgid "Record each contract: its type, job, and start and end dates."
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:621
-msgid "End"
-msgstr ""
-
-#: src/admin/staff/EmploymentTab.jsx:674
+#: src/admin/staff/EmploymentTab.jsx:682
 msgid "Delete this contract?"
 msgstr ""
 
-#: src/admin/staff/EmploymentTab.jsx:678
+#: src/admin/staff/EmploymentTab.jsx:686
 msgid "Only for a contract entered by mistake: it leaves the history. To close a contract, end it instead."
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:88
-#: src/admin/staff/FileTabs.jsx:235
+#: src/admin/staff/FileTabs.jsx:89
+#: src/admin/staff/FileTabs.jsx:236
 msgid "Saved."
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:179
+#: src/admin/staff/FileTabs.jsx:180
 msgid "Not given"
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:256
-msgid "CNPS number"
+#: src/admin/staff/FileTabs.jsx:257
+msgid "Social security number"
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:261
+#: src/admin/staff/FileTabs.jsx:262
 msgid "Tax number"
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:274
+#: src/admin/staff/FileTabs.jsx:275
 msgid "Statutory numbers"
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:302
+#: src/admin/staff/FileTabs.jsx:303
 msgid "Hide"
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:303
+#: src/admin/staff/FileTabs.jsx:304
 msgid "Show numbers"
 msgstr ""
 
-#: src/admin/staff/FileTabs.jsx:531
+#: src/admin/staff/FileTabs.jsx:535
 msgid "Also the e-mail of their account: password links go here."
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:58
+#: src/admin/staff/StaffDetailScreen.jsx:90
 msgid "Personal"
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:79
+#: src/admin/staff/StaffDetailScreen.jsx:111
 msgid "Employment"
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:110
+#: src/admin/staff/StaffDetailScreen.jsx:142
 msgid "Account"
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:163
+#: src/admin/staff/StaffDetailScreen.jsx:195
 msgid "This employee does not exist"
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:167
+#: src/admin/staff/StaffDetailScreen.jsx:199
 msgid "The employee could not be loaded"
 msgstr ""
 
 #. translators: %s: access role name
-#: src/admin/staff/StaffDetailScreen.jsx:230
+#: src/admin/staff/StaffDetailScreen.jsx:262
 #, js-format
 msgid "Access: %s"
 msgstr ""
 
 #. translators: %s: date and time.
-#: src/admin/staff/StaffDetailScreen.jsx:245
+#: src/admin/staff/StaffDetailScreen.jsx:277
 #, js-format
 msgid "Deactivated %s: cannot sign in."
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:276
-#: src/admin/staff/StaffDetailScreen.jsx:350
+#: src/admin/staff/StaffDetailScreen.jsx:308
+#: src/admin/staff/StaffDetailScreen.jsx:382
 #: src/admin/staff/StaffListScreen.jsx:137
 #: src/admin/staff/StaffListScreen.jsx:313
 msgid "Deactivate"
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:280
-#: src/admin/staff/StaffDetailScreen.jsx:351
+#: src/admin/staff/StaffDetailScreen.jsx:312
+#: src/admin/staff/StaffDetailScreen.jsx:383
 #: src/admin/staff/StaffListScreen.jsx:150
 #: src/admin/staff/StaffListScreen.jsx:314
 msgid "Reactivate"
 msgstr ""
 
 #. translators: %s: employee name.
-#: src/admin/staff/StaffDetailScreen.jsx:322
+#: src/admin/staff/StaffDetailScreen.jsx:354
 #: src/admin/staff/StaffListScreen.jsx:288
 #, js-format
 msgid "Deactivate %s?"
 msgstr ""
 
 #. translators: %s: employee name.
-#: src/admin/staff/StaffDetailScreen.jsx:330
+#: src/admin/staff/StaffDetailScreen.jsx:362
 #: src/admin/staff/StaffListScreen.jsx:292
 #, js-format
 msgid "Reactivate %s?"
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:339
+#: src/admin/staff/StaffDetailScreen.jsx:371
 #: src/admin/staff/StaffListScreen.jsx:302
 msgid "They are signed out now and cannot sign in again. Their file, bookings and history are kept."
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:343
+#: src/admin/staff/StaffDetailScreen.jsx:375
 #: src/admin/staff/StaffListScreen.jsx:306
 msgid "They can sign in again with their user name and password."
 msgstr ""
 
-#: src/admin/staff/StaffDetailScreen.jsx:366
+#: src/admin/staff/StaffDetailScreen.jsx:398
 #: src/admin/staff/StaffListScreen.jsx:326
 msgid "Employee deactivated."
 msgstr ""
@@ -4299,24 +6771,12 @@ msgstr ""
 msgid "Try part of the name, the number, the phone or the job."
 msgstr ""
 
-#. translators: %d: number of employees.
-#: src/admin/staff/StaffListScreen.jsx:201
-#, js-format
-msgid "%d employee"
-msgid_plural "%d employees"
-msgstr[0] ""
-msgstr[1] ""
-
 #: src/admin/staff/StaffListScreen.jsx:214
 msgid "Show"
 msgstr ""
 
 #: src/admin/staff/StaffListScreen.jsx:232
 msgid "Deactivated"
-msgstr ""
-
-#: src/admin/staff/StaffListScreen.jsx:239
-msgid "All"
 msgstr ""
 
 #: src/admin/staff/StaffListScreen.jsx:262

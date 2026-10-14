@@ -18,8 +18,9 @@ import {
 	Skeleton,
 	Textarea,
 } from '@rtbp/ui';
-import { toast, toastError } from '@rtbp/lib';
+import { format, toast, toastError } from '@rtbp/lib';
 
+import { DateField, PhoneField } from '../pickers';
 import { ChoiceSelect } from '../staff/FileTabs';
 import { useProfile, useSaveProfile } from './api';
 import SecuritySection from './SecuritySection';
@@ -206,7 +207,16 @@ function ProfileForm( { profile } ) {
 							required: true,
 						}
 					) }
-					{ row( 'dob', text( 'dob', { type: 'date' } ) ) }
+					{ row( 'dob', ( locked ) => (
+						<DateField
+							value={ values.dob ?? '' }
+							onChange={ ( day ) => set( 'dob', day ) }
+							disabled={ locked }
+							max={ format.siteToday() }
+							yearDropdown
+							clearable
+						/>
+					) ) }
 					{ row( 'marital_status', ( locked ) => (
 						<ChoiceSelect
 							value={ values.marital_status }
@@ -241,9 +251,19 @@ function ProfileForm( { profile } ) {
 				title={ __( 'Contact', 'radius-hotel-booking-pro' ) }
 			>
 				<div className="grid gap-4 sm:grid-cols-2">
-					{ row( 'phone', text( 'phone', { type: 'tel' } ), {
-						required: true,
-					} ) }
+					{ row(
+						'phone',
+						( locked ) => (
+							<PhoneField
+								value={ values.phone ?? '' }
+								onChange={ ( phone ) => set( 'phone', phone ) }
+								disabled={ locked }
+							/>
+						),
+						{
+							required: true,
+						}
+					) }
 					{ row( 'email', text( 'email', { type: 'email' } ), {
 						description: __(
 							'Also the e-mail of your account: password links go here.',
@@ -326,14 +346,12 @@ function ProfileForm( { profile } ) {
 						{ row(
 							'emergency_contact.phone',
 							( locked ) => (
-								<Input
-									type="tel"
+								<PhoneField
 									value={ contact.phone || '' }
-									onChange={ ( e ) =>
-										setContact( 'phone', e.target.value )
+									onChange={ ( phone ) =>
+										setContact( 'phone', phone )
 									}
 									disabled={ locked }
-									autoComplete="off"
 								/>
 							),
 							{
