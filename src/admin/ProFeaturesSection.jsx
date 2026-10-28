@@ -63,7 +63,6 @@ function FeatureRow( { feature, enabled, missing, onChange } ) {
 					<label htmlFor={ id } className="m-0 text-sm font-medium">
 						{ feature.label }
 					</label>
-					<Badge variant="outline">{ feature.module }</Badge>
 					{ feature.state !== 'active' &&
 					feature.state !== 'disabled' ? (
 						<Badge

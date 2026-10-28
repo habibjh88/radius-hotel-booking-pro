@@ -87,3 +87,5 @@ New Payroll and HR feature: pay runs, payslips, deductions, shifts, time off and
 Settings → Payroll: set your own social contributions and income tax brackets for any country.
 Country add-ons can supply their own tax and contribution calculator instead.
 Payroll data from the Residence TATA add-on is moved over automatically on update.
+Pro features screen no longer shows internal module codes such as M14 next to features.
+Staff access list shows each person's access role as a coloured badge beside their name.

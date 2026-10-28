@@ -23,11 +23,17 @@ export default function StaffScreen() {
 	const [ confirmAll, setConfirmAll ] = useState( false );
 
 	const selected = Number( params.get( 'user' ) ) || 0;
-	const anyOverrides = ( users.data ?? [] ).some( ( user ) => user.overrides );
+	const anyOverrides = ( users.data ?? [] ).some(
+		( user ) => user.overrides
+	);
 
 	usePageActions(
 		! selected && anyOverrides ? (
-			<Button size="sm" variant="outline" onClick={ () => setConfirmAll( true ) }>
+			<Button
+				size="sm"
+				variant="outline"
+				onClick={ () => setConfirmAll( true ) }
+			>
 				{ __( 'Reset all overrides', 'radius-hotel-booking-pro' ) }
 			</Button>
 		) : null,
@@ -66,17 +72,33 @@ export default function StaffScreen() {
 							className="flex flex-col gap-3 py-3 sm:flex-row sm:items-center"
 						>
 							<div className="min-w-0 flex-1">
-								<div className="text-sm font-semibold text-heading">
-									{ user.name }
+								<div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+									<span className="text-sm font-semibold text-heading">
+										{ user.name }
+									</span>
+									{ user.access_role ? (
+										<Badge
+											variant="secondary"
+											className="bg-primary-soft text-primary"
+										>
+											{ user.access_role.name }
+										</Badge>
+									) : (
+										<Badge
+											variant="outline"
+											className="border-dashed font-medium text-muted-foreground"
+										>
+											{ __(
+												'No access role',
+												'radius-hotel-booking-pro'
+											) }
+										</Badge>
+									) }
 								</div>
 								<div className="truncate text-xs text-muted-foreground">
 									{ user.email }
 								</div>
 								<div className="mt-1 flex flex-wrap gap-1.5">
-									<Badge variant="outline">
-										{ user.access_role?.name ??
-											__( 'No access role', 'radius-hotel-booking-pro' ) }
-									</Badge>
 									{ user.overrides ? (
 										<Badge variant="outline">
 											{ sprintf(
@@ -93,8 +115,14 @@ export default function StaffScreen() {
 									) : null }
 									<Badge variant="outline">
 										{ user.has_pin
-											? __( 'PIN set', 'radius-hotel-booking-pro' )
-											: __( 'No PIN', 'radius-hotel-booking-pro' ) }
+											? __(
+													'PIN set',
+													'radius-hotel-booking-pro'
+											  )
+											: __(
+													'No PIN',
+													'radius-hotel-booking-pro'
+											  ) }
 									</Badge>
 								</div>
 							</div>
@@ -126,7 +154,9 @@ export default function StaffScreen() {
 				{ confirmAll ? (
 					<ConfirmDialog
 						open
-						onOpenChange={ ( next ) => ! next && setConfirmAll( false ) }
+						onOpenChange={ ( next ) =>
+							! next && setConfirmAll( false )
+						}
 						destructive
 						title={ __(
 							'Reset everyone’s personal overrides?',
@@ -136,7 +166,10 @@ export default function StaffScreen() {
 							'Every personal override is removed. Access roles stay; everyone gets their role and the defaults again.',
 							'radius-hotel-booking-pro'
 						) }
-						confirmLabel={ __( 'Reset all', 'radius-hotel-booking-pro' ) }
+						confirmLabel={ __(
+							'Reset all',
+							'radius-hotel-booking-pro'
+						) }
 						onConfirm={ () =>
 							reset
 								.mutateAsync( null )

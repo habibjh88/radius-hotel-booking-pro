@@ -117,7 +117,6 @@ final class FeatureManager {
 				'label'       => $feature['label'],
 				'description' => $feature['description'],
 				'group'       => $feature['group'],
-				'module'      => $feature['module'],
 				'requires'    => array_values( $feature['requires'] ),
 				'state'       => $this->state( $key ),
 			);
