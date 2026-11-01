@@ -124,7 +124,7 @@ class AccessRoleService {
 		$role = $this->find( $id );
 		if ( $role->is_template ) {
 			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON; React escapes it (phpcs.xml).
-			throw DomainException::conflict( 'template_role', __( 'A template role can be changed but not deleted.', 'radius-hotel-booking-pro' ) );
+			throw DomainException::conflict( 'template_role', __( 'A built-in role can be changed but not deleted.', 'radius-hotel-booking-pro' ) );
 		}
 
 		$users = $this->roles->unassignAll( $id );

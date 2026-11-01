@@ -28,9 +28,7 @@ import { useProfileFields, useSaveRole } from './api';
  */
 export default function RoleEditor( { role, registry, onDone } ) {
 	const [ name, setName ] = useState( role?.name ?? '' );
-	const [ description, setDescription ] = useState(
-		role?.description ?? ''
-	);
+	const [ description, setDescription ] = useState( role?.description ?? '' );
 	const [ levels, setLevels ] = useState( { ...( role?.levels ?? {} ) } );
 	const [ profileFields, setProfileFields ] = useState( {
 		...( role?.profile_fields ?? {} ),
@@ -92,7 +90,7 @@ export default function RoleEditor( { role, registry, onDone } ) {
 				actions={
 					role?.is_template ? (
 						<Badge variant="outline">
-							{ __( 'Template', 'radius-hotel-booking-pro' ) }
+							{ __( 'Built-in', 'radius-hotel-booking-pro' ) }
 						</Badge>
 					) : null
 				}
@@ -121,7 +119,10 @@ export default function RoleEditor( { role, registry, onDone } ) {
 					/>
 				</Field>
 				<Field
-					label={ __( 'Everything else', 'radius-hotel-booking-pro' ) }
+					label={ __(
+						'Everything else',
+						'radius-hotel-booking-pro'
+					) }
 					description={ __(
 						'The level of every page and action this role does not set below, including ones added later.',
 						'radius-hotel-booking-pro'
@@ -163,7 +164,10 @@ export default function RoleEditor( { role, registry, onDone } ) {
 					<ProfileFieldsControl
 						fields={ fields.data.fields }
 						value={ profileFields }
-						unsetLabel={ __( 'Default', 'radius-hotel-booking-pro' ) }
+						unsetLabel={ __(
+							'Default',
+							'radius-hotel-booking-pro'
+						) }
 						onChange={ ( key, next ) =>
 							setProfileFields( ( current ) => {
 								const updated = { ...current };

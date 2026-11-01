@@ -128,7 +128,7 @@ export default function RolesScreen() {
 									{ role.is_template ? (
 										<Badge variant="outline">
 											{ __(
-												'Template',
+												'Built-in',
 												'radius-hotel-booking-pro'
 											) }
 										</Badge>
@@ -179,7 +179,10 @@ export default function RolesScreen() {
 			) : (
 				<EmptyState
 					icon={ ShieldHalf }
-					title={ __( 'No access roles yet', 'radius-hotel-booking-pro' ) }
+					title={ __(
+						'No access roles yet',
+						'radius-hotel-booking-pro'
+					) }
 					description={ __(
 						'Create a role such as Receptionist and assign it to your staff.',
 						'radius-hotel-booking-pro'
@@ -196,7 +199,9 @@ export default function RolesScreen() {
 				{ deleting ? (
 					<ConfirmDialog
 						open
-						onOpenChange={ ( next ) => ! next && setDeleting( null ) }
+						onOpenChange={ ( next ) =>
+							! next && setDeleting( null )
+						}
 						destructive
 						title={ sprintf(
 							/* translators: %s: role name. */
@@ -207,7 +212,10 @@ export default function RolesScreen() {
 							'Everyone with this role goes back to the default permissions. Their personal overrides stay.',
 							'radius-hotel-booking-pro'
 						) }
-						confirmLabel={ __( 'Delete role', 'radius-hotel-booking-pro' ) }
+						confirmLabel={ __(
+							'Delete role',
+							'radius-hotel-booking-pro'
+						) }
 						onConfirm={ () =>
 							remove
 								.mutateAsync( deleting.id )

@@ -41,6 +41,38 @@ const featureActive = ( key ) =>
 		( feature ) => feature.key === key && feature.state === 'active'
 	);
 
+/**
+ * Add staff pages to the free plugin's "Staff & access" sidebar section
+ * (group `team`, which holds Permissions), at the first anchor found:
+ * `[ path, 'before' | 'after' ]`. A free version without that section keeps
+ * them at the end of System, as before.
+ *
+ * @param {Array} routes Routes so far.
+ * @param {Array} items  Routes to add (their group is `system`).
+ * @param {Array} places Anchors, in order of preference.
+ * @return {Array} Routes.
+ */
+const intoTeam = ( routes, items, places ) => {
+	if ( ! routes.some( ( route ) => 'team' === route.group ) ) {
+		return [ ...routes, ...items ];
+	}
+	const moved = items.map( ( route ) =>
+		'system' === route.group ? { ...route, group: 'team' } : route
+	);
+	for ( const [ path, side ] of places ) {
+		const at = routes.findIndex( ( route ) => route.path === path );
+		if ( at >= 0 ) {
+			const index = 'before' === side ? at : at + 1;
+			return [
+				...routes.slice( 0, index ),
+				...moved,
+				...routes.slice( index ),
+			];
+		}
+	}
+	return [ ...routes, ...moved ];
+};
+
 addFilter(
 	'rtbp.settings.sections',
 	'radius-hotel-booking-pro/features',
@@ -109,38 +141,51 @@ if ( featureActive( 'staff_records' ) ) {
 	addFilter(
 		'rtbp.admin.routes',
 		'radius-hotel-booking-pro/staff',
-		( routes ) => [
-			...routes,
-			{
-				path: '/staff',
-				group: 'system',
-				label: __( 'Staff', 'radius-hotel-booking-pro' ),
-				description: __(
-					'Employee files, contracts and documents',
-					'radius-hotel-booking-pro'
-				),
-				icon: UsersRound,
-				capability: 'rtbp_view_dashboard',
-				accessKey: 'page.staff',
-				element: lazy( () => import( './staff/StaffListScreen' ) ),
-			},
-			{
-				path: '/staff/new',
-				hidden: true,
-				label: __( 'Add an employee', 'radius-hotel-booking-pro' ),
-				capability: 'rtbp_view_dashboard',
-				accessKey: 'staff.create',
-				element: lazy( () => import( './staff/CreateEmployeeScreen' ) ),
-			},
-			{
-				path: '/staff/:id',
-				hidden: true,
-				label: __( 'Employee', 'radius-hotel-booking-pro' ),
-				capability: 'rtbp_view_dashboard',
-				accessKey: 'page.staff',
-				element: lazy( () => import( './staff/StaffDetailScreen' ) ),
-			},
-		]
+		( routes ) =>
+			intoTeam(
+				routes,
+				[
+					{
+						path: '/staff',
+						group: 'system',
+						label: __( 'Staff', 'radius-hotel-booking-pro' ),
+						description: __(
+							'Employee files, contracts and documents',
+							'radius-hotel-booking-pro'
+						),
+						icon: UsersRound,
+						capability: 'rtbp_view_dashboard',
+						accessKey: 'page.staff',
+						element: lazy( () =>
+							import( './staff/StaffListScreen' )
+						),
+					},
+					{
+						path: '/staff/new',
+						hidden: true,
+						label: __(
+							'Add an employee',
+							'radius-hotel-booking-pro'
+						),
+						capability: 'rtbp_view_dashboard',
+						accessKey: 'staff.create',
+						element: lazy( () =>
+							import( './staff/CreateEmployeeScreen' )
+						),
+					},
+					{
+						path: '/staff/:id',
+						hidden: true,
+						label: __( 'Employee', 'radius-hotel-booking-pro' ),
+						capability: 'rtbp_view_dashboard',
+						accessKey: 'page.staff',
+						element: lazy( () =>
+							import( './staff/StaffDetailScreen' )
+						),
+					},
+				],
+				[ [ '/permissions', 'before' ] ]
+			)
 	);
 }
 
@@ -203,35 +248,39 @@ if ( featureActive( 'advanced_access' ) ) {
 	addFilter(
 		'rtbp.admin.routes',
 		'radius-hotel-booking-pro/access',
-		( routes ) => [
-			...routes,
-			{
-				path: '/access/roles',
-				group: 'system',
-				label: __( 'Access roles', 'radius-hotel-booking-pro' ),
-				description: __(
-					'Named roles such as Receptionist, with their permissions',
-					'radius-hotel-booking-pro'
-				),
-				icon: ShieldHalf,
-				capability: 'rtbp_view_dashboard',
-				accessKey: 'access.manage',
-				element: lazy( () => import( './access/RolesScreen' ) ),
-			},
-			{
-				path: '/access/staff',
-				group: 'system',
-				label: __( 'Staff access', 'radius-hotel-booking-pro' ),
-				description: __(
-					'Each person’s access role, PIN and personal overrides',
-					'radius-hotel-booking-pro'
-				),
-				icon: UserCog,
-				capability: 'rtbp_view_dashboard',
-				accessKey: 'access.manage',
-				element: lazy( () => import( './access/StaffScreen' ) ),
-			},
-		]
+		( routes ) =>
+			intoTeam(
+				routes,
+				[
+					{
+						path: '/access/roles',
+						group: 'system',
+						label: __( 'Access roles', 'radius-hotel-booking-pro' ),
+						description: __(
+							'Named roles such as Receptionist, with their permissions',
+							'radius-hotel-booking-pro'
+						),
+						icon: ShieldHalf,
+						capability: 'rtbp_view_dashboard',
+						accessKey: 'access.manage',
+						element: lazy( () => import( './access/RolesScreen' ) ),
+					},
+					{
+						path: '/access/staff',
+						group: 'system',
+						label: __( 'Staff access', 'radius-hotel-booking-pro' ),
+						description: __(
+							'Each person’s access role, PIN and personal overrides',
+							'radius-hotel-booking-pro'
+						),
+						icon: UserCog,
+						capability: 'rtbp_view_dashboard',
+						accessKey: 'access.manage',
+						element: lazy( () => import( './access/StaffScreen' ) ),
+					},
+				],
+				[ [ '/permissions', 'after' ] ]
+			)
 	);
 
 	addFilter(
@@ -402,46 +451,55 @@ if ( featureActive( 'payroll' ) ) {
 	addFilter(
 		'rtbp.admin.routes',
 		'radius-hotel-booking-pro/payroll',
-		( routes ) => [
-			...routes,
-			{
-				path: '/payroll',
-				group: 'system',
-				label: __( 'Payroll', 'radius-hotel-booking-pro' ),
-				description: __(
-					'Pay runs, payslips, taxes and contributions, and time off',
-					'radius-hotel-booking-pro'
-				),
-				icon: Banknote,
-				accessKey: 'page.payroll',
-				element: lazy( () => import( './payroll/PayrollScreen' ) ),
-			},
-			{
-				path: '/payroll/runs/:id',
-				hidden: true,
-				group: 'system',
-				label: __( 'Pay run', 'radius-hotel-booking-pro' ),
-				description: __(
-					'Lines, totals and what can be done next',
-					'radius-hotel-booking-pro'
-				),
-				accessKey: 'page.payroll',
-				element: lazy( () => import( './payroll/RunScreen' ) ),
-			},
-			{
-				path: '/me/payroll',
-				hidden: true,
-				label: __( 'My payroll', 'radius-hotel-booking-pro' ),
-				description: __(
-					'Your payslips and time off',
-					'radius-hotel-booking-pro'
-				),
-				accessKey: 'page.my_payroll',
-				element: lazy( () =>
-					import( './payroll/self/MyPayrollScreen' )
-				),
-			},
-		]
+		( routes ) =>
+			intoTeam(
+				routes,
+				[
+					{
+						path: '/payroll',
+						group: 'system',
+						label: __( 'Payroll', 'radius-hotel-booking-pro' ),
+						description: __(
+							'Pay runs, payslips, taxes and contributions, and time off',
+							'radius-hotel-booking-pro'
+						),
+						icon: Banknote,
+						accessKey: 'page.payroll',
+						element: lazy( () =>
+							import( './payroll/PayrollScreen' )
+						),
+					},
+					{
+						path: '/payroll/runs/:id',
+						hidden: true,
+						group: 'system',
+						label: __( 'Pay run', 'radius-hotel-booking-pro' ),
+						description: __(
+							'Lines, totals and what can be done next',
+							'radius-hotel-booking-pro'
+						),
+						accessKey: 'page.payroll',
+						element: lazy( () => import( './payroll/RunScreen' ) ),
+					},
+					{
+						path: '/me/payroll',
+						hidden: true,
+						label: __( 'My payroll', 'radius-hotel-booking-pro' ),
+						description: __(
+							'Your payslips and time off',
+							'radius-hotel-booking-pro'
+						),
+						accessKey: 'page.my_payroll',
+						element: lazy( () =>
+							import( './payroll/self/MyPayrollScreen' )
+						),
+					},
+				],
+				[
+					[ '/staff', 'after' ],
+					[ '/permissions', 'before' ],
+				]
+			)
 	);
 
 	addFilter(
