@@ -73,6 +73,30 @@ final class PasscodeService {
 	}
 
 	/**
+	 * Whether the user may choose their own PIN on My profile (staff
+	 * self-service on, and the PIN field allowed for them).
+	 *
+	 * @param int $user_id User id.
+	 * @return bool
+	 */
+	public static function can_set_own_pin( int $user_id ): bool {
+		return function_exists( 'rtbp_pro_feature_active' ) && rtbp_pro_feature_active( 'staff_self_service' ) && ProfileFields::allowed( $user_id, 'passcode' );
+	}
+
+	/**
+	 * What to tell a user who has no PIN to enter: set one on My profile
+	 * when they may, otherwise ask a manager (R1-T4).
+	 *
+	 * @param int $user_id User id.
+	 * @return string
+	 */
+	public static function no_pin_message( int $user_id ): string {
+		return self::can_set_own_pin( $user_id )
+			? __( 'You do not have a PIN yet. Choose one in My profile → Personal PIN.', 'radius-hotel-booking-pro' )
+			: __( 'You do not have a PIN yet. Ask a manager to set one for you.', 'radius-hotel-booking-pro' );
+	}
+
+	/**
 	 * Whether a fallback PIN is set.
 	 *
 	 * @return bool
@@ -214,7 +238,7 @@ final class PasscodeService {
 				$fallback = self::fallback_generation();
 			}
 			if ( '' === $hash ) {
-				return new WP_Error( 'pin_not_set', __( 'You do not have a PIN yet. Ask a manager to set one for you.', 'radius-hotel-booking-pro' ) );
+				return new WP_Error( 'pin_not_set', self::no_pin_message( $user_id ) );
 			}
 
 			if ( ! self::is_valid_pin( $pin ) || ! wp_check_password( $pin, $hash ) ) {

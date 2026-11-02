@@ -129,6 +129,12 @@ final class PayrollSettings {
 					'default'  => array(),
 					'sanitize' => array( self::class, 'brackets' ),
 				),
+				// Bonuses every pay run adds on its own (R1-T17): see BonusRules.
+				'bonusRules'       => array(
+					'type'     => 'array',
+					'default'  => array(),
+					'sanitize' => array( BonusRules::class, 'sanitize' ),
+				),
 			)
 		);
 	}

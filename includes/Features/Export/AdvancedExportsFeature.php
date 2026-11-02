@@ -1,13 +1,12 @@
 <?php
 /**
- * Advanced exports and archiving (M11 T3a–T4).
+ * Advanced exports (M11 T3a, T4).
  *
  * @package RadiusTheme\RadiusHotelBookingPro\Features\Export
  */
 
 namespace RadiusTheme\RadiusHotelBookingPro\Features\Export;
 
-use RadiusTheme\RadiusHotelBookingPro\Export\ArchiveController;
 use RadiusTheme\RadiusHotelBookingPro\Export\ScheduleController;
 use RadiusTheme\RadiusHotelBookingPro\Export\ScheduleService;
 use RadiusTheme\RadiusHotelBookingPro\Features\AbstractFeature;
@@ -22,10 +21,9 @@ defined( 'ABSPATH' ) || exit;
  *   streamed writer (`XlsxStream`) for exports of any size. The same format
  *   as `advanced_reports` registers (one definition, `XlsxWriter::format()`),
  *   so either feature alone brings it.
- * - **Archive and remove** (11.4) — `POST exports/archive` (`ArchiveService`),
- *   behind `exports.generate` + **`exports.archive_remove`** (locked by
- *   default), logged `exports.archive_remove`; the *Archive and remove* panel
- *   on the Exports screen (`rtbp.exports.panels`).
+ * - *Archive and remove* (11.4) was dropped (R1, 2026-11-02): the hotel keeps
+ *   every booking; a period file is a normal export. Its activity label stays
+ *   so earlier log entries still read.
  * - **Scheduled exports** (11.8) — `ScheduleService` (weekly / monthly, the
  *   previous week or month), run by a 15-minute job; `exports/schedules`
  *   endpoints; the *Scheduled exports* panel with each next run.
@@ -65,10 +63,7 @@ final class AdvancedExportsFeature extends AbstractFeature {
 		if ( XlsxWriter::available() ) {
 			add_filter( 'rtbp_export_formats', array( $this, 'formats' ) );
 		}
-		add_filter( 'rtbp_access_keys', array( $this, 'keys' ) );
-		add_filter( 'rtbp_access_role_defaults', array( $this, 'role_defaults' ) );
 		add_filter( 'rtbp_activity_actions', array( $this, 'actions' ) );
-		add_action( 'rtbp_register_addon_routes', array( ArchiveController::class, 'routes' ) );
 		add_action( 'rtbp_register_addon_routes', array( ScheduleController::class, 'routes' ) );
 		add_filter( 'rtbp_scheduled_events', array( $this, 'events' ) );
 	}
@@ -100,39 +95,8 @@ final class AdvancedExportsFeature extends AbstractFeature {
 	}
 
 	/**
-	 * `rtbp_access_keys`: archive-and-remove deletes bookings — locked by default.
-	 *
-	 * @param array $keys Key => definition.
-	 * @return array
-	 */
-	public function keys( $keys ): array {
-		$keys                           = (array) $keys;
-		$keys['exports.archive_remove'] = array(
-			'default' => 'locked',
-			'group'   => 'exports',
-			'label'   => __( 'Archive and remove bookings', 'radius-hotel-booking-pro' ),
-		);
-		return $keys;
-	}
-
-	/**
-	 * `rtbp_access_role_defaults`: managers start with every key open; this one
-	 * deletes bookings, so it starts locked for them too (the owner opens it
-	 * per role in Settings → Permissions; administrators always pass).
-	 *
-	 * @param array $defaults Role => key => level.
-	 * @return array
-	 */
-	public function role_defaults( $defaults ): array {
-		$defaults = (array) $defaults;
-		if ( isset( $defaults['rtbp_manager'] ) && is_array( $defaults['rtbp_manager'] ) ) {
-			$defaults['rtbp_manager']['exports.archive_remove'] = 'locked';
-		}
-		return $defaults;
-	}
-
-	/**
-	 * `rtbp_activity_actions`: the archive-and-remove action.
+	 * `rtbp_activity_actions`: the scheduled-export actions, and the label of
+	 * archive-and-remove runs made before it was dropped.
 	 *
 	 * @param array $actions Key => definition.
 	 * @return array

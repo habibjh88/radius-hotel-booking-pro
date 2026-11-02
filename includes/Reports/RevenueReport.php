@@ -86,10 +86,13 @@ class RevenueReport {
 		$report  = $this->build( $range );
 		$columns = static fn( $first ) => array( $first, __( 'Bookings', 'radius-hotel-booking-pro' ), __( 'Rooms', 'radius-hotel-booking-pro' ), __( 'Revenue', 'radius-hotel-booking-pro' ), __( 'Share (%)', 'radius-hotel-booking-pro' ) );
 		$rows    = static fn( $list ) => array_map( static fn( $row ) => array( $row['label'], $row['bookings'], $row['rooms'], $row['revenue'], $row['share'] ), $list );
-		$mode    = 'created' === $range->mode ? __( 'by booking date', 'radius-hotel-booking-pro' ) : __( 'by arrival date', 'radius-hotel-booking-pro' );
+		$mode    = array(
+			'created'   => __( 'by booking date', 'radius-hotel-booking-pro' ),
+			'departure' => __( 'by departure date', 'radius-hotel-booking-pro' ),
+		)[ $range->mode ] ?? __( 'by arrival date', 'radius-hotel-booking-pro' );
 		return array(
 			array(
-				/* translators: 1: first day, 2: last day, 3: "by arrival date" or "by booking date". */
+				/* translators: 1: first day, 2: last day, 3: "by arrival date", "by departure date" or "by booking date". */
 				'title'   => sprintf( __( 'Revenue by room type, %1$s to %2$s, %3$s', 'radius-hotel-booking-pro' ), $range->from, $range->to, $mode ),
 				'columns' => $columns( __( 'Room type', 'radius-hotel-booking-pro' ) ),
 				'rows'    => $rows( $report['room_types'] ),
@@ -117,7 +120,9 @@ class RevenueReport {
 	 */
 	private function group( ReportRange $range, string $key, string $label ): array {
 		global $wpdb;
-		$where = 'created' === $range->mode ? 'b.created_at_gmt >= %s AND b.created_at_gmt < %s' : 'br.start_at_gmt >= %s AND br.start_at_gmt < %s';
+		// Free's ReportRange::column() knows every date mode (free 1.0.21+, R1-T12); older free: arrival or created.
+		$column = method_exists( $range, 'column' ) ? $range->column() : ( 'created' === $range->mode ? 'b.created_at_gmt' : 'br.start_at_gmt' );
+		$where  = "{$column} >= %s AND {$column} < %s";
 		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- $key, $label and $where are fixed fragments of this class (two %s in $where); the free registry caches the result.
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(

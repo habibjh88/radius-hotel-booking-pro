@@ -2,12 +2,14 @@
  * Add an employee (`#/staff/new`, 12.2): two steps — the person (name,
  * phone, e-mail, job), then the account (user name, password or a link to
  * set it, access role, PIN). One request creates the WordPress user and the
- * employee file together; the detail screen opens afterwards.
+ * employee file together; the detail screen opens afterwards. Step 2 can
+ * instead pick an existing sign-in that opens the dashboard (R1-T3): it keeps
+ * its password, role and PIN and only gains the file.
  */
 import { Suspense, useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Eye, EyeOff, Wand2 } from 'lucide-react';
+import { ArrowLeft, Check, Eye, EyeOff, Search, Wand2 } from 'lucide-react';
 import {
 	Button,
 	Field,
@@ -23,7 +25,12 @@ import {
 } from '@rtbp/ui';
 import { access, toast, toastError } from '@rtbp/lib';
 
-import { sendPasswordLink, useCreateEmployee, useStaffOptions } from './api';
+import {
+	sendPasswordLink,
+	useCreateEmployee,
+	useStaffAccounts,
+	useStaffOptions,
+} from './api';
 import { PhoneField } from '../pickers';
 
 const STEP_ONE = [
@@ -92,6 +99,14 @@ export default function CreateEmployeeScreen() {
 		pin: '',
 	} );
 	const [ usernameTouched, setUsernameTouched ] = useState( false );
+	// 'new' makes a WordPress user; 'existing' gives a file to one (R1-T3).
+	const [ signin, setSignin ] = useState( 'new' );
+	const [ accountQuery, setAccountQuery ] = useState( '' );
+	const [ account, setAccount ] = useState( null );
+	const accounts = useStaffAccounts(
+		accountQuery.trim(),
+		2 === step && 'existing' === signin
+	);
 
 	const set = ( field, value ) => {
 		setValues( ( prev ) => {
@@ -148,8 +163,25 @@ export default function CreateEmployeeScreen() {
 
 	const submit = async ( event ) => {
 		event.preventDefault();
-		const body = { ...values };
-		const wantsLink = 'link' === values.password_mode;
+		const existing = 'existing' === signin;
+		if ( existing && ! account ) {
+			setErrors( {
+				user_id: __(
+					'Choose the sign-in to use.',
+					'radius-hotel-booking-pro'
+				),
+			} );
+			return;
+		}
+		const body = existing
+			? {
+					...Object.fromEntries(
+						STEP_ONE.map( ( field ) => [ field, values[ field ] ] )
+					),
+					user_id: account.id,
+			  }
+			: { ...values };
+		const wantsLink = ! existing && 'link' === values.password_mode;
 		if ( wantsLink ) {
 			body.password = '';
 			if ( ! values.email.trim() ) {
@@ -163,10 +195,12 @@ export default function CreateEmployeeScreen() {
 				return;
 			}
 		}
-		delete body.password_mode;
-		body.access_role = values.access_role
-			? Number( values.access_role )
-			: null;
+		if ( ! existing ) {
+			delete body.password_mode;
+			body.access_role = values.access_role
+				? Number( values.access_role )
+				: null;
+		}
 		try {
 			const employee = await create.mutateAsync( body );
 			toast.success(
@@ -348,227 +382,397 @@ export default function CreateEmployeeScreen() {
 							noValidate
 							className="space-y-5"
 						>
-							<Field
+							<SegmentedControl
 								label={ __(
-									'User name',
+									'Sign-in',
 									'radius-hotel-booking-pro'
 								) }
-								error={ errors.username }
-								description={ __(
-									'They sign in with it. It cannot be changed later.',
-									'radius-hotel-booking-pro'
-								) }
-								required
-							>
-								<Input
-									value={ values.username }
-									onChange={ ( e ) => {
-										setUsernameTouched( true );
-										set( 'username', e.target.value );
-									} }
-									autoComplete="off"
-									maxLength={ 60 }
-								/>
-							</Field>
+								value={ signin }
+								onChange={ ( mode ) => {
+									setSignin( mode );
+									setErrors( {} );
+								} }
+								options={ [
+									{
+										value: 'new',
+										label: __(
+											'New sign-in',
+											'radius-hotel-booking-pro'
+										),
+									},
+									{
+										value: 'existing',
+										label: __(
+											'Existing sign-in',
+											'radius-hotel-booking-pro'
+										),
+									},
+								] }
+							/>
 
-							<div className="space-y-2">
-								<SegmentedControl
+							{ 'existing' === signin ? (
+								<Field
 									label={ __(
-										'Password',
+										'Sign-in to use',
 										'radius-hotel-booking-pro'
 									) }
-									value={ values.password_mode }
-									onChange={ ( mode ) =>
-										set( 'password_mode', mode )
-									}
-									options={ [
-										{
-											value: 'set',
-											label: __(
-												'Set a password',
-												'radius-hotel-booking-pro'
-											),
-										},
-										{
-											value: 'link',
-											label: __(
-												'E-mail them a link',
-												'radius-hotel-booking-pro'
-											),
-										},
-									] }
-								/>
-								{ 'set' === values.password_mode ? (
+									error={ errors.user_id }
+									description={ __(
+										'Accounts that already open the dashboard and have no employee file. Their password, access role and PIN stay as they are.',
+										'radius-hotel-booking-pro'
+									) }
+									required
+								>
+									<div className="space-y-2">
+										<div className="relative">
+											<Search
+												className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+												aria-hidden="true"
+											/>
+											<Input
+												value={ accountQuery }
+												onChange={ ( e ) =>
+													setAccountQuery(
+														e.target.value
+													)
+												}
+												placeholder={ __(
+													'Name, user name or e-mail',
+													'radius-hotel-booking-pro'
+												) }
+												aria-label={ __(
+													'Search sign-ins',
+													'radius-hotel-booking-pro'
+												) }
+												autoComplete="off"
+												className="pl-9"
+											/>
+										</div>
+										{ accounts.isPending ? (
+											<Skeleton className="h-24 w-full" />
+										) : null }
+										{ accounts.data &&
+										! accounts.data.length ? (
+											<p className="m-0 text-sm text-muted-foreground">
+												{ __(
+													'No sign-in without an employee file matches.',
+													'radius-hotel-booking-pro'
+												) }
+											</p>
+										) : null }
+										{ accounts.data?.length ? (
+											<ul
+												className="m-0 max-h-64 list-none divide-y divide-border overflow-y-auto rounded-lg border border-border p-0"
+												role="listbox"
+												aria-label={ __(
+													'Sign-ins',
+													'radius-hotel-booking-pro'
+												) }
+											>
+												{ accounts.data.map(
+													( row ) => {
+														const chosen =
+															account?.id ===
+															row.id;
+														return (
+															<li
+																key={ row.id }
+																className="m-0"
+															>
+																<button
+																	type="button"
+																	role="option"
+																	aria-selected={
+																		chosen
+																	}
+																	onClick={ () => {
+																		setAccount(
+																			row
+																		);
+																		setErrors(
+																			{}
+																		);
+																	} }
+																	className={ `flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-sm ${
+																		chosen
+																			? 'bg-primary-softer'
+																			: 'hover:bg-muted'
+																	}` }
+																>
+																	<span className="min-w-0">
+																		<span className="block truncate font-medium text-heading">
+																			{
+																				row.name
+																			}
+																		</span>
+																		<span className="block truncate text-xs text-muted-foreground">
+																			{ [
+																				row.username,
+																				row.email,
+																			]
+																				.filter(
+																					Boolean
+																				)
+																				.join(
+																					' · '
+																				) }
+																		</span>
+																	</span>
+																	{ chosen ? (
+																		<Check
+																			className="h-4 w-4 shrink-0 text-primary"
+																			aria-hidden="true"
+																		/>
+																	) : null }
+																</button>
+															</li>
+														);
+													}
+												) }
+											</ul>
+										) : null }
+									</div>
+								</Field>
+							) : (
+								<>
 									<Field
 										label={ __(
-											'Password',
+											'User name',
 											'radius-hotel-booking-pro'
 										) }
-										error={ errors.password }
+										error={ errors.username }
 										description={ __(
-											'At least 8 characters. Give it to them in person.',
+											'They sign in with it. It cannot be changed later.',
 											'radius-hotel-booking-pro'
 										) }
 										required
 									>
-										<div className="flex gap-2">
-											<Input
-												type={
-													showPassword
-														? 'text'
-														: 'password'
-												}
-												value={ values.password }
-												onChange={ ( e ) =>
-													set(
-														'password',
-														e.target.value
-													)
-												}
-												autoComplete="new-password"
-												className="min-w-0 flex-1"
-											/>
-											<Button
-												type="button"
-												variant="outline"
-												size="icon"
-												onClick={ () =>
-													setShowPassword(
-														( v ) => ! v
-													)
-												}
-												aria-label={
-													showPassword
-														? __(
-																'Hide password',
-																'radius-hotel-booking-pro'
-														  )
-														: __(
-																'Show password',
-																'radius-hotel-booking-pro'
-														  )
-												}
-											>
-												{ showPassword ? (
-													<EyeOff
-														className="h-4 w-4"
-														aria-hidden="true"
-													/>
-												) : (
-													<Eye
-														className="h-4 w-4"
-														aria-hidden="true"
-													/>
-												) }
-											</Button>
-											<Button
-												type="button"
-												variant="outline"
-												size="icon"
-												onClick={ () => {
-													set(
-														'password',
-														randomPassword()
-													);
-													setShowPassword( true );
-												} }
-												aria-label={ __(
-													'Suggest a password',
-													'radius-hotel-booking-pro'
-												) }
-											>
-												<Wand2
-													className="h-4 w-4"
-													aria-hidden="true"
-												/>
-											</Button>
-										</div>
-									</Field>
-								) : (
-									<p className="m-0 text-sm text-muted-foreground">
-										{ values.email
-											? __(
-													'After saving, a link to choose their password is sent to their e-mail.',
-													'radius-hotel-booking-pro'
-											  )
-											: __(
-													'Add their e-mail in step 1 to send the link.',
-													'radius-hotel-booking-pro'
-											  ) }
-									</p>
-								) }
-							</div>
-
-							{ options.data?.advanced_access &&
-							'locked' !== manageLevel ? (
-								<div className="grid gap-4 sm:grid-cols-2">
-									<Field
-										label={ __(
-											'Access role',
-											'radius-hotel-booking-pro'
-										) }
-										error={ errors.access_role }
-										description={ __(
-											'What they may open and do. Without one, the staff defaults apply.',
-											'radius-hotel-booking-pro'
-										) }
-									>
-										<Select
-											value={
-												values.access_role || 'none'
-											}
-											onValueChange={ ( value ) =>
+										<Input
+											value={ values.username }
+											onChange={ ( e ) => {
+												setUsernameTouched( true );
 												set(
-													'access_role',
-													'none' === value
-														? ''
-														: value
-												)
+													'username',
+													e.target.value
+												);
+											} }
+											autoComplete="off"
+											maxLength={ 60 }
+										/>
+									</Field>
+
+									<div className="space-y-2">
+										<SegmentedControl
+											label={ __(
+												'Password',
+												'radius-hotel-booking-pro'
+											) }
+											value={ values.password_mode }
+											onChange={ ( mode ) =>
+												set( 'password_mode', mode )
 											}
-										>
-											<SelectTrigger>
-												<SelectValue />
-											</SelectTrigger>
-											<SelectContent>
-												<SelectItem value="none">
-													{ __(
-														'Staff defaults',
+											options={ [
+												{
+													value: 'set',
+													label: __(
+														'Set a password',
 														'radius-hotel-booking-pro'
-													) }
-												</SelectItem>
-												{ roles.map( ( role ) => (
-													<SelectItem
-														key={ role.id }
-														value={ String(
-															role.id
+													),
+												},
+												{
+													value: 'link',
+													label: __(
+														'E-mail them a link',
+														'radius-hotel-booking-pro'
+													),
+												},
+											] }
+										/>
+										{ 'set' === values.password_mode ? (
+											<Field
+												label={ __(
+													'Password',
+													'radius-hotel-booking-pro'
+												) }
+												error={ errors.password }
+												description={ __(
+													'At least 8 characters. Give it to them in person.',
+													'radius-hotel-booking-pro'
+												) }
+												required
+											>
+												<div className="flex gap-2">
+													<Input
+														type={
+															showPassword
+																? 'text'
+																: 'password'
+														}
+														value={
+															values.password
+														}
+														onChange={ ( e ) =>
+															set(
+																'password',
+																e.target.value
+															)
+														}
+														autoComplete="new-password"
+														className="min-w-0 flex-1"
+													/>
+													<Button
+														type="button"
+														variant="outline"
+														size="icon"
+														onClick={ () =>
+															setShowPassword(
+																( v ) => ! v
+															)
+														}
+														aria-label={
+															showPassword
+																? __(
+																		'Hide password',
+																		'radius-hotel-booking-pro'
+																  )
+																: __(
+																		'Show password',
+																		'radius-hotel-booking-pro'
+																  )
+														}
+													>
+														{ showPassword ? (
+															<EyeOff
+																className="h-4 w-4"
+																aria-hidden="true"
+															/>
+														) : (
+															<Eye
+																className="h-4 w-4"
+																aria-hidden="true"
+															/>
+														) }
+													</Button>
+													<Button
+														type="button"
+														variant="outline"
+														size="icon"
+														onClick={ () => {
+															set(
+																'password',
+																randomPassword()
+															);
+															setShowPassword(
+																true
+															);
+														} }
+														aria-label={ __(
+															'Suggest a password',
+															'radius-hotel-booking-pro'
 														) }
 													>
-														{ role.name }
-													</SelectItem>
-												) ) }
-											</SelectContent>
-										</Select>
-									</Field>
-									<Field
-										label={ __(
-											'PIN (optional)',
-											'radius-hotel-booking-pro'
+														<Wand2
+															className="h-4 w-4"
+															aria-hidden="true"
+														/>
+													</Button>
+												</div>
+											</Field>
+										) : (
+											<p className="m-0 text-sm text-muted-foreground">
+												{ values.email
+													? __(
+															'After saving, a link to choose their password is sent to their e-mail.',
+															'radius-hotel-booking-pro'
+													  )
+													: __(
+															'Add their e-mail in step 1 to send the link.',
+															'radius-hotel-booking-pro'
+													  ) }
+											</p>
 										) }
-										error={ errors.pin }
-										description={ __(
-											'4 to 8 digits, to confirm protected actions.',
-											'radius-hotel-booking-pro'
-										) }
-									>
-										{ input( 'pin', {
-											inputMode: 'numeric',
-											type: 'password',
-											maxLength: 8,
-											autoComplete: 'new-password',
-										} ) }
-									</Field>
-								</div>
-							) : null }
+									</div>
+
+									{ options.data?.advanced_access &&
+									'locked' !== manageLevel ? (
+										<div className="grid gap-4 sm:grid-cols-2">
+											<Field
+												label={ __(
+													'Access role',
+													'radius-hotel-booking-pro'
+												) }
+												error={ errors.access_role }
+												description={ __(
+													'What they may open and do. Without one, the staff defaults apply.',
+													'radius-hotel-booking-pro'
+												) }
+											>
+												<Select
+													value={
+														values.access_role ||
+														'none'
+													}
+													onValueChange={ ( value ) =>
+														set(
+															'access_role',
+															'none' === value
+																? ''
+																: value
+														)
+													}
+												>
+													<SelectTrigger>
+														<SelectValue />
+													</SelectTrigger>
+													<SelectContent>
+														<SelectItem value="none">
+															{ __(
+																'Staff defaults',
+																'radius-hotel-booking-pro'
+															) }
+														</SelectItem>
+														{ roles.map(
+															( role ) => (
+																<SelectItem
+																	key={
+																		role.id
+																	}
+																	value={ String(
+																		role.id
+																	) }
+																>
+																	{
+																		role.name
+																	}
+																</SelectItem>
+															)
+														) }
+													</SelectContent>
+												</Select>
+											</Field>
+											<Field
+												label={ __(
+													'PIN (optional)',
+													'radius-hotel-booking-pro'
+												) }
+												error={ errors.pin }
+												description={ __(
+													'4 to 8 digits, to confirm protected actions.',
+													'radius-hotel-booking-pro'
+												) }
+											>
+												{ input( 'pin', {
+													inputMode: 'numeric',
+													type: 'password',
+													maxLength: 8,
+													autoComplete:
+														'new-password',
+												} ) }
+											</Field>
+										</div>
+									) : null }
+								</>
+							) }
 
 							<div className="flex justify-between gap-2">
 								<Button

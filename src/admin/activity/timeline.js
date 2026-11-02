@@ -4,6 +4,7 @@
  *
  *   applyFilters( 'rtbp.booking.panels', panels, { booking } )
  *   applyFilters( 'rtbp.guest.panels', panels, { guest } )
+ *   applyFilters( 'rtbp.record.panels', panels, { type, id } )   (R1-T14: rooms, floors, rate plans, …)
  *
  * Each panel is `{ key, label, order, render() }`; the host screen renders
  * them sorted by `order`. The free screens add these filters in M03 / M09.
@@ -47,6 +48,12 @@ export function registerTimeline() {
 	addFilter( 'rtbp.guest.panels', 'radius-hotel-booking-pro/activity', ( panels, context ) =>
 		context?.guest?.id
 			? [ ...( panels || [] ), panel( 'guest', context.guest.id ) ]
+			: panels
+	);
+	// Any other record's "Notes and history" drawer (free RecordHistory, R1-T14).
+	addFilter( 'rtbp.record.panels', 'radius-hotel-booking-pro/activity', ( panels, context ) =>
+		context?.type && context?.id
+			? [ ...( panels || [] ), panel( context.type, context.id ) ]
 			: panels
 	);
 }

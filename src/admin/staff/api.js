@@ -68,6 +68,24 @@ export const useStaffOptions = () =>
 	} );
 
 /**
+ * Sign-ins that can get an employee file: they open the dashboard and have
+ * none yet (R1-T3).
+ *
+ * @param {string}  q       Search.
+ * @param {boolean} enabled Fetch only while the choice is shown.
+ * @return {Object} Query; data is the accounts array.
+ */
+export const useStaffAccounts = ( q, enabled ) =>
+	useQuery( {
+		queryKey: [ ...EMPLOYEES_KEY, 'accounts', q ],
+		queryFn: () =>
+			api
+				.get( 'employees/accounts', { q } )
+				.then( ( r ) => r.data.accounts ),
+		enabled,
+	} );
+
+/**
  * A mutation that stores the returned employee and refreshes the lists.
  *
  * @param {Function} send Called with the variables; resolves with the employee.

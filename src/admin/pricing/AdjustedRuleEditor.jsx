@@ -11,6 +11,7 @@ import {
 	ConfirmDialog,
 	Field,
 	Input,
+	RecordHistory,
 	SegmentedControl,
 	Switch,
 } from '@rtbp/ui';
@@ -127,6 +128,13 @@ export default function AdjustedRuleEditor( {
 			footer={
 				readOnly ? null : (
 					<>
+						{ rule && RecordHistory ? (
+							<RecordHistory
+								type="pricing_rule"
+								id={ rule.id }
+								title={ rule.name }
+							/>
+						) : null }
 						{ rule ? (
 							<Button
 								type="button"

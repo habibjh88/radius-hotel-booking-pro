@@ -55,6 +55,8 @@ class PasscodeController {
 						'has_fallback'     => PasscodeService::has_fallback(),
 						'fallback_enabled' => (bool) AccessSettings::get( 'fallbackEnabled', true ),
 						'can_enter_pin'    => PasscodeService::can_enter_pin( $user_id ),
+						'can_set_own_pin'  => PasscodeService::can_set_own_pin( $user_id ),
+						'no_pin_message'   => PasscodeService::no_pin_message( $user_id ),
 						'locked_until'     => $until ? gmdate( 'c', $until ) : null,
 						'scope'            => AccessSettings::global_scope() ? 'global' : 'per_key',
 						'validity'         => (int) AccessSettings::get( 'passcodeValidity', 5 ),

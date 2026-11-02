@@ -34,6 +34,20 @@ final class Assets {
 	 */
 	public function register(): void {
 		add_action( 'rtbp_admin_enqueue_scripts', array( $this, 'enqueue_admin' ) );
+		// Free merges every JSON / .mo of this domain for the bundle (free 1.0.21+; older free ignores it).
+		add_filter( 'rtbp_script_translation_domains', array( self::class, 'translation_domain' ) );
+	}
+
+	/**
+	 * `rtbp_script_translation_domains`: this plugin's text domain and languages folder.
+	 *
+	 * @param array $domains Text domain => languages folder.
+	 * @return array
+	 */
+	public static function translation_domain( $domains ): array {
+		$domains                             = (array) $domains;
+		$domains['radius-hotel-booking-pro'] = RADIUS_HOTEL_BOOKING_PRO_DIR . 'languages';
+		return $domains;
 	}
 
 	/**
@@ -70,6 +84,8 @@ final class Assets {
 					'version'  => RADIUS_HOTEL_BOOKING_PRO_VERSION,
 					'features' => $features ? $features->describe() : array(),
 					'groups'   => FeatureRegistry::groups(),
+					// Settings → Payroll → Bonuses: the kinds a rule can be (R1-T17).
+					'bonusKinds' => class_exists( '\\RadiusTheme\\RadiusHotelBookingPro\\Payroll\\BonusRules' ) ? \RadiusTheme\RadiusHotelBookingPro\Payroll\BonusRules::kinds() : array(),
 				)
 			) . ';',
 			'before'

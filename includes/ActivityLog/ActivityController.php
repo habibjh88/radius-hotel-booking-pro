@@ -189,10 +189,15 @@ class ActivityController {
 		$keys = array(
 			'booking'  => 'page.bookings',
 			'guest'    => 'page.guests',
-			'room'     => 'page.rooms',
-			'floor'    => 'page.rooms',
-			'rate'     => 'page.rates',
-			'employee' => 'page.staff',
+			'room'         => 'page.rooms',
+			'room_type'    => 'page.rooms',
+			'floor'        => 'page.rooms',
+			'rate'         => 'page.rates',
+			'rate_plan'    => 'page.rates',
+			'pricing_rule' => 'pricing.manage',
+			'block'        => 'page.availability',
+			'employee'     => 'page.staff',
+			'payroll_run'  => 'page.payroll',
 		);
 
 		/**

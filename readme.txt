@@ -91,3 +91,12 @@ Pro features screen no longer shows internal module codes such as M14 next to fe
 Staff access list shows each person's access role as a coloured badge beside their name.
 Staff, Payroll, Access roles and Staff access now sit together under Staff & access in the menu.
 The access roles that come with Pro are now labelled Built-in instead of Template.
+New staff can use an existing sign-in, so managers already on the dashboard get My payroll.
+Staff without a PIN are now sent to My profile to choose one, not told to ask a manager.
+My paychecks and My profile now appear in the menu under My account.
+Complete French translation, included in the plugin.
+Revenue breakdown report also works by check-out date and with times.
+History of changes now shows on rooms, floors, rate plans, pricing rules, blocked dates and pay runs.
+Bonus rules: fixed or percentage bonuses every pay run adds, taxable or not, for chosen staff.
+Pay runs list active staff without a pay schedule; recalculating adds newly scheduled staff.
+Removed Archive and remove: bookings are never deleted from the Exports screen.

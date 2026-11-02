@@ -36,6 +36,8 @@ export default function PasscodeDialog( { accessKeys, onUnlocked, onCancel } ) {
 	const [ error, setError ] = useState( '' );
 	const [ blocked, setBlocked ] = useState( false );
 	const [ busy, setBusy ] = useState( false );
+	// They may choose their own PIN on My profile (R1-T4).
+	const [ canSetPin, setCanSetPin ] = useState( false );
 	const input = useRef( null );
 
 	// Say up front when there is no PIN to enter, or the user is locked out.
@@ -52,11 +54,13 @@ export default function PasscodeDialog( { accessKeys, onUnlocked, onCancel } ) {
 					);
 				} else if ( data && ! data.can_enter_pin ) {
 					setBlocked( true );
+					setCanSetPin( Boolean( data.can_set_own_pin ) );
 					setError(
-						__(
-							'You do not have a PIN yet. Ask a manager to set one for you.',
-							'radius-hotel-booking-pro'
-						)
+						data.no_pin_message ||
+							__(
+								'You do not have a PIN yet. Ask a manager to set one for you.',
+								'radius-hotel-booking-pro'
+							)
 					);
 				}
 			} )
@@ -131,7 +135,10 @@ export default function PasscodeDialog( { accessKeys, onUnlocked, onCancel } ) {
 							maxLength={ 8 }
 							value={ pin }
 							disabled={ blocked || busy }
-							aria-label={ __( 'PIN', 'radius-hotel-booking-pro' ) }
+							aria-label={ __(
+								'PIN',
+								'radius-hotel-booking-pro'
+							) }
 							aria-invalid={ error ? true : undefined }
 							onChange={ ( event ) =>
 								setPin(
@@ -159,8 +166,25 @@ export default function PasscodeDialog( { accessKeys, onUnlocked, onCancel } ) {
 							>
 								{ blocked
 									? __( 'Close', 'radius-hotel-booking-pro' )
-									: __( 'Cancel', 'radius-hotel-booking-pro' ) }
+									: __(
+											'Cancel',
+											'radius-hotel-booking-pro'
+									  ) }
 							</Button>
+							{ blocked && canSetPin ? (
+								<Button
+									type="button"
+									onClick={ () => {
+										onCancel();
+										window.location.hash = '#/me/profile';
+									} }
+								>
+									{ __(
+										'Set my PIN',
+										'radius-hotel-booking-pro'
+									) }
+								</Button>
+							) : null }
 							{ blocked ? null : (
 								<Button
 									type="submit"

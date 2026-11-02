@@ -6,7 +6,7 @@
  * each behind its own access key.
  */
 import { Suspense, useState } from 'react';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import {
@@ -23,6 +23,7 @@ import {
 	Field,
 	Input,
 	Panel,
+	RecordHistory,
 	Skeleton,
 	StatusBadge,
 	Textarea,
@@ -507,6 +508,15 @@ export default function RunScreen() {
 							) : null }
 						</div>
 						<div className="flex flex-wrap gap-2">
+							{ /* Free 1.0.21+ (R1-T14); absent on an older free. */ }
+							{ RecordHistory ? (
+								<RecordHistory
+									type="payroll_run"
+									id={ run.id }
+									title={ periodText( run ) }
+									size="default"
+								/>
+							) : null }
 							{ draft && can.run ? (
 								<Button
 									variant="outline"
@@ -619,6 +629,43 @@ export default function RunScreen() {
 						) ) }
 					</dl>
 				</Panel>
+				{ run.unscheduled?.length ? (
+					// Active staff no run includes: their Pay tab needs a pay schedule (R1-T17).
+					<div
+						className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-heading"
+						role="status"
+					>
+						<p className="m-0 font-semibold">
+							{ sprintf(
+								/* translators: %d: number of employees. */
+								_n(
+									'%d active employee has no pay schedule and is in no pay run:',
+									'%d active employees have no pay schedule and are in no pay run:',
+									run.unscheduled.length,
+									'radius-hotel-booking-pro'
+								),
+								run.unscheduled.length
+							) }
+						</p>
+						<p className="m-0 mt-1 flex flex-wrap gap-x-3 gap-y-1">
+							{ run.unscheduled.map( ( e ) => (
+								<Link
+									key={ e.id }
+									to={ `/staff/${ e.id }?tab=pay` }
+									className="text-primary no-underline hover:underline"
+								>
+									{ e.name || e.no }
+								</Link>
+							) ) }
+						</p>
+						<p className="m-0 mt-1 text-muted-foreground">
+							{ __(
+								'Give each a pay schedule on their Pay tab, then recalculate.',
+								'radius-hotel-booking-pro'
+							) }
+						</p>
+					</div>
+				) : null }
 				<Panel>
 					<DataTable
 						columns={ columns }

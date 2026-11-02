@@ -55,8 +55,9 @@ cp -r includes languages templates build vendor vendor-prefixed "$STAGE/"
 # No hidden files (.DS_Store, .gitkeep …).
 find "$STAGE" -name '.*' -not -name '.' -exec rm -rf {} + 2>/dev/null || true
 
-# Languages: ship only the template (.pot) (ADR-019).
-find "$STAGE/languages" -type f ! -name '*.pot' ! -name 'index.php' -delete 2>/dev/null || true
+# Languages: the template (.pot) and the bundled translations (.po/.mo/.l10n.php, e.g. fr_FR for the
+# first client, R1); editor backups are left out. Loco can still override them (ADR-019, amended).
+find "$STAGE/languages" -type f \( -name '*.po~' -o -name '*-backup-*' \) -delete 2>/dev/null || true
 
 # Zip from inside dist/ so the archive root is "$SLUG/", as WordPress expects.
 ( cd "$DIST" && zip -rq "$SLUG.zip" "$SLUG/" )

@@ -182,6 +182,38 @@ final class LineCalculator {
 		if ( $errors ) {
 			throw DomainException::invalid( $errors ); // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON.
 		}
+
+		// 2b. Bonus rules (R1-T17): a fixed amount or a % of the base pay; a taxable
+		// one is an earning, a non-taxable one is added to net pay with the custom items.
+		$rule_custom = array();
+		foreach ( (array) ( $in['bonuses'] ?? array() ) as $bonus ) {
+			$value  = Decimal::max( '0', Decimal::of( (string) ( $bonus['value'] ?? '0' ) ) );
+			$amount = 'percent' === ( $bonus['kind'] ?? '' )
+				? Decimal::money( Decimal::mul( $base, Decimal::div( $value, '100' ) ) )
+				: Decimal::money( $value );
+			if ( 0 === Decimal::cmp( $amount, '0' ) ) {
+				continue;
+			}
+			if ( ! empty( $bonus['taxable'] ) ) {
+				$earnings[] = array(
+					'code'     => 'bonus_rule',
+					'key'      => (string) ( $bonus['key'] ?? '' ),
+					'label'    => (string) ( $bonus['label'] ?? '' ),
+					'quantity' => null,
+					'rate'     => 'percent' === ( $bonus['kind'] ?? '' ) ? $value : null,
+					'amount'   => $amount,
+					'effect'   => 'add',
+				);
+				$gross      = Decimal::add( $gross, $amount );
+			} else {
+				$rule_custom[] = array(
+					'type'    => 'addition',
+					'name'    => (string) ( $bonus['label'] ?? '' ),
+					'amount'  => $amount,
+					'taxable' => false,
+				);
+			}
+		}
 		$gross    = Decimal::max( '0', Decimal::sub( $gross, $off ) );
 		$vac_base = Decimal::max( '0', Decimal::sub( $vac_base, $off ) );
 
@@ -298,7 +330,7 @@ final class LineCalculator {
 		$custom      = array();
 		$custom_net  = '0';
 		$custom_cost = '0';
-		foreach ( (array) ( $in['custom'] ?? array() ) as $item ) {
+		foreach ( array_merge( $rule_custom, (array) ( $in['custom'] ?? array() ) ) as $item ) {
 			$amount = Decimal::money( Decimal::max( '0', Decimal::of( $item['amount'] ?? '0' ) ) );
 			if ( 0 === Decimal::cmp( $amount, '0' ) ) {
 				continue;

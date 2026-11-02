@@ -424,6 +424,13 @@ function RuleEditor( { rule, templates, scope, readOnly, onClose } ) {
 			footer={
 				readOnly ? null : (
 					<>
+						{ rule && ui.RecordHistory ? (
+							<ui.RecordHistory
+								type="pricing_rule"
+								id={ rule.id }
+								title={ rule.name }
+							/>
+						) : null }
 						{ rule ? (
 							<Button
 								type="button"

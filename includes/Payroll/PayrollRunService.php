@@ -130,6 +130,41 @@ final class PayrollRunService {
 			'item_types' => $types,
 			// Payslips exist once the run is finalised: the formats they come in.
 			'payslip_formats' => PayrollRun::DRAFT === (string) $run->status ? array() : PayslipService::formats(),
+			// Active staff no pay run includes (no pay schedule), so nobody is missed unseen (R1-T17).
+			'unscheduled'     => PayrollRun::DRAFT === (string) $run->status ? self::unscheduled() : array(),
+		);
+	}
+
+	/**
+	 * Active employees without a pay schedule: `[ { id, name, no } ]`.
+	 *
+	 * @return array[]
+	 */
+	public static function unscheduled(): array {
+		global $wpdb;
+		$repo = '\\RadiusTheme\\RadiusHotelBookingPro\\Staff\\EmployeeRepository';
+		if ( ! class_exists( $repo ) || ! method_exists( $repo, 'table' ) ) {
+			return array();
+		}
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- a short list for the run screen.
+		$rows = $wpdb->get_results(
+			$wpdb->prepare(
+				'SELECT e.id, e.employee_no, e.first_name, e.last_name FROM %i e
+				LEFT JOIN %i p ON p.employee_id = e.id
+				WHERE e.is_active = 1 AND ( p.id IS NULL OR p.pay_schedule_id IS NULL )
+				ORDER BY e.first_name, e.last_name LIMIT 100',
+				$repo::table(),
+				EmployeePayRepository::table()
+			),
+			ARRAY_A
+		);
+		return array_map(
+			static fn( $row ) => array(
+				'id'   => (int) $row['id'],
+				'name' => trim( $row['first_name'] . ' ' . $row['last_name'] ),
+				'no'   => (string) $row['employee_no'],
+			),
+			(array) $rows
 		);
 	}
 
@@ -263,9 +298,28 @@ final class PayrollRunService {
 	public function recalculate( int $run_id ): array {
 		Transaction::run(
 			function () use ( $run_id ) {
-				$run = $this->locked( $run_id, array( PayrollRun::DRAFT ), 'recalculate' );
+				$run   = $this->locked( $run_id, array( PayrollRun::DRAFT ), 'recalculate' );
+				$lined = array();
 				foreach ( $this->runs->lines( $run_id ) as $line ) {
+					$lined[ (int) $line->employee_id ] = true;
 					$this->calculateLine( $run, (int) $line->employee_id, $line->json( 'inputs' ) );
+				}
+				// Employees put on the schedule since the run was made join it (R1-T17), on the same
+				// terms as create(): working in the period, not paid for these days elsewhere.
+				$start    = substr( (string) $run->period_start, 0, 10 );
+				$end      = substr( (string) $run->period_end, 0, 10 );
+				$joining  = array_filter(
+					( new EmployeePayRepository() )->forSchedule( (int) $run->pay_schedule_id ),
+					static function ( $p ) use ( $lined, $start ) {
+						$employee = self::employee( (int) $p->employee_id );
+						return ! isset( $lined[ (int) $p->employee_id ] ) && $employee && ( $employee['active'] || ( '' !== $employee['deactivated_on'] && $employee['deactivated_on'] >= $start ) );
+					}
+				);
+				$paid     = $this->runs->paidOverlapping( array_map( static fn( $p ) => (int) $p->employee_id, $joining ), $start, $end );
+				foreach ( $joining as $profile ) {
+					if ( ! isset( $paid[ (int) $profile->employee_id ] ) ) {
+						$this->calculateLine( $run, (int) $profile->employee_id, array() );
+					}
 				}
 				$this->totals( $run_id );
 				/* translators: %s: run. */
@@ -574,6 +628,8 @@ final class PayrollRunService {
 			),
 			'deductions'       => $deductions,
 			'taken_this_month' => $this->runs->takenInMonth( $employee_id, $year, $month, (int) $run->id ),
+			// The bonus rules that apply to them on the pay date, frozen with the line (R1-T17).
+			'bonuses'          => BonusRules::forEmployee( $employee_id, $pay_date ),
 		);
 		$result   = LineCalculator::calculate(
 			$settings + array(

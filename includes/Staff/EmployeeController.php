@@ -40,6 +40,7 @@ class EmployeeController {
 	public static function routes( $router ): void {
 		$router->get( 'employees', array( self::class, 'index' ) );
 		$router->get( 'employees/options', array( self::class, 'options' ) );
+		$router->get( 'employees/accounts', array( self::class, 'accounts' ) );
 		$router->put( 'employees/(?P<id>\d+)/account', array( self::class, 'account' ) ); // phpcs:ignore
 		$router->post( 'employees/(?P<id>\d+)/password-link', array( self::class, 'password_link' ) ); // phpcs:ignore
 		$router->post( 'employees', array( self::class, 'store' ) );
@@ -119,10 +120,32 @@ class EmployeeController {
 		return $this->guard(
 			$request,
 			self::withAccessManage( 'staff.create', $request ),
-			fn( $request ) => ApiResponse::created(
-				array( 'employee' => EmployeeResource::detail( ( new EmployeeService() )->create( (array) $request->get_json_params() ) ) ),
-				__( 'Employee added.', 'radius-hotel-booking-pro' )
-			)->send()
+			function ( $request ) {
+				$body    = (array) $request->get_json_params();
+				$user_id = absint( $body['user_id'] ?? 0 );
+				// An existing sign-in gets a file (R1-T3); otherwise a new user is made with it.
+				$employee = $user_id
+					? ( new EmployeeService() )->linkAccount( $user_id, array_diff_key( $body, array_flip( array( 'user_id', 'username', 'password', 'access_role', 'pin' ) ) ) )
+					: ( new EmployeeService() )->create( $body );
+				return ApiResponse::created(
+					array( 'employee' => EmployeeResource::detail( $employee ) ),
+					__( 'Employee added.', 'radius-hotel-booking-pro' )
+				)->send();
+			}
+		);
+	}
+
+	/**
+	 * GET employees/accounts: sign-ins that can get a file (R1-T3).
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return mixed
+	 */
+	public function accounts( WP_REST_Request $request ) {
+		return $this->guard(
+			$request,
+			'staff.create',
+			fn( $request ) => ApiResponse::success( array( 'accounts' => ( new EmployeeService() )->accounts( sanitize_text_field( (string) $request->get_param( 'q' ) ) ) ) )->send()
 		);
 	}
 

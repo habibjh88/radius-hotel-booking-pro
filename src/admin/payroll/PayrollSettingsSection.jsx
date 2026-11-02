@@ -17,6 +17,8 @@ import {
 	ToggleRow,
 } from '@rtbp/ui';
 
+import BonusRulesSection from './BonusRulesSection';
+
 const NEW_CONTRIBUTION = {
 	code: '',
 	label: '',
@@ -555,6 +557,14 @@ export default function PayrollSettingsSection( {
 					</p>
 				</SettingsSection>
 			) }
+
+			<BonusRulesSection
+				rules={
+					Array.isArray( value.bonusRules ) ? value.bonusRules : []
+				}
+				onChange={ setField( 'bonusRules' ) }
+				error={ errors.bonusRules }
+			/>
 
 			<SettingsSection
 				title={ __( 'Time off', 'radius-hotel-booking-pro' ) }

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-14T11:20:22+00:00\n"
+"POT-Creation-Date: 2026-11-02T06:57:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: radius-hotel-booking-pro\n"
@@ -61,7 +61,7 @@ msgid "Changed the access role %s"
 msgstr ""
 
 #: includes/Access/AccessRoleService.php:127
-msgid "A template role can be changed but not deleted."
+msgid "A built-in role can be changed but not deleted."
 msgstr ""
 
 #. translators: %s: role name.
@@ -89,113 +89,117 @@ msgstr ""
 msgid "Give the role a name of up to 100 characters."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:88
+#: includes/Access/PasscodeController.php:90
 msgid "Unlocked."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:110
+#: includes/Access/PasscodeController.php:112
 #: includes/Access/UserAccessService.php:389
 msgid "This staff member does not exist."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:113
+#: includes/Access/PasscodeController.php:115
 msgid "Only an administrator can change an administrator’s PIN."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:127
+#: includes/Access/PasscodeController.php:129
 #: src/admin/staff/AccountTab.jsx:424
 msgid "PIN removed."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:127
+#: includes/Access/PasscodeController.php:129
 #: src/admin/staff/AccountTab.jsx:399
 msgid "PIN saved."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:155
+#: includes/Access/PasscodeController.php:157
 msgid "Fallback PIN removed."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:155
+#: includes/Access/PasscodeController.php:157
 msgid "Fallback PIN saved."
 msgstr ""
 
-#: includes/Access/PasscodeController.php:171
+#: includes/Access/PasscodeController.php:173
 msgid "Send a PIN, or null to remove it."
 msgstr ""
 
 #: includes/Access/PasscodeService.php:95
-#: includes/Access/PasscodeService.php:138
-#: src/admin/access/PasscodeDialog.jsx:70
-msgid "A PIN is 4 to 8 digits."
+msgid "You do not have a PIN yet. Choose one in My profile → Personal PIN."
 msgstr ""
 
-#: includes/Access/PasscodeService.php:122
-msgid "Removed a staff PIN"
-msgstr ""
-
-#: includes/Access/PasscodeService.php:123
-msgid "Set a staff PIN"
-msgstr ""
-
-#: includes/Access/PasscodeService.php:154
-msgid "Removed the fallback PIN"
-msgstr ""
-
-#: includes/Access/PasscodeService.php:155
-msgid "Set the fallback PIN"
-msgstr ""
-
-#: includes/Access/PasscodeService.php:192
-msgid "Choose what to unlock."
-msgstr ""
-
-#: includes/Access/PasscodeService.php:197
-#: includes/Access/PasscodeService.php:331
-msgid "Another PIN is being checked. Try again in a moment."
-msgstr ""
-
-#: includes/Access/PasscodeService.php:217
-#: src/admin/access/PasscodeDialog.jsx:56
+#: includes/Access/PasscodeService.php:96
+#: src/admin/access/PasscodeDialog.jsx:60
 msgid "You do not have a PIN yet. Ask a manager to set one for you."
 msgstr ""
 
-#: includes/Access/PasscodeService.php:241
+#: includes/Access/PasscodeService.php:119
+#: includes/Access/PasscodeService.php:162
+#: src/admin/access/PasscodeDialog.jsx:74
+msgid "A PIN is 4 to 8 digits."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:146
+msgid "Removed a staff PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:147
+msgid "Set a staff PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:178
+msgid "Removed the fallback PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:179
+msgid "Set the fallback PIN"
+msgstr ""
+
+#: includes/Access/PasscodeService.php:216
+msgid "Choose what to unlock."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:221
+#: includes/Access/PasscodeService.php:355
+msgid "Another PIN is being checked. Try again in a moment."
+msgstr ""
+
+#: includes/Access/PasscodeService.php:265
 msgid "Confirmed with a PIN"
 msgstr ""
 
-#: includes/Access/PasscodeService.php:286
+#: includes/Access/PasscodeService.php:310
 msgid "Enter your PIN to continue."
 msgstr ""
 
-#: includes/Access/PasscodeService.php:310
+#: includes/Access/PasscodeService.php:334
 msgid "You do not have a PIN yet. Use your password instead."
 msgstr ""
 
 #. translators: %d: minutes left.
-#: includes/Access/PasscodeService.php:353
+#: includes/Access/PasscodeService.php:377
 #, php-format
 msgid "Too many wrong PINs. Try again in %d minute."
 msgid_plural "Too many wrong PINs. Try again in %d minutes."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Access/PasscodeService.php:430
+#: includes/Access/PasscodeService.php:454
 msgid "Entered a wrong PIN"
 msgstr ""
 
-#: includes/Access/PasscodeService.php:439
+#: includes/Access/PasscodeService.php:463
 msgid "Locked out after too many wrong PINs"
 msgstr ""
 
 #. translators: %d: minutes.
-#: includes/Access/PasscodeService.php:447
+#: includes/Access/PasscodeService.php:471
 #, php-format
 msgid "Too many wrong PINs. Try again in %d minutes."
 msgstr ""
 
 #. translators: %d: attempts left.
-#: includes/Access/PasscodeService.php:459
+#: includes/Access/PasscodeService.php:483
 #, php-format
 msgid "Wrong PIN. %d attempt left."
 msgid_plural "Wrong PIN. %d attempts left."
@@ -207,13 +211,13 @@ msgid "Username"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:40
-#: src/admin/staff/CreateEmployeeScreen.jsx:248
+#: src/admin/staff/CreateEmployeeScreen.jsx:282
 #: src/admin/staff/FileTabs.jsx:428
 msgid "First name"
 msgstr ""
 
 #: includes/Access/ProfileFields.php:41
-#: src/admin/staff/CreateEmployeeScreen.jsx:260
+#: src/admin/staff/CreateEmployeeScreen.jsx:294
 #: src/admin/staff/FileTabs.jsx:435
 msgid "Last name"
 msgstr ""
@@ -243,7 +247,7 @@ msgstr ""
 #: includes/Access/ProfileFields.php:46
 #: includes/ActivityLog/DeviceParser.php:45
 #: src/admin/self/ProfileScreen.jsx:358
-#: src/admin/staff/CreateEmployeeScreen.jsx:270
+#: src/admin/staff/CreateEmployeeScreen.jsx:304
 #: src/admin/staff/FileTabs.jsx:522
 #: src/admin/staff/FileTabs.jsx:593
 #: src/admin/staff/StaffListScreen.jsx:112
@@ -252,7 +256,7 @@ msgstr ""
 
 #: includes/Access/ProfileFields.php:47
 #: src/admin/staff/AccountTab.jsx:114
-#: src/admin/staff/CreateEmployeeScreen.jsx:285
+#: src/admin/staff/CreateEmployeeScreen.jsx:319
 #: src/admin/staff/FileTabs.jsx:533
 msgid "E-mail"
 msgstr ""
@@ -270,8 +274,8 @@ msgstr ""
 
 #: includes/Access/ProfileFields.php:50
 #: src/admin/self/SecuritySection.jsx:95
-#: src/admin/staff/CreateEmployeeScreen.jsx:376
-#: src/admin/staff/CreateEmployeeScreen.jsx:403
+#: src/admin/staff/CreateEmployeeScreen.jsx:566
+#: src/admin/staff/CreateEmployeeScreen.jsx:593
 msgid "Password"
 msgstr ""
 
@@ -550,8 +554,8 @@ msgstr ""
 #: includes/Features/ActivityLog/ActivityLogFeature.php:224
 #: includes/Features/FeatureRegistry.php:133
 #: src/admin/activity/ActivityScreen.jsx:107
-#: src/admin/index.js:295
-#: src/admin/index.js:317
+#: src/admin/index.js:346
+#: src/admin/index.js:368
 msgid "Activity log"
 msgstr ""
 
@@ -690,7 +694,7 @@ msgstr ""
 
 #: includes/Features/FeatureRegistry.php:175
 #: includes/Features/Staff/StaffRecordsFeature.php:85
-#: src/admin/index.js:117
+#: src/admin/index.js:151
 #: src/admin/staff/StaffListScreen.jsx:196
 #: src/admin/staff/StaffListScreen.jsx:272
 msgid "Staff"
@@ -698,7 +702,7 @@ msgstr ""
 
 #: includes/Features/Ical/IcalSyncFeature.php:81
 #: src/admin/ical/CalendarSyncScreen.jsx:549
-#: src/admin/index.js:93
+#: src/admin/index.js:125
 msgid "Calendar sync"
 msgstr ""
 
@@ -731,7 +735,7 @@ msgid "Read a channel calendar"
 msgstr ""
 
 #: includes/Features/Payments/AutoReleaseFeature.php:112
-#: src/admin/index.js:267
+#: src/admin/index.js:318
 #: src/admin/payments/AutoReleaseSettingsSection.jsx:25
 msgid "Automatic release"
 msgstr ""
@@ -765,7 +769,7 @@ msgid "Deleted a pricing rule"
 msgstr ""
 
 #: includes/Features/Reports/AdvancedReportsFeature.php:84
-#: src/admin/index.js:362
+#: src/admin/index.js:413
 #: src/admin/pricing/OccupancyTab.jsx:107
 #: src/admin/pricing/PricingScreen.jsx:43
 #: src/admin/reports/OccupancyTab.jsx:87
@@ -773,7 +777,7 @@ msgid "Occupancy"
 msgstr ""
 
 #: includes/Features/Reports/AdvancedReportsFeature.php:92
-#: src/admin/index.js:371
+#: src/admin/index.js:422
 msgid "Revenue breakdown"
 msgstr ""
 
@@ -795,8 +799,8 @@ msgid "Changed their own PIN"
 msgstr ""
 
 #: includes/Features/Staff/StaffRecordsFeature.php:86
-#: src/admin/index.js:130
-#: src/admin/staff/CreateEmployeeScreen.jsx:224
+#: src/admin/index.js:166
+#: src/admin/staff/CreateEmployeeScreen.jsx:258
 msgid "Add an employee"
 msgstr ""
 
@@ -1127,8 +1131,8 @@ msgstr ""
 #: includes/Staff/ContractService.php:363
 #: includes/Staff/ContractService.php:369
 #: includes/Staff/DocumentService.php:124
-#: includes/Staff/EmployeeService.php:643
-#: includes/Staff/EmployeeService.php:680
+#: includes/Staff/EmployeeService.php:734
+#: includes/Staff/EmployeeService.php:771
 msgid "Choose from the list."
 msgstr ""
 
@@ -1270,7 +1274,7 @@ msgid "Request cancelled."
 msgstr ""
 
 #: includes/Payroll/MyPayrollService.php:36
-msgid "Your account has no employee file, so there is no payroll to show."
+msgid "Your sign-in has no employee file, so there is no payroll to show. A manager can link it: Staff → Add an employee → Existing sign-in."
 msgstr ""
 
 #: includes/Payroll/MyPayrollService.php:80
@@ -1363,9 +1367,9 @@ msgstr ""
 
 #: includes/Payroll/PayrollAccess.php:41
 #: includes/Payroll/PayrollReports.php:45
-#: src/admin/index.js:410
-#: src/admin/index.js:454
-#: src/admin/index.js:475
+#: src/admin/index.js:463
+#: src/admin/index.js:517
+#: src/admin/index.js:538
 #: src/admin/payroll/PayrollScreen.jsx:61
 msgid "Payroll"
 msgstr ""
@@ -1612,7 +1616,7 @@ msgstr ""
 
 #: includes/Payroll/PayrollReports.php:265
 #: templates/documents/payslip.php:92
-#: src/admin/index.js:138
+#: src/admin/index.js:179
 #: src/admin/payroll/PayrollSettingsSection.jsx:211
 #: src/admin/payroll/reports.jsx:234
 #: src/admin/payroll/RunScreen.jsx:420
@@ -1964,8 +1968,8 @@ msgstr ""
 #: includes/Staff/ContractService.php:376
 #: includes/Staff/ContractService.php:392
 #: includes/Staff/DocumentService.php:131
-#: includes/Staff/EmployeeService.php:617
-#: includes/Staff/EmployeeService.php:696
+#: includes/Staff/EmployeeService.php:708
+#: includes/Staff/EmployeeService.php:787
 msgid "This is too long."
 msgstr ""
 
@@ -2099,7 +2103,7 @@ msgstr ""
 #: includes/Payroll/TimeOffService.php:67
 #: includes/Staff/ContractService.php:480
 #: includes/Staff/DocumentService.php:307
-#: includes/Staff/EmployeeService.php:526
+#: includes/Staff/EmployeeService.php:617
 msgid "Other"
 msgstr ""
 
@@ -2594,7 +2598,7 @@ msgstr ""
 
 #: includes/SelfService/CredentialsService.php:126
 #: includes/Staff/EmployeeService.php:113
-#: includes/Staff/EmployeeService.php:415
+#: includes/Staff/EmployeeService.php:506
 msgid "Enter a PIN of 4 to 8 digits."
 msgstr ""
 
@@ -2659,21 +2663,21 @@ msgid "Enter your first and last name."
 msgstr ""
 
 #: includes/SelfService/ProfileService.php:186
-#: includes/Staff/EmployeeService.php:670
+#: includes/Staff/EmployeeService.php:761
 msgid "Enter a valid e-mail address."
 msgstr ""
 
 #: includes/SelfService/ProfileService.php:188
 #: includes/Staff/EmployeeService.php:125
 #: includes/Staff/EmployeeService.php:175
-#: includes/Staff/EmployeeService.php:294
+#: includes/Staff/EmployeeService.php:385
 msgid "Another account already uses this e-mail."
 msgstr ""
 
 #. translators: %s: name.
 #. translators: %s: employee name.
 #: includes/SelfService/ProfileService.php:232
-#: includes/Staff/EmployeeService.php:334
+#: includes/Staff/EmployeeService.php:425
 #, php-format
 msgid "%s updated their own profile"
 msgstr ""
@@ -2861,30 +2865,30 @@ msgstr ""
 msgid "This file is too large. The limit is %s."
 msgstr ""
 
-#: includes/Staff/EmployeeController.php:124
-#: src/admin/staff/CreateEmployeeScreen.jsx:173
+#: includes/Staff/EmployeeController.php:132
+#: src/admin/staff/CreateEmployeeScreen.jsx:207
 msgid "Employee added."
 msgstr ""
 
-#: includes/Staff/EmployeeController.php:141
+#: includes/Staff/EmployeeController.php:164
 msgid "Employee saved."
 msgstr ""
 
-#: includes/Staff/EmployeeController.php:158
+#: includes/Staff/EmployeeController.php:181
 msgid "Employee deactivated: they can no longer sign in."
 msgstr ""
 
-#: includes/Staff/EmployeeController.php:175
+#: includes/Staff/EmployeeController.php:198
 #: src/admin/staff/StaffDetailScreen.jsx:402
 #: src/admin/staff/StaffListScreen.jsx:330
 msgid "Employee reactivated."
 msgstr ""
 
-#: includes/Staff/EmployeeController.php:202
+#: includes/Staff/EmployeeController.php:225
 msgid "Account saved."
 msgstr ""
 
-#: includes/Staff/EmployeeController.php:219
+#: includes/Staff/EmployeeController.php:242
 msgid "Password link sent."
 msgstr ""
 
@@ -2897,7 +2901,7 @@ msgid "This user name is taken."
 msgstr ""
 
 #: includes/Staff/EmployeeService.php:109
-#: includes/Staff/EmployeeService.php:411
+#: includes/Staff/EmployeeService.php:502
 #: src/admin/staff/AccountTab.jsx:129
 msgid "Use at least 8 characters."
 msgstr ""
@@ -2916,154 +2920,159 @@ msgstr ""
 msgid "Added the employee file of %1$s (existing user %2$s)"
 msgstr ""
 
+#: includes/Staff/EmployeeService.php:280
+#: includes/Staff/EmployeeService.php:673
+msgid "Only an administrator can change an administrator's account."
+msgstr ""
+
+#: includes/Staff/EmployeeService.php:284
+msgid "Only a sign-in that already opens the dashboard can be used."
+msgstr ""
+
 #. translators: 1: employee name, 2: user name.
-#: includes/Staff/EmployeeService.php:267
+#: includes/Staff/EmployeeService.php:358
 #, php-format
 msgid "Added the employee %1$s (user %2$s)"
 msgstr ""
 
 #. translators: %s: employee name.
-#: includes/Staff/EmployeeService.php:336
+#: includes/Staff/EmployeeService.php:427
 #, php-format
 msgid "Changed the file of %s"
 msgstr ""
 
 #. translators: %s: employee name.
-#: includes/Staff/EmployeeService.php:360
+#: includes/Staff/EmployeeService.php:451
 #, php-format
 msgid "Viewed the social security and tax numbers of %s"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:424
+#: includes/Staff/EmployeeService.php:515
 msgid "PINs and access roles need the Advanced staff access feature (Settings → Pro features)."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:431
+#: includes/Staff/EmployeeService.php:522
 #: src/admin/staff/AccountTab.jsx:263
 msgid "You cannot change your own access role."
 msgstr ""
 
 #. translators: %s: employee name.
-#: includes/Staff/EmployeeService.php:443
+#: includes/Staff/EmployeeService.php:534
 #, php-format
 msgid "Set a new password for %s"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:473
+#: includes/Staff/EmployeeService.php:564
 msgid "Add an e-mail address first: the link is sent there."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:478
+#: includes/Staff/EmployeeService.php:569
 msgid "The e-mail could not be sent. Check the site's e-mail settings, or set a password here."
 msgstr ""
 
 #. translators: %s: employee name.
-#: includes/Staff/EmployeeService.php:486
+#: includes/Staff/EmployeeService.php:577
 #, php-format
 msgid "Sent %s a link to set their password"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:511
+#: includes/Staff/EmployeeService.php:602
 msgid "Single"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:512
+#: includes/Staff/EmployeeService.php:603
 msgid "Married"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:513
+#: includes/Staff/EmployeeService.php:604
 msgid "Divorced"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:514
+#: includes/Staff/EmployeeService.php:605
 msgid "Separated"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:515
+#: includes/Staff/EmployeeService.php:606
 msgid "Widowed"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:518
+#: includes/Staff/EmployeeService.php:609
 msgid "Father"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:519
+#: includes/Staff/EmployeeService.php:610
 msgid "Mother"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:520
+#: includes/Staff/EmployeeService.php:611
 msgid "Spouse"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:521
+#: includes/Staff/EmployeeService.php:612
 msgid "Brother"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:522
+#: includes/Staff/EmployeeService.php:613
 msgid "Sister"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:523
+#: includes/Staff/EmployeeService.php:614
 msgid "Friend"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:524
+#: includes/Staff/EmployeeService.php:615
 msgid "Relative"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:525
+#: includes/Staff/EmployeeService.php:616
 msgid "Guardian"
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:549
+#: includes/Staff/EmployeeService.php:640
 msgid "This account is deactivated. Ask a manager."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:582
-msgid "Only an administrator can change an administrator's account."
-msgstr ""
-
-#: includes/Staff/EmployeeService.php:595
+#: includes/Staff/EmployeeService.php:686
 msgid "Changing access roles and PINs needs the \"Manage permissions\" permission."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:624
+#: includes/Staff/EmployeeService.php:715
 msgid "Enter the first and last name."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:632
+#: includes/Staff/EmployeeService.php:723
 msgid "Enter a valid date of birth."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:653
+#: includes/Staff/EmployeeService.php:744
 msgid "Enter a number from 0 to 30."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:664
-#: src/admin/staff/CreateEmployeeScreen.jsx:138
+#: includes/Staff/EmployeeService.php:755
+#: src/admin/staff/CreateEmployeeScreen.jsx:153
 msgid "Enter the phone number."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:724
+#: includes/Staff/EmployeeService.php:815
 msgid "This employee is already active."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:724
+#: includes/Staff/EmployeeService.php:815
 msgid "This employee is already deactivated."
 msgstr ""
 
-#: includes/Staff/EmployeeService.php:730
+#: includes/Staff/EmployeeService.php:821
 msgid "You cannot deactivate your own account."
 msgstr ""
 
 #. translators: %s: employee name.
-#: includes/Staff/EmployeeService.php:758
+#: includes/Staff/EmployeeService.php:849
 #, php-format
 msgid "Reactivated %s"
 msgstr ""
 
 #. translators: %s: employee name.
-#: includes/Staff/EmployeeService.php:760
+#: includes/Staff/EmployeeService.php:851
 #, php-format
 msgid "Deactivated %s: they can no longer sign in"
 msgstr ""
@@ -3185,7 +3194,7 @@ msgid "Year to date"
 msgstr ""
 
 #: templates/documents/payslip.php:212
-#: src/admin/index.js:487
+#: src/admin/index.js:550
 #: src/admin/payroll/PayrollSettingsSection.jsx:541
 #: src/admin/payroll/reports.jsx:143
 #: src/admin/payroll/RunScreen.jsx:440
@@ -3268,7 +3277,7 @@ msgid "Staff without a personal PIN, and administrators, may confirm with a shar
 msgstr ""
 
 #: src/admin/access/AccessSection.jsx:228
-#: src/admin/access/RoleEditor.jsx:157
+#: src/admin/access/RoleEditor.jsx:158
 #: src/admin/access/StaffAccess.jsx:284
 msgid "Profile fields"
 msgstr ""
@@ -3306,7 +3315,7 @@ msgid "Open"
 msgstr ""
 
 #: src/admin/access/levels.js:15
-#: src/admin/index.js:190
+#: src/admin/index.js:237
 msgid "Passcode"
 msgstr ""
 
@@ -3325,7 +3334,7 @@ msgstr ""
 #: src/admin/access/ProfileFieldsControl.jsx:37
 #: src/admin/access/StaffAccess.jsx:184
 #: src/admin/staff/AccountTab.jsx:256
-#: src/admin/staff/CreateEmployeeScreen.jsx:506
+#: src/admin/staff/CreateEmployeeScreen.jsx:700
 #: src/admin/staff/StaffListScreen.jsx:117
 msgid "Access role"
 msgstr ""
@@ -3337,9 +3346,9 @@ msgstr ""
 #: src/admin/access/levels.js:50
 #: src/admin/access/ProfileFieldsControl.jsx:38
 #: src/admin/access/ProfileFieldsControl.jsx:39
-#: src/admin/access/RoleEditor.jsx:137
-#: src/admin/access/RoleEditor.jsx:151
-#: src/admin/access/RoleEditor.jsx:166
+#: src/admin/access/RoleEditor.jsx:138
+#: src/admin/access/RoleEditor.jsx:152
+#: src/admin/access/RoleEditor.jsx:167
 msgid "Default"
 msgstr ""
 
@@ -3353,30 +3362,30 @@ msgstr ""
 msgid "No dashboard access"
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:48
+#: src/admin/access/PasscodeDialog.jsx:50
 msgid "Too many wrong PINs. Try again later."
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:112
+#: src/admin/access/PasscodeDialog.jsx:116
 msgid "Enter your PIN"
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:118
+#: src/admin/access/PasscodeDialog.jsx:122
 msgid "This action is protected. Confirm it with your personal PIN."
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:134
+#: src/admin/access/PasscodeDialog.jsx:138
 #: src/admin/staff/AccountTab.jsx:336
 msgid "PIN"
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:161
+#: src/admin/access/PasscodeDialog.jsx:168
 #: src/admin/payroll/LineDialog.jsx:628
 msgid "Close"
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:162
-#: src/admin/access/RoleEditor.jsx:188
+#: src/admin/access/PasscodeDialog.jsx:169
+#: src/admin/access/RoleEditor.jsx:192
 #: src/admin/exports/SchedulesPanel.jsx:530
 #: src/admin/ical/ImportDialog.jsx:257
 #: src/admin/payroll/Deductions.jsx:565
@@ -3393,18 +3402,22 @@ msgstr ""
 #: src/admin/pricing/AdjustedRuleEditor.jsx:152
 #: src/admin/pricing/SeasonalTab.jsx:449
 #: src/admin/pricing/TemplatesTab.jsx:252
-#: src/admin/staff/CreateEmployeeScreen.jsx:334
+#: src/admin/staff/CreateEmployeeScreen.jsx:368
 #: src/admin/staff/EmploymentTab.jsx:310
 #: src/admin/staff/EmploymentTab.jsx:424
 #: src/admin/staff/FileTabs.jsx:364
 msgid "Cancel"
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:170
+#: src/admin/access/PasscodeDialog.jsx:182
+msgid "Set my PIN"
+msgstr ""
+
+#: src/admin/access/PasscodeDialog.jsx:194
 msgid "Checking…"
 msgstr ""
 
-#: src/admin/access/PasscodeDialog.jsx:174
+#: src/admin/access/PasscodeDialog.jsx:198
 msgid "Confirm"
 msgstr ""
 
@@ -3430,25 +3443,24 @@ msgstr ""
 msgid "The file could not be downloaded."
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:85
+#: src/admin/access/RoleEditor.jsx:83
 msgid "Edit access role"
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:86
+#: src/admin/access/RoleEditor.jsx:84
 msgid "New access role"
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:88
+#: src/admin/access/RoleEditor.jsx:86
 msgid "Everyone with this role gets these permissions. A key left on Default follows Settings → Permissions."
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:95
+#: src/admin/access/RoleEditor.jsx:93
 #: src/admin/access/RolesScreen.jsx:130
-#: src/admin/pricing/SeasonalTab.jsx:484
-msgid "Template"
+msgid "Built-in"
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:101
+#: src/admin/access/RoleEditor.jsx:99
 #: src/admin/payroll/LineDialog.jsx:495
 #: src/admin/payroll/PayrollSettingsSection.jsx:126
 #: src/admin/payroll/SchedulesTab.jsx:142
@@ -3459,30 +3471,30 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:112
+#: src/admin/access/RoleEditor.jsx:110
 #: src/admin/payroll/ShiftsTab.jsx:327
 msgid "Description"
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:124
-#: src/admin/access/RoleEditor.jsx:132
+#: src/admin/access/RoleEditor.jsx:122
+#: src/admin/access/RoleEditor.jsx:133
 msgid "Everything else"
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:125
+#: src/admin/access/RoleEditor.jsx:126
 msgid "The level of every page and action this role does not set below, including ones added later."
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:158
+#: src/admin/access/RoleEditor.jsx:159
 msgid "Which fields people with this role may change on their own profile. Default follows Settings → Passcodes."
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:192
-#: src/admin/ProFeaturesSection.jsx:181
+#: src/admin/access/RoleEditor.jsx:196
+#: src/admin/ProFeaturesSection.jsx:180
 msgid "Saving…"
 msgstr ""
 
-#: src/admin/access/RoleEditor.jsx:193
+#: src/admin/access/RoleEditor.jsx:197
 #: src/admin/staff/AccountTab.jsx:326
 msgid "Save role"
 msgstr ""
@@ -3503,12 +3515,12 @@ msgid "Try again"
 msgstr ""
 
 #: src/admin/access/RolesScreen.jsx:72
-#: src/admin/access/RolesScreen.jsx:189
+#: src/admin/access/RolesScreen.jsx:192
 msgid "New role"
 msgstr ""
 
 #: src/admin/access/RolesScreen.jsx:110
-#: src/admin/index.js:211
+#: src/admin/index.js:260
 msgid "Access roles"
 msgstr ""
 
@@ -3549,7 +3561,7 @@ msgstr ""
 msgid "No access roles yet"
 msgstr ""
 
-#: src/admin/access/RolesScreen.jsx:183
+#: src/admin/access/RolesScreen.jsx:186
 msgid "Create a role such as Receptionist and assign it to your staff."
 msgstr ""
 
@@ -3557,7 +3569,7 @@ msgstr ""
 #. translators: %s: deduction name.
 #. translators: %s: pay schedule name.
 #. translators: %s: work shift name.
-#: src/admin/access/RolesScreen.jsx:203
+#: src/admin/access/RolesScreen.jsx:208
 #: src/admin/payroll/Deductions.jsx:723
 #: src/admin/payroll/SchedulesTab.jsx:376
 #: src/admin/payroll/ShiftsTab.jsx:533
@@ -3565,11 +3577,11 @@ msgstr ""
 msgid "Delete %s?"
 msgstr ""
 
-#: src/admin/access/RolesScreen.jsx:206
+#: src/admin/access/RolesScreen.jsx:211
 msgid "Everyone with this role goes back to the default permissions. Their personal overrides stay."
 msgstr ""
 
-#: src/admin/access/RolesScreen.jsx:210
+#: src/admin/access/RolesScreen.jsx:215
 msgid "Delete role"
 msgstr ""
 
@@ -3583,18 +3595,18 @@ msgid "Change PIN"
 msgstr ""
 
 #: src/admin/access/StaffAccess.jsx:92
-#: src/admin/access/StaffScreen.jsx:96
+#: src/admin/access/StaffScreen.jsx:118
 msgid "PIN set"
 msgstr ""
 
 #: src/admin/access/StaffAccess.jsx:93
-#: src/admin/access/StaffScreen.jsx:97
+#: src/admin/access/StaffScreen.jsx:122
 msgid "No PIN"
 msgstr ""
 
 #: src/admin/access/StaffAccess.jsx:169
 #: src/admin/activity/ActivityScreen.jsx:131
-#: src/admin/staff/CreateEmployeeScreen.jsx:221
+#: src/admin/staff/CreateEmployeeScreen.jsx:255
 #: src/admin/staff/StaffDetailScreen.jsx:173
 msgid "All staff"
 msgstr ""
@@ -3653,52 +3665,52 @@ msgstr ""
 msgid "Every personal override is removed; the access role and the defaults apply again."
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:31
+#: src/admin/access/StaffScreen.jsx:37
 msgid "Reset all overrides"
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:55
-#: src/admin/index.js:224
+#: src/admin/access/StaffScreen.jsx:61
+#: src/admin/index.js:273
 msgid "Staff access"
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:56
+#: src/admin/access/StaffScreen.jsx:62
 msgid "Give each person an access role, a PIN, and single exceptions where needed."
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:78
+#: src/admin/access/StaffScreen.jsx:91
 msgid "No access role"
 msgstr ""
 
 #. translators: %d: number of overrides.
-#: src/admin/access/StaffScreen.jsx:84
+#: src/admin/access/StaffScreen.jsx:106
 #, js-format
 msgid "%d override"
 msgid_plural "%d overrides"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/access/StaffScreen.jsx:109
+#: src/admin/access/StaffScreen.jsx:137
 msgid "Manage"
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:117
+#: src/admin/access/StaffScreen.jsx:145
 msgid "No staff yet"
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:118
+#: src/admin/access/StaffScreen.jsx:146
 msgid "People with the Manager or Staff role appear here."
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:131
+#: src/admin/access/StaffScreen.jsx:161
 msgid "Reset everyone’s personal overrides?"
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:135
+#: src/admin/access/StaffScreen.jsx:165
 msgid "Every personal override is removed. Access roles stay; everyone gets their role and the defaults again."
 msgstr ""
 
-#: src/admin/access/StaffScreen.jsx:139
+#: src/admin/access/StaffScreen.jsx:169
 msgid "Reset all"
 msgstr ""
 
@@ -4382,87 +4394,91 @@ msgid_plural "Every %d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/index.js:51
-#: src/admin/ProFeaturesSection.jsx:138
+#: src/admin/index.js:83
+#: src/admin/ProFeaturesSection.jsx:137
 msgid "Pro features"
 msgstr ""
 
-#: src/admin/index.js:69
+#: src/admin/index.js:101
 msgid "Pricing rules"
 msgstr ""
 
-#: src/admin/index.js:70
+#: src/admin/index.js:102
 msgid "Seasonal, occupancy and booking-window prices"
 msgstr ""
 
-#: src/admin/index.js:94
+#: src/admin/index.js:126
 msgid "Share and read room calendars with channels"
 msgstr ""
 
-#: src/admin/index.js:118
+#: src/admin/index.js:152
 msgid "Employee files, contracts and documents"
 msgstr ""
 
-#: src/admin/index.js:157
-#: src/admin/index.js:171
+#: src/admin/index.js:204
+#: src/admin/index.js:218
 msgid "My profile"
 msgstr ""
 
-#: src/admin/index.js:212
+#: src/admin/index.js:261
 msgid "Named roles such as Receptionist, with their permissions"
 msgstr ""
 
-#: src/admin/index.js:225
+#: src/admin/index.js:274
 msgid "Each person’s access role, PIN and personal overrides"
 msgstr ""
 
-#: src/admin/index.js:244
+#: src/admin/index.js:295
 msgid "Passcodes"
 msgstr ""
 
-#: src/admin/index.js:247
+#: src/admin/index.js:298
 msgid "PIN confirmation, the fallback PIN and the locked message"
 msgstr ""
 
-#: src/admin/index.js:268
+#: src/admin/index.js:319
 msgid "Free the room when a booking stays unpaid past its deadline"
 msgstr ""
 
-#: src/admin/index.js:296
+#: src/admin/index.js:347
 msgid "Archiving, removing archived entries and page views"
 msgstr ""
 
-#: src/admin/index.js:318
+#: src/admin/index.js:369
 msgid "Who did what, when and from which device"
 msgstr ""
 
-#: src/admin/index.js:411
+#: src/admin/index.js:464
 msgid "Pay runs, payslips, taxes and contributions, and time off"
 msgstr ""
 
-#: src/admin/index.js:423
+#: src/admin/index.js:478
 msgid "Pay run"
 msgstr ""
 
-#: src/admin/index.js:424
+#: src/admin/index.js:479
 msgid "Lines, totals and what can be done next"
 msgstr ""
 
-#: src/admin/index.js:434
-#: src/admin/index.js:544
+#: src/admin/index.js:491
+msgid "My paychecks"
+msgstr ""
+
+#: src/admin/index.js:492
+#: src/admin/index.js:607
 #: src/admin/payroll/self/MyPayrollScreen.jsx:492
 msgid "My payroll"
 msgstr ""
 
-#: src/admin/index.js:435
+#: src/admin/index.js:493
 msgid "Your payslips and time off"
 msgstr ""
 
-#: src/admin/index.js:455
+#: src/admin/index.js:518
 msgid "Taxes and contributions, and the vacation quota"
 msgstr ""
 
-#: src/admin/index.js:516
+#: src/admin/index.js:579
 msgid "Pay"
 msgstr ""
 
@@ -5005,7 +5021,7 @@ msgstr ""
 
 #: src/admin/payroll/PayTab.jsx:195
 #: src/admin/payroll/ShiftsTab.jsx:433
-#: src/admin/staff/CreateEmployeeScreen.jsx:318
+#: src/admin/staff/CreateEmployeeScreen.jsx:352
 #: src/admin/staff/EmploymentTab.jsx:503
 msgid "Work shift"
 msgstr ""
@@ -5976,6 +5992,10 @@ msgstr ""
 msgid "Create a template first, on the Templates tab."
 msgstr ""
 
+#: src/admin/pricing/SeasonalTab.jsx:484
+msgid "Template"
+msgstr ""
+
 #: src/admin/pricing/SeasonalTab.jsx:494
 msgid "Choose a template"
 msgstr ""
@@ -6079,16 +6099,16 @@ msgid "In development"
 msgstr ""
 
 #. translators: %s: comma-separated feature names.
-#: src/admin/ProFeaturesSection.jsx:84
+#: src/admin/ProFeaturesSection.jsx:83
 #, js-format
 msgid "Requires: %s"
 msgstr ""
 
-#: src/admin/ProFeaturesSection.jsx:141
+#: src/admin/ProFeaturesSection.jsx:140
 msgid "Switch each Pro feature on or off. A feature that is off adds nothing to the site, and its data is kept for when you switch it back on. Changes apply on the next page load."
 msgstr ""
 
-#: src/admin/ProFeaturesSection.jsx:182
+#: src/admin/ProFeaturesSection.jsx:181
 msgid "Save changes"
 msgstr ""
 
@@ -6319,11 +6339,12 @@ msgid "Only a manager can change your PIN."
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:101
+#: src/admin/staff/CreateEmployeeScreen.jsx:386
 msgid "Sign-in"
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:106
-#: src/admin/staff/CreateEmployeeScreen.jsx:352
+#: src/admin/staff/CreateEmployeeScreen.jsx:539
 msgid "User name"
 msgstr ""
 
@@ -6332,12 +6353,12 @@ msgid "Password changed."
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:178
-#: src/admin/staff/CreateEmployeeScreen.jsx:442
+#: src/admin/staff/CreateEmployeeScreen.jsx:634
 msgid "Hide password"
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:182
-#: src/admin/staff/CreateEmployeeScreen.jsx:446
+#: src/admin/staff/CreateEmployeeScreen.jsx:638
 msgid "Show password"
 msgstr ""
 
@@ -6360,7 +6381,7 @@ msgid "Access and PIN"
 msgstr ""
 
 #: src/admin/staff/AccountTab.jsx:280
-#: src/admin/staff/CreateEmployeeScreen.jsx:534
+#: src/admin/staff/CreateEmployeeScreen.jsx:729
 msgid "Staff defaults"
 msgstr ""
 
@@ -6384,100 +6405,136 @@ msgstr ""
 msgid "Remove PIN"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:126
+#: src/admin/staff/CreateEmployeeScreen.jsx:141
 msgid "Enter the first name."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:132
+#: src/admin/staff/CreateEmployeeScreen.jsx:147
 msgid "Enter the last name."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:157
+#: src/admin/staff/CreateEmployeeScreen.jsx:169
+msgid "Choose the sign-in to use."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:189
 msgid "Add an e-mail address: the link is sent there."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:179
+#: src/admin/staff/CreateEmployeeScreen.jsx:213
 msgid "A link to set the password was e-mailed."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:230
+#: src/admin/staff/CreateEmployeeScreen.jsx:264
 msgid "Step 1 of 2 — who they are."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:234
+#: src/admin/staff/CreateEmployeeScreen.jsx:268
 msgid "Step 2 of 2 — how they sign in."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:290
+#: src/admin/staff/CreateEmployeeScreen.jsx:324
 msgid "Needed to e-mail them a password link."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:298
+#: src/admin/staff/CreateEmployeeScreen.jsx:332
 #: src/admin/staff/EmploymentTab.jsx:246
 #: src/admin/staff/EmploymentTab.jsx:485
 msgid "Job title"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:307
+#: src/admin/staff/CreateEmployeeScreen.jsx:341
 #: src/admin/staff/EmploymentTab.jsx:255
 #: src/admin/staff/EmploymentTab.jsx:494
 msgid "Department"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:323
+#: src/admin/staff/CreateEmployeeScreen.jsx:357
 #: src/admin/staff/EmploymentTab.jsx:508
 msgid "For example Morning, Day or Night."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:341
+#: src/admin/staff/CreateEmployeeScreen.jsx:375
 msgid "Next"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:357
+#: src/admin/staff/CreateEmployeeScreen.jsx:398
+msgid "New sign-in"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:405
+msgid "Existing sign-in"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:415
+msgid "Sign-in to use"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:420
+msgid "Accounts that already open the dashboard and have no employee file. Their password, access role and PIN stay as they are."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:439
+msgid "Name, user name or e-mail"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:443
+msgid "Search sign-ins"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:457
+msgid "No sign-in without an employee file matches."
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:467
+msgid "Sign-ins"
+msgstr ""
+
+#: src/admin/staff/CreateEmployeeScreen.jsx:544
 msgid "They sign in with it. It cannot be changed later."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:387
+#: src/admin/staff/CreateEmployeeScreen.jsx:577
 msgid "Set a password"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:394
+#: src/admin/staff/CreateEmployeeScreen.jsx:584
 msgid "E-mail them a link"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:408
+#: src/admin/staff/CreateEmployeeScreen.jsx:598
 msgid "At least 8 characters. Give it to them in person."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:475
+#: src/admin/staff/CreateEmployeeScreen.jsx:669
 msgid "Suggest a password"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:490
+#: src/admin/staff/CreateEmployeeScreen.jsx:684
 msgid "After saving, a link to choose their password is sent to their e-mail."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:494
+#: src/admin/staff/CreateEmployeeScreen.jsx:688
 msgid "Add their e-mail in step 1 to send the link."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:511
+#: src/admin/staff/CreateEmployeeScreen.jsx:705
 msgid "What they may open and do. Without one, the staff defaults apply."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:553
+#: src/admin/staff/CreateEmployeeScreen.jsx:754
 msgid "PIN (optional)"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:558
+#: src/admin/staff/CreateEmployeeScreen.jsx:759
 msgid "4 to 8 digits, to confirm protected actions."
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:579
+#: src/admin/staff/CreateEmployeeScreen.jsx:783
 msgid "Back"
 msgstr ""
 
-#: src/admin/staff/CreateEmployeeScreen.jsx:585
+#: src/admin/staff/CreateEmployeeScreen.jsx:789
 #: src/admin/staff/StaffListScreen.jsx:47
 msgid "Add employee"
 msgstr ""

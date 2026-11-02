@@ -210,6 +210,97 @@ class EmployeeService {
 	}
 
 	/**
+	 * Sign-ins that may get an employee file from the New staff screen: users
+	 * who already open the dashboard and have no file yet (R1-T3). Guests'
+	 * accounts are never listed, and an administrator only to administrators.
+	 *
+	 * @param string $q     Search on name, user name or e-mail.
+	 * @param int    $limit Most rows.
+	 * @return array[] `{ id, name, username, email, first_name, last_name }`.
+	 */
+	public function accounts( string $q, int $limit = 20 ): array {
+		global $wpdb;
+		// Only roles that open the dashboard: a site's thousands of guest accounts never reach the loop.
+		$roles = array();
+		foreach ( wp_roles()->roles as $slug => $role ) {
+			$caps = (array) ( $role['capabilities'] ?? array() );
+			if ( ! empty( $caps[ Capabilities::VIEW_DASHBOARD ] ) || ! empty( $caps['manage_options'] ) ) {
+				$roles[] = $slug;
+			}
+		}
+		if ( ! $roles ) {
+			return array();
+		}
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- the users who already have a file.
+		$filed = array_map( 'intval', (array) $wpdb->get_col( $wpdb->prepare( 'SELECT user_id FROM %i WHERE user_id IS NOT NULL', EmployeeRepository::table() ) ) );
+		$args  = array(
+			'role__in' => $roles,
+			'exclude'  => $filed,
+			'number'   => 200,
+			'orderby'  => 'display_name',
+			'fields'   => 'all',
+		);
+		$q     = trim( $q );
+		if ( '' !== $q ) {
+			$args['search']         = '*' . $q . '*';
+			$args['search_columns'] = array( 'user_login', 'user_email', 'display_name' );
+		}
+		$out = array();
+		foreach ( get_users( $args ) as $user ) {
+			if ( ! self::linkable( (int) $user->ID ) ) {
+				continue;
+			}
+			$out[] = array(
+				'id'         => (int) $user->ID,
+				'name'       => (string) $user->display_name,
+				'username'   => (string) $user->user_login,
+				'email'      => (string) $user->user_email,
+				'first_name' => (string) $user->first_name,
+				'last_name'  => (string) $user->last_name,
+			);
+			if ( count( $out ) >= $limit ) {
+				break;
+			}
+		}
+		return $out;
+	}
+
+	/**
+	 * Give an existing sign-in an employee file from the New staff screen
+	 * (R1-T3): attach() limited to the accounts accounts() lists.
+	 *
+	 * @param int   $user_id User id.
+	 * @param array $input   The file fields.
+	 * @return Employee
+	 * @throws DomainException 403 (an administrator, for a non-administrator), 404, 409, 422.
+	 */
+	public function linkAccount( int $user_id, array $input ): Employee {
+		if ( get_userdata( $user_id ) && user_can( $user_id, 'manage_options' ) && ! current_user_can( 'manage_options' ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON; React escapes it.
+			throw new DomainException( 'admin_file', __( 'Only an administrator can change an administrator\'s account.', 'radius-hotel-booking-pro' ), 403 );
+		}
+		if ( get_userdata( $user_id ) && ! self::linkable( $user_id ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON; React escapes it.
+			throw DomainException::invalid( array( 'user_id' => __( 'Only a sign-in that already opens the dashboard can be used.', 'radius-hotel-booking-pro' ) ) );
+		}
+		return $this->attach( $user_id, $input );
+	}
+
+	/**
+	 * Whether a user may be listed and linked: they open the dashboard, and
+	 * an administrator only for an administrator.
+	 *
+	 * @param int $user_id User id.
+	 * @return bool
+	 */
+	private static function linkable( int $user_id ): bool {
+		if ( ! user_can( $user_id, Capabilities::VIEW_DASHBOARD ) ) {
+			return false;
+		}
+		return ! user_can( $user_id, 'manage_options' ) || current_user_can( 'manage_options' );
+	}
+
+	/**
 	 * Write the user, the employee file, the access role and the PIN in one
 	 * transaction.
 	 *

@@ -198,7 +198,9 @@ if ( featureActive( 'staff_self_service' ) ) {
 			...routes,
 			{
 				path: '/me/profile',
-				hidden: true,
+				// In the sidebar too, not only the account menu (R1-T5).
+				group: 'me',
+				icon: UserRound,
 				label: __( 'My profile', 'radius-hotel-booking-pro' ),
 				// Any dashboard user, on their own profile (no access key).
 				capability: 'rtbp_view_dashboard',
@@ -426,17 +428,13 @@ if ( featureActive( 'advanced_reports' ) ) {
 	);
 }
 
-// M11: archive and remove (T3b) and scheduled exports (T4), panels of the free Exports screen.
+// M11: scheduled exports (T4), a panel of the free Exports screen (archive and remove dropped in R1).
 if ( featureActive( 'advanced_exports' ) ) {
 	addFilter(
 		'rtbp.exports.panels',
 		'radius-hotel-booking-pro/archive',
 		( panels ) => [
 			...panels,
-			{
-				key: 'archive',
-				Component: lazy( () => import( './exports/ArchivePanel' ) ),
-			},
 			{
 				key: 'schedules',
 				Component: lazy( () => import( './exports/SchedulesPanel' ) ),
@@ -483,8 +481,11 @@ if ( featureActive( 'payroll' ) ) {
 					},
 					{
 						path: '/me/payroll',
-						hidden: true,
-						label: __( 'My payroll', 'radius-hotel-booking-pro' ),
+						// In the sidebar too, named as on the old dashboard (R1-T5).
+						group: 'me',
+						icon: Wallet,
+						label: __( 'My paychecks', 'radius-hotel-booking-pro' ),
+						title: __( 'My payroll', 'radius-hotel-booking-pro' ),
 						description: __(
 							'Your payslips and time off',
 							'radius-hotel-booking-pro'

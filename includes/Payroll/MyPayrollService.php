@@ -33,7 +33,7 @@ final class MyPayrollService {
 		$employee = $user && class_exists( $repo ) && method_exists( $repo, 'forUser' ) ? ( new $repo() )->forUser( $user ) : null;
 		if ( ! $employee ) {
 			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON.
-			throw new DomainException( 'no_employee_file', __( 'Your account has no employee file, so there is no payroll to show.', 'radius-hotel-booking-pro' ), 404 );
+			throw new DomainException( 'no_employee_file', __( 'Your sign-in has no employee file, so there is no payroll to show. A manager can link it: Staff → Add an employee → Existing sign-in.', 'radius-hotel-booking-pro' ), 404 );
 		}
 		return (int) $employee->id;
 	}
