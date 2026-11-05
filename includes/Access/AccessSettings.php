@@ -48,11 +48,11 @@ final class AccessSettings {
 		SettingsSchema::register(
 			self::SECTION,
 			array(
-				// Minutes a correct PIN stays valid.
+				// Minutes a correct PIN stays valid; 0 = until the browser closes or the user signs out.
 				'passcodeValidity' => array(
 					'type'    => 'int',
 					'default' => 5,
-					'min'     => 1,
+					'min'     => 0,
 					'max'     => 240,
 				),
 				// `global`: one PIN covers everything until it expires; `per_key`: each page or action asks again.
@@ -94,12 +94,32 @@ final class AccessSettings {
 	}
 
 	/**
-	 * Passcode validity in seconds.
+	 * Whether a correct PIN stays valid until the browser closes or the user
+	 * signs out (validity 0), rather than for a number of minutes.
+	 *
+	 * @return bool
+	 */
+	public static function until_sign_out(): bool {
+		return (int) self::get( 'passcodeValidity', 5 ) <= 0;
+	}
+
+	/**
+	 * Passcode validity in seconds. Until sign-out: what is left of the
+	 * user's login session (a day when it cannot be read).
 	 *
 	 * @return int
 	 */
 	public static function validity_seconds(): int {
-		return max( 1, (int) self::get( 'passcodeValidity', 5 ) ) * MINUTE_IN_SECONDS;
+		if ( ! self::until_sign_out() ) {
+			return (int) self::get( 'passcodeValidity', 5 ) * MINUTE_IN_SECONDS;
+		}
+
+		$token   = wp_get_session_token();
+		$session = $token && class_exists( 'WP_Session_Tokens' )
+			? \WP_Session_Tokens::get_instance( get_current_user_id() )->get( $token )
+			: null;
+		$left    = isset( $session['expiration'] ) ? (int) $session['expiration'] - time() : 0;
+		return $left > MINUTE_IN_SECONDS ? $left : DAY_IN_SECONDS;
 	}
 
 	/**

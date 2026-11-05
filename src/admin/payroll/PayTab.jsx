@@ -5,7 +5,7 @@
  * or an hourly rate — with what that means per pay period. Read with
  * `page.payroll`, saved with `payroll.pay_profile`.
  */
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useId, useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
 import {
 	Button,
@@ -99,6 +99,8 @@ export default function PayTab( { employee } ) {
 		: false;
 	const [ values, setValues ] = useState( toValues( null ) );
 	const [ errors, setErrors ] = useState( {} );
+	const amountId = useId();
+	const currency = format.currencyInfo?.().symbol || '';
 	const pay = query.data?.pay;
 
 	useEffect( () => {
@@ -230,96 +232,157 @@ export default function PayTab( { employee } ) {
 						</Field>
 					</div>
 
-					<SegmentedControl
-						label={ __( 'Paid', 'radius-hotel-booking-pro' ) }
-						value={ values.pay_type }
-						onChange={ ( v ) => canEdit && set( 'pay_type', v ) }
-						options={ [
-							{
-								value: 'salaried',
-								label: __(
-									'A salary',
+					<div className="space-y-4 rounded-lg border p-4">
+						<div className="space-y-1.5">
+							<p className="m-0 text-sm font-medium text-heading">
+								{ __(
+									'How they are paid',
 									'radius-hotel-booking-pro'
-								),
-							},
-							{
-								value: 'hourly',
-								label: __(
-									'By the hour',
+								) }
+							</p>
+							<SegmentedControl
+								label={ __(
+									'How they are paid',
 									'radius-hotel-booking-pro'
-								),
-							},
-						] }
-					/>
-
-					<div className="grid gap-4 sm:grid-cols-2">
-						<Field
-							label={
-								hourly
+								) }
+								value={ values.pay_type }
+								onChange={ ( v ) =>
+									canEdit && set( 'pay_type', v )
+								}
+								options={ [
+									{
+										value: 'salaried',
+										label: __(
+											'Salary',
+											'radius-hotel-booking-pro'
+										),
+									},
+									{
+										value: 'hourly',
+										label: __(
+											'Hourly rate',
+											'radius-hotel-booking-pro'
+										),
+									},
+								] }
+							/>
+						</div>
+						<div className="space-y-1.5">
+							<label
+								htmlFor={ amountId }
+								className="block text-sm font-medium text-heading"
+							>
+								{ hourly
 									? __(
 											'Hourly rate',
 											'radius-hotel-booking-pro'
 									  )
-									: __( 'Salary', 'radius-hotel-booking-pro' )
-							}
-							error={ errors.amount }
-							required
-						>
-							<Input
-								type="number"
-								inputMode="decimal"
-								min="0"
-								step="any"
-								value={ values.amount }
-								disabled={ ! canEdit }
-								onChange={ ( e ) =>
-									set( 'amount', e.target.value )
-								}
-							/>
-						</Field>
-						{ ! hourly ? (
-							<Field
-								label={ __(
-									'Per',
-									'radius-hotel-booking-pro'
-								) }
-								error={ errors.amount_period }
-							>
-								<SegmentedControl
-									label={ __(
-										'Salary period',
-										'radius-hotel-booking-pro'
-									) }
-									value={ values.amount_period }
-									onChange={ ( v ) =>
-										canEdit && set( 'amount_period', v )
-									}
-									options={ [
-										{
-											value: 'week',
-											label: __(
-												'Week',
+									: __(
+											'Salary',
+											'radius-hotel-booking-pro'
+									  ) }
+								<span
+									className="text-destructive"
+									aria-hidden="true"
+								>
+									{ ' ' }
+									*
+								</span>
+							</label>
+							<div className="flex flex-wrap items-center gap-3">
+								<div className="relative w-56">
+									<Input
+										id={ amountId }
+										type="number"
+										inputMode="decimal"
+										min="0"
+										step="any"
+										required
+										className={
+											'pr-14 text-right tabular-nums' +
+											( errors.amount
+												? ' !border-destructive focus-visible:!ring-destructive'
+												: '' )
+										}
+										aria-invalid={
+											errors.amount ? true : undefined
+										}
+										value={ values.amount }
+										disabled={ ! canEdit }
+										onChange={ ( e ) =>
+											set( 'amount', e.target.value )
+										}
+									/>
+									{ currency ? (
+										<span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-muted-foreground">
+											{ currency }
+										</span>
+									) : null }
+								</div>
+								<span className="text-sm text-muted-foreground">
+									{ hourly
+										? __(
+												'per hour',
 												'radius-hotel-booking-pro'
-											),
-										},
-										{
-											value: 'month',
-											label: __(
-												'Month',
+										  )
+										: __(
+												'per',
 												'radius-hotel-booking-pro'
-											),
-										},
-										{
-											value: 'year',
-											label: __(
-												'Year',
-												'radius-hotel-booking-pro'
-											),
-										},
-									] }
-								/>
-							</Field>
-						) : null }
+										  ) }
+								</span>
+								{ ! hourly ? (
+									<SegmentedControl
+										label={ __(
+											'Salary period',
+											'radius-hotel-booking-pro'
+										) }
+										value={ values.amount_period }
+										onChange={ ( v ) =>
+											canEdit && set( 'amount_period', v )
+										}
+										options={ [
+											{
+												value: 'week',
+												label: __(
+													'Week',
+													'radius-hotel-booking-pro'
+												),
+											},
+											{
+												value: 'month',
+												label: __(
+													'Month',
+													'radius-hotel-booking-pro'
+												),
+											},
+											{
+												value: 'year',
+												label: __(
+													'Year',
+													'radius-hotel-booking-pro'
+												),
+											},
+										] }
+									/>
+								) : null }
+							</div>
+							<p className="text-xs text-muted-foreground">
+								{ hourly
+									? __(
+											'Paid for each hour worked, before tax and deductions.',
+											'radius-hotel-booking-pro'
+									  )
+									: __(
+											'The gross salary, before tax and deductions.',
+											'radius-hotel-booking-pro'
+									  ) }
+							</p>
+							{ errors.amount || errors.amount_period ? (
+								<p className="text-xs text-destructive">
+									{ errors.amount || errors.amount_period }
+								</p>
+							) : null }
+						</div>
 					</div>
 
 					{ pay.saved ? (

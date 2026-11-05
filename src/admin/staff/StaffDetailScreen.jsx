@@ -29,7 +29,7 @@ import { access, format, toast } from '@rtbp/lib';
 import AccountTab from './AccountTab';
 import DocumentsTab from './DocumentsTab';
 import EmploymentTab from './EmploymentTab';
-import { ContactTab, EmergencyTab, PersonalTab } from './FileTabs';
+import { EmergencyTab, PersonalTab } from './FileTabs';
 import { useEmployee, useSetActive } from './api';
 
 // The Pro activity log's per-record history (M14), loaded when opened.
@@ -90,13 +90,6 @@ const baseTabs = ( employee, can ) =>
 			label: __( 'Personal', 'radius-hotel-booking-pro' ),
 			render: () => (
 				<PersonalTab employee={ employee } canEdit={ can.edit } />
-			),
-		},
-		{
-			key: 'contact',
-			label: __( 'Contact', 'radius-hotel-booking-pro' ),
-			render: () => (
-				<ContactTab employee={ employee } canEdit={ can.edit } />
 			),
 		},
 		{

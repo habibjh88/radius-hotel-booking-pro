@@ -130,7 +130,13 @@ export default function PasscodeDialog( { accessKeys, onUnlocked, onCancel } ) {
 							ref={ input }
 							type="password"
 							inputMode="numeric"
-							autoComplete="off"
+							// A PIN, not the site password: keep password
+							// managers from offering to fill or save it.
+							autoComplete="one-time-code"
+							data-1p-ignore="true"
+							data-lpignore="true"
+							data-bwignore="true"
+							data-form-type="other"
 							autoFocus
 							maxLength={ 8 }
 							value={ pin }

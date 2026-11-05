@@ -7,7 +7,7 @@
  */
 import { useEffect, useState } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Eye, EyeOff, Landmark, Pencil } from 'lucide-react';
+import { Eye, EyeOff, Landmark, Pencil, Phone, UserRound } from 'lucide-react';
 import {
 	Button,
 	Field,
@@ -392,8 +392,33 @@ function StatutoryNumbers( { employee, canEdit } ) {
 }
 
 /**
- * Personal: name, date of birth, marital status, children, address, and
- * the statutory numbers.
+ * A titled group of fields inside a tab, styled like the statutory numbers box.
+ *
+ * @param {Object}      props          Props.
+ * @param {Function}    props.icon     Lucide icon.
+ * @param {string}      props.title    Title.
+ * @param {JSX.Element} props.children Fields.
+ * @return {JSX.Element} Group.
+ */
+function FieldGroup( { icon: Icon, title, children } ) {
+	return (
+		<section className="space-y-3 rounded-lg border border-border p-4">
+			<h3 className="m-0 flex items-center gap-2 text-sm font-semibold text-heading">
+				<Icon
+					className="h-4 w-4 text-muted-foreground"
+					aria-hidden="true"
+				/>
+				{ title }
+			</h3>
+			{ children }
+		</section>
+	);
+}
+
+/**
+ * Personal: the person (name, date of birth, marital status, children), how
+ * to reach them (phone — required —, e-mail, address), one Save for both;
+ * then the statutory numbers.
  *
  * @param {Object}  props          Props.
  * @param {Object}  props.employee Employee (detail shape).
@@ -408,6 +433,8 @@ export function PersonalTab( { employee, canEdit } ) {
 		'dob',
 		'marital_status',
 		'num_children',
+		'phone',
+		'email',
 		'address',
 	] );
 	const input = ( name, props = {} ) => (
@@ -423,133 +450,131 @@ export function PersonalTab( { employee, canEdit } ) {
 	return (
 		<div className="space-y-4">
 			<form className="space-y-4" onSubmit={ form.save }>
-				<div className="grid gap-4 sm:grid-cols-2">
+				<FieldGroup
+					icon={ UserRound }
+					title={ __(
+						'Personal details',
+						'radius-hotel-booking-pro'
+					) }
+				>
+					<div className="grid gap-4 sm:grid-cols-2">
+						<Field
+							label={ __(
+								'First name',
+								'radius-hotel-booking-pro'
+							) }
+							error={ form.errors.first_name }
+							required
+						>
+							{ input( 'first_name', { maxLength: 100 } ) }
+						</Field>
+						<Field
+							label={ __(
+								'Last name',
+								'radius-hotel-booking-pro'
+							) }
+							error={ form.errors.last_name }
+							required
+						>
+							{ input( 'last_name', { maxLength: 100 } ) }
+						</Field>
+						<Field
+							label={ __(
+								'Date of birth',
+								'radius-hotel-booking-pro'
+							) }
+							error={ form.errors.dob }
+						>
+							<DateField
+								value={ form.values.dob }
+								onChange={ ( day ) => form.set( 'dob', day ) }
+								disabled={ ! canEdit }
+								max={ format.siteToday() }
+								yearDropdown
+								clearable
+							/>
+						</Field>
+						<Field
+							label={ __(
+								'Marital status',
+								'radius-hotel-booking-pro'
+							) }
+							error={ form.errors.marital_status }
+						>
+							<ChoiceSelect
+								value={ form.values.marital_status }
+								choices={ options.data?.marital }
+								onChange={ ( value ) =>
+									form.set( 'marital_status', value )
+								}
+								disabled={ ! canEdit }
+							/>
+						</Field>
+						<Field
+							label={ __(
+								'Number of children',
+								'radius-hotel-booking-pro'
+							) }
+							error={ form.errors.num_children }
+						>
+							{ input( 'num_children', {
+								type: 'number',
+								min: 0,
+								max: 30,
+								inputMode: 'numeric',
+							} ) }
+						</Field>
+					</div>
+				</FieldGroup>
+
+				<FieldGroup
+					icon={ Phone }
+					title={ __( 'Contact', 'radius-hotel-booking-pro' ) }
+				>
+					<div className="grid gap-4 sm:grid-cols-2">
+						<Field
+							label={ __( 'Phone', 'radius-hotel-booking-pro' ) }
+							error={ form.errors.phone }
+							required
+						>
+							<PhoneField
+								value={ form.values.phone }
+								onChange={ ( phone ) =>
+									form.set( 'phone', phone )
+								}
+								disabled={ ! canEdit }
+							/>
+						</Field>
+						<Field
+							label={ __( 'E-mail', 'radius-hotel-booking-pro' ) }
+							error={ form.errors.email }
+							description={ __(
+								'Also the e-mail of their account: password links go here.',
+								'radius-hotel-booking-pro'
+							) }
+						>
+							{ input( 'email', { type: 'email' } ) }
+						</Field>
+					</div>
 					<Field
-						label={ __( 'First name', 'radius-hotel-booking-pro' ) }
-						error={ form.errors.first_name }
-						required
+						label={ __( 'Address', 'radius-hotel-booking-pro' ) }
+						error={ form.errors.address }
 					>
-						{ input( 'first_name', { maxLength: 100 } ) }
-					</Field>
-					<Field
-						label={ __( 'Last name', 'radius-hotel-booking-pro' ) }
-						error={ form.errors.last_name }
-						required
-					>
-						{ input( 'last_name', { maxLength: 100 } ) }
-					</Field>
-					<Field
-						label={ __(
-							'Date of birth',
-							'radius-hotel-booking-pro'
-						) }
-						error={ form.errors.dob }
-					>
-						<DateField
-							value={ form.values.dob }
-							onChange={ ( day ) => form.set( 'dob', day ) }
-							disabled={ ! canEdit }
-							max={ format.siteToday() }
-							yearDropdown
-							clearable
-						/>
-					</Field>
-					<Field
-						label={ __(
-							'Marital status',
-							'radius-hotel-booking-pro'
-						) }
-						error={ form.errors.marital_status }
-					>
-						<ChoiceSelect
-							value={ form.values.marital_status }
-							choices={ options.data?.marital }
-							onChange={ ( value ) =>
-								form.set( 'marital_status', value )
+						<Textarea
+							rows={ 3 }
+							value={ form.values.address }
+							onChange={ ( e ) =>
+								form.set( 'address', e.target.value )
 							}
 							disabled={ ! canEdit }
 						/>
 					</Field>
-					<Field
-						label={ __(
-							'Number of children',
-							'radius-hotel-booking-pro'
-						) }
-						error={ form.errors.num_children }
-					>
-						{ input( 'num_children', {
-							type: 'number',
-							min: 0,
-							max: 30,
-							inputMode: 'numeric',
-						} ) }
-					</Field>
-				</div>
-				<Field
-					label={ __( 'Address', 'radius-hotel-booking-pro' ) }
-					error={ form.errors.address }
-				>
-					<Textarea
-						rows={ 3 }
-						value={ form.values.address }
-						onChange={ ( e ) =>
-							form.set( 'address', e.target.value )
-						}
-						disabled={ ! canEdit }
-					/>
-				</Field>
+				</FieldGroup>
+
 				<FormActions form={ form } canEdit={ canEdit } />
 			</form>
 			<StatutoryNumbers employee={ employee } canEdit={ canEdit } />
 		</div>
-	);
-}
-
-/**
- * Contact: phone (required) and e-mail. The e-mail is also the account's.
- *
- * @param {Object}  props          Props.
- * @param {Object}  props.employee Employee (detail shape).
- * @param {boolean} props.canEdit  Viewer has `staff.edit`.
- * @return {JSX.Element} Tab.
- */
-export function ContactTab( { employee, canEdit } ) {
-	const form = useFileForm( employee, [ 'phone', 'email' ] );
-	return (
-		<form className="space-y-4" onSubmit={ form.save }>
-			<div className="grid gap-4 sm:grid-cols-2">
-				<Field
-					label={ __( 'Phone', 'radius-hotel-booking-pro' ) }
-					error={ form.errors.phone }
-					required
-				>
-					<PhoneField
-						value={ form.values.phone }
-						onChange={ ( phone ) => form.set( 'phone', phone ) }
-						disabled={ ! canEdit }
-					/>
-				</Field>
-				<Field
-					label={ __( 'E-mail', 'radius-hotel-booking-pro' ) }
-					error={ form.errors.email }
-					description={ __(
-						'Also the e-mail of their account: password links go here.',
-						'radius-hotel-booking-pro'
-					) }
-				>
-					<Input
-						type="email"
-						value={ form.values.email }
-						onChange={ ( e ) =>
-							form.set( 'email', e.target.value )
-						}
-						disabled={ ! canEdit }
-						autoComplete="off"
-					/>
-				</Field>
-			</div>
-			<FormActions form={ form } canEdit={ canEdit } />
-		</form>
 	);
 }
 

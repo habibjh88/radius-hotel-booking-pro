@@ -7,9 +7,13 @@
  * the request with the `X-RTBP-Passcode` header. The screen that made the
  * request just sees it succeed, without a second click.
  *
- * Grants are kept in memory until they expire: under the `global` scope one
- * grant covers every key, under `per_key` each key has its own. The server
- * checks every grant again, so this cache only saves prompts.
+ * Grants are kept until they expire: under the `global` scope one grant covers
+ * every key, under `per_key` each key has its own. They live in a session
+ * cookie, so a page refresh or a second tab does not ask again, and closing
+ * the browser (or signing out, which clears the cookie and voids the grants on
+ * the server) does. The validity is idle time: each request a grant lets
+ * through starts it again, here as on the server. The server checks every
+ * grant again, so this cache only saves prompts.
  */
 import { createRoot } from '@wordpress/element';
 import { addFilter } from '@wordpress/hooks';
@@ -18,9 +22,51 @@ import PasscodeDialog from './PasscodeDialog';
 
 const HEADER = 'X-RTBP-Passcode';
 const GLOBAL = '*';
+const COOKIE = 'rtbp_pro_pc';
 
-/** @type {Map<string, {token: string, expires: number}>} */
-const grants = new Map();
+/**
+ * The grants saved in the session cookie.
+ *
+ * @return {Map<string, {token: string, expires: number, ttl: number}>} Grants by scope.
+ */
+function load() {
+	const raw = document.cookie
+		.split( '; ' )
+		.find( ( part ) => part.startsWith( COOKIE + '=' ) );
+	try {
+		const saved = raw
+			? JSON.parse( decodeURIComponent( raw.slice( COOKIE.length + 1 ) ) )
+			: null;
+		return new Map(
+			saved && typeof saved === 'object' ? Object.entries( saved ) : []
+		);
+	} catch {
+		return new Map();
+	}
+}
+
+/**
+ * Save the grants to the session cookie (no expiry: gone when the browser
+ * closes), or drop it when there are none.
+ *
+ * @return {void}
+ */
+function save() {
+	const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+	const value = grants.size
+		? encodeURIComponent( JSON.stringify( Object.fromEntries( grants ) ) )
+		: '';
+	const expiry = grants.size ? '' : '; Max-Age=0';
+	document.cookie = `${ COOKIE }=${ value }; Path=/; SameSite=Strict${ expiry }${ secure }`;
+}
+
+/**
+ * Grants by scope, re-read from the cookie before each use, since another tab
+ * may have unlocked meanwhile.
+ *
+ * @type {Map<string, {token: string, expires: number, ttl: number}>}
+ */
+let grants = load();
 
 /** @type {Promise<string>|null} The prompt currently open. */
 let prompt = null;
@@ -37,8 +83,27 @@ function live( scope ) {
 	if ( grant && grant.expires - 3000 > Date.now() ) {
 		return grant.token;
 	}
-	grants.delete( scope );
+	if ( grants.delete( scope ) ) {
+		save();
+	}
 	return null;
+}
+
+/**
+ * Start a grant's validity again after the server let a request through with
+ * it (the server did the same).
+ *
+ * @param {string} token Token.
+ * @return {void}
+ */
+function extend( token ) {
+	grants = load();
+	grants.forEach( ( grant ) => {
+		if ( grant.token === token && grant.ttl ) {
+			grant.expires = Date.now() + grant.ttl;
+		}
+	} );
+	save();
 }
 
 /**
@@ -49,12 +114,15 @@ function live( scope ) {
  * @return {string|null} Token.
  */
 function cachedToken( keys ) {
+	grants = load();
 	const global = live( GLOBAL );
 	if ( global ) {
 		return global;
 	}
 	const tokens = new Set( keys.map( live ) );
-	return tokens.size === 1 && ! tokens.has( null ) ? [ ...tokens ][ 0 ] : null;
+	return tokens.size === 1 && ! tokens.has( null )
+		? [ ...tokens ][ 0 ]
+		: null;
 }
 
 /**
@@ -82,13 +150,18 @@ function openPrompt( keys ) {
 			<PasscodeDialog
 				accessKeys={ keys }
 				onUnlocked={ ( data ) => {
+					const expires = Date.parse( data.expires_at ) || 0;
 					const grant = {
 						token: data.token,
-						expires: Date.parse( data.expires_at ) || 0,
+						expires,
+						// The validity, to start it again on each use.
+						ttl: Math.max( 0, expires - Date.now() ),
 					};
+					grants = load();
 					( data.scope === 'global' ? [ GLOBAL ] : keys ).forEach(
 						( scope ) => grants.set( scope, grant )
 					);
+					save();
 					close();
 					resolve( data.token );
 				} }
@@ -160,15 +233,18 @@ export function registerPasscode() {
 				const cached = cachedToken( keys );
 				if ( cached ) {
 					try {
-						return await retry( {
+						const result = await retry( {
 							headers: { [ HEADER ]: cached },
 						} );
+						extend( cached );
+						return result;
 					} catch ( failure ) {
 						if ( failure?.code !== 'passcode_required' ) {
 							throw failure;
 						}
 						// Revoked on the server (PIN changed, scope changed).
 						grants.clear();
+						save();
 					}
 				}
 

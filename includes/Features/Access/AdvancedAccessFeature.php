@@ -74,6 +74,7 @@ final class AdvancedAccessFeature extends AbstractFeature {
 		add_filter( 'rtbp_access_passcode_check', array( PasscodeService::class, 'check' ), 10, 3 );
 		add_filter( 'rtbp_access_locked_message', array( $this, 'locked_message' ) );
 		add_action( 'rtbp_register_addon_routes', array( PasscodeController::class, 'routes' ) );
+		add_action( 'wp_logout', array( PasscodeService::class, 'clear_cookie' ) );
 		add_action( 'rtbp_register_addon_routes', array( AccessRolesController::class, 'routes' ) );
 		add_action( 'rtbp_register_addon_routes', array( UserAccessController::class, 'routes' ) );
 

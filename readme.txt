@@ -100,3 +100,15 @@ History of changes now shows on rooms, floors, rate plans, pricing rules, blocke
 Bonus rules: fixed or percentage bonuses every pay run adds, taxable or not, for chosen staff.
 Pay runs list active staff without a pay schedule; recalculating adds newly scheduled staff.
 Removed Archive and remove: bookings are never deleted from the Exports screen.
+Entered PIN now survives page refresh and new tabs; signing out always asks again.
+New PIN validity option "Until sign-out"; the default stays 5 minutes.
+PIN validity is now idle time: each protected page or action restarts it.
+Password managers no longer offer to autofill the PIN field.
+Pay run line breakdown shows each rate on the same line as its label.
+Pay run line editor regrouped: period inputs with units, and a tidier one-off items list.
+Staff Pay tab: salary, currency and period on one line; new document file picker.
+Staff file: Contact tab merged into Personal, as its own section.
+Pay run line: footer stays visible; one-off items fold to one line with Edit.
+Removing a one-off pay run item now asks for confirmation first.
+A one-off item taxed on its own now starts at the salary tax rate.
+Pay run line stays open after saving, showing the recalculated figures; header stays fixed.

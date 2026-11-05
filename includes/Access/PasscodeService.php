@@ -20,10 +20,13 @@ defined( 'ABSPATH' ) || exit;
  * - A fallback PIN for users without one (hashed, can be switched off).
  * - `unlock()`: a correct PIN returns a random token, valid for the passcode
  *   validity, for every key (`global` scope) or for one key (`per_key`). Only a
- *   hash of the token is stored.
+ *   hash of the token is stored. The validity is idle time: each request the
+ *   grant lets through starts it again (check()).
  * - Five wrong PINs lock the user out of unlocking for 15 minutes.
  * - Changing a PIN bumps the user's grant generation, which voids all their
  *   grants at once.
+ * - A grant belongs to the login session it was made in: signing out (or
+ *   signing in again) voids it, even while its time has not run out.
  *
  * The client sends the token in the `X-RTBP-Passcode` header; check() answers
  * the free plugin's `rtbp_access_passcode_check` filter.
@@ -40,6 +43,7 @@ final class PasscodeService {
 	const MAX_FAILURES = 5;
 	const LOCKOUT      = 15 * MINUTE_IN_SECONDS;
 	const HEADER       = 'x-rtbp-passcode';
+	const COOKIE       = 'rtbp_pro_pc';
 
 	/**
 	 * Whether a value is a valid PIN: 4 to 8 digits.
@@ -250,8 +254,9 @@ final class PasscodeService {
 			$token = wp_generate_password( 40, false, false );
 			$ttl   = AccessSettings::validity_seconds();
 			// A grant made with the fallback PIN remembers its generation, so
-			// changing or switching off the fallback voids it (review #7).
-			$value = self::token_hash( $token ) . '|' . $fallback;
+			// changing or switching off the fallback voids it (review #7). It
+			// also remembers the login session, so signing out voids it.
+			$value = self::token_hash( $token ) . '|' . $fallback . '|' . self::session_hash();
 			foreach ( $global ? array( 'global' ) : $keys as $scope ) {
 				set_transient( self::grant_name( $user_id, $scope ), $value, $ttl );
 			}
@@ -304,6 +309,7 @@ final class PasscodeService {
 			: sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_RTBP_PASSCODE'] ?? '' ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated -- defaulted; read-only token compared by hash.
 
 		if ( '' !== $token && self::grant_valid( $user_id, (string) $key, $token ) ) {
+			self::extend_grant( $user_id, (string) $key );
 			return true;
 		}
 
@@ -399,13 +405,42 @@ final class PasscodeService {
 			return false;
 		}
 
-		list( $hash, $fallback ) = array_pad( explode( '|', $stored, 2 ), 2, '' );
-		if ( ! hash_equals( $hash, self::token_hash( $token ) ) ) {
+		list( $hash, $fallback, $session ) = array_pad( explode( '|', $stored, 3 ), 3, '' );
+		if ( ! hash_equals( $hash, self::token_hash( $token ) ) || ! hash_equals( $session, self::session_hash() ) ) {
 			return false;
 		}
 		// Made with the fallback PIN: only while that same fallback is on.
 		return '' === $fallback
 			|| ( AccessSettings::get( 'fallbackEnabled', true ) && self::has_fallback() && $fallback === self::fallback_generation() );
+	}
+
+	/**
+	 * Start a live grant's validity again: the passcode validity is idle
+	 * time, so a request it lets through counts as activity.
+	 *
+	 * @param int    $user_id User id.
+	 * @param string $key     Access key.
+	 * @return void
+	 */
+	private static function extend_grant( int $user_id, string $key ): void {
+		$name   = self::grant_name( $user_id, AccessSettings::global_scope() ? 'global' : $key );
+		$stored = get_transient( $name );
+		if ( is_string( $stored ) ) {
+			set_transient( $name, $stored, AccessSettings::validity_seconds() );
+		}
+	}
+
+	/**
+	 * `wp_logout` listener: drop the browser's copy of its grants (the
+	 * `rtbp_pro_pc` cookie set by the admin app). The grants are void on the
+	 * server anyway, since they belong to the login session that just ended.
+	 *
+	 * @return void
+	 */
+	public static function clear_cookie(): void {
+		if ( ! headers_sent() && isset( $_COOKIE[ self::COOKIE ] ) ) {
+			setcookie( self::COOKIE, '', time() - YEAR_IN_SECONDS, '/' );
+		}
 	}
 
 	/**
@@ -562,6 +597,17 @@ final class PasscodeService {
 	private static function grant_name( int $user_id, string $scope ): string {
 		$generation = (int) get_user_meta( $user_id, self::META_GENERATION, true );
 		return 'rtbp_pro_pc_' . $user_id . '_' . $generation . '_' . md5( $scope );
+	}
+
+	/**
+	 * Keyed hash of the current login session token ('' without one, e.g.
+	 * an application password).
+	 *
+	 * @return string
+	 */
+	private static function session_hash(): string {
+		$session = wp_get_session_token();
+		return '' === $session ? '' : self::token_hash( $session );
 	}
 
 	/**

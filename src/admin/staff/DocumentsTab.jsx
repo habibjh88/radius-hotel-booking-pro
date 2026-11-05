@@ -56,6 +56,75 @@ const formatSize = ( bytes ) => {
 };
 
 /**
+ * A file box: the native picker laid over it (so a click or a dropped file
+ * both work), showing the chosen file's name and size. Takes the id and
+ * aria props from Field and gives them to the real input.
+ *
+ * @param {Object}   props           Props.
+ * @param {string}   props.id        Id (from Field).
+ * @param {Object}   props.inputRef  Ref to the input (to clear it).
+ * @param {File}     props.file      The chosen file, or null.
+ * @param {string}   props.accept    Accepted types.
+ * @param {Function} props.onChange  Input change handler.
+ * @param {string}   props.className Classes from Field (error border).
+ * @return {JSX.Element} Picker.
+ */
+function FilePicker( {
+	id,
+	inputRef,
+	file,
+	accept,
+	onChange,
+	className = '',
+	...aria
+} ) {
+	const Icon = file ? FileText : Upload;
+	return (
+		<div
+			className={
+				'relative flex items-center gap-3 rounded-md border-2 border-dashed border-border px-4 py-3 hover:border-primary focus-within:ring-2 focus-within:ring-ring ' +
+				className
+			}
+		>
+			<input
+				id={ id }
+				ref={ inputRef }
+				type="file"
+				accept={ accept }
+				onChange={ onChange }
+				className="absolute inset-0 z-10 cursor-pointer opacity-0"
+				{ ...aria }
+			/>
+			<span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
+				<Icon className="h-5 w-5" aria-hidden="true" />
+			</span>
+			<span className="min-w-0 flex-1">
+				<span className="block truncate text-sm font-medium text-heading">
+					{ file
+						? file.name
+						: __( 'Choose a file', 'radius-hotel-booking-pro' ) }
+				</span>
+				<span className="block text-xs text-muted-foreground">
+					{ file
+						? sprintf(
+								/* translators: %s: file size such as "2.4 MB". */
+								__(
+									'%s · click to choose another',
+									'radius-hotel-booking-pro'
+								),
+								formatSize( file.size )
+						  )
+						: __(
+								'Click to browse, or drop it here',
+								'radius-hotel-booking-pro'
+						  ) }
+				</span>
+			</span>
+		</div>
+	);
+}
+
+/**
  * @param {Object} props          Props.
  * @param {Object} props.employee Employee (detail shape).
  * @return {JSX.Element} Tab.
@@ -166,9 +235,9 @@ export default function DocumentsTab( { employee } ) {
 						}
 						required
 					>
-						<Input
-							ref={ picker }
-							type="file"
+						<FilePicker
+							inputRef={ picker }
+							file={ file }
 							accept={ ACCEPT }
 							onChange={ choose }
 						/>

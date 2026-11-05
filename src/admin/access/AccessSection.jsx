@@ -129,7 +129,9 @@ function ProfileDefaults( { value, onChange, error } ) {
 				fields={ fields.data.fields }
 				value={ map }
 				onChange={ ( key, next ) => {
-					const code = fields.data.fields.find( ( f ) => f.key === key )?.default;
+					const code = fields.data.fields.find(
+						( f ) => f.key === key
+					)?.default;
 					const updated = { ...map };
 					if ( next === code ) {
 						delete updated[ key ];
@@ -157,6 +159,8 @@ function ProfileDefaults( { value, onChange, error } ) {
  * @return {JSX.Element} Tab.
  */
 export default function AccessSection( { value, setField, errors, schema } ) {
+	// 0 minutes: valid until the browser closes or the user signs out.
+	const untilSignOut = [ 0, '0' ].includes( value.passcodeValidity );
 	return (
 		<>
 			<SettingsSection
@@ -167,15 +171,71 @@ export default function AccessSection( { value, setField, errors, schema } ) {
 				) }
 			>
 				<Field
-					label={ __( 'A PIN stays valid for', 'radius-hotel-booking-pro' ) }
+					label={ __(
+						'A PIN stays valid for',
+						'radius-hotel-booking-pro'
+					) }
 					error={ errors.passcodeValidity }
 				>
-					<NumberInput
-						value={ value.passcodeValidity }
-						onChange={ setField( 'passcodeValidity' ) }
-						unit={ __( 'minutes', 'radius-hotel-booking-pro' ) }
-						limits={ schema.passcodeValidity }
-					/>
+					<div className="space-y-3">
+						<SegmentedControl
+							label={ __(
+								'A PIN stays valid for',
+								'radius-hotel-booking-pro'
+							) }
+							value={ untilSignOut ? 'session' : 'minutes' }
+							onChange={ ( mode ) =>
+								setField( 'passcodeValidity' )(
+									'session' === mode ? 0 : 5
+								)
+							}
+							options={ [
+								{
+									value: 'session',
+									label: __(
+										'Until sign-out',
+										'radius-hotel-booking-pro'
+									),
+								},
+								{
+									value: 'minutes',
+									label: __(
+										'After inactivity',
+										'radius-hotel-booking-pro'
+									),
+								},
+							] }
+						/>
+						{ untilSignOut ? (
+							<p className="text-sm text-muted-foreground">
+								{ __(
+									'Staff enter their PIN once. It is asked again after they close the browser or sign out.',
+									'radius-hotel-booking-pro'
+								) }
+							</p>
+						) : (
+							<>
+								<NumberInput
+									value={ value.passcodeValidity }
+									onChange={ setField( 'passcodeValidity' ) }
+									unit={ __(
+										'minutes without activity',
+										'radius-hotel-booking-pro'
+									) }
+									limits={ {
+										...schema.passcodeValidity,
+										min: 1,
+									} }
+								/>
+								<p className="text-sm text-muted-foreground">
+									{ __(
+										'Each protected page or action starts the time again. The PIN is asked again after this long without one, or after signing out.',
+										'radius-hotel-booking-pro'
+									) }
+								</p>
+							</>
+						) }
+					</div>
 				</Field>
 
 				<Field
@@ -184,7 +244,10 @@ export default function AccessSection( { value, setField, errors, schema } ) {
 				>
 					<div>
 						<SegmentedControl
-							label={ __( 'One PIN covers', 'radius-hotel-booking-pro' ) }
+							label={ __(
+								'One PIN covers',
+								'radius-hotel-booking-pro'
+							) }
 							value={ value.passcodeScope }
 							onChange={ setField( 'passcodeScope' ) }
 							options={ [
