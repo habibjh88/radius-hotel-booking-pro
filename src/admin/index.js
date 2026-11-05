@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 
 import ProFeaturesSection from './ProFeaturesSection';
+import ScanButton from './scan/ScanButton';
 import { registerPasscode } from './access/passcode';
 import { registerTimeline } from './activity/timeline';
 
@@ -302,6 +303,18 @@ if ( featureActive( 'advanced_access' ) ) {
 				icon: KeyRound,
 				Component: AccessSection,
 			},
+		]
+	);
+}
+
+// Booking QR codes: *Scan a booking* in the top bar (free 1.0.0 UNRELEASE adds the slot).
+if ( featureActive( 'booking_qr' ) ) {
+	addFilter(
+		'rtbp.topbar.actions',
+		'radius-hotel-booking-pro/scan',
+		( items ) => [
+			...( items || [] ),
+			{ key: 'scan', Component: ScanButton },
 		]
 	);
 }

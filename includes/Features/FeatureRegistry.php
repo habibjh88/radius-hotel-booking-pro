@@ -69,6 +69,13 @@ final class FeatureRegistry {
 				'requires'    => array(),
 				'default'     => true,
 			),
+			'booking_qr'         => array(
+				'group'       => 'payments',
+				'module'      => 'M05',
+				'class'       => __NAMESPACE__ . '\\Booking\\BookingQrFeature',
+				'requires'    => array(),
+				'default'     => true,
+			),
 			'auto_release'       => array(
 				'group'       => 'payments',
 				'module'      => 'M05',
@@ -135,6 +142,7 @@ final class FeatureRegistry {
 			'pricing_rules' => array( __( 'Advanced pricing rules', 'radius-hotel-booking-pro' ), __( 'Seasonal pricing, occupancy pricing, early-bird and last-minute discounts.', 'radius-hotel-booking-pro' ) ),
 			'ical_sync' => array( __( 'iCal calendar sync', 'radius-hotel-booking-pro' ), __( 'Import and export room availability with Booking.com, Airbnb and similar channels.', 'radius-hotel-booking-pro' ) ),
 			'pdf_documents' => array( __( 'PDF invoices and receipts', 'radius-hotel-booking-pro' ), __( 'Generate invoices and receipts as PDF files and attach them to guest e-mails.', 'radius-hotel-booking-pro' ) ),
+			'booking_qr' => array( __( 'Booking QR codes', 'radius-hotel-booking-pro' ), __( 'A QR code on guest e-mails, invoices and receipts; scan it at arrival to open the booking.', 'radius-hotel-booking-pro' ) ),
 			'auto_release' => array( __( 'Automatic release of unpaid bookings', 'radius-hotel-booking-pro' ), __( 'Free the room automatically when a booking passes its payment deadline.', 'radius-hotel-booking-pro' ) ),
 			'advanced_reports' => array( __( 'Advanced reports', 'radius-hotel-booking-pro' ), __( 'Occupancy rate, revenue by room type, rate plan and staff member, and Excel export.', 'radius-hotel-booking-pro' ) ),
 			'advanced_exports' => array( __( 'Advanced exports and archiving', 'radius-hotel-booking-pro' ), __( 'Excel exports, archive-and-remove of old bookings, and scheduled exports.', 'radius-hotel-booking-pro' ) ),
