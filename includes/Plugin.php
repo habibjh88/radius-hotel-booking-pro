@@ -56,6 +56,11 @@ final class Plugin {
 	public static function instance(): Plugin {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
+			// The free plugin fires `rtbp_loaded` while its file loads, so when WordPress
+			// loads it before Pro (a custom plugin load order) the hook has already passed.
+			if ( did_action( 'rtbp_loaded' ) ) {
+				self::$instance->boot();
+			}
 		}
 		return self::$instance;
 	}

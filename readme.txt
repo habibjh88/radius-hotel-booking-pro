@@ -114,3 +114,4 @@ A one-off item taxed on its own now starts at the salary tax rate.
 Pay run line stays open after saving, showing the recalculated figures; header stays fixed.
 Booking QR codes on guest e-mails, booking page, invoices and receipts; scan to open the booking.
 New Scan button in the dashboard: phone camera, handheld scanner or typed booking reference.
+Fixed: Pro features (staff, payroll, activity log) not loading on sites with a custom plugin load order.
