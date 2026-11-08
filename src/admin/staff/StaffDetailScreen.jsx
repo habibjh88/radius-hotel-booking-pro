@@ -30,6 +30,7 @@ import AccountTab from './AccountTab';
 import DocumentsTab from './DocumentsTab';
 import EmploymentTab from './EmploymentTab';
 import { EmergencyTab, PersonalTab } from './FileTabs';
+import StaffPhoto from './StaffPhoto';
 import { useEmployee, useSetActive } from './api';
 
 // The Pro activity log's per-record history (M14), loaded when opened.
@@ -230,53 +231,59 @@ export default function StaffDetailScreen() {
 				{ back }
 				<Panel>
 					<div className="flex flex-wrap items-start justify-between gap-3">
-						<div className="min-w-0 space-y-1">
-							<div className="flex flex-wrap items-center gap-2">
-								<h2 className="m-0 text-xl font-semibold text-heading">
-									{ employee.name || employee.user_login }
-								</h2>
-								<StatusBadge
-									domain="active"
-									value={
-										employee.is_active
-											? 'active'
-											: 'inactive'
-									}
-								/>
-							</div>
-							<p className="m-0 text-sm text-muted-foreground">
-								{ [
-									employee.employee_no,
-									employee.job_title,
-									employee.department,
-									employee.access_role &&
-										sprintf(
-											/* translators: %s: access role name */
+						<div className="flex min-w-0 items-start gap-4">
+							<StaffPhoto
+								employee={ employee }
+								canEdit={ can.edit }
+							/>
+							<div className="min-w-0 space-y-1">
+								<div className="flex flex-wrap items-center gap-2">
+									<h2 className="m-0 text-xl font-semibold text-heading">
+										{ employee.name || employee.user_login }
+									</h2>
+									<StatusBadge
+										domain="active"
+										value={
+											employee.is_active
+												? 'active'
+												: 'inactive'
+										}
+									/>
+								</div>
+								<p className="m-0 text-sm text-muted-foreground">
+									{ [
+										employee.employee_no,
+										employee.job_title,
+										employee.department,
+										employee.access_role &&
+											sprintf(
+												/* translators: %s: access role name */
+												__(
+													'Access: %s',
+													'radius-hotel-booking-pro'
+												),
+												employee.access_role.name
+											),
+									]
+										.filter( Boolean )
+										.join( ' · ' ) }
+								</p>
+								{ ! employee.is_active &&
+								employee.deactivated_at ? (
+									<p className="m-0 text-sm text-muted-foreground">
+										{ sprintf(
+											/* translators: %s: date and time. */
 											__(
-												'Access: %s',
+												'Deactivated %s: cannot sign in.',
 												'radius-hotel-booking-pro'
 											),
-											employee.access_role.name
-										),
-								]
-									.filter( Boolean )
-									.join( ' · ' ) }
-							</p>
-							{ ! employee.is_active &&
-							employee.deactivated_at ? (
-								<p className="m-0 text-sm text-muted-foreground">
-									{ sprintf(
-										/* translators: %s: date and time. */
-										__(
-											'Deactivated %s: cannot sign in.',
-											'radius-hotel-booking-pro'
-										),
-										format.formatDateTime(
-											employee.deactivated_at
-										)
-									) }
-								</p>
-							) : null }
+											format.formatDateTime(
+												employee.deactivated_at
+											)
+										) }
+									</p>
+								) : null }
+							</div>
 						</div>
 						{ can.toggle ? (
 							<Button

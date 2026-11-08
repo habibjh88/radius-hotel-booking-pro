@@ -66,6 +66,8 @@ final class StaffRecordsFeature extends AbstractFeature {
 		add_filter( 'rtbp_activity_actions', array( $this, 'actions' ) );
 		// DoB, address, social security / tax numbers and the emergency contact: logged as "changed" only.
 		add_filter( 'rtbp_activity_secret_pattern', array( EmployeeService::class, 'secretPattern' ) );
+		// The account menu shows the staff photo (free `rtbp_user_avatar_url`).
+		add_filter( 'rtbp_user_avatar_url', array( $this, 'avatarUrl' ), 10, 2 );
 		// After WordPress checked the password (priority 20), before the result is used.
 		add_filter( 'authenticate', array( EmployeeService::class, 'signInBlock' ), 99 );
 		// REST checks application passwords without `authenticate`: none for a deactivated employee.
@@ -178,5 +180,18 @@ final class StaffRecordsFeature extends AbstractFeature {
 			);
 		}
 		return $actions;
+	}
+
+	/**
+	 * `rtbp_user_avatar_url`: the signed-in employee's uploaded photo (no Gravatar: initials look better).
+	 *
+	 * @param string $url     URL so far.
+	 * @param int    $user_id User id.
+	 * @return string
+	 */
+	public function avatarUrl( $url, $user_id ): string {
+		$employee = $user_id ? ( new \RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeRepository() )->forUser( (int) $user_id ) : null;
+		$image    = $employee && $employee->avatar_id ? wp_get_attachment_image_url( (int) $employee->avatar_id, 'thumbnail' ) : '';
+		return $image ? (string) $image : (string) $url;
 	}
 }

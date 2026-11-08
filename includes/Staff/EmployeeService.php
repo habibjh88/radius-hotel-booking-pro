@@ -701,6 +701,15 @@ class EmployeeService {
 		$errors = array();
 		$data   = array();
 
+		// The staff photo: an image from the media library; 0 removes it (Gravatar shows instead).
+		if ( array_key_exists( 'avatar_id', $input ) ) {
+			$avatar = absint( $input['avatar_id'] );
+			if ( $avatar && ! wp_attachment_is_image( $avatar ) ) {
+				$errors['avatar_id'] = __( 'Choose an image.', 'radius-hotel-booking-pro' );
+			} else {
+				$data['avatar_id'] = $avatar ? $avatar : null;
+			}
+		}
 		foreach ( array( 'first_name', 'last_name', 'department', 'job_title', 'shift' ) as $field ) {
 			if ( $has( $field ) ) {
 				$data[ $field ] = sanitize_text_field( (string) ( $input[ $field ] ?? '' ) );
@@ -897,7 +906,7 @@ class EmployeeService {
 	 * @return array
 	 */
 	private static function logged( array $values, array $extra ): array {
-		$fields = array( 'first_name', 'last_name', 'dob', 'address', 'marital_status', 'num_children', 'phone', 'email', 'emergency', 'cnps_no', 'tax_no', 'department', 'job_title', 'shift' );
+		$fields = array( 'first_name', 'last_name', 'dob', 'address', 'marital_status', 'num_children', 'phone', 'email', 'emergency', 'cnps_no', 'tax_no', 'department', 'job_title', 'shift', 'avatar_id' );
 		$out    = array();
 		foreach ( $fields as $field ) {
 			$value         = $values[ $field ] ?? null;

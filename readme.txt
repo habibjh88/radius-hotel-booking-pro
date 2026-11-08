@@ -131,3 +131,5 @@ Vacation pay and gratification can count transport, gratification and bonus rule
 Pay tab: a Bonus rules panel shows which bonus rules (such as seniority) the employee gets.
 Pay tab: new Additions — an amount or % of base pay added to every payslip.
 Payroll → Work shifts: print the work schedule of every employee for a week or month.
+Staff: each employee can have a photo, shown on the staff list and staff file.
+The account menu shows the signed-in employee's photo when one is set.

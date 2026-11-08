@@ -45,6 +45,9 @@ final class EmployeeResource {
 			'phone'          => (string) $row['phone'],
 			'email'          => (string) $row['email'],
 			'is_active'      => (bool) (int) $row['is_active'],
+			// The staff photo, else the account's Gravatar.
+			'avatar_id'      => (int) ( $row['avatar_id'] ?? 0 ),
+			'avatar_url'     => self::avatarUrl( (int) ( $row['avatar_id'] ?? 0 ), (int) $row['user_id'] ),
 			'access_role'    => $role ? array(
 				'id'   => (int) $role->id,
 				'name' => (string) $role->name,
@@ -91,5 +94,21 @@ final class EmployeeResource {
 	public static function mask( string $value ): string {
 		$value = trim( $value );
 		return '' === $value ? '' : '••••' . ( strlen( $value ) > 4 ? substr( $value, -4 ) : '' );
+	}
+
+	/**
+	 * A staff photo's URL: the chosen image (square thumbnail), else the
+	 * account's Gravatar.
+	 *
+	 * @param int $avatar_id Attachment id, 0 for none.
+	 * @param int $user_id   WordPress user id.
+	 * @return string
+	 */
+	public static function avatarUrl( int $avatar_id, int $user_id ): string {
+		$url = $avatar_id ? wp_get_attachment_image_url( $avatar_id, 'thumbnail' ) : '';
+		if ( ! $url && $user_id ) {
+			$url = get_avatar_url( $user_id, array( 'size' => 96 ) );
+		}
+		return (string) $url;
 	}
 }

@@ -21,6 +21,7 @@ import {
 import { access, toast, usePageActions } from '@rtbp/lib';
 
 import { useEmployees, useSetActive } from './api';
+import { StaffAvatar } from './StaffPhoto';
 
 const PER_PAGE = 20;
 
@@ -83,12 +84,15 @@ export default function StaffListScreen() {
 			header: __( 'Employee', 'radius-hotel-booking-pro' ),
 			mobile: 'title',
 			cell: ( employee ) => (
-				<span className="inline-flex flex-wrap items-baseline gap-x-2">
-					<span className="font-semibold text-heading">
-						{ employee.name || employee.user_login }
-					</span>
-					<span className="text-xs text-muted-foreground">
-						{ employee.employee_no }
+				<span className="inline-flex items-center gap-3">
+					<StaffAvatar employee={ employee } />
+					<span className="inline-flex flex-wrap items-baseline gap-x-2">
+						<span className="font-semibold text-heading">
+							{ employee.name || employee.user_login }
+						</span>
+						<span className="text-xs text-muted-foreground">
+							{ employee.employee_no }
+						</span>
 					</span>
 				</span>
 			),
