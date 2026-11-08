@@ -191,7 +191,7 @@ export default function StaffListScreen() {
 	return (
 		// DataTable, ConfirmDialog and the menus load on demand (window.rtbp.ui).
 		<Suspense fallback={ <Skeleton className="h-64 w-full rounded-xl" /> }>
-			<div className="mx-auto max-w-6xl space-y-4">
+			<div className="space-y-4">
 				<Panel
 					title={ __( 'Staff', 'radius-hotel-booking-pro' ) }
 					description={

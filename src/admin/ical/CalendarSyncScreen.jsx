@@ -544,7 +544,7 @@ export default function CalendarSyncScreen() {
 	return (
 		// Select, Dialog and ConfirmDialog parts load on demand (window.rtbp.ui).
 		<Suspense fallback={ <Skeleton className="h-64 w-full rounded-xl" /> }>
-			<div className="mx-auto max-w-5xl space-y-4">
+			<div className="space-y-4">
 				<Panel
 					title={ __( 'Calendar sync', 'radius-hotel-booking-pro' ) }
 					description={ __(

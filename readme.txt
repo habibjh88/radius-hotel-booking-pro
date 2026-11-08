@@ -115,3 +115,19 @@ Pay run line stays open after saving, showing the recalculated figures; header s
 Booking QR codes on guest e-mails, booking page, invoices and receipts; scan to open the booking.
 New Scan button in the dashboard: phone camera, handheld scanner or typed booking reference.
 Fixed: Pro features (staff, payroll, activity log) not loading on sites with a custom plugin load order.
+Staff access: "PIN set" and "No PIN" badges now have distinct colours.
+Settings → Passcodes: "One PIN covers" now explains each option and where pages are protected.
+Staff, payroll, pricing, calendar sync and My profile screens now use the full page width.
+Scan box now asks for "the booking reference", whatever its format.
+Scanning a renumbered booking's old reference still opens the booking.
+Payslips show the hotel name beside the logo; the legal name sits underneath.
+Pay run: the staff-without-schedule notice now sits on a white card with a warning icon.
+Pay tab: overtime, paid or unpaid time off and sick pay can be counted per day.
+Pay tab: vacation pay can be a percentage or a fixed amount each pay period.
+Pay tab: bonus and commission take an amount or a % of base pay, paid each period.
+Pay tab: transport allowance takes an amount paid each pay period.
+Pay tab: gratification is set up like vacation pay — percentage or amount, paid or kept.
+Vacation pay and gratification can count transport, gratification and bonus rules such as seniority.
+Pay tab: a Bonus rules panel shows which bonus rules (such as seniority) the employee gets.
+Pay tab: new Additions — an amount or % of base pay added to every payslip.
+Payroll → Work shifts: print the work schedule of every employee for a week or month.

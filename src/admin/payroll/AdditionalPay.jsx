@@ -14,44 +14,99 @@ import {
 	SegmentedControl,
 	Switch,
 } from '@rtbp/ui';
-import { toast, toastError } from '@rtbp/lib';
+import { format, toast, toastError } from '@rtbp/lib';
 
 import { useSaveEmployeePayItems } from './api';
 
 /**
  * Field labels and units, by type and field.
  *
- * @param {string} type  Type key.
- * @param {string} field Field key.
+ * @param {string} type     Type key.
+ * @param {string} field    Field key.
+ * @param {Object} settings The type's settings (the unit changes the words).
  * @return {{label: string, unit?: string, hint?: string}} Text.
  */
-const fieldText = ( type, field ) => {
+const fieldText = ( type, field, settings = {} ) => {
+	const days = 'day' === settings.unit;
+	if ( 'unit' === field ) {
+		return { label: __( 'Counted', 'radius-hotel-booking-pro' ) };
+	}
 	if ( 'rate' === field ) {
 		return {
 			label: __( 'Overtime rate', 'radius-hotel-booking-pro' ),
-			unit: __( 'per hour', 'radius-hotel-booking-pro' ),
-			hint: __(
-				'Empty: the employee’s hourly rate.',
-				'radius-hotel-booking-pro'
-			),
+			unit: days
+				? __( 'per day', 'radius-hotel-booking-pro' )
+				: __( 'per hour', 'radius-hotel-booking-pro' ),
+			hint: days
+				? __(
+						'Empty: the employee’s hourly rate × a day’s hours on their work shift.',
+						'radius-hotel-booking-pro'
+				  )
+				: __(
+						'Empty: the employee’s hourly rate.',
+						'radius-hotel-booking-pro'
+				  ),
 		};
 	}
 	if ( 'max' === field ) {
-		return 'unpaid_time_off' === type
+		if ( 'unpaid_time_off' === type ) {
+			return {
+				label: days
+					? __( 'Most days', 'radius-hotel-booking-pro' )
+					: __( 'Most hours', 'radius-hotel-booking-pro' ),
+				unit: days
+					? __( 'days', 'radius-hotel-booking-pro' )
+					: __( 'hours', 'radius-hotel-booking-pro' ),
+				hint: __( '0: no limit.', 'radius-hotel-booking-pro' ),
+			};
+		}
+		return days
 			? {
-					label: __( 'Most hours', 'radius-hotel-booking-pro' ),
-					unit: __( 'hours', 'radius-hotel-booking-pro' ),
-					hint: __( '0: no limit.', 'radius-hotel-booking-pro' ),
+					label: __( 'Days allowed', 'radius-hotel-booking-pro' ),
+					unit: __( 'days a year', 'radius-hotel-booking-pro' ),
 			  }
 			: {
 					label: __( 'Hours allowed', 'radius-hotel-booking-pro' ),
 					unit: __( 'hours a year', 'radius-hotel-booking-pro' ),
 			  };
 	}
+	// Paid each period (R2-T3, R2-T5) or worked out from earnings (R2-T2, R2-T4).
+	const accrues = [ 'vacation_pay', 'gratification' ].includes( type );
+	if ( 'calc' === field ) {
+		return { label: __( 'Paid as', 'radius-hotel-booking-pro' ) };
+	}
 	if ( 'percent' === field ) {
 		return {
-			label: __( 'Percentage', 'radius-hotel-booking-pro' ),
+			label: accrues
+				? __( 'Percentage', 'radius-hotel-booking-pro' )
+				: __( 'Percentage of base pay', 'radius-hotel-booking-pro' ),
 			unit: '%',
+			hint: accrues
+				? __(
+						'Of the earnings that count, below.',
+						'radius-hotel-booking-pro'
+				  )
+				: __(
+						'Each pay period. A pay run can change it.',
+						'radius-hotel-booking-pro'
+				  ),
+		};
+	}
+	if ( 'amount' === field ) {
+		return {
+			label: __( 'Amount', 'radius-hotel-booking-pro' ),
+			unit: sprintf(
+				/* translators: %s: currency symbol. */
+				__( '%s each pay period', 'radius-hotel-booking-pro' ),
+				format.currencyInfo?.().symbol || ''
+			),
+			hint:
+				'vacation_pay' === type
+					? ''
+					: __(
+							'Empty: typed on each pay run. A pay run can change it.',
+							'radius-hotel-booking-pro'
+					  ),
 		};
 	}
 	if ( 'method' === field ) {
@@ -62,27 +117,81 @@ const fieldText = ( type, field ) => {
 	};
 };
 
+/**
+ * The choices of each switch field, by field.
+ *
+ * @return {Object<string, Object<string, string>>} Field => value => label.
+ */
+const CHOICES = () => ( {
+	method: {
+		pay: __( 'Add to every pay', 'radius-hotel-booking-pro' ),
+		retain: __( 'Keep through the year', 'radius-hotel-booking-pro' ),
+	},
+	unit: {
+		hour: __( 'Per hour', 'radius-hotel-booking-pro' ),
+		day: __( 'Per day', 'radius-hotel-booking-pro' ),
+	},
+	calc: {
+		amount: __( 'An amount', 'radius-hotel-booking-pro' ),
+		percent: __( 'A percentage', 'radius-hotel-booking-pro' ),
+	},
+} );
+
+/**
+ * Whether a field applies to the type's current choices (its `when`).
+ *
+ * @param {Object} def      Field definition.
+ * @param {Object} fields   The type's field definitions.
+ * @param {Object} settings The type's settings.
+ * @return {boolean} Shown.
+ */
+const applies = ( def, fields, settings = {} ) =>
+	Object.entries( def.when || {} ).every(
+		( [ other, wanted ] ) =>
+			( settings[ other ] || fields[ other ]?.default ) === wanted
+	);
+
 const BASE_LABELS = () => ( {
 	regular: __( 'Regular pay', 'radius-hotel-booking-pro' ),
 	overtime: __( 'Overtime', 'radius-hotel-booking-pro' ),
 	bonus: __( 'Bonus', 'radius-hotel-booking-pro' ),
 	commission: __( 'Commission', 'radius-hotel-booking-pro' ),
+	transportation: __( 'Transport allowance', 'radius-hotel-booking-pro' ),
+	gratification: __( 'Gratification', 'radius-hotel-booking-pro' ),
+	bonus_rules: __(
+		'Bonus rules, such as seniority',
+		'radius-hotel-booking-pro'
+	),
 } );
 
 /**
  * What a run asks for, per type.
  *
- * @param {string} entry `hours`, `amount` or `none`.
+ * @param {string} entry    `hours`, `amount` or `none`.
+ * @param {Object} settings The type's settings (its unit).
  * @return {string} Hint.
  */
-const entryHint = ( entry ) =>
+const entryHint = ( entry, settings = {} ) =>
 	'hours' === entry
-		? __( 'Hours are entered on each pay run.', 'radius-hotel-booking-pro' )
+		? 'day' === settings.unit
+			? __(
+					'Days are entered on each pay run.',
+					'radius-hotel-booking-pro'
+			  )
+			: __(
+					'Hours are entered on each pay run.',
+					'radius-hotel-booking-pro'
+			  )
 		: 'amount' === entry
-		? __(
-				'The amount is entered on each pay run.',
-				'radius-hotel-booking-pro'
-		  )
+		? settings.amount || settings.percent
+			? __(
+					'Paid each pay period. A pay run can change it.',
+					'radius-hotel-booking-pro'
+			  )
+			: __(
+					'The amount is entered on each pay run.',
+					'radius-hotel-booking-pro'
+			  )
 		: __( 'Worked out on each pay run.', 'radius-hotel-booking-pro' );
 
 /**
@@ -108,6 +217,7 @@ export default function AdditionalPay( { employeeId, saved, types, canEdit } ) {
 	const [ errors, setErrors ] = useState( {} );
 	const save = useSaveEmployeePayItems( employeeId );
 	const bases = BASE_LABELS();
+	const choices = CHOICES();
 
 	useEffect( () => {
 		setItems( saved || {} );
@@ -120,14 +230,19 @@ export default function AdditionalPay( { employeeId, saved, types, canEdit } ) {
 		setItems( ( current ) => {
 			const next = { ...current };
 			if ( on ) {
-				next[ type.key ] =
-					'vacation_pay' === type.key
-						? {
-								method: 'pay',
-								percent: '',
-								payitems: [ 'regular' ],
-						  }
-						: {};
+				next[ type.key ] = [ 'vacation_pay', 'gratification' ].includes(
+					type.key
+				)
+					? {
+							method: 'pay',
+							calc:
+								'vacation_pay' === type.key
+									? 'percent'
+									: 'amount',
+							percent: '',
+							payitems: [ 'regular' ],
+					  }
+					: {};
 			} else {
 				delete next[ type.key ];
 			}
@@ -164,34 +279,27 @@ export default function AdditionalPay( { employeeId, saved, types, canEdit } ) {
 	};
 
 	const input = ( type, field, def ) => {
-		const text = fieldText( type.key, field );
+		const text = fieldText( type.key, field, items[ type.key ] );
 		const value = items[ type.key ]?.[ field ];
 		const error = errors[ `items.${ type.key }.${ field }` ];
 		if ( 'enum' === def.type ) {
+			const labels = choices[ field ] || {};
 			return (
 				<Field key={ field } label={ text.label } error={ error }>
 					<SegmentedControl
 						label={ text.label }
-						value={ value || 'pay' }
+						value={
+							value ||
+							def.default ||
+							( 'method' === field ? 'pay' : def.options[ 0 ] )
+						}
 						onChange={ ( v ) =>
 							canEdit && setField( type.key, field, v )
 						}
-						options={ [
-							{
-								value: 'pay',
-								label: __(
-									'Add to every pay',
-									'radius-hotel-booking-pro'
-								),
-							},
-							{
-								value: 'retain',
-								label: __(
-									'Keep through the year',
-									'radius-hotel-booking-pro'
-								),
-							},
-						] }
+						options={ def.options.map( ( option ) => ( {
+							value: option,
+							label: labels[ option ] || option,
+						} ) ) }
 					/>
 				</Field>
 			);
@@ -294,7 +402,10 @@ export default function AdditionalPay( { employeeId, saved, types, canEdit } ) {
 										</span>
 										{ on ? (
 											<span className="block text-xs text-muted-foreground">
-												{ entryHint( type.entry ) }
+												{ entryHint(
+													type.entry,
+													items[ type.key ]
+												) }
 											</span>
 										) : null }
 									</span>
@@ -316,9 +427,17 @@ export default function AdditionalPay( { employeeId, saved, types, canEdit } ) {
 								</label>
 								{ on && fields.length ? (
 									<div className="grid gap-3 pb-1 sm:grid-cols-2">
-										{ fields.map( ( [ field, def ] ) =>
-											input( type, field, def )
-										) }
+										{ fields
+											.filter( ( [ , def ] ) =>
+												applies(
+													def,
+													type.fields,
+													items[ type.key ]
+												)
+											)
+											.map( ( [ field, def ] ) =>
+												input( type, field, def )
+											) }
 									</div>
 								) : null }
 							</div>

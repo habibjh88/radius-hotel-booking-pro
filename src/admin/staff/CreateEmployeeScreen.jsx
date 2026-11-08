@@ -246,7 +246,7 @@ export default function CreateEmployeeScreen() {
 	return (
 		// Select parts load on demand (window.rtbp.ui).
 		<Suspense fallback={ <Skeleton className="h-96 w-full rounded-xl" /> }>
-			<div className="mx-auto max-w-3xl space-y-4">
+			<div className="space-y-4">
 				<Link
 					to="/staff"
 					className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground no-underline hover:text-heading"

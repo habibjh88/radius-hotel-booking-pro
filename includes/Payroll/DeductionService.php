@@ -22,7 +22,9 @@ defined( 'ABSPATH' ) || exit;
  * - garnishment `court_order`: name, start / end, an amount requested per
  *   period and the most it may take (% of disposable pay);
  * - garnishment `other`: name, start / end, a total to recover, taken as an
- *   amount or a % per payslip or per month, with what remains.
+ *   amount or a % per payslip or per month, with what remains;
+ * - addition `taxable` / `not_taxable` (R2-T8): name, optional start / end,
+ *   an amount or a % of base pay on every payslip.
  *
  * What remains is set to the total on creation; changing the total moves
  * it only while nothing has been taken yet (the legacy rule). Status:
@@ -34,6 +36,8 @@ final class DeductionService {
 	public const TYPES = array(
 		'deduction'   => array( 'health_insurance', 'other' ),
 		'garnishment' => array( 'court_order', 'other' ),
+		// R2-T8: added to every payslip — taxable (in gross pay) or not (added to net pay).
+		'addition'    => array( 'taxable', 'not_taxable' ),
 	);
 
 	public const STATUSES = array( 'active', 'suspended', 'completed' );
@@ -257,6 +261,19 @@ final class DeductionService {
 			}
 			$share( '', false );
 			$share( 'employer_', true );
+		} elseif ( 'addition' === $kind ) {
+			$data['start_date']  = $date( 'start_date' );
+			$data['end_date']    = $date( 'end_date' );
+			$data['calculation'] = 'per_payslip';
+			foreach ( array( 'start_date', 'end_date' ) as $key ) {
+				if ( '' !== (string) ( $input[ $key ] ?? '' ) && null === $data[ $key ] ) {
+					$errors[ $key ] = __( 'Enter a valid date.', 'radius-hotel-booking-pro' );
+				}
+			}
+			if ( $data['end_date'] && $data['start_date'] && $data['end_date'] < $data['start_date'] ) {
+				$errors['end_date'] = __( 'The end cannot be before the start.', 'radius-hotel-booking-pro' );
+			}
+			$share( '', false );
 		} else {
 			$data['start_date'] = $date( 'start_date' );
 			$data['end_date']   = $date( 'end_date' );

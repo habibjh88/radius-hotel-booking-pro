@@ -276,7 +276,7 @@ export default function ScanDialog( { open, onOpenChange } ) {
 								setCode( event.target.value )
 							}
 							placeholder={ __(
-								'Scan now, or type RT-…',
+								'Scan now, or type the booking reference',
 								'radius-hotel-booking-pro'
 							) }
 						/>

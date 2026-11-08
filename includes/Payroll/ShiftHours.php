@@ -71,6 +71,19 @@ final class ShiftHours {
 	}
 
 	/**
+	 * Hours of an average working day (the week's hours over its working
+	 * days): what one day of overtime or time off is worth (R2-T1). 0 without
+	 * a working day.
+	 *
+	 * @param array[] $days Weekday => day.
+	 * @return float
+	 */
+	public static function perDay( array $days ): float {
+		$worked = array_filter( array_map( array( self::class, 'forDay' ), $days ) );
+		return $worked ? round( array_sum( $worked ) / count( $worked ), 4 ) : 0.0;
+	}
+
+	/**
 	 * Hours in a period, counting each shift on the day it starts.
 	 *
 	 * @param array[] $days Weekday => day.

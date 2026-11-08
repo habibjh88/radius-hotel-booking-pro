@@ -26,7 +26,7 @@ export default function PricingScreen() {
 		: true;
 
 	return (
-		<div className="mx-auto max-w-4xl space-y-4">
+		<div className="space-y-4">
 			<Suspense fallback={ <Skeleton className="h-10 w-72" /> }>
 				<Tabs
 					value={ tab }

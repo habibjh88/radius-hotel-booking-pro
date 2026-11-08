@@ -99,6 +99,8 @@ final class EmployeePayService {
 			'pay'        => self::shape( $profile, $schedules, $shifts ),
 			'items'      => (object) ( new EmployeePayItemRepository() )->forEmployee( $employee_id ),
 			'item_types' => self::itemTypes(),
+			// Settings → Payroll → Bonuses that this employee gets today, resolved (seniority's % for their years; R2-T7).
+			'bonus_rules' => BonusRules::forEmployee( $employee_id, current_time( 'Y-m-d' ) ),
 			'schedules' => array_map(
 				static fn( PaySchedule $s ) => array(
 					'id'             => (int) $s->id,

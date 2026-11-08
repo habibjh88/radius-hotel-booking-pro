@@ -242,7 +242,13 @@ export default function AccessSection( { value, setField, errors, schema } ) {
 					label={ __( 'One PIN covers', 'radius-hotel-booking-pro' ) }
 					error={ errors.passcodeScope }
 				>
-					<div>
+					<div className="space-y-3">
+						<p className="m-0 text-sm text-muted-foreground">
+							{ __(
+								'Choose which pages and actions need a PIN in Permissions, Access roles or Staff access.',
+								'radius-hotel-booking-pro'
+							) }
+						</p>
 						<SegmentedControl
 							label={ __(
 								'One PIN covers',
@@ -267,6 +273,17 @@ export default function AccessSection( { value, setField, errors, schema } ) {
 								},
 							] }
 						/>
+						<p className="text-sm text-muted-foreground">
+							{ 'per_key' === value.passcodeScope
+								? __(
+										'Each protected page or action asks for its own PIN. Unlocking one does not unlock the others.',
+										'radius-hotel-booking-pro'
+								  )
+								: __(
+										'One PIN unlocks every protected page and action until it expires.',
+										'radius-hotel-booking-pro'
+								  ) }
+						</p>
 					</div>
 				</Field>
 

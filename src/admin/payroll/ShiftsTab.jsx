@@ -28,6 +28,7 @@ import {
 import { access, toast, toastError, usePageActions } from '@rtbp/lib';
 
 import { TimeField } from '../pickers';
+import PrintSchedule from './PrintSchedule';
 import { useDeleteShift, useSaveShift, useWorkShifts } from './api';
 
 /**
@@ -485,6 +486,11 @@ export default function ShiftsTab() {
 
 	return (
 		<Suspense fallback={ <Skeleton className="h-64 w-full rounded-xl" /> }>
+			<div className="mb-4">
+				<PrintSchedule
+					hasPdf={ ( list.data?.formats || [] ).includes( 'pdf' ) }
+				/>
+			</div>
 			<Panel>
 				<DataTable
 					columns={ columns }

@@ -14,7 +14,7 @@ use WP_REST_Request;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * `GET payroll/shifts` (`page.payroll`), `POST payroll/shifts`,
+ * `GET payroll/shifts` and `GET payroll/work-schedule` (`page.payroll`), `POST payroll/shifts`,
  * `PUT|DELETE payroll/shifts/{id}` (`payroll.shifts`). Registered only
  * when Pro's GuardsRequests exists (Plugin::boot()).
  */
@@ -30,6 +30,8 @@ class WorkShiftController {
 	 */
 	public static function routes( $router ): void {
 		$router->get( 'payroll/shifts', array( self::class, 'index' ) );
+		// The printable work schedule (R2-T9).
+		$router->get( 'payroll/work-schedule', array( self::class, 'schedule' ) );
 		$router->post( 'payroll/shifts', array( self::class, 'store' ) );
 		$router->put( 'payroll/shifts/(?P<id>\d+)', array( self::class, 'update' ) );
 		$router->delete( 'payroll/shifts/(?P<id>\d+)', array( self::class, 'destroy' ) );
@@ -45,7 +47,43 @@ class WorkShiftController {
 		return $this->guard(
 			$request,
 			'page.payroll',
-			fn() => ApiResponse::success( array( 'shifts' => ( new WorkShiftService() )->list() ) )->send()
+			fn() => ApiResponse::success(
+				array(
+					'shifts'  => ( new WorkShiftService() )->list(),
+					// The work schedule prints in these (html, and pdf with Pro's renderer).
+					'formats' => PayslipService::formats(),
+				)
+			)->send()
+		);
+	}
+
+	/**
+	 * GET payroll/work-schedule?from=&to=&format=html|pdf (`page.payroll`): the
+	 * printable schedule of every active employee, base64 in the JSON envelope
+	 * like a payslip (so a PIN-level page still asks for the PIN).
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return mixed
+	 */
+	public function schedule( WP_REST_Request $request ) {
+		return $this->guard(
+			$request,
+			'page.payroll',
+			function ( $request ) {
+				$out = ( new WorkScheduleService() )->render(
+					sanitize_text_field( (string) $request->get_param( 'from' ) ),
+					sanitize_text_field( (string) $request->get_param( 'to' ) ),
+					sanitize_key( (string) ( $request->get_param( 'format' ) ?? 'html' ) )
+				);
+				return ApiResponse::success(
+					array(
+						'filename'     => (string) $out['filename'],
+						'content_type' => (string) $out['content_type'],
+						// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- a binary file (PDF) in a JSON body.
+						'body'         => base64_encode( (string) $out['body'] ),
+					)
+				)->send();
+			}
 		);
 	}
 

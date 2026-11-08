@@ -34,6 +34,30 @@ import {
 } from './api';
 
 /**
+ * "PIN set" (green) or "No PIN" (amber), so the two read apart at a glance.
+ *
+ * @param {Object}  props        Props.
+ * @param {boolean} props.hasPin Whether a PIN is set.
+ * @return {JSX.Element} Badge.
+ */
+export function PinBadge( { hasPin } ) {
+	return (
+		<Badge
+			variant="secondary"
+			className={
+				hasPin
+					? 'bg-success-soft text-success'
+					: 'bg-warning-soft text-warning'
+			}
+		>
+			{ hasPin
+				? __( 'PIN set', 'radius-hotel-booking-pro' )
+				: __( 'No PIN', 'radius-hotel-booking-pro' ) }
+		</Badge>
+	);
+}
+
+/**
  * The personal PIN: set or remove. Never shown.
  *
  * @param {Object}  props        Props.
@@ -87,11 +111,7 @@ function PinField( { userId, hasPin } ) {
 						{ __( 'Remove', 'radius-hotel-booking-pro' ) }
 					</Button>
 				) : null }
-				<Badge variant="outline">
-					{ hasPin
-						? __( 'PIN set', 'radius-hotel-booking-pro' )
-						: __( 'No PIN', 'radius-hotel-booking-pro' ) }
-				</Badge>
+				<PinBadge hasPin={ hasPin } />
 			</div>
 		</Field>
 	);
@@ -175,7 +195,10 @@ export default function StaffAccess( { userId, onBack } ) {
 				actions={
 					user.is_admin ? (
 						<Badge variant="outline">
-							{ __( 'Administrator', 'radius-hotel-booking-pro' ) }
+							{ __(
+								'Administrator',
+								'radius-hotel-booking-pro'
+							) }
 						</Badge>
 					) : null
 				}
@@ -190,11 +213,15 @@ export default function StaffAccess( { userId, onBack } ) {
 					<div>
 						<Suspense fallback={ null }>
 							<Select
-								value={ String( profile.data.access_role ?? 'none' ) }
+								value={ String(
+									profile.data.access_role ?? 'none'
+								) }
 								onValueChange={ ( next ) =>
 									save.mutate( {
 										access_role:
-											'none' === next ? null : Number( next ),
+											'none' === next
+												? null
+												: Number( next ),
 									} )
 								}
 								disabled={ save.isPending }
@@ -238,15 +265,24 @@ export default function StaffAccess( { userId, onBack } ) {
 							variant="ghost"
 							onClick={ () => setConfirmReset( true ) }
 						>
-							{ __( 'Reset overrides', 'radius-hotel-booking-pro' ) }
+							{ __(
+								'Reset overrides',
+								'radius-hotel-booking-pro'
+							) }
 						</Button>
 					) : null
 				}
 			>
 				<p className="m-0 text-sm text-muted-foreground">
 					{ overrideCount
-						? __( 'This person has personal overrides.', 'radius-hotel-booking-pro' )
-						: __( 'No personal overrides.', 'radius-hotel-booking-pro' ) }
+						? __(
+								'This person has personal overrides.',
+								'radius-hotel-booking-pro'
+						  )
+						: __(
+								'No personal overrides.',
+								'radius-hotel-booking-pro'
+						  ) }
 				</p>
 			</SettingsSection>
 
@@ -264,13 +300,18 @@ export default function StaffAccess( { userId, onBack } ) {
 						return next;
 					} )
 				}
-				options={ withUnset( __( 'Inherit', 'radius-hotel-booking-pro' ) ) }
+				options={ withUnset(
+					__( 'Inherit', 'radius-hotel-booking-pro' )
+				) }
 				aside={ ( key ) =>
 					effective[ key.key ] ? (
 						<span className="mt-0.5 block text-xs text-muted-foreground">
 							{ sprintf(
 								/* translators: 1: a level such as Open, 2: where it comes from, e.g. Access role. */
-								__( 'Now: %1$s · %2$s', 'radius-hotel-booking-pro' ),
+								__(
+									'Now: %1$s · %2$s',
+									'radius-hotel-booking-pro'
+								),
 								levelLabel( effective[ key.key ].level ),
 								sourceLabel( effective[ key.key ].source )
 							) }
@@ -290,11 +331,14 @@ export default function StaffAccess( { userId, onBack } ) {
 					<ProfileFieldsControl
 						fields={ fields.data.fields }
 						value={ profile.data.profile_fields?.overrides ?? {} }
-						unsetLabel={ __( 'Inherit', 'radius-hotel-booking-pro' ) }
+						unsetLabel={ __(
+							'Inherit',
+							'radius-hotel-booking-pro'
+						) }
 						effective={ Object.fromEntries(
-							( profile.data.profile_fields?.effective ?? [] ).map(
-								( row ) => [ row.key, row ]
-							)
+							(
+								profile.data.profile_fields?.effective ?? []
+							).map( ( row ) => [ row.key, row ] )
 						) }
 						onChange={ ( key, next ) =>
 							save.mutate( {
@@ -327,7 +371,9 @@ export default function StaffAccess( { userId, onBack } ) {
 				{ confirmReset ? (
 					<ConfirmDialog
 						open
-						onOpenChange={ ( next ) => ! next && setConfirmReset( false ) }
+						onOpenChange={ ( next ) =>
+							! next && setConfirmReset( false )
+						}
 						destructive
 						title={ __(
 							'Reset this person’s overrides?',
@@ -337,7 +383,10 @@ export default function StaffAccess( { userId, onBack } ) {
 							'Every personal override is removed; the access role and the defaults apply again.',
 							'radius-hotel-booking-pro'
 						) }
-						confirmLabel={ __( 'Reset overrides', 'radius-hotel-booking-pro' ) }
+						confirmLabel={ __(
+							'Reset overrides',
+							'radius-hotel-booking-pro'
+						) }
 						onConfirm={ () =>
 							reset
 								.mutateAsync( userId )

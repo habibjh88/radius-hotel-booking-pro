@@ -54,10 +54,22 @@ $rtbp_pro_rate  = static fn( $rate ) => null === $rate || '' === (string) $rate 
 	<table>
 		<tr>
 			<td style="width: 55%;">
-				<?php if ( ! empty( $doc['logo_url'] ) ) : ?>
-					<img class="logo" src="<?php echo esc_url( $doc['logo_url'] ); ?>" alt="" /><br />
+				<?php
+				// The hotel's name beside its logo (`trade_name`, free 1.0.0.1+; the legal name before),
+				// the legal name under it when it differs — as on the free invoice.
+				$rtbp_pro_brand = '' !== (string) ( $rtbp_pro_hotel['trade_name'] ?? '' ) ? (string) $rtbp_pro_hotel['trade_name'] : (string) ( $rtbp_pro_hotel['name'] ?? '' );
+				?>
+				<table class="brand">
+					<tr>
+						<?php if ( ! empty( $doc['logo_url'] ) ) : ?>
+							<td class="brand-logo"><img class="logo" src="<?php echo esc_url( $doc['logo_url'] ); ?>" alt="" /></td>
+						<?php endif; ?>
+						<td><p class="hotel-name"><?php echo esc_html( $rtbp_pro_brand ); ?></p></td>
+					</tr>
+				</table>
+				<?php if ( '' !== (string) ( $rtbp_pro_hotel['name'] ?? '' ) && $rtbp_pro_hotel['name'] !== $rtbp_pro_brand ) : ?>
+					<div class="legal-name"><?php echo esc_html( $rtbp_pro_hotel['name'] ); ?></div>
 				<?php endif; ?>
-				<p class="hotel-name"><?php echo esc_html( $rtbp_pro_hotel['name'] ?? '' ); ?></p>
 				<?php if ( ! empty( $rtbp_pro_hotel['address'] ) ) : ?>
 					<div class="muted" style="white-space: pre-line;"><?php echo esc_html( $rtbp_pro_hotel['address'] ); ?></div>
 				<?php endif; ?>
@@ -128,17 +140,40 @@ $rtbp_pro_rate  = static fn( $rate ) => null === $rate || '' === (string) $rate 
 			<?php foreach ( (array) ( $rtbp_pro_b['earnings'] ?? array() ) as $rtbp_pro_e ) : ?>
 				<tr>
 					<td><?php echo esc_html( $rtbp_pro_e['label'] ); ?></td>
-					<td class="num"><?php echo null !== $rtbp_pro_e['quantity'] ? esc_html( sprintf( /* translators: %s: hours. */ __( '%s h', 'radius-hotel-booking-pro' ), number_format_i18n( (float) $rtbp_pro_e['quantity'], 2 ) ) ) : ''; ?></td>
+					<td class="num">
+					<?php
+					if ( null !== $rtbp_pro_e['quantity'] ) {
+						// Hours, or days for a type set per day (R2-T1).
+						echo esc_html(
+							'day' === ( $rtbp_pro_e['unit'] ?? '' )
+								/* translators: %s: number of days. */
+								? sprintf( _n( '%s day', '%s days', (int) ceil( (float) $rtbp_pro_e['quantity'] ), 'radius-hotel-booking-pro' ), number_format_i18n( (float) $rtbp_pro_e['quantity'], 2 ) )
+								/* translators: %s: hours. */
+								: sprintf( __( '%s h', 'radius-hotel-booking-pro' ), number_format_i18n( (float) $rtbp_pro_e['quantity'], 2 ) )
+						);
+					}
+					?>
+					</td>
 					<td class="num"><?php echo esc_html( ( 'deduct' === $rtbp_pro_e['effect'] ? '− ' : '' ) . $rtbp_pro_money( $rtbp_pro_e['amount'] ) ); ?></td>
 				</tr>
 			<?php endforeach; ?>
-			<?php if ( ! empty( $rtbp_pro_b['vacation'] ) && 'pay' === $rtbp_pro_b['vacation']['method'] ) : ?>
+			<?php
+			// Gratification and vacation pay paid with this pay (R2-T2, R2-T4); a kept one is not paid yet.
+			foreach ( array(
+				'gratification' => __( 'Gratification', 'radius-hotel-booking-pro' ),
+				'vacation'      => __( 'Vacation pay', 'radius-hotel-booking-pro' ),
+			) as $rtbp_pro_key => $rtbp_pro_label ) :
+				$rtbp_pro_acc = (array) ( $rtbp_pro_b[ $rtbp_pro_key ] ?? array() );
+				if ( ! $rtbp_pro_acc || 'pay' !== ( $rtbp_pro_acc['method'] ?? '' ) ) {
+					continue;
+				}
+				?>
 				<tr>
-					<td><?php esc_html_e( 'Vacation pay', 'radius-hotel-booking-pro' ); ?></td>
-					<td class="num"><?php echo esc_html( $rtbp_pro_rate( $rtbp_pro_b['vacation']['percent'] ) ); ?></td>
-					<td class="num"><?php echo esc_html( $rtbp_pro_money( $rtbp_pro_b['vacation']['amount'] ) ); ?></td>
+					<td><?php echo esc_html( $rtbp_pro_label ); ?></td>
+					<td class="num"><?php echo esc_html( $rtbp_pro_rate( $rtbp_pro_acc['percent'] ?? null ) ); ?></td>
+					<td class="num"><?php echo esc_html( $rtbp_pro_money( $rtbp_pro_acc['amount'] ) ); ?></td>
 				</tr>
-			<?php endif; ?>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
 	<table class="totals">

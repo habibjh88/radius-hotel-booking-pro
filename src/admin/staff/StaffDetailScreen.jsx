@@ -169,7 +169,7 @@ export default function StaffDetailScreen() {
 
 	if ( isPending ) {
 		return (
-			<div className="mx-auto max-w-5xl space-y-4">
+			<div className="space-y-4">
 				{ back }
 				<Skeleton className="h-28 w-full rounded-xl" />
 				<Skeleton className="h-64 w-full rounded-xl" />
@@ -178,7 +178,7 @@ export default function StaffDetailScreen() {
 	}
 	if ( error || ! employee ) {
 		return (
-			<div className="mx-auto max-w-5xl space-y-4">
+			<div className="space-y-4">
 				{ back }
 				<Panel>
 					<EmptyState
@@ -226,7 +226,7 @@ export default function StaffDetailScreen() {
 	return (
 		// Tabs, Select and ConfirmDialog parts load on demand (window.rtbp.ui).
 		<Suspense fallback={ <Skeleton className="h-64 w-full rounded-xl" /> }>
-			<div className="mx-auto max-w-5xl space-y-4">
+			<div className="space-y-4">
 				{ back }
 				<Panel>
 					<div className="flex flex-wrap items-start justify-between gap-3">

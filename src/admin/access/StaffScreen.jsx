@@ -9,7 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Badge, Button, ConfirmDialog, EmptyState, Panel } from '@rtbp/ui';
 import { usePageActions } from '@rtbp/lib';
 
-import StaffAccess from './StaffAccess';
+import StaffAccess, { PinBadge } from './StaffAccess';
 import { LoadError, ListSkeleton } from './RolesScreen';
 import { useResetOverrides, useUsers } from './api';
 
@@ -113,17 +113,7 @@ export default function StaffScreen() {
 											) }
 										</Badge>
 									) : null }
-									<Badge variant="outline">
-										{ user.has_pin
-											? __(
-													'PIN set',
-													'radius-hotel-booking-pro'
-											  )
-											: __(
-													'No PIN',
-													'radius-hotel-booking-pro'
-											  ) }
-									</Badge>
+									<PinBadge hasPin={ user.has_pin } />
 								</div>
 							</div>
 							<Button

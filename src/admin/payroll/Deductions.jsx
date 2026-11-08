@@ -3,6 +3,10 @@
  * tab: deductions are taken before tax (health insurance, other — with an
  * optional employer share), garnishments after tax (a court order up to a
  * % of disposable pay; another debt to recover). A run takes them (T5a).
+ *
+ * With `mode="additions"` the same panel lists the employee's additions
+ * (R2-T8): an amount or a % of base pay added to every payslip, taxable (in
+ * gross pay) or not (added to net pay).
  */
 import { useEffect, useState } from 'react';
 import { __, sprintf } from '@wordpress/i18n';
@@ -33,36 +37,62 @@ import { DateField } from '../pickers';
 import { useDeductionMutation, useDeductions } from './api';
 
 /**
- * The four kinds of row, as one choice.
+ * The kinds of row, as one choice.
  *
+ * @param {string} mode `deductions` or `additions`.
  * @return {Array<{value: string, kind: string, type: string, label: string}>} Choices.
  */
-const choices = () => [
-	{
-		value: 'deduction:health_insurance',
-		kind: 'deduction',
-		type: 'health_insurance',
-		label: __( 'Health insurance', 'radius-hotel-booking-pro' ),
-	},
-	{
-		value: 'deduction:other',
-		kind: 'deduction',
-		type: 'other',
-		label: __( 'Other deduction', 'radius-hotel-booking-pro' ),
-	},
-	{
-		value: 'garnishment:court_order',
-		kind: 'garnishment',
-		type: 'court_order',
-		label: __( 'Court order', 'radius-hotel-booking-pro' ),
-	},
-	{
-		value: 'garnishment:other',
-		kind: 'garnishment',
-		type: 'other',
-		label: __( 'Other garnishment', 'radius-hotel-booking-pro' ),
-	},
-];
+const choices = ( mode = 'deductions' ) =>
+	'additions' === mode
+		? [
+				{
+					value: 'addition:taxable',
+					kind: 'addition',
+					type: 'taxable',
+					label: __(
+						'Taxable — part of gross pay',
+						'radius-hotel-booking-pro'
+					),
+				},
+				{
+					value: 'addition:not_taxable',
+					kind: 'addition',
+					type: 'not_taxable',
+					label: __(
+						'Not taxable — added to net pay',
+						'radius-hotel-booking-pro'
+					),
+				},
+		  ]
+		: [
+				{
+					value: 'deduction:health_insurance',
+					kind: 'deduction',
+					type: 'health_insurance',
+					label: __( 'Health insurance', 'radius-hotel-booking-pro' ),
+				},
+				{
+					value: 'deduction:other',
+					kind: 'deduction',
+					type: 'other',
+					label: __( 'Other deduction', 'radius-hotel-booking-pro' ),
+				},
+				{
+					value: 'garnishment:court_order',
+					kind: 'garnishment',
+					type: 'court_order',
+					label: __( 'Court order', 'radius-hotel-booking-pro' ),
+				},
+				{
+					value: 'garnishment:other',
+					kind: 'garnishment',
+					type: 'other',
+					label: __(
+						'Other garnishment',
+						'radius-hotel-booking-pro'
+					),
+				},
+		  ];
 
 const STATUS_LABELS = () => ( {
 	active: __( 'Active', 'radius-hotel-booking-pro' ),
@@ -118,6 +148,22 @@ const takes = ( row ) => {
 		'per_month' === row.calculation
 			? __( 'a month', 'radius-hotel-booking-pro' )
 			: __( 'a payslip', 'radius-hotel-booking-pro' );
+	if ( 'addition' === row.kind ) {
+		return 'percent' === row.amount_type
+			? sprintf(
+					/* translators: %s: percentage. */
+					__(
+						'%s %% of base pay, every payslip',
+						'radius-hotel-booking-pro'
+					),
+					Number( row.percent )
+			  )
+			: sprintf(
+					/* translators: %s: amount. */
+					__( '%s every payslip', 'radius-hotel-booking-pro' ),
+					format.formatMoney( row.amount )
+			  );
+	}
 	if ( 'garnishment' === row.kind ) {
 		return sprintf(
 			/* translators: 1: amount or %, 2: "a month" / "a payslip", 3: amount left. */
@@ -158,8 +204,9 @@ const message = ( value ) =>
  * @param {Function} props.onClose    Close.
  * @return {JSX.Element} Dialog.
  */
-function DeductionDialog( { open, row, employeeId, onClose } ) {
-	const [ choice, setChoice ] = useState( 'deduction:health_insurance' );
+function DeductionDialog( { open, row, employeeId, onClose, mode } ) {
+	const first = choices( mode )[ 0 ].value;
+	const [ choice, setChoice ] = useState( first );
 	const [ values, setValues ] = useState( BLANK );
 	const [ errors, setErrors ] = useState( {} );
 	const mutation = useDeductionMutation( employeeId );
@@ -168,9 +215,7 @@ function DeductionDialog( { open, row, employeeId, onClose } ) {
 		if ( ! open ) {
 			return;
 		}
-		setChoice(
-			row ? `${ row.kind }:${ row.type }` : 'deduction:health_insurance'
-		);
+		setChoice( row ? `${ row.kind }:${ row.type }` : first );
 		setValues(
 			row
 				? {
@@ -185,7 +230,7 @@ function DeductionDialog( { open, row, employeeId, onClose } ) {
 				: BLANK
 		);
 		setErrors( {} );
-	}, [ open, row ] );
+	}, [ open, row, first ] );
 
 	const [ kind, type ] = choice.split( ':' );
 	const set = ( key, value ) => {
@@ -349,7 +394,17 @@ function DeductionDialog( { open, row, employeeId, onClose } ) {
 				<form className="space-y-4" onSubmit={ submit } noValidate>
 					<DialogHeader>
 						<DialogTitle>
-							{ row
+							{ 'additions' === mode
+								? row
+									? __(
+											'Change the addition',
+											'radius-hotel-booking-pro'
+									  )
+									: __(
+											'Add an addition',
+											'radius-hotel-booking-pro'
+									  )
+								: row
 								? __(
 										'Change the deduction',
 										'radius-hotel-booking-pro'
@@ -373,7 +428,7 @@ function DeductionDialog( { open, row, employeeId, onClose } ) {
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent className="rtbp-root">
-								{ choices().map( ( c ) => (
+								{ choices( mode ).map( ( c ) => (
 									<SelectItem
 										key={ c.value }
 										value={ c.value }
@@ -392,7 +447,36 @@ function DeductionDialog( { open, row, employeeId, onClose } ) {
 						),
 						{ required: true, input: { maxLength: 191 } }
 					) }
-					{ 'deduction' === kind ? (
+					{ 'addition' === kind ? (
+						<>
+							<div className="grid gap-4 sm:grid-cols-2">
+								{ dateField(
+									'start_date',
+									__( 'Start', 'radius-hotel-booking-pro' )
+								) }
+								{ dateField(
+									'end_date',
+									__( 'End', 'radius-hotel-booking-pro' )
+								) }
+							</div>
+							{ share(
+								'',
+								__(
+									'Added to every payslip',
+									'radius-hotel-booking-pro'
+								),
+								false
+							) }
+							{ 'percent' === values.amount_type ? (
+								<p className="m-0 text-xs text-muted-foreground">
+									{ __(
+										'A percentage of the base pay.',
+										'radius-hotel-booking-pro'
+									) }
+								</p>
+							) : null }
+						</>
+					) : 'deduction' === kind ? (
 						<>
 							<div className="grid gap-4 sm:grid-cols-2">
 								{ text(
@@ -582,13 +666,21 @@ function DeductionDialog( { open, row, employeeId, onClose } ) {
  * @param {boolean} props.canEdit    May change them.
  * @return {JSX.Element} Panel.
  */
-export default function Deductions( { employeeId, canEdit } ) {
+export default function Deductions( {
+	employeeId,
+	canEdit,
+	mode = 'deductions',
+} ) {
+	const additions = 'additions' === mode;
 	const list = useDeductions( employeeId );
+	const rows = ( list.data || [] ).filter(
+		( row ) => additions === ( 'addition' === row.kind )
+	);
 	const mutation = useDeductionMutation( employeeId );
 	const [ editing, setEditing ] = useState( null );
 	const [ deleting, setDeleting ] = useState( null );
 	const labels = Object.fromEntries(
-		choices().map( ( c ) => [ c.value, c.label ] )
+		choices( mode ).map( ( c ) => [ c.value, c.label ] )
 	);
 	const statuses = STATUS_LABELS();
 
@@ -598,16 +690,23 @@ export default function Deductions( { employeeId, canEdit } ) {
 				<div className="flex flex-wrap items-start justify-between gap-3">
 					<div className="min-w-0">
 						<h3 className="m-0 text-base font-semibold text-heading">
-							{ __(
-								'Deductions and garnishments',
-								'radius-hotel-booking-pro'
-							) }
+							{ additions
+								? __( 'Additions', 'radius-hotel-booking-pro' )
+								: __(
+										'Deductions and garnishments',
+										'radius-hotel-booking-pro'
+								  ) }
 						</h3>
 						<p className="m-0 text-sm text-muted-foreground">
-							{ __(
-								'Deductions are taken before tax; garnishments after tax.',
-								'radius-hotel-booking-pro'
-							) }
+							{ additions
+								? __(
+										'Added to every payslip, such as an allowance. Taxable ones are part of gross pay; the others are added to net pay.',
+										'radius-hotel-booking-pro'
+								  )
+								: __(
+										'Deductions are taken before tax; garnishments after tax.',
+										'radius-hotel-booking-pro'
+								  ) }
 						</p>
 					</div>
 					{ canEdit ? (
@@ -628,13 +727,13 @@ export default function Deductions( { employeeId, canEdit } ) {
 						{ list.error.message }
 					</p>
 				) : null }
-				{ list.data && ! list.data.length ? (
+				{ list.data && ! rows.length ? (
 					<p className="m-0 text-sm text-muted-foreground">
 						{ __( 'None.', 'radius-hotel-booking-pro' ) }
 					</p>
 				) : null }
 				<div className="space-y-2">
-					{ ( list.data || [] ).map( ( row ) => (
+					{ rows.map( ( row ) => (
 						<div
 							key={ row.id }
 							className="flex flex-wrap items-center justify-between gap-3 rounded-lg border px-3 py-2"
@@ -712,6 +811,7 @@ export default function Deductions( { employeeId, canEdit } ) {
 				row={ editing?.row || null }
 				employeeId={ employeeId }
 				onClose={ () => setEditing( null ) }
+				mode={ mode }
 			/>
 			<ConfirmDialog
 				open={ Boolean( deleting ) }

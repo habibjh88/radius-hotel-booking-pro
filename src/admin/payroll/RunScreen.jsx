@@ -8,7 +8,7 @@
 import { Suspense, useState } from 'react';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { AlertTriangle, ArrowLeft } from 'lucide-react';
 import {
 	Button,
 	ConfirmDialog,
@@ -470,7 +470,7 @@ export default function RunScreen() {
 
 	return (
 		<Suspense fallback={ <Skeleton className="h-64 w-full rounded-xl" /> }>
-			<div className="mx-auto max-w-5xl space-y-4">
+			<div className="space-y-4">
 				{ back }
 				<Panel>
 					<div className="flex flex-wrap items-start justify-between gap-3">
@@ -632,10 +632,14 @@ export default function RunScreen() {
 				{ run.unscheduled?.length ? (
 					// Active staff no run includes: their Pay tab needs a pay schedule (R1-T17).
 					<div
-						className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-heading"
+						className="rounded-xl border border-border bg-card p-4 text-sm text-heading shadow-sm"
 						role="status"
 					>
-						<p className="m-0 font-semibold">
+						<p className="m-0 flex items-center gap-2 font-semibold">
+							<AlertTriangle
+								className="h-4 w-4 shrink-0 text-warning"
+								aria-hidden="true"
+							/>
 							{ sprintf(
 								/* translators: %d: number of employees. */
 								_n(

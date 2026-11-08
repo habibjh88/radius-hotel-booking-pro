@@ -5,7 +5,7 @@
  * additional pay, one-off additions and deductions. Saving recalculates.
  */
 import { useEffect, useId, useState } from 'react';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, _n, sprintf } from '@wordpress/i18n';
 import { Check, Pencil, Plus, Trash2 } from 'lucide-react';
 import {
 	Button,
@@ -27,6 +27,47 @@ import { usePayrollRunAction } from './api';
 import { openPayslip } from './payslip';
 
 const money = ( v ) => format.formatMoney( v );
+
+/**
+ * How vacation pay or gratification was worked out (R2-T2, R2-T4).
+ *
+ * @param {Object} accrual `{ method, calc, percent }`.
+ * @return {string} Hint.
+ */
+const accrualHint = ( accrual ) => {
+	if ( 'retain' === accrual.method ) {
+		return __( 'Kept for later, not paid now', 'radius-hotel-booking-pro' );
+	}
+	return null === accrual.percent || undefined === accrual.percent
+		? __( 'Fixed amount', 'radius-hotel-booking-pro' )
+		: sprintf(
+				/* translators: %s: percentage. */
+				__( '%s %% of the eligible pay', 'radius-hotel-booking-pro' ),
+				String( Number( accrual.percent ) )
+		  );
+};
+
+/**
+ * A quantity of hours or days in words.
+ *
+ * @param {string|number} value Quantity.
+ * @param {string}        unit  `day` or hours (anything else).
+ * @return {string} Text.
+ */
+const quantityText = ( value, unit ) => {
+	const n = Math.round( Number( value ) * 100 ) / 100;
+	return 'day' === unit
+		? sprintf(
+				/* translators: %s: number of days. */
+				_n( '%s day', '%s days', n, 'radius-hotel-booking-pro' ),
+				String( n )
+		  )
+		: sprintf(
+				/* translators: %s: hours. */
+				__( '%s h', 'radius-hotel-booking-pro' ),
+				String( n )
+		  );
+};
 
 /**
  * A breakdown row.
@@ -106,23 +147,16 @@ export function Breakdown( { breakdown: b } ) {
 						label={ e.label }
 						hint={
 							e.quantity
-								? sprintf(
-										/* translators: %s: hours. */
-										__(
-											'%s h',
-											'radius-hotel-booking-pro'
-										),
-										String( Number( e.quantity ) )
-								  ) +
+								? quantityText( e.quantity, e.unit ) +
 								  ( e.over
 										? ' · ' +
 										  sprintf(
-												/* translators: %s: hours. */
+												/* translators: %s: hours or days, e.g. "8 h" or "1 day". */
 												__(
-													'%s h over the yearly quota, taken off',
+													'%s over the yearly quota, taken off',
 													'radius-hotel-booking-pro'
 												),
-												String( Number( e.over ) )
+												quantityText( e.over, e.unit )
 										  )
 										: '' )
 								: ''
@@ -133,34 +167,29 @@ export function Breakdown( { breakdown: b } ) {
 						}
 					/>
 				) ) }
-				{ b.vacation ? (
-					<Row
-						label={ __(
-							'Vacation pay',
-							'radius-hotel-booking-pro'
-						) }
-						hint={
-							'retain' === b.vacation.method
-								? __(
-										'Kept for later, not paid now',
-										'radius-hotel-booking-pro'
-								  )
-								: sprintf(
-										/* translators: %s: percentage. */
-										__(
-											'%s %% of the eligible pay',
-											'radius-hotel-booking-pro'
-										),
-										String( Number( b.vacation.percent ) )
-								  )
-						}
-						value={
-							'retain' === b.vacation.method
-								? `(${ money( b.vacation.amount ) })`
-								: money( b.vacation.amount )
-						}
-					/>
-				) : null }
+				{ [
+					[
+						'gratification',
+						__( 'Gratification', 'radius-hotel-booking-pro' ),
+					],
+					[
+						'vacation',
+						__( 'Vacation pay', 'radius-hotel-booking-pro' ),
+					],
+				].map( ( [ key, label ] ) =>
+					b[ key ] ? (
+						<Row
+							key={ key }
+							label={ label }
+							hint={ accrualHint( b[ key ] ) }
+							value={
+								'retain' === b[ key ].method
+									? `(${ money( b[ key ].amount ) })`
+									: money( b[ key ].amount )
+							}
+						/>
+					) : null
+				) }
 				<Row
 					strong
 					label={ __( 'Gross pay', 'radius-hotel-booking-pro' ) }
@@ -797,23 +826,35 @@ export default function LineDialog( { run, line, canEdit, onClose } ) {
 												key={ t.key }
 												label={ t.label }
 												help={
-													'hours' === t.entry
+													'hours' !== t.entry
 														? __(
-																'Hours in this period.',
+																'Amount for this period.',
+																'radius-hotel-booking-pro'
+														  )
+														: 'day' ===
+														  line.units?.[ t.key ]
+														? __(
+																'Days in this period.',
 																'radius-hotel-booking-pro'
 														  )
 														: __(
-																'Amount for this period.',
+																'Hours in this period.',
 																'radius-hotel-booking-pro'
 														  )
 												}
 												unit={
-													'hours' === t.entry
+													'hours' !== t.entry
+														? currency
+														: 'day' ===
+														  line.units?.[ t.key ]
 														? __(
+																'days',
+																'radius-hotel-booking-pro'
+														  )
+														: __(
 																'h',
 																'radius-hotel-booking-pro'
 														  )
-														: currency
 												}
 												error={
 													errors[

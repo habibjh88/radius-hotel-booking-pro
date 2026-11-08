@@ -112,6 +112,10 @@ final class BookingQr {
 			return null;
 		}
 		$rows = Booking::query()->where( 'reference', '=', $reference )->limit( 1 )->get();
+		// A booking renumbered since (free DB 1.0.22+, `former_reference`): the guest's e-mail has the old one.
+		if ( ! $rows && defined( 'RADIUS_HOTEL_BOOKING_DB_VERSION' ) && version_compare( RADIUS_HOTEL_BOOKING_DB_VERSION, '1.0.22', '>=' ) ) {
+			$rows = Booking::query()->where( 'former_reference', '=', $reference )->limit( 1 )->get();
+		}
 		return $rows ? Booking::hydrate( $rows[0] ) : null;
 	}
 

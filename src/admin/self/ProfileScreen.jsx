@@ -420,7 +420,7 @@ export default function ProfileScreen() {
 
 	if ( isPending ) {
 		return (
-			<div className="mx-auto max-w-3xl space-y-4">
+			<div className="space-y-4">
 				<Skeleton className="h-24 w-full rounded-xl" />
 				<Skeleton className="h-72 w-full rounded-xl" />
 			</div>
@@ -428,7 +428,7 @@ export default function ProfileScreen() {
 	}
 	if ( error || ! profile ) {
 		return (
-			<div className="mx-auto max-w-3xl">
+			<div>
 				<Panel>
 					<EmptyState
 						icon={ UserRound }
@@ -469,7 +469,7 @@ export default function ProfileScreen() {
 		: '';
 
 	return (
-		<div className="mx-auto max-w-3xl space-y-4">
+		<div className="space-y-4">
 			<Panel bodyClassName="flex items-center gap-4">
 				<span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary-soft text-lg font-semibold text-primary">
 					{ initials( name || profile.username ) }

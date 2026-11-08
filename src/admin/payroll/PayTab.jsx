@@ -23,6 +23,7 @@ import {
 import { access, format, toast, toastError } from '@rtbp/lib';
 
 import AdditionalPay from './AdditionalPay';
+import AppliedBonusRules from './AppliedBonusRules';
 import Deductions from './Deductions';
 import { useEmployeePay, useSaveEmployeePay } from './api';
 
@@ -457,6 +458,16 @@ export default function PayTab( { employee } ) {
 					saved={ query.data.items }
 					types={ query.data.item_types }
 					canEdit={ canEdit }
+				/>
+			</div>
+			<div className="mt-4">
+				<AppliedBonusRules rules={ query.data.bonus_rules || [] } />
+			</div>
+			<div className="mt-4">
+				<Deductions
+					employeeId={ employee.id }
+					canEdit={ canEdit }
+					mode="additions"
 				/>
 			</div>
 			<div className="mt-4">

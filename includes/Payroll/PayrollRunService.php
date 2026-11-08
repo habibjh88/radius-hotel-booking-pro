@@ -621,6 +621,8 @@ final class PayrollRunService {
 			) : array(),
 			'hours'            => $hours,
 			'hours_per_week'   => $per_week,
+			// One day of overtime or time off set per day (R2-T1).
+			'hours_per_day'    => ShiftHours::perDay( $shift_days ),
 			'items'            => $items,
 			'used'             => array(
 				'paid_time_off' => $this->runs->hoursUsed( $employee_id, 'paid_time_off', $year, (int) $run->id ),
@@ -1008,6 +1010,8 @@ final class PayrollRunService {
 			'payment_method' => $line->payment_method ? (string) $line->payment_method : null,
 			'payment_ref'    => $line->payment_ref ? (string) $line->payment_ref : null,
 			'items'          => array_keys( (array) ( $line->json( 'settings' )['items'] ?? array() ) ),
+			// hour|day per type: what the run's entries are in (R2-T1).
+			'units'          => array_map( static fn( $settings ) => PayItemTypes::unit( (array) $settings ), (array) ( $line->json( 'settings' )['items'] ?? array() ) ),
 		);
 	}
 

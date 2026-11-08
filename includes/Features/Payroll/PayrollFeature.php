@@ -18,6 +18,7 @@ use RadiusTheme\RadiusHotelBookingPro\Payroll\PayrollMigration;
 use RadiusTheme\RadiusHotelBookingPro\Payroll\PayrollReports;
 use RadiusTheme\RadiusHotelBookingPro\Payroll\PayrollRunController;
 use RadiusTheme\RadiusHotelBookingPro\Payroll\PayrollRunService;
+use RadiusTheme\RadiusHotelBookingPro\Payroll\WorkScheduleService;
 use RadiusTheme\RadiusHotelBookingPro\Payroll\PayrollSettings;
 use RadiusTheme\RadiusHotelBookingPro\Payroll\PayScheduleController;
 use RadiusTheme\RadiusHotelBookingPro\Payroll\PayslipService;
@@ -72,6 +73,7 @@ final class PayrollFeature extends AbstractFeature {
 		EmployeePayService::register();
 		PayrollRunService::register();
 		PayslipService::register();
+		WorkScheduleService::register();
 		PayrollReports::register();
 		foreach ( array( PayScheduleController::class, WorkShiftController::class, EmployeePayController::class, DeductionController::class, PayrollRunController::class, StatutoryController::class, TimeOffController::class, MyPayrollController::class ) as $controller ) {
 			add_action( 'rtbp_register_addon_routes', array( $controller, 'routes' ) );
