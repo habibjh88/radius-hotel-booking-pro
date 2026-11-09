@@ -133,3 +133,21 @@ Pay tab: new Additions — an amount or % of base pay added to every payslip.
 Payroll → Work shifts: print the work schedule of every employee for a week or month.
 Staff: each employee can have a photo, shown on the staff list and staff file.
 The account menu shows the signed-in employee's photo when one is set.
+Add employee now asks for date of birth, marital status, address and number of children.
+Staff: Work shift on the Employment tab and Add employee now uses Payroll work shifts.
+Fixed: the Pay tab bonus was paid every period; now only in runs set to pay bonuses.
+Scanning a booking QR code opens a quick card: check in, check out or record payment.
+New Cash register: staff open and close their register per shift, with per-method totals.
+Cash register close counts the cash and keeps the difference; managers see every register.
+Optional setting: staff must open their cash register before taking a payment.
+Payroll list: pay runs that pay bonuses are flagged with a Bonus badge.
+New Settings → Staff: departments and job titles to pick from on staff files and contracts.
+Staff list: filter and sort by department, job title and shift.
+Settings → Payroll: social contributions redesigned as a collapsible list with totals.
+New: add the common social contributions (pension, health, unemployment, work accident) in one click.
+Settings → Payroll: income tax redesigned, with a clear brackets table (from, up to, rate).
+Bonus rules: choose employees from a searchable list (name or number) instead of checkboxes.
+Fixed: income tax brackets refused on save; the last bracket is now always “and above”.
+Social contributions now also show for a country add-on's calculator that uses them.
+Developers: the tax brackets table is shared with add-ons as window.rtbpPro.ui.BracketsTable.
+Deleting payroll contributions, tax brackets, bonuses, pay schedules or work shifts requires typing DELETE.

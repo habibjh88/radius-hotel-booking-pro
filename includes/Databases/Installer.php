@@ -58,6 +58,8 @@ final class Installer {
 			PayrollStatutoryTable::class,
 			StatutoryPaymentTable::class,
 			TimeOffTable::class,
+			// Cash register (R3-T5).
+			CashSessionsTable::class,
 		);
 	}
 

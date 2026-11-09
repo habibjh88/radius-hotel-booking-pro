@@ -30,6 +30,7 @@ import { access, toast, toastError, usePageActions } from '@rtbp/lib';
 import { TimeField } from '../pickers';
 import PrintSchedule from './PrintSchedule';
 import { useDeleteShift, useSaveShift, useWorkShifts } from './api';
+import { deleteWord } from './useConfirmRemove';
 
 /**
  * ISO weekdays 1–7 with their names.
@@ -546,6 +547,7 @@ export default function ShiftsTab() {
 					'radius-hotel-booking-pro'
 				) }
 				confirmLabel={ __( 'Delete', 'radius-hotel-booking-pro' ) }
+				confirmText={ deleteWord() }
 				destructive
 				onConfirm={ () =>
 					remove

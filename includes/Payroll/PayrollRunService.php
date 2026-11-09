@@ -176,7 +176,7 @@ final class PayrollRunService {
 	 * @return array As get().
 	 * @throws DomainException 404, 409 `run_exists` / `no_employees`.
 	 */
-	public function create( int $schedule_id, ?int $period_index = null ): array {
+	public function create( int $schedule_id, ?int $period_index = null, bool $pay_bonus = false ): array {
 		$schedule = ( new PayScheduleRepository() )->find( $schedule_id );
 		if ( ! $schedule instanceof PaySchedule ) {
 			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON.
@@ -184,7 +184,7 @@ final class PayrollRunService {
 		}
 		$skipped = array();
 		$id      = Transaction::run(
-			function () use ( $schedule, $period_index, &$skipped ) {
+			function () use ( $schedule, $period_index, $pay_bonus, &$skipped ) {
 				$this->runs->lockSchedule( (int) $schedule->id );
 				if ( null === $period_index ) {
 					// The next period to pay that has no run yet.
@@ -228,6 +228,7 @@ final class PayrollRunService {
 						'period_end'      => $period['end'],
 						'pay_date'        => $period['pay_date'],
 						'status'          => PayrollRun::DRAFT,
+						'pay_bonus'       => $pay_bonus ? 1 : 0,
 						'created_by'      => get_current_user_id() ? get_current_user_id() : null,
 					)
 				);
@@ -240,7 +241,10 @@ final class PayrollRunService {
 					'payroll.run',
 					$run,
 					array(),
-					array( 'employees' => count( $profiles ) ) + ( $skipped ? array( 'left_out' => $skipped ) : array() ),
+					array(
+						'employees' => count( $profiles ),
+						'pay_bonus' => $pay_bonus,
+					) + ( $skipped ? array( 'left_out' => $skipped ) : array() ),
 					/* translators: %s: run (schedule and period). */
 					sprintf( __( 'Ran payroll %s', 'radius-hotel-booking-pro' ), $run->label() )
 				);
@@ -291,14 +295,20 @@ final class PayrollRunService {
 	/**
 	 * Recalculate every line of a draft with the employees' current settings (the re-run after a revert).
 	 *
-	 * @param int $run_id Run.
+	 * @param int       $run_id    Run.
+	 * @param bool|null $pay_bonus Switch the Pay tab's bonuses on or off for the run first (null: as it is).
 	 * @return array As get().
 	 * @throws DomainException 404, 409.
 	 */
-	public function recalculate( int $run_id ): array {
+	public function recalculate( int $run_id, ?bool $pay_bonus = null ): array {
 		Transaction::run(
-			function () use ( $run_id ) {
+			function () use ( $run_id, $pay_bonus ) {
 				$run   = $this->locked( $run_id, array( PayrollRun::DRAFT ), 'recalculate' );
+				$was   = (bool) (int) $run->pay_bonus;
+				if ( null !== $pay_bonus && $pay_bonus !== $was ) {
+					$this->runs->update( (int) $run->id, array( 'pay_bonus' => $pay_bonus ? 1 : 0 ) );
+					$run = $this->find( (int) $run->id );
+				}
 				$lined = array();
 				foreach ( $this->runs->lines( $run_id ) as $line ) {
 					$lined[ (int) $line->employee_id ] = true;
@@ -322,8 +332,14 @@ final class PayrollRunService {
 					}
 				}
 				$this->totals( $run_id );
-				/* translators: %s: run. */
-				self::log( 'payroll.run', $run, array(), array( 'recalculated' => true ), sprintf( __( 'Recalculated payroll %s', 'radius-hotel-booking-pro' ), $run->label() ) );
+				self::log(
+					'payroll.run',
+					$run,
+					null !== $pay_bonus && $pay_bonus !== $was ? array( 'pay_bonus' => $was ) : array(),
+					array( 'recalculated' => true ) + ( null !== $pay_bonus && $pay_bonus !== $was ? array( 'pay_bonus' => $pay_bonus ) : array() ),
+					/* translators: %s: run. */
+					sprintf( __( 'Recalculated payroll %s', 'radius-hotel-booking-pro' ), $run->label() )
+				);
 			}
 		);
 		return $this->get( $run_id );
@@ -624,6 +640,8 @@ final class PayrollRunService {
 			// One day of overtime or time off set per day (R2-T1).
 			'hours_per_day'    => ShiftHours::perDay( $shift_days ),
 			'items'            => $items,
+			// The Pay tab's bonus counts only in a run that pays bonuses (a run line's own amount always does).
+			'pay_bonus'        => (bool) (int) $run->pay_bonus,
 			'used'             => array(
 				'paid_time_off' => $this->runs->hoursUsed( $employee_id, 'paid_time_off', $year, (int) $run->id ),
 				'sick_pay'      => $this->runs->hoursUsed( $employee_id, 'sick_pay', $year, (int) $run->id ),
@@ -969,6 +987,7 @@ final class PayrollRunService {
 			'period_end'          => substr( (string) $run->period_end, 0, 10 ),
 			'pay_date'            => substr( (string) $run->pay_date, 0, 10 ),
 			'status'              => (string) $run->status,
+			'pay_bonus'           => (bool) (int) $run->pay_bonus,
 			'employees'           => (int) $run->employees,
 			'gross_total'         => $money( $run->gross_total ),
 			'employee_tax_total'  => $money( $run->employee_tax_total ),

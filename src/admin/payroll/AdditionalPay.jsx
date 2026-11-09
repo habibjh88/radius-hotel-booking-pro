@@ -86,6 +86,11 @@ const fieldText = ( type, field, settings = {} ) => {
 						'Of the earnings that count, below.',
 						'radius-hotel-booking-pro'
 				  )
+				: 'bonus' === type
+				? __(
+						'Of the base pay of the period, in a pay run that pays bonuses.',
+						'radius-hotel-booking-pro'
+				  )
 				: __(
 						'Each pay period. A pay run can change it.',
 						'radius-hotel-booking-pro'
@@ -95,14 +100,25 @@ const fieldText = ( type, field, settings = {} ) => {
 	if ( 'amount' === field ) {
 		return {
 			label: __( 'Amount', 'radius-hotel-booking-pro' ),
-			unit: sprintf(
-				/* translators: %s: currency symbol. */
-				__( '%s each pay period', 'radius-hotel-booking-pro' ),
-				format.currencyInfo?.().symbol || ''
-			),
+			unit:
+				'bonus' === type
+					? format.currencyInfo?.().symbol || ''
+					: sprintf(
+							/* translators: %s: currency symbol. */
+							__(
+								'%s each pay period',
+								'radius-hotel-booking-pro'
+							),
+							format.currencyInfo?.().symbol || ''
+					  ),
 			hint:
 				'vacation_pay' === type
 					? ''
+					: 'bonus' === type
+					? __(
+							'Paid in a pay run that pays bonuses. Empty: typed on the run.',
+							'radius-hotel-booking-pro'
+					  )
 					: __(
 							'Empty: typed on each pay run. A pay run can change it.',
 							'radius-hotel-booking-pro'
@@ -169,10 +185,16 @@ const BASE_LABELS = () => ( {
  *
  * @param {string} entry    `hours`, `amount` or `none`.
  * @param {Object} settings The type's settings (its unit).
+ * @param {string} type     Type key (a bonus is paid only in the runs that pay bonuses).
  * @return {string} Hint.
  */
-const entryHint = ( entry, settings = {} ) =>
-	'hours' === entry
+const entryHint = ( entry, settings = {}, type = '' ) =>
+	'bonus' === type
+		? __(
+				'Paid in the pay runs you choose to pay bonuses in. A pay run can change it.',
+				'radius-hotel-booking-pro'
+		  )
+		: 'hours' === entry
 		? 'day' === settings.unit
 			? __(
 					'Days are entered on each pay run.',
@@ -404,7 +426,8 @@ export default function AdditionalPay( { employeeId, saved, types, canEdit } ) {
 											<span className="block text-xs text-muted-foreground">
 												{ entryHint(
 													type.entry,
-													items[ type.key ]
+													items[ type.key ],
+													type.key
 												) }
 											</span>
 										) : null }

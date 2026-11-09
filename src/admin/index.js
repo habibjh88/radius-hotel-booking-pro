@@ -10,6 +10,7 @@ import { createElement, lazy, Suspense } from 'react';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import {
+	Calculator,
 	BadgePercent,
 	Banknote,
 	ChartPie,
@@ -26,10 +27,15 @@ import {
 
 import ProFeaturesSection from './ProFeaturesSection';
 import ScanButton from './scan/ScanButton';
+import BracketsTable from './payroll/BracketsTable';
 import { registerPasscode } from './access/passcode';
 import { registerTimeline } from './activity/timeline';
 
 const AccessSection = lazy( () => import( './access/AccessSection' ) );
+
+// Pro UI parts an add-on may reuse (e.g. a country's tax scales): `window.rtbpPro.ui`.
+window.rtbpPro = window.rtbpPro || {};
+window.rtbpPro.ui = { ...( window.rtbpPro.ui || {} ), BracketsTable };
 
 /**
  * Whether a Pro feature is active (booted) on the server.
@@ -139,6 +145,32 @@ if ( featureActive( 'ical_sync' ) ) {
 
 // M12: staff records.
 if ( featureActive( 'staff_records' ) ) {
+	// Settings → Staff: the departments and job titles to pick from.
+	addFilter(
+		'rtbp.settings.sections',
+		'radius-hotel-booking-pro/staff-lists',
+		( sections ) => [
+			...sections,
+			{
+				key: 'pro_staff',
+				label: __( 'Staff', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Departments and job titles',
+					'radius-hotel-booking-pro'
+				),
+				icon: UsersRound,
+				accessKey: 'settings.general',
+				Component: lazy( () =>
+					import( './staff/StaffSettingsSection' )
+				),
+				// The forms and filters read the lists from the staff options.
+				onSaved: () =>
+					window.rtbp?.lib?.queryClient?.invalidateQueries( {
+						queryKey: [ 'employees', 'options' ],
+					} ),
+			},
+		]
+	);
 	addFilter(
 		'rtbp.admin.routes',
 		'radius-hotel-booking-pro/staff',
@@ -315,6 +347,79 @@ if ( featureActive( 'booking_qr' ) ) {
 		( items ) => [
 			...( items || [] ),
 			{ key: 'scan', Component: ScanButton },
+		]
+	);
+	// What a scan opens: the booking's quick card, Check in / Check out at once (R3-T4).
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/scan-card',
+		( routes ) => [
+			...routes,
+			{
+				path: '/scan/:id',
+				hidden: true,
+				group: 'frontDesk',
+				label: __( 'Scanned booking', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Check in, check out or take the payment',
+					'radius-hotel-booking-pro'
+				),
+				accessKey: 'page.bookings',
+				element: lazy( () => import( './scan/ScanCard' ) ),
+			},
+		]
+	);
+}
+
+// R3-T5 – T8: Front desk → Cash register, and its setting.
+if ( featureActive( 'cash_register' ) ) {
+	addFilter(
+		'rtbp.admin.routes',
+		'radius-hotel-booking-pro/cash-register',
+		( routes ) => {
+			const route = {
+				path: '/cash-register',
+				group: 'frontDesk',
+				label: __( 'Cash register', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Open and close your register; what came in per payment method',
+					'radius-hotel-booking-pro'
+				),
+				icon: Calculator,
+				accessKey: 'register.use',
+				element: lazy( () =>
+					import( './cashRegister/CashRegisterScreen' )
+				),
+			};
+			// After Payments in the Front desk group, else at the end.
+			const at = routes.findIndex( ( r ) => '/payments' === r.path );
+			return at < 0
+				? [ ...routes, route ]
+				: [
+						...routes.slice( 0, at + 1 ),
+						route,
+						...routes.slice( at + 1 ),
+				  ];
+		}
+	);
+	addFilter(
+		'rtbp.settings.sections',
+		'radius-hotel-booking-pro/cash-register',
+		( sections ) => [
+			...sections,
+			{
+				key: 'pro_cash_register',
+				label: __( 'Cash register', 'radius-hotel-booking-pro' ),
+				description: __(
+					'Whether payments need an open register',
+					'radius-hotel-booking-pro'
+				),
+				icon: Calculator,
+				accessKey: 'settings.payments',
+				Component: lazy( () =>
+					import( './cashRegister/CashRegisterSettingsSection' )
+				),
+			},
 		]
 	);
 }

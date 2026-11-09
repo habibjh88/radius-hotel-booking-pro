@@ -30,7 +30,8 @@ defined( 'ABSPATH' ) || exit;
  *    yearly quota nothing changes, the hours over it are **taken off** at
  *    the hourly rate (legacy `splitPtoEntry`); unpaid time off is taken off;
  *    bonus, commission and transport add the amount typed on the run, else
- *    the Pay tab's amount or percentage of base pay. Hours may be set per
+ *    the Pay tab's amount or percentage of base pay — the bonus only in a
+ *    run that pays bonuses (`pay_bonus`). Hours may be set per
  *    day (a day = the shift's average working day).
  * 3. **Gratification, then vacation pay** — a percentage of the earnings
  *    that count (regular pay less what was taken off, plus the chosen
@@ -62,7 +63,7 @@ final class LineCalculator {
 	 *
 	 * @param array $in `{ pay_date, interval, statutory (the calculator's settings), profile: { pay_type, amount, amount_period },
 	 *                  hours (base hours of the period), hours_per_week (the shift's),
-	 *                  items: { type: settings }, entries: { type: hours|amount },
+	 *                  items: { type: settings }, entries: { type: hours|amount }, pay_bonus (the Pay tab's bonus counts),
 	 *                  used: { paid_time_off, sick_pay } (hours used this year before this line),
 	 *                  deductions: [ rows as DeductionService::shape(), active and within their dates ],
 	 *                  taken_this_month: { deduction id: true }, custom: [ { type, name, amount, taxable?, tax_rate? } ] }`.
@@ -114,6 +115,10 @@ final class LineCalculator {
 			if ( isset( $entries[ $code ] ) && '' !== (string) $entries[ $code ] ) {
 				$quantity = Decimal::max( '0', Decimal::of( $entries[ $code ] ) );
 			} elseif ( 'amount' === $def['entry'] ) {
+				// A bonus is paid once or twice a year: the Pay tab's only in a run that pays bonuses.
+				if ( 'bonus' === $code && empty( $in['pay_bonus'] ) ) {
+					continue;
+				}
 				// Nothing typed on the run: the Pay tab's amount or percentage (R2-T3, R2-T5).
 				$quantity = self::periodAmount( $settings, $base );
 				if ( null === $quantity ) {

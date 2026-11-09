@@ -72,7 +72,7 @@ class PayrollRunController {
 	}
 
 	/**
-	 * POST runs `{ schedule_id, period_index? }`.
+	 * POST runs `{ schedule_id, period_index?, pay_bonus? }` (pay_bonus: pay the Pay tab's bonuses).
 	 *
 	 * @param WP_REST_Request $request Request.
 	 * @return mixed
@@ -84,7 +84,7 @@ class PayrollRunController {
 			function ( $request ) {
 				$index = $request->get_param( 'period_index' );
 				return ApiResponse::created(
-					array( 'run' => ( new PayrollRunService() )->create( (int) $request->get_param( 'schedule_id' ), null === $index || '' === $index ? null : (int) $index ) ),
+					array( 'run' => ( new PayrollRunService() )->create( (int) $request->get_param( 'schedule_id' ), null === $index || '' === $index ? null : (int) $index, rest_sanitize_boolean( $request->get_param( 'pay_bonus' ) ) ) ),
 					__( 'Pay run created.', 'radius-hotel-booking-pro' )
 				)->send();
 			}
@@ -143,13 +143,18 @@ class PayrollRunController {
 	}
 
 	/**
-	 * POST runs/{id}/recalculate.
+	 * POST runs/{id}/recalculate `{ pay_bonus? }` (switch the Pay tab's bonuses on or off first).
 	 *
 	 * @param WP_REST_Request $request Request.
 	 * @return mixed
 	 */
 	public function recalculate( WP_REST_Request $request ) {
-		return $this->move( $request, 'payroll.run', fn( $s, $id ) => $s->recalculate( $id ), __( 'Pay run recalculated.', 'radius-hotel-booking-pro' ) );
+		return $this->move(
+			$request,
+			'payroll.run',
+			fn( $s, $id, $request ) => $s->recalculate( $id, null === $request->get_param( 'pay_bonus' ) ? null : rest_sanitize_boolean( $request->get_param( 'pay_bonus' ) ) ),
+			__( 'Pay run recalculated.', 'radius-hotel-booking-pro' )
+		);
 	}
 
 	/**

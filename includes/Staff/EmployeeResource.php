@@ -24,13 +24,15 @@ final class EmployeeResource {
 	/**
 	 * A row of the list.
 	 *
-	 * @param array $row Employee columns plus `user_login`.
+	 * @param array $row Employee columns plus `user_login`, `work_shift_id` and `work_shift_name`.
 	 * @return array
 	 */
 	public static function summary( array $row ): array {
 		$role = function_exists( 'rtbp_pro_feature_active' ) && rtbp_pro_feature_active( 'advanced_access' ) && class_exists( UserAccessService::class )
 			? UserAccessService::role_of( (int) $row['user_id'] )
 			: null;
+		// The work shift is payroll's (M15): none to show while Payroll is switched off.
+		$shifts = function_exists( 'rtbp_pro_feature_active' ) && rtbp_pro_feature_active( 'payroll' );
 		return array(
 			'id'             => (int) $row['id'],
 			'user_id'        => (int) $row['user_id'],
@@ -41,7 +43,8 @@ final class EmployeeResource {
 			'name'           => trim( $row['first_name'] . ' ' . $row['last_name'] ),
 			'job_title'      => (string) $row['job_title'],
 			'department'     => (string) $row['department'],
-			'shift'          => (string) $row['shift'],
+			'work_shift_id'  => $shifts && ! empty( $row['work_shift_id'] ) ? (int) $row['work_shift_id'] : null,
+			'shift'          => $shifts ? (string) ( $row['work_shift_name'] ?? '' ) : '',
 			'phone'          => (string) $row['phone'],
 			'email'          => (string) $row['email'],
 			'is_active'      => (bool) (int) $row['is_active'],
@@ -65,7 +68,11 @@ final class EmployeeResource {
 	 */
 	public static function detail( Employee $employee ): array {
 		$user = get_userdata( (int) $employee->user_id );
-		$row  = array_merge( $employee->toArray(), array( 'user_login' => $user ? $user->user_login : '' ) );
+		$row  = array_merge(
+			$employee->toArray(),
+			array( 'user_login' => $user ? $user->user_login : '' ),
+			( new EmployeeRepository() )->workShift( (int) $employee->id )
+		);
 		return array_merge(
 			self::summary( $row ),
 			array(

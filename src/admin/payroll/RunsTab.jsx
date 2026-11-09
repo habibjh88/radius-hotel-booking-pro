@@ -6,7 +6,7 @@
 import { Suspense, useState } from 'react';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Banknote, Play } from 'lucide-react';
+import { Banknote, Gift, Play } from 'lucide-react';
 import {
 	Button,
 	DataTable,
@@ -27,6 +27,7 @@ import {
 	SelectValue,
 	Skeleton,
 	StatusBadge,
+	Switch,
 } from '@rtbp/ui';
 import { access, format, toast, toastError, usePageActions } from '@rtbp/lib';
 
@@ -49,6 +50,42 @@ export const periodText = ( run ) =>
 	);
 
 /**
+ * "Pay bonuses in this run": the Pay tab's bonus of each employee is added
+ * only when on (a bonus typed on a line always counts).
+ *
+ * @param {Object}   props          Props.
+ * @param {boolean}  props.checked  On.
+ * @param {Function} props.onChange Called with the new state.
+ * @param {boolean}  props.disabled Read-only.
+ * @return {JSX.Element} Switch row.
+ */
+export function PayBonusSwitch( { checked, onChange, disabled } ) {
+	return (
+		<label className="flex cursor-pointer items-start justify-between gap-4 rounded-lg border border-border p-3">
+			<span className="space-y-0.5">
+				<span className="block text-sm font-semibold text-heading">
+					{ __(
+						'Pay bonuses in this run',
+						'radius-hotel-booking-pro'
+					) }
+				</span>
+				<span className="block text-xs text-muted-foreground">
+					{ __(
+						'Adds each employee’s bonus from their Pay tab. Leave off for a regular pay run.',
+						'radius-hotel-booking-pro'
+					) }
+				</span>
+			</span>
+			<Switch
+				checked={ checked }
+				onCheckedChange={ onChange }
+				disabled={ disabled }
+			/>
+		</label>
+	);
+}
+
+/**
  * Start a run.
  *
  * @param {Object}   props         Props.
@@ -61,6 +98,8 @@ function RunPayrollDialog( { open, onClose } ) {
 	const action = usePayrollRunAction();
 	const navigate = useNavigate();
 	const [ schedule, setSchedule ] = useState( '' );
+	// A bonus is paid once or twice a year: off unless this run pays it.
+	const [ payBonus, setPayBonus ] = useState( false );
 	const list = schedules.data?.schedules || [];
 	const chosen =
 		list.find( ( s ) => String( s.id ) === schedule ) || list[ 0 ];
@@ -70,6 +109,7 @@ function RunPayrollDialog( { open, onClose } ) {
 			const response = await action.mutateAsync( {
 				action: 'create',
 				schedule_id: chosen.id,
+				pay_bonus: payBonus,
 			} );
 			toast.success( response.message );
 			const skipped = response.data.run.skipped || [];
@@ -155,6 +195,12 @@ function RunPayrollDialog( { open, onClose } ) {
 						) }
 					</p>
 				) }
+				{ list.length ? (
+					<PayBonusSwitch
+						checked={ payBonus }
+						onChange={ setPayBonus }
+					/>
+				) : null }
 				<DialogFooter>
 					<Button type="button" variant="ghost" onClick={ onClose }>
 						{ __( 'Cancel', 'radius-hotel-booking-pro' ) }
@@ -221,6 +267,13 @@ export default function RunsTab() {
 					<span className="text-xs text-muted-foreground">
 						{ run.schedule_name }
 					</span>
+					{ run.pay_bonus ? (
+						// A run that pays the Pay tab's bonuses (once or twice a year).
+						<span className="inline-flex items-center gap-1 rounded-full bg-warning-soft px-2 py-0.5 text-xs font-semibold text-warning">
+							<Gift className="h-3 w-3" aria-hidden="true" />
+							{ __( 'Bonus', 'radius-hotel-booking-pro' ) }
+						</span>
+					) : null }
 				</span>
 			),
 		},

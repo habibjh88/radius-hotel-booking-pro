@@ -31,7 +31,6 @@ defined( 'ABSPATH' ) || exit;
  * @property string      $tax_no
  * @property string      $department
  * @property string      $job_title
- * @property string      $shift
  * @property bool        $is_active
  * @property string|null $deactivated_at
  * @property int|null    $avatar_id
@@ -77,7 +76,6 @@ class Employee extends BaseModel {
 		'tax_no',
 		'department',
 		'job_title',
-		'shift',
 		'is_active',
 		'deactivated_at',
 		'avatar_id',

@@ -1,6 +1,6 @@
 /**
- * Employment (12.9, 12.11): the current job (title, department, work
- * shift — a plain label until shifts get their own list) and the contract
+ * Employment (12.9, 12.11): the current job (title, department, and the
+ * work shift from Payroll → Work shifts, the one the Pay tab shows) and the contract
  * history, newest first. Adding an active contract ends the one before it
  * on the day before the new start; the active contract sets the job title
  * and department. Contracts need `staff.contracts`; ending one does not
@@ -20,7 +20,6 @@ import {
 	DialogTitle,
 	EmptyState,
 	Field,
-	Input,
 	SegmentedControl,
 	Select,
 	SelectContent,
@@ -36,6 +35,8 @@ import { format, toast, toastError } from '@rtbp/lib';
 import { DateField } from '../pickers';
 import { useContractMutation, useContracts } from './api';
 import { FormActions, useFileForm } from './FileTabs';
+import NameSelect from './NameSelect';
+import WorkShiftSelect, { useShiftVisible } from './WorkShiftSelect';
 
 const EMPTY = {
 	status: 'active',
@@ -156,15 +157,6 @@ function ContractDialog( {
 		}
 	};
 
-	const input = ( name, props = {} ) => (
-		<Input
-			value={ values[ name ] }
-			onChange={ ( e ) => set( name, e.target.value ) }
-			autoComplete="off"
-			{ ...props }
-		/>
-	);
-
 	return (
 		<Dialog open={ open } onOpenChange={ ( next ) => ! next && onClose() }>
 			<DialogContent className="rtbp-root max-w-lg">
@@ -249,7 +241,13 @@ function ContractDialog( {
 							) }
 							error={ errors.job_title }
 						>
-							{ input( 'job_title', { maxLength: 100 } ) }
+							<NameSelect
+								list="job_titles"
+								value={ values.job_title }
+								onChange={ ( name ) =>
+									set( 'job_title', name )
+								}
+							/>
 						</Field>
 						<Field
 							label={ __(
@@ -258,7 +256,13 @@ function ContractDialog( {
 							) }
 							error={ errors.department }
 						>
-							{ input( 'department', { maxLength: 100 } ) }
+							<NameSelect
+								list="departments"
+								value={ values.department }
+								onChange={ ( name ) =>
+									set( 'department', name )
+								}
+							/>
 						</Field>
 						<div className="hidden sm:block" />
 						<Field
@@ -445,10 +449,11 @@ function EndDialog( { contract, onClose, mutation } ) {
  * @return {JSX.Element} Tab.
  */
 export default function EmploymentTab( { employee, canEdit, canContracts } ) {
+	const showShift = useShiftVisible();
 	const form = useFileForm( employee, [
 		'job_title',
 		'department',
-		'shift',
+		...( showShift ? [ 'work_shift_id' ] : [] ),
 	] );
 	const contracts = useContracts( employee.id );
 	const mutation = useContractMutation( employee.id );
@@ -458,16 +463,6 @@ export default function EmploymentTab( { employee, canEdit, canContracts } ) {
 
 	const list = contracts.data?.contracts || [];
 	const hasActive = list.some( ( c ) => 'active' === c.status );
-
-	const input = ( name, props = {} ) => (
-		<Input
-			value={ form.values[ name ] }
-			onChange={ ( e ) => form.set( name, e.target.value ) }
-			disabled={ ! canEdit }
-			autoComplete="off"
-			{ ...props }
-		/>
-	);
 
 	return (
 		<div className="space-y-4">
@@ -488,7 +483,14 @@ export default function EmploymentTab( { employee, canEdit, canContracts } ) {
 							) }
 							error={ form.errors.job_title }
 						>
-							{ input( 'job_title', { maxLength: 100 } ) }
+							<NameSelect
+								list="job_titles"
+								value={ form.values.job_title }
+								onChange={ ( name ) =>
+									form.set( 'job_title', name )
+								}
+								disabled={ ! canEdit }
+							/>
 						</Field>
 						<Field
 							label={ __(
@@ -497,21 +499,25 @@ export default function EmploymentTab( { employee, canEdit, canContracts } ) {
 							) }
 							error={ form.errors.department }
 						>
-							{ input( 'department', { maxLength: 100 } ) }
+							<NameSelect
+								list="departments"
+								value={ form.values.department }
+								onChange={ ( name ) =>
+									form.set( 'department', name )
+								}
+								disabled={ ! canEdit }
+							/>
 						</Field>
-						<Field
-							label={ __(
-								'Work shift',
-								'radius-hotel-booking-pro'
-							) }
-							error={ form.errors.shift }
-							description={ __(
-								'For example Morning, Day or Night.',
-								'radius-hotel-booking-pro'
-							) }
-						>
-							{ input( 'shift', { maxLength: 60 } ) }
-						</Field>
+						{ showShift ? (
+							<WorkShiftSelect
+								value={ form.values.work_shift_id }
+								onChange={ ( id ) =>
+									form.set( 'work_shift_id', id )
+								}
+								error={ form.errors.work_shift_id }
+								disabled={ ! canEdit }
+							/>
+						) : null }
 					</div>
 					<FormActions form={ form } canEdit={ canEdit } />
 				</form>

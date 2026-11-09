@@ -39,6 +39,8 @@ class PayrollRunTable extends Migration {
 				$table->date( 'period_end' );
 				$table->date( 'pay_date' );
 				$table->string( 'status', 20 )->default( 'draft' );
+				// Whether the Pay tab's bonuses are paid in this run (a bonus is paid once or twice a year).
+				$table->boolean( 'pay_bonus' )->default( 0 );
 				$table->unsignedInteger( 'employees' )->default( 0 );
 				$table->decimal( 'gross_total', 14, 2 )->default( 0 );
 				$table->decimal( 'employee_tax_total', 14, 2 )->default( 0 );

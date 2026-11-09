@@ -66,9 +66,10 @@ class EmployeeRepository extends BaseRepository {
 	 * @param string $active `active`, `inactive` or '' (all).
 	 * @param int    $page   Page.
 	 * @param int    $per    Per page.
+	 * @param array  $more   `{ department, job_title }` (exact, '' = any), `sort` (name|job_title|department|shift, '' = default), `dir`.
 	 * @return array{items: array[], total: int}
 	 */
-	public function page( string $q, string $active, int $page, int $per ): array {
+	public function page( string $q, string $active, int $page, int $per, array $more = array() ): array {
 		global $wpdb;
 		$where = array( '1=1' );
 		$args  = array();
@@ -82,13 +83,29 @@ class EmployeeRepository extends BaseRepository {
 			$where[] = '( CONCAT( e.first_name, \' \', e.last_name ) LIKE %s OR e.employee_no LIKE %s OR e.phone LIKE %s OR e.email LIKE %s OR e.job_title LIKE %s OR u.user_login LIKE %s )';
 			array_push( $args, $like, $like, $like, $like, $like, $like );
 		}
+		foreach ( array( 'department', 'job_title' ) as $column ) {
+			if ( '' !== (string) ( $more[ $column ] ?? '' ) ) {
+				$where[] = "TRIM( e.{$column} ) = %s";
+				$args[]  = (string) $more[ $column ];
+			}
+		}
 		$where = implode( ' AND ', $where );
+		// Active first, then the chosen column (empty values last), then the name.
+		$dir   = 'desc' === ( $more['dir'] ?? '' ) ? 'DESC' : 'ASC';
+		$order = array(
+			'name'       => "e.first_name {$dir}, e.last_name {$dir}",
+			'job_title'  => "e.job_title = '' ASC, e.job_title {$dir}",
+			'department' => "e.department = '' ASC, e.department {$dir}",
+			'shift'      => "ws.name IS NULL ASC, ws.name {$dir}",
+		)[ $more['sort'] ?? '' ] ?? '';
+		$order = 'e.is_active DESC, ' . ( '' !== $order ? $order . ', ' : '' ) . 'e.first_name, e.last_name, e.id';
 		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- $where holds only fixed conditions with placeholders.
 		$total = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM %i e LEFT JOIN %i u ON u.ID = e.user_id WHERE $where", array_merge( array( self::table(), $wpdb->users ), $args ) ) );
-		$rows  = $wpdb->get_results(
+		// The work shift is the payroll one (on the pay profile); Pro installs its tables whatever features are on.
+		$rows = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT e.*, u.user_login FROM %i e LEFT JOIN %i u ON u.ID = e.user_id WHERE $where ORDER BY e.is_active DESC, e.first_name, e.last_name, e.id LIMIT %d OFFSET %d",
-				array_merge( array( self::table(), $wpdb->users ), $args, array( $per, ( max( 1, $page ) - 1 ) * $per ) )
+				"SELECT e.*, u.user_login, ws.id AS work_shift_id, ws.name AS work_shift_name FROM %i e LEFT JOIN %i u ON u.ID = e.user_id LEFT JOIN %i p ON p.employee_id = e.id LEFT JOIN %i ws ON ws.id = p.work_shift_id WHERE $where ORDER BY $order LIMIT %d OFFSET %d",
+				array_merge( array( self::table(), $wpdb->users, self::payTable(), self::shiftTable() ), $args, array( $per, ( max( 1, $page ) - 1 ) * $per ) )
 			),
 			ARRAY_A
 		);
@@ -97,6 +114,40 @@ class EmployeeRepository extends BaseRepository {
 			'items' => (array) $rows,
 			'total' => $total,
 		);
+	}
+
+	/**
+	 * An employee's work shift (the payroll one, on their pay profile).
+	 *
+	 * @param int $employee_id Employee id.
+	 * @return array{work_shift_id: int|null, work_shift_name: string}
+	 */
+	public function workShift( int $employee_id ): array {
+		global $wpdb;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one row for the staff file.
+		$row = $wpdb->get_row( $wpdb->prepare( 'SELECT ws.id, ws.name FROM %i p JOIN %i ws ON ws.id = p.work_shift_id WHERE p.employee_id = %d', self::payTable(), self::shiftTable(), $employee_id ), ARRAY_A );
+		return array(
+			'work_shift_id'   => $row ? (int) $row['id'] : null,
+			'work_shift_name' => $row ? (string) $row['name'] : '',
+		);
+	}
+
+	/**
+	 * The pay profiles table (M15).
+	 *
+	 * @return string
+	 */
+	private static function payTable(): string {
+		return rtbp_table_prefix() . 'pro_employee_pay';
+	}
+
+	/**
+	 * The work shifts table (M15).
+	 *
+	 * @return string
+	 */
+	private static function shiftTable(): string {
+		return rtbp_table_prefix() . 'pro_work_shifts';
 	}
 
 	/**

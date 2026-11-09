@@ -105,6 +105,8 @@ function useEmployeeMutation( send ) {
 			client.invalidateQueries( {
 				queryKey: [ ...EMPLOYEES_KEY, 'list' ],
 			} );
+			// The work shift lives on the pay profile (Pay tab, shift counts).
+			client.invalidateQueries( { queryKey: [ 'payroll' ] } );
 		},
 	} );
 }

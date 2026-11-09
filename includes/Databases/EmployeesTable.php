@@ -17,7 +17,9 @@ defined( 'ABSPATH' ) || exit;
  * `…pro_employees`: the employee file of a staff member (a WordPress user
  * with the role `rtbp_staff`, one row per user). `emergency` is JSON
  * `{ full_name, address, phone, relationship }`. The pay fields of 12.12–
- * 12.15 are not here: they wait for D1 (payroll in scope?).
+ * 12.15 are not here: they wait for D1 (payroll in scope?). The work shift
+ * is payroll's, on the pay profile (`pro_employee_pay.work_shift_id`); an
+ * older install may still have an unused `shift` text column.
  */
 class EmployeesTable extends Migration {
 
@@ -47,7 +49,6 @@ class EmployeesTable extends Migration {
 				$table->string( 'tax_no', 40 )->default( '' );
 				$table->string( 'department', 100 )->default( '' );
 				$table->string( 'job_title', 100 )->default( '' );
-				$table->string( 'shift', 60 )->default( '' );
 				$table->boolean( 'is_active' )->default( 1 );
 				$table->dateTime( 'deactivated_at' )->nullable();
 				$table->unsignedBigInteger( 'avatar_id' )->nullable();

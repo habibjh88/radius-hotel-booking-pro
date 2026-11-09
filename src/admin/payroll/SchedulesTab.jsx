@@ -31,6 +31,7 @@ import { access, format, toast, toastError, usePageActions } from '@rtbp/lib';
 
 import { DateField } from '../pickers';
 import { useDeleteSchedule, usePaySchedules, useSaveSchedule } from './api';
+import { deleteWord } from './useConfirmRemove';
 
 const BLANK = {
 	name: '',
@@ -383,6 +384,7 @@ export default function SchedulesTab() {
 					'radius-hotel-booking-pro'
 				) }
 				confirmLabel={ __( 'Delete', 'radius-hotel-booking-pro' ) }
+				confirmText={ deleteWord() }
 				destructive
 				onConfirm={ () =>
 					remove

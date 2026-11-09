@@ -5,7 +5,7 @@
  * for every employee or chosen ones. A run line still takes one-off bonuses
  * typed in by hand.
  */
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { Plus, Trash2 } from 'lucide-react';
 import {
 	Button,
@@ -22,6 +22,8 @@ import {
 } from '@rtbp/ui';
 
 import { useEmployees } from '../staff/api';
+import EmployeeMultiSelect from './EmployeeMultiSelect';
+import useConfirmRemove from './useConfirmRemove';
 
 const NEW_RULE = {
 	key: '',
@@ -78,6 +80,7 @@ export default function BonusRulesSection( { rules = [], onChange, error } ) {
 	};
 	const staff = useEmployees( { active: 'active', per_page: 100 } );
 	const employees = staff.data?.employees || [];
+	const [ confirmRemove, removeDialog ] = useConfirmRemove();
 	const change = ( index, fields ) =>
 		onChange(
 			rules.map( ( row, i ) =>
@@ -242,10 +245,18 @@ export default function BonusRulesSection( { rules = [], onChange, error } ) {
 									size="sm"
 									className="ml-auto text-destructive"
 									onClick={ () =>
-										onChange(
-											rules.filter(
-												( _, i ) => i !== index
-											)
+										confirmRemove(
+											row.label ||
+												__(
+													'Untitled bonus',
+													'radius-hotel-booking-pro'
+												),
+											() =>
+												onChange(
+													rules.filter(
+														( _, i ) => i !== index
+													)
+												)
 										)
 									}
 								>
@@ -261,58 +272,14 @@ export default function BonusRulesSection( { rules = [], onChange, error } ) {
 							</div>
 
 							{ 'selected' === row.applies ? (
-								<div className="grid max-h-48 gap-1 overflow-y-auto rounded-md border border-border p-2 sm:grid-cols-2 lg:grid-cols-3">
-									{ employees.map( ( employee ) => {
-										const chosen = (
-											row.employees || []
-										).includes( employee.id );
-										return (
-											<label
-												key={ employee.id }
-												className="flex items-center gap-2 text-sm text-heading"
-											>
-												<input
-													type="checkbox"
-													checked={ chosen }
-													onChange={ () =>
-														change( index, {
-															employees: chosen
-																? row.employees.filter(
-																		(
-																			id
-																		) =>
-																			id !==
-																			employee.id
-																  )
-																: [
-																		...( row.employees ||
-																			[] ),
-																		employee.id,
-																  ],
-														} )
-													}
-												/>
-												{ sprintf(
-													/* translators: 1: employee name, 2: employee number. */
-													__(
-														'%1$s (%2$s)',
-														'radius-hotel-booking-pro'
-													),
-													employee.name,
-													employee.employee_no
-												) }
-											</label>
-										);
-									} ) }
-									{ ! employees.length ? (
-										<p className="m-0 text-sm text-muted-foreground">
-											{ __(
-												'No active employees.',
-												'radius-hotel-booking-pro'
-											) }
-										</p>
-									) : null }
-								</div>
+								<EmployeeMultiSelect
+									options={ employees }
+									loading={ staff.isPending }
+									value={ row.employees || [] }
+									onChange={ ( ids ) =>
+										change( index, { employees: ids } )
+									}
+								/>
 							) : null }
 						</div>
 					) ) }
@@ -334,6 +301,7 @@ export default function BonusRulesSection( { rules = [], onChange, error } ) {
 				<Plus className="h-4 w-4" aria-hidden="true" />
 				{ __( 'Add a bonus', 'radius-hotel-booking-pro' ) }
 			</Button>
+			{ removeDialog }
 		</SettingsSection>
 	);
 }

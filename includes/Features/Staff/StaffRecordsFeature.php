@@ -15,6 +15,7 @@ use RadiusTheme\RadiusHotelBookingPro\Staff\Employee;
 use RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeController;
 use RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeRepository;
 use RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeService;
+use RadiusTheme\RadiusHotelBookingPro\Staff\StaffSettings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -52,6 +53,9 @@ final class StaffRecordsFeature extends AbstractFeature {
 	 * @return void
 	 */
 	public function boot(): void {
+		// Settings → Staff: the departments and job titles to pick from.
+		StaffSettings::register();
+		add_filter( 'rtbp_settings_access_key', array( $this, 'settings_key' ), 10, 2 );
 		add_action( 'rtbp_register_addon_routes', array( EmployeeController::class, 'routes' ) );
 		add_action( 'rtbp_register_addon_routes', array( ContractController::class, 'routes' ) );
 		add_action( 'rtbp_register_addon_routes', array( DocumentController::class, 'routes' ) );
@@ -133,6 +137,17 @@ final class StaffRecordsFeature extends AbstractFeature {
 			},
 		);
 		return $types;
+	}
+
+	/**
+	 * `rtbp_settings_access_key`: Settings → Staff is saved with `settings.general`.
+	 *
+	 * @param string $key     Access key.
+	 * @param string $section Section.
+	 * @return string
+	 */
+	public function settings_key( $key, $section ): string {
+		return StaffSettings::SECTION === $section ? 'settings.general' : (string) $key;
 	}
 
 	/**

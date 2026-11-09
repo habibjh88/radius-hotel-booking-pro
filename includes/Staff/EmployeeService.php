@@ -76,10 +76,23 @@ class EmployeeService {
 	 * @param string $active active|inactive|''.
 	 * @param int    $page   Page.
 	 * @param int    $per    Per page (1–100).
+	 * @param array  $more   `{ department?, job_title?, sort? (name|job_title|department|shift), dir? (asc|desc) }`.
 	 * @return array{items: array[], total: int} Rows with `user_login`.
 	 */
-	public function page( string $q, string $active, int $page = 1, int $per = 20 ): array {
-		return $this->employees->page( sanitize_text_field( $q ), $active, max( 1, $page ), min( 100, max( 1, $per ) ) );
+	public function page( string $q, string $active, int $page = 1, int $per = 20, array $more = array() ): array {
+		$sort = sanitize_key( (string) ( $more['sort'] ?? '' ) );
+		return $this->employees->page(
+			sanitize_text_field( $q ),
+			$active,
+			max( 1, $page ),
+			min( 100, max( 1, $per ) ),
+			array(
+				'department' => trim( sanitize_text_field( (string) ( $more['department'] ?? '' ) ) ),
+				'job_title'  => trim( sanitize_text_field( (string) ( $more['job_title'] ?? '' ) ) ),
+				'sort'       => in_array( $sort, array( 'name', 'job_title', 'department', 'shift' ), true ) ? $sort : '',
+				'dir'        => 'desc' === ( $more['dir'] ?? '' ) ? 'desc' : 'asc',
+			)
+		);
 	}
 
 	/**
@@ -598,6 +611,10 @@ class EmployeeService {
 		return array(
 			'access_roles'    => $roles,
 			'advanced_access' => self::advancedAccess(),
+			// Settings → Staff: what the forms offer, and what files already use (to list them, or filter by).
+			'departments'     => StaffSettings::get( 'departments' ),
+			'job_titles'      => StaffSettings::get( 'jobTitles' ),
+			'in_use'          => StaffSettings::inUse(),
 			'marital'         => array(
 				'single'    => __( 'Single', 'radius-hotel-booking-pro' ),
 				'married'   => __( 'Married', 'radius-hotel-booking-pro' ),
@@ -710,10 +727,10 @@ class EmployeeService {
 				$data['avatar_id'] = $avatar ? $avatar : null;
 			}
 		}
-		foreach ( array( 'first_name', 'last_name', 'department', 'job_title', 'shift' ) as $field ) {
+		foreach ( array( 'first_name', 'last_name', 'department', 'job_title' ) as $field ) {
 			if ( $has( $field ) ) {
 				$data[ $field ] = sanitize_text_field( (string) ( $input[ $field ] ?? '' ) );
-				if ( mb_strlen( $data[ $field ] ) > ( 'shift' === $field ? 60 : 100 ) ) {
+				if ( mb_strlen( $data[ $field ] ) > 100 ) {
 					$errors[ $field ] = __( 'This is too long.', 'radius-hotel-booking-pro' );
 				}
 			}
@@ -906,7 +923,7 @@ class EmployeeService {
 	 * @return array
 	 */
 	private static function logged( array $values, array $extra ): array {
-		$fields = array( 'first_name', 'last_name', 'dob', 'address', 'marital_status', 'num_children', 'phone', 'email', 'emergency', 'cnps_no', 'tax_no', 'department', 'job_title', 'shift', 'avatar_id' );
+		$fields = array( 'first_name', 'last_name', 'dob', 'address', 'marital_status', 'num_children', 'phone', 'email', 'emergency', 'cnps_no', 'tax_no', 'department', 'job_title', 'avatar_id' );
 		$out    = array();
 		foreach ( $fields as $field ) {
 			$value         = $values[ $field ] ?? null;

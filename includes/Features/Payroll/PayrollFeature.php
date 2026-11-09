@@ -103,6 +103,8 @@ final class PayrollFeature extends AbstractFeature {
 			'key'      => $calculator->key(),
 			'label'    => $calculator->label(),
 			'built_in' => Statutory::builtIn(),
+			// A country calculator that reads Settings → Payroll → Social contributions (optional method).
+			'contributions' => Statutory::builtIn() || ( method_exists( $calculator, 'usesContributions' ) && $calculator->usesContributions() ),
 		);
 		return $params;
 	}

@@ -15,15 +15,56 @@ import {
 	EmptyState,
 	FilterTabs,
 	Panel,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
 	Skeleton,
 	StatusBadge,
 } from '@rtbp/ui';
 import { access, toast, usePageActions } from '@rtbp/lib';
 
-import { useEmployees, useSetActive } from './api';
+import { useEmployees, useSetActive, useStaffOptions } from './api';
 import { StaffAvatar } from './StaffPhoto';
+import { useShiftVisible } from './WorkShiftSelect';
 
 const PER_PAGE = 20;
+
+/**
+ * A department or job title filter: "All …" or one name.
+ *
+ * @param {Object}   props          Props.
+ * @param {string}   props.value    The name ('' = all).
+ * @param {string[]} props.names    Names offered.
+ * @param {string}   props.all      Label of "all".
+ * @param {Function} props.onChange Called with the name ('' = all).
+ * @return {JSX.Element} Select.
+ */
+function NameFilter( { value, names, all, onChange } ) {
+	const ALL = '__all__';
+	return (
+		<Select
+			value={ value || ALL }
+			onValueChange={ ( next ) => onChange( ALL === next ? '' : next ) }
+		>
+			<SelectTrigger
+				className="h-9 w-auto min-w-[10rem]"
+				aria-label={ all }
+			>
+				<SelectValue />
+			</SelectTrigger>
+			<SelectContent className="rtbp-root">
+				<SelectItem value={ ALL }>{ all }</SelectItem>
+				{ names.map( ( name ) => (
+					<SelectItem key={ name } value={ name }>
+						{ name }
+					</SelectItem>
+				) ) }
+			</SelectContent>
+		</Select>
+	);
+}
 
 /**
  * @return {JSX.Element} Screen.
@@ -57,12 +98,35 @@ export default function StaffListScreen() {
 		? params.get( 'show' )
 		: 'active';
 	const page = Math.max( 1, Number( params.get( 'page' ) ) || 1 );
+	// Filters and sort (Settings → Staff lists, plus names already on files).
+	const department = params.get( 'department' ) || '';
+	const jobTitle = params.get( 'job_title' ) || '';
+	const sort = {
+		by: params.get( 'sort' ) || '',
+		dir: 'desc' === params.get( 'dir' ) ? 'desc' : 'asc',
+	};
 	const list = useEmployees( {
 		q,
 		active: 'all' === tab ? '' : tab,
 		page,
 		per_page: PER_PAGE,
+		...( department ? { department } : {} ),
+		...( jobTitle ? { job_title: jobTitle } : {} ),
+		...( sort.by ? { sort: sort.by, dir: sort.dir } : {} ),
 	} );
+	const options = useStaffOptions();
+	const choices = ( listed, used ) =>
+		[ ...new Set( [ ...( listed || [] ), ...( used || [] ) ] ) ].sort(
+			( a, b ) => a.localeCompare( b )
+		);
+	const departments = choices(
+		options.data?.departments,
+		options.data?.in_use?.departments
+	);
+	const jobTitles = choices(
+		options.data?.job_titles,
+		options.data?.in_use?.jobTitles
+	);
 
 	const setView = ( changes ) =>
 		setParams(
@@ -78,10 +142,13 @@ export default function StaffListScreen() {
 			{ replace: true }
 		);
 
+	// The payroll work shift (M15): no column while Payroll is off.
+	const showShift = useShiftVisible();
 	const columns = [
 		{
-			id: 'employee',
+			id: 'name',
 			header: __( 'Employee', 'radius-hotel-booking-pro' ),
+			sortable: true,
 			mobile: 'title',
 			cell: ( employee ) => (
 				<span className="inline-flex items-center gap-3">
@@ -98,17 +165,22 @@ export default function StaffListScreen() {
 			),
 		},
 		{
-			id: 'job',
-			header: __( 'Job', 'radius-hotel-booking-pro' ),
+			id: 'job_title',
+			header: __( 'Job title', 'radius-hotel-booking-pro' ),
+			sortable: true,
 			mobile: 'subtitle',
-			cell: ( employee ) =>
-				[ employee.job_title, employee.department ]
-					.filter( Boolean )
-					.join( ' · ' ) || '—',
+			cell: ( employee ) => employee.job_title || '—',
 		},
 		{
+			id: 'department',
+			header: __( 'Department', 'radius-hotel-booking-pro' ),
+			sortable: true,
+			cell: ( employee ) => employee.department || '—',
+		},
+		showShift && {
 			id: 'shift',
 			header: __( 'Shift', 'radius-hotel-booking-pro' ),
+			sortable: true,
 			cell: ( employee ) => employee.shift || '—',
 		},
 		{
@@ -131,7 +203,7 @@ export default function StaffListScreen() {
 				/>
 			),
 		},
-	];
+	].filter( Boolean );
 
 	const rowActions = ( employee ) =>
 		canToggle
@@ -268,6 +340,46 @@ export default function StaffListScreen() {
 									'radius-hotel-booking-pro'
 								),
 							} }
+							sort={ sort }
+							onSortChange={ ( next ) =>
+								setView( {
+									sort: next?.by || '',
+									dir: 'desc' === next?.dir ? 'desc' : '',
+									page: '',
+								} )
+							}
+							toolbar={
+								<div className="flex flex-wrap gap-2">
+									<NameFilter
+										value={ department }
+										names={ departments }
+										all={ __(
+											'All departments',
+											'radius-hotel-booking-pro'
+										) }
+										onChange={ ( value ) =>
+											setView( {
+												department: value,
+												page: '',
+											} )
+										}
+									/>
+									<NameFilter
+										value={ jobTitle }
+										names={ jobTitles }
+										all={ __(
+											'All job titles',
+											'radius-hotel-booking-pro'
+										) }
+										onChange={ ( value ) =>
+											setView( {
+												job_title: value,
+												page: '',
+											} )
+										}
+									/>
+								</div>
+							}
 							rowActions={ rowActions }
 							onRowClick={ ( employee ) =>
 								navigate( `/staff/${ employee.id }` )

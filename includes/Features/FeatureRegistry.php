@@ -83,6 +83,13 @@ final class FeatureRegistry {
 				'requires'    => array(),
 				'default'     => false,
 			),
+			'cash_register'      => array(
+				'group'       => 'payments',
+				'module'      => 'R3',
+				'class'       => __NAMESPACE__ . '\\CashRegister\\CashRegisterFeature',
+				'requires'    => array(),
+				'default'     => true,
+			),
 			'advanced_reports'   => array(
 				'group'       => 'insights',
 				'module'      => 'M10',
@@ -144,6 +151,7 @@ final class FeatureRegistry {
 			'pdf_documents' => array( __( 'PDF invoices and receipts', 'radius-hotel-booking-pro' ), __( 'Generate invoices and receipts as PDF files and attach them to guest e-mails.', 'radius-hotel-booking-pro' ) ),
 			'booking_qr' => array( __( 'Booking QR codes', 'radius-hotel-booking-pro' ), __( 'A QR code on guest e-mails, invoices and receipts; scan it at arrival to open the booking.', 'radius-hotel-booking-pro' ) ),
 			'auto_release' => array( __( 'Automatic release of unpaid bookings', 'radius-hotel-booking-pro' ), __( 'Free the room automatically when a booking passes its payment deadline.', 'radius-hotel-booking-pro' ) ),
+			'cash_register' => array( __( 'Cash register', 'radius-hotel-booking-pro' ), __( 'Staff open and close their register each shift; payments are tallied per method and the cash is counted.', 'radius-hotel-booking-pro' ) ),
 			'advanced_reports' => array( __( 'Advanced reports', 'radius-hotel-booking-pro' ), __( 'Occupancy rate, revenue by room type, rate plan and staff member, and Excel export.', 'radius-hotel-booking-pro' ) ),
 			'advanced_exports' => array( __( 'Advanced exports and archiving', 'radius-hotel-booking-pro' ), __( 'Excel exports, archive-and-remove of old bookings, and scheduled exports.', 'radius-hotel-booking-pro' ) ),
 			'staff_records' => array( __( 'Staff records', 'radius-hotel-booking-pro' ), __( 'Full employee files: contracts, emergency contacts, documents, notes and history.', 'radius-hotel-booking-pro' ) ),

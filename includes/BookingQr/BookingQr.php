@@ -19,8 +19,9 @@ defined( 'ABSPATH' ) || exit;
  * same 128-bit token as the guest's booking page, so it opens nothing the
  * guest's e-mail does not already open):
  *
- * - staff who may open bookings land on the booking in the dashboard
- *   (the `[rtbp_dashboard]` page when there is one, else wp-admin);
+ * - staff who may open bookings land on the booking's quick card in the
+ *   dashboard — check in / out at once (R3-T4) — (the `[rtbp_dashboard]`
+ *   page when there is one, else wp-admin);
  * - anyone else (the guest) lands on the guest's booking page.
  *
  * The dashboard's *Scan a booking* dialog reads the same link, a bare token
@@ -146,10 +147,10 @@ final class BookingQr {
 		/**
 		 * Where a staff scan opens a booking.
 		 *
-		 * @param string $url        Dashboard URL with the `#/bookings/{id}` route.
+		 * @param string $url        Dashboard URL with the `#/scan/{id}` route (the quick card, R3-T4).
 		 * @param int    $booking_id Booking id.
 		 */
-		return (string) apply_filters( 'rtbp_pro_scan_staff_url', $base . '#/bookings/' . $booking_id, $booking_id );
+		return (string) apply_filters( 'rtbp_pro_scan_staff_url', $base . '#/scan/' . $booking_id, $booking_id );
 	}
 
 	/**

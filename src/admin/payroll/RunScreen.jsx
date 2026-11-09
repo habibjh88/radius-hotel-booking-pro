@@ -31,7 +31,7 @@ import {
 import { access, format, toast, toastError } from '@rtbp/lib';
 
 import LineDialog from './LineDialog';
-import { periodText } from './RunsTab';
+import { PayBonusSwitch, periodText } from './RunsTab';
 import { usePayrollRun, usePayrollRunAction } from './api';
 
 const money = ( v ) => format.formatMoney( v );
@@ -368,6 +368,19 @@ export default function RunScreen() {
 	}
 
 	const draft = 'draft' === run.status;
+	// Switching the Pay tab's bonuses on or off recalculates the draft.
+	const toggleBonus = async ( next ) => {
+		try {
+			const response = await action.mutateAsync( {
+				action: 'recalculate',
+				id: run.id,
+				pay_bonus: next,
+			} );
+			toast.success( response.message );
+		} catch ( err ) {
+			toastError( err );
+		}
+	};
 	const periodOpen = run.can_finalize_from > format.siteToday();
 	const moves = {
 		recalculate: {
@@ -629,6 +642,23 @@ export default function RunScreen() {
 						) ) }
 					</dl>
 				</Panel>
+				{ draft ? (
+					<div className="rounded-xl bg-card shadow-sm">
+						<PayBonusSwitch
+							checked={ Boolean( run.pay_bonus ) }
+							onChange={ toggleBonus }
+							disabled={ ! can.run || action.isPending }
+						/>
+					</div>
+				) : null }
+				{ ! draft && run.pay_bonus ? (
+					<p className="m-0 text-sm text-muted-foreground">
+						{ __(
+							'Bonuses from the Pay tab were paid in this run.',
+							'radius-hotel-booking-pro'
+						) }
+					</p>
+				) : null }
 				{ run.unscheduled?.length ? (
 					// Active staff no run includes: their Pay tab needs a pay schedule (R1-T17).
 					<div

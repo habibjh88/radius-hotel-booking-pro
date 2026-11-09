@@ -123,6 +123,8 @@ export function useSaveEmployeePay( employeeId ) {
 			// Employee counts on the schedules and shifts tabs.
 			client.invalidateQueries( { queryKey: SCHEDULES_KEY } );
 			client.invalidateQueries( { queryKey: SHIFTS_KEY } );
+			// The staff file and list show the work shift too.
+			client.invalidateQueries( { queryKey: [ 'employees' ] } );
 		},
 	} );
 }

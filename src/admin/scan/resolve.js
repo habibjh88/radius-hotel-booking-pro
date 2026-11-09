@@ -1,5 +1,6 @@
 /**
- * Turn a scanned or typed code into its booking (`GET scan`) and open it.
+ * Turn a scanned or typed code into its booking (`GET scan`) and open its
+ * quick card (R3-T4: check in / out at once; the full booking is one tap on).
  */
 import { __ } from '@wordpress/i18n';
 import { api, toastError } from '@rtbp/lib';
@@ -23,7 +24,7 @@ export const resolveCode = ( code ) =>
 export async function openScanned( code, navigate ) {
 	try {
 		const booking = await resolveCode( code );
-		navigate( `/bookings/${ booking.id }` );
+		navigate( `/scan/${ booking.id }` );
 		return true;
 	} catch ( error ) {
 		toastError(

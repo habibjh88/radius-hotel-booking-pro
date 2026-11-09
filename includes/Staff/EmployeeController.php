@@ -9,6 +9,7 @@ namespace RadiusTheme\RadiusHotelBookingPro\Staff;
 
 use RadiusTheme\RadiusHotelBooking\Core\Api\ApiResponse;
 use RadiusTheme\RadiusHotelBookingPro\Access\GuardsRequests;
+use RadiusTheme\RadiusHotelBookingPro\Payroll\EmployeePayService;
 use WP_REST_Request;
 
 defined( 'ABSPATH' ) || exit;
@@ -18,6 +19,8 @@ defined( 'ABSPATH' ) || exit;
  * - `POST employees` (`staff.create`): the user and the file, plus access role and PIN
  *   (these two also need `access.manage`);
  * - `PUT employees/{id}` (`staff.edit`): only the fields sent;
+ * - on both, `work_shift_id` (Payroll on) sets the payroll work shift and also
+ *   needs `payroll.pay_profile`;
  * - `POST employees/{id}/deactivate` · `/activate` `{ reason? }` (`staff.deactivate`);
  * - `PUT employees/{id}/account` `{ password?, pin?, remove_pin?, access_role? }` (role
  *   and PIN also need `access.manage`; never your own role; never an administrator's
@@ -68,7 +71,13 @@ class EmployeeController {
 					(string) $request->get_param( 'q' ),
 					sanitize_key( (string) $request->get_param( 'active' ) ),
 					$page,
-					$per ? $per : 20
+					$per ? $per : 20,
+					array(
+						'department' => (string) $request->get_param( 'department' ),
+						'job_title'  => (string) $request->get_param( 'job_title' ),
+						'sort'       => (string) $request->get_param( 'sort' ),
+						'dir'        => (string) $request->get_param( 'dir' ),
+					)
 				);
 				return ApiResponse::success(
 					array( 'employees' => array_map( array( EmployeeResource::class, 'summary' ), $data['items'] ) ),
@@ -119,14 +128,22 @@ class EmployeeController {
 	public function store( WP_REST_Request $request ) {
 		return $this->guard(
 			$request,
-			self::withAccessManage( 'staff.create', $request ),
+			self::withShift( self::withAccessManage( 'staff.create', $request ), $request, false ),
 			function ( $request ) {
 				$body    = (array) $request->get_json_params();
 				$user_id = absint( $body['user_id'] ?? 0 );
+				$shift   = self::shiftOf( $request );
+				// Checked first: a wrong shift must not leave a file half made.
+				if ( null !== $shift ) {
+					EmployeePayService::assertShift( $shift );
+				}
 				// An existing sign-in gets a file (R1-T3); otherwise a new user is made with it.
 				$employee = $user_id
-					? ( new EmployeeService() )->linkAccount( $user_id, array_diff_key( $body, array_flip( array( 'user_id', 'username', 'password', 'access_role', 'pin' ) ) ) )
-					: ( new EmployeeService() )->create( $body );
+					? ( new EmployeeService() )->linkAccount( $user_id, array_diff_key( $body, array_flip( array( 'user_id', 'username', 'password', 'access_role', 'pin', 'work_shift_id' ) ) ) )
+					: ( new EmployeeService() )->create( array_diff_key( $body, array( 'work_shift_id' => 0 ) ) );
+				if ( $shift ) {
+					( new EmployeePayService() )->setShift( (int) $employee->id, $shift );
+				}
 				return ApiResponse::created(
 					array( 'employee' => EmployeeResource::detail( $employee ) ),
 					__( 'Employee added.', 'radius-hotel-booking-pro' )
@@ -158,11 +175,22 @@ class EmployeeController {
 	public function update( WP_REST_Request $request ) {
 		return $this->guard(
 			$request,
-			'staff.edit',
-			fn( $request ) => ApiResponse::success(
-				array( 'employee' => EmployeeResource::detail( ( new EmployeeService() )->update( (int) $request->get_param( 'id' ), self::fields( $request ) ) ) ),
-				__( 'Employee saved.', 'radius-hotel-booking-pro' )
-			)->send()
+			self::withShift( array( 'staff.edit' ), $request, true ),
+			function ( $request ) {
+				$id    = (int) $request->get_param( 'id' );
+				$shift = self::shiftOf( $request );
+				if ( null !== $shift ) {
+					EmployeePayService::assertShift( $shift );
+				}
+				$employee = ( new EmployeeService() )->update( $id, self::fields( $request ) );
+				if ( null !== $shift ) {
+					( new EmployeePayService() )->setShift( $id, $shift );
+				}
+				return ApiResponse::success(
+					array( 'employee' => EmployeeResource::detail( $employee ) ),
+					__( 'Employee saved.', 'radius-hotel-booking-pro' )
+				)->send();
+			}
 		);
 	}
 
@@ -267,6 +295,38 @@ class EmployeeController {
 	}
 
 	/**
+	 * The payroll work shift sent (`work_shift_id`; '' or 0 is none), or null
+	 * when none was sent or Payroll is off (M15 owns work shifts).
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return int|null
+	 */
+	private static function shiftOf( WP_REST_Request $request ): ?int {
+		$body = (array) $request->get_json_params();
+		if ( ! array_key_exists( 'work_shift_id', $body ) || ! class_exists( EmployeePayService::class )
+			|| ! function_exists( 'rtbp_pro_feature_active' ) || ! rtbp_pro_feature_active( 'payroll' ) ) {
+			return null;
+		}
+		return absint( $body['work_shift_id'] );
+	}
+
+	/**
+	 * The access keys, plus `payroll.pay_profile` when a work shift is set.
+	 *
+	 * @param string[]        $keys   Keys so far.
+	 * @param WP_REST_Request $request Request.
+	 * @param bool            $clear  Whether sending "none" counts (an update; on create none is nothing).
+	 * @return string[]
+	 */
+	private static function withShift( array $keys, WP_REST_Request $request, bool $clear ): array {
+		$shift = self::shiftOf( $request );
+		if ( null !== $shift && ( $shift || $clear ) ) {
+			$keys[] = 'payroll.pay_profile';
+		}
+		return $keys;
+	}
+
+	/**
 	 * The file fields of an update body (only those present; the account
 	 * fields are T3a's).
 	 *
@@ -276,7 +336,7 @@ class EmployeeController {
 	private static function fields( WP_REST_Request $request ): array {
 		return array_intersect_key(
 			(array) $request->get_json_params(),
-			array_flip( array( 'first_name', 'last_name', 'dob', 'address', 'marital_status', 'num_children', 'phone', 'email', 'emergency', 'cnps_no', 'tax_no', 'department', 'job_title', 'shift' ) )
+			array_flip( array( 'first_name', 'last_name', 'dob', 'address', 'marital_status', 'num_children', 'phone', 'email', 'emergency', 'cnps_no', 'tax_no', 'department', 'job_title' ) )
 		);
 	}
 }

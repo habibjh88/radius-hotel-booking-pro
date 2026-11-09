@@ -162,6 +162,72 @@ final class EmployeePayService {
 	}
 
 	/**
+	 * Set only an employee's work shift (the staff file's Employment tab and
+	 * Add employee). Without a pay profile yet, one is started with the
+	 * defaults and no pay schedule, so no pay run includes it until the pay
+	 * is set on the Pay tab.
+	 *
+	 * @param int $employee_id Pro employee id.
+	 * @param int $shift_id    Work shift id, 0 for none.
+	 * @return void
+	 * @throws DomainException 404, 422 (`work_shift_id`).
+	 */
+	public function setShift( int $employee_id, int $shift_id ): void {
+		$employee = $this->employee( $employee_id );
+		self::assertShift( $shift_id );
+		$current = $this->pay->forEmployee( $employee_id );
+		$before  = $current && $current->work_shift_id ? (int) $current->work_shift_id : null;
+		$after   = $shift_id > 0 ? $shift_id : null;
+		if ( $before === $after ) {
+			return;
+		}
+		if ( $current ) {
+			$this->pay->update( (int) $current->id, array( 'work_shift_id' => $after ) );
+		} else {
+			$this->pay->create(
+				array(
+					'employee_id'     => $employee_id,
+					'pay_schedule_id' => null,
+					'work_shift_id'   => $after,
+					'pay_type'        => 'salaried',
+					'amount'          => '0.00',
+					'amount_period'   => 'month',
+				)
+			);
+		}
+		if ( function_exists( 'rtbp_activity' ) ) {
+			rtbp_activity(
+				'payroll.pay_profile',
+				array(
+					'type'  => 'employee',
+					'id'    => $employee_id,
+					'label' => $employee['name'],
+				),
+				array(
+					'before'      => self::readable( array( 'work_shift_id' => $before ) ),
+					'after'       => self::readable( array( 'work_shift_id' => $after ) ),
+					/* translators: %s: employee name. */
+					'description' => sprintf( __( 'Changed the work shift of %s', 'radius-hotel-booking-pro' ), $employee['name'] ),
+				)
+			);
+		}
+	}
+
+	/**
+	 * Refuse a work shift that does not exist (0 is "none").
+	 *
+	 * @param int $shift_id Work shift id.
+	 * @return void
+	 * @throws DomainException 422 (`work_shift_id`).
+	 */
+	public static function assertShift( int $shift_id ): void {
+		if ( $shift_id > 0 && ! ( new WorkShiftRepository() )->find( $shift_id ) ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped -- sent as JSON; React escapes it.
+			throw DomainException::invalid( array( 'work_shift_id' => __( 'This work shift does not exist.', 'radius-hotel-booking-pro' ) ) );
+		}
+	}
+
+	/**
 	 * Save an employee's additional pay types (12.14): the full set, each with
 	 * its settings; a type left out is no longer paid. One log entry.
 	 *

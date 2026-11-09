@@ -22,8 +22,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 	Skeleton,
+	Textarea,
 } from '@rtbp/ui';
-import { access, toast, toastError } from '@rtbp/lib';
+import { access, format, toast, toastError } from '@rtbp/lib';
 
 import {
 	sendPasswordLink,
@@ -31,16 +32,23 @@ import {
 	useStaffAccounts,
 	useStaffOptions,
 } from './api';
-import { PhoneField } from '../pickers';
+import { DateField, PhoneField } from '../pickers';
+import { ChoiceSelect } from './FileTabs';
+import NameSelect from './NameSelect';
+import WorkShiftSelect, { useShiftVisible } from './WorkShiftSelect';
 
 const STEP_ONE = [
 	'first_name',
 	'last_name',
 	'phone',
 	'email',
+	'dob',
+	'marital_status',
+	'address',
+	'num_children',
 	'job_title',
 	'department',
-	'shift',
+	'work_shift_id',
 ];
 
 /**
@@ -80,6 +88,7 @@ const randomPassword = () => {
 export default function CreateEmployeeScreen() {
 	const navigate = useNavigate();
 	const options = useStaffOptions();
+	const showShift = useShiftVisible();
 	const create = useCreateEmployee();
 	const [ step, setStep ] = useState( 1 );
 	const [ errors, setErrors ] = useState( {} );
@@ -89,9 +98,13 @@ export default function CreateEmployeeScreen() {
 		last_name: '',
 		phone: '',
 		email: '',
+		dob: '',
+		marital_status: '',
+		address: '',
+		num_children: '',
 		job_title: '',
 		department: '',
-		shift: '',
+		work_shift_id: '',
 		username: '',
 		password_mode: 'set',
 		password: '',
@@ -330,12 +343,80 @@ export default function CreateEmployeeScreen() {
 								</Field>
 								<Field
 									label={ __(
+										'Date of birth',
+										'radius-hotel-booking-pro'
+									) }
+									error={ errors.dob }
+								>
+									<DateField
+										value={ values.dob }
+										onChange={ ( day ) =>
+											set( 'dob', day )
+										}
+										max={ format.siteToday() }
+										yearDropdown
+										clearable
+									/>
+								</Field>
+								<Field
+									label={ __(
+										'Marital status',
+										'radius-hotel-booking-pro'
+									) }
+									error={ errors.marital_status }
+								>
+									<ChoiceSelect
+										value={ values.marital_status }
+										choices={ options.data?.marital }
+										onChange={ ( value ) =>
+											set( 'marital_status', value )
+										}
+									/>
+								</Field>
+								<Field
+									className="sm:col-span-2"
+									label={ __(
+										'Address',
+										'radius-hotel-booking-pro'
+									) }
+									error={ errors.address }
+								>
+									<Textarea
+										rows={ 2 }
+										value={ values.address }
+										onChange={ ( e ) =>
+											set( 'address', e.target.value )
+										}
+									/>
+								</Field>
+								<Field
+									label={ __(
+										'Number of children',
+										'radius-hotel-booking-pro'
+									) }
+									error={ errors.num_children }
+								>
+									{ input( 'num_children', {
+										type: 'number',
+										min: 0,
+										max: 30,
+										inputMode: 'numeric',
+									} ) }
+								</Field>
+								<Field
+									label={ __(
 										'Job title',
 										'radius-hotel-booking-pro'
 									) }
 									error={ errors.job_title }
 								>
-									{ input( 'job_title', { maxLength: 100 } ) }
+									<NameSelect
+										list="job_titles"
+										value={ values.job_title }
+										onChange={ ( name ) =>
+											set( 'job_title', name )
+										}
+									/>
 								</Field>
 								<Field
 									label={ __(
@@ -344,23 +425,23 @@ export default function CreateEmployeeScreen() {
 									) }
 									error={ errors.department }
 								>
-									{ input( 'department', {
-										maxLength: 100,
-									} ) }
+									<NameSelect
+										list="departments"
+										value={ values.department }
+										onChange={ ( name ) =>
+											set( 'department', name )
+										}
+									/>
 								</Field>
-								<Field
-									label={ __(
-										'Work shift',
-										'radius-hotel-booking-pro'
-									) }
-									error={ errors.shift }
-									description={ __(
-										'For example Morning, Day or Night.',
-										'radius-hotel-booking-pro'
-									) }
-								>
-									{ input( 'shift', { maxLength: 60 } ) }
-								</Field>
+								{ showShift ? (
+									<WorkShiftSelect
+										value={ values.work_shift_id }
+										onChange={ ( id ) =>
+											set( 'work_shift_id', id )
+										}
+										error={ errors.work_shift_id }
+									/>
+								) : null }
 							</div>
 							<div className="flex justify-end gap-2">
 								<Button asChild variant="ghost">

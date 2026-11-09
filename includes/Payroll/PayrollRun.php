@@ -23,6 +23,7 @@ defined( 'ABSPATH' ) || exit;
  * @property string $period_end
  * @property string $pay_date
  * @property string $status
+ * @property int    $pay_bonus
  */
 class PayrollRun extends BaseModel {
 
@@ -57,6 +58,7 @@ class PayrollRun extends BaseModel {
 		'period_end',
 		'pay_date',
 		'status',
+		'pay_bonus',
 		'employees',
 		'gross_total',
 		'employee_tax_total',
