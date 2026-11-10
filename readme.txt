@@ -140,6 +140,8 @@ Scanning a booking QR code opens a quick card: check in, check out or record pay
 New Cash register: staff open and close their register per shift, with per-method totals.
 Cash register close counts the cash and keeps the difference; managers see every register.
 Optional setting: staff must open their cash register before taking a payment.
+The Dashboard now shows your cash register: open, close and per-method totals at a glance.
+Fixed: every staff member could use the cash register; now only roles given access, like Receptionist.
 Payroll list: pay runs that pay bonuses are flagged with a Bonus badge.
 New Settings → Staff: departments and job titles to pick from on staff files and contracts.
 Staff list: filter and sort by department, job title and shift.

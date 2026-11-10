@@ -38,7 +38,7 @@ const money = ( value ) => format.formatMoney( Number( value ) || 0 );
  * @param {Object} session Session.
  * @return {void}
  */
-function printSlip( session ) {
+export function printSlip( session ) {
 	const win = window.open( '', '_blank', 'width=420,height=640' );
 	if ( ! win ) {
 		return;
@@ -106,7 +106,7 @@ function printSlip( session ) {
  * @param {number} props.value Counted − expected.
  * @return {JSX.Element} Amount.
  */
-function Difference( { value } ) {
+export function Difference( { value } ) {
 	if ( null === value || undefined === value ) {
 		return <span className="text-muted-foreground">—</span>;
 	}
@@ -131,7 +131,7 @@ function Difference( { value } ) {
  * @param {Object} props.session Session.
  * @return {JSX.Element} Summary.
  */
-function ClosedSummary( { session } ) {
+export function ClosedSummary( { session } ) {
 	return (
 		<div className="space-y-3">
 			<table className="w-full text-sm">
@@ -250,7 +250,7 @@ function LiveBox( { session } ) {
  * @param {Function} props.onClosed Called with the closed session.
  * @return {JSX.Element} Dialog.
  */
-function CloseDialog( { open, onClose, onClosed } ) {
+export function CloseDialog( { open, onClose, onClosed } ) {
 	const action = useRegisterAction();
 	const [ counted, setCounted ] = useState( '' );
 	const [ note, setNote ] = useState( '' );
@@ -357,15 +357,76 @@ function CloseDialog( { open, onClose, onClosed } ) {
 }
 
 /**
+ * Open my register with the cash already in the drawer.
+ *
+ * @param {Object}   props          Props.
+ * @param {Function} props.onOpened Called once opened.
+ * @return {JSX.Element} Form.
+ */
+export function OpenForm( { onOpened } ) {
+	const action = useRegisterAction();
+	const [ float, setFloat ] = useState( '' );
+	const [ floatError, setFloatError ] = useState( '' );
+
+	const openRegister = async ( event ) => {
+		event.preventDefault();
+		setFloatError( '' );
+		try {
+			const response = await action.mutateAsync( {
+				action: 'open',
+				opening_float: float,
+			} );
+			toast.success( response.message );
+			setFloat( '' );
+			onOpened?.();
+		} catch ( err ) {
+			const message = err?.errors?.opening_float?.first_message;
+			if ( message ) {
+				setFloatError( message );
+			} else {
+				toastError( err );
+			}
+		}
+	};
+
+	return (
+		<form
+			onSubmit={ openRegister }
+			className="flex flex-wrap items-end gap-3"
+		>
+			<Field
+				label={ __(
+					'Cash in the drawer now',
+					'radius-hotel-booking-pro'
+				) }
+				error={ floatError }
+			>
+				<Input
+					type="number"
+					inputMode="decimal"
+					min={ 0 }
+					step="any"
+					placeholder="0"
+					className="w-48"
+					value={ float }
+					onChange={ ( e ) => setFloat( e.target.value ) }
+				/>
+			</Field>
+			<Button type="submit" disabled={ action.isPending }>
+				<LockOpen className="h-4 w-4" aria-hidden="true" />
+				{ __( 'Open', 'radius-hotel-booking-pro' ) }
+			</Button>
+		</form>
+	);
+}
+
+/**
  * My register.
  *
  * @return {JSX.Element} Tab.
  */
 function MyRegister() {
 	const query = useMyRegister();
-	const action = useRegisterAction();
-	const [ float, setFloat ] = useState( '' );
-	const [ floatError, setFloatError ] = useState( '' );
 	const [ closing, setClosing ] = useState( false );
 	// The session just closed: its summary and slip.
 	const [ justClosed, setJustClosed ] = useState( null );
@@ -384,27 +445,6 @@ function MyRegister() {
 	}
 	const session = query.data?.session;
 	const recent = query.data?.recent || [];
-
-	const openRegister = async ( event ) => {
-		event.preventDefault();
-		setFloatError( '' );
-		try {
-			const response = await action.mutateAsync( {
-				action: 'open',
-				opening_float: float,
-			} );
-			toast.success( response.message );
-			setFloat( '' );
-			setJustClosed( null );
-		} catch ( err ) {
-			const message = err?.errors?.opening_float?.first_message;
-			if ( message ) {
-				setFloatError( message );
-			} else {
-				toastError( err );
-			}
-		}
-	};
 
 	return (
 		<div className="space-y-4">
@@ -465,33 +505,7 @@ function MyRegister() {
 						'radius-hotel-booking-pro'
 					) }
 				>
-					<form
-						onSubmit={ openRegister }
-						className="flex flex-wrap items-end gap-3"
-					>
-						<Field
-							label={ __(
-								'Cash in the drawer now',
-								'radius-hotel-booking-pro'
-							) }
-							error={ floatError }
-						>
-							<Input
-								type="number"
-								inputMode="decimal"
-								min={ 0 }
-								step="any"
-								placeholder="0"
-								className="w-48"
-								value={ float }
-								onChange={ ( e ) => setFloat( e.target.value ) }
-							/>
-						</Field>
-						<Button type="submit" disabled={ action.isPending }>
-							<LockOpen className="h-4 w-4" aria-hidden="true" />
-							{ __( 'Open', 'radius-hotel-booking-pro' ) }
-						</Button>
-					</form>
+					<OpenForm onOpened={ () => setJustClosed( null ) } />
 				</Panel>
 			) }
 

@@ -202,7 +202,8 @@ final class CashRegisterService {
 
 	/**
 	 * `rtbp_payment_validated`: with *Require an open register* on, refuse a
-	 * payment or refund from someone whose register is closed.
+	 * payment or refund from someone whose register is closed. Someone without
+	 * `register.use` has no register to open, so the rule skips them.
 	 *
 	 * @param array $data The payment.
 	 * @return void
@@ -212,6 +213,9 @@ final class CashRegisterService {
 		unset( $data );
 		$user_id = get_current_user_id();
 		if ( ! $user_id || ! CashRegisterSettings::get( 'requireOpen', false ) ) {
+			return;
+		}
+		if ( class_exists( Access::class ) && ! Access::can( 'register.use' ) ) {
 			return;
 		}
 		if ( ! ( new CashSessionRepository() )->openFor( $user_id ) ) {

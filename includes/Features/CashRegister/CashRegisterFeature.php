@@ -57,8 +57,10 @@ final class CashRegisterFeature extends AbstractFeature {
 	}
 
 	/**
-	 * `rtbp_access_keys`: using your own register is open to staff; seeing
-	 * everyone's is locked.
+	 * `rtbp_access_keys`: both locked unless granted. A role saved before this
+	 * feature never names these keys, so an open default would hand the
+	 * register to every staff member, maintenance included. The Receptionist
+	 * templates open `register.use` (RoleTemplates).
 	 *
 	 * @param array $keys Keys.
 	 * @return array
@@ -66,7 +68,7 @@ final class CashRegisterFeature extends AbstractFeature {
 	public function keys( $keys ): array {
 		$keys                    = (array) $keys;
 		$keys['register.use']    = array(
-			'default' => 'open',
+			'default' => 'locked',
 			'group'   => 'register',
 			'label'   => __( 'Use their own cash register', 'radius-hotel-booking-pro' ),
 		);

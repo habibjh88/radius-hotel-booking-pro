@@ -402,6 +402,31 @@ if ( featureActive( 'cash_register' ) ) {
 				  ];
 		}
 	);
+	// The register on the Dashboard, under the counters. A free version
+	// without `rtbp.dashboard.widgets` never runs this filter: nothing shows.
+	const CashRegisterCard = lazy( () =>
+		import( './cashRegister/CashRegisterCard' )
+	);
+	// One component for every filter run, so a re-run does not remount it.
+	const CashRegisterWidget = () => (
+		<Suspense fallback={ null }>
+			<CashRegisterCard />
+		</Suspense>
+	);
+	addFilter(
+		'rtbp.dashboard.widgets',
+		'radius-hotel-booking-pro/cash-register',
+		( widgets ) => [
+			...( widgets || [] ),
+			{
+				key: 'cash-register',
+				area: 'top',
+				order: 10,
+				accessKey: 'register.use',
+				Component: CashRegisterWidget,
+			},
+		]
+	);
 	addFilter(
 		'rtbp.settings.sections',
 		'radius-hotel-booking-pro/cash-register',

@@ -17,12 +17,49 @@ defined( 'ABSPATH' ) || exit;
 final class RoleTemplates {
 
 	/**
+	 * Set once grant_register_use() ran.
+	 */
+	const REGISTER_USE_OPTION = 'rtbp_pro_register_use_granted';
+
+	/**
 	 * Hook the seeder onto Pro's installer.
 	 *
 	 * @return void
 	 */
 	public static function init(): void {
 		add_action( 'rtbp_pro_installed', array( self::class, 'schedule_seed' ) );
+		add_action( 'rtbp_pro_installed', array( self::class, 'grant_register_use' ) );
+	}
+
+	/**
+	 * Once per site: the Receptionist roles seeded before `register.use`
+	 * became locked by default keep their cash register. Only a role that
+	 * does not set the key (nor `*`) is touched; a hotel's own choice stays.
+	 *
+	 * @return int Roles updated.
+	 */
+	public static function grant_register_use(): int {
+		if ( get_option( self::REGISTER_USE_OPTION ) ) {
+			return 0;
+		}
+		$repository = new AccessRoleRepository();
+		$updated    = 0;
+		foreach ( array( 'receptionist', 'night_receptionist' ) as $slug ) {
+			$role = $repository->findBySlug( $slug );
+			if ( ! $role ) {
+				continue;
+			}
+			$levels = (array) $role->levels;
+			if ( isset( $levels['register.use'] ) || isset( $levels['*'] ) ) {
+				continue;
+			}
+			$levels['register.use'] = 'open';
+			if ( $repository->update( (int) $role->id, array( 'levels' => $levels ) ) ) {
+				++$updated;
+			}
+		}
+		update_option( self::REGISTER_USE_OPTION, 1, false );
+		return $updated;
 	}
 
 	/**
@@ -73,6 +110,7 @@ final class RoleTemplates {
 			'page.reports_sales' => 'locked',
 			'page.exports'       => 'locked',
 			'page.settings'      => 'locked',
+			'register.use'       => 'open',
 		);
 
 		return array(
