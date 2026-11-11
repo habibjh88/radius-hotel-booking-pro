@@ -153,3 +153,4 @@ Fixed: income tax brackets refused on save; the last bracket is now always “an
 Social contributions now also show for a country add-on's calculator that uses them.
 Developers: the tax brackets table is shared with add-ons as window.rtbpPro.ui.BracketsTable.
 Deleting payroll contributions, tax brackets, bonuses, pay schedules or work shifts requires typing DELETE.
+The account menu now shows the employee job title and department.

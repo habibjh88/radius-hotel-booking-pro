@@ -72,6 +72,8 @@ final class StaffRecordsFeature extends AbstractFeature {
 		add_filter( 'rtbp_activity_secret_pattern', array( EmployeeService::class, 'secretPattern' ) );
 		// The account menu shows the staff photo (free `rtbp_user_avatar_url`).
 		add_filter( 'rtbp_user_avatar_url', array( $this, 'avatarUrl' ), 10, 2 );
+		// …and the job title · department under the role badge (free `rtbp_user_menu_subtitle`).
+		add_filter( 'rtbp_user_menu_subtitle', array( $this, 'menuSubtitle' ), 10, 2 );
 		// After WordPress checked the password (priority 20), before the result is used.
 		add_filter( 'authenticate', array( EmployeeService::class, 'signInBlock' ), 99 );
 		// REST checks application passwords without `authenticate`: none for a deactivated employee.
@@ -208,5 +210,21 @@ final class StaffRecordsFeature extends AbstractFeature {
 		$employee = $user_id ? ( new \RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeRepository() )->forUser( (int) $user_id ) : null;
 		$image    = $employee && $employee->avatar_id ? wp_get_attachment_image_url( (int) $employee->avatar_id, 'thumbnail' ) : '';
 		return $image ? (string) $image : (string) $url;
+	}
+
+	/**
+	 * `rtbp_user_menu_subtitle`: the signed-in employee's "Job title · Department".
+	 *
+	 * @param string $subtitle Text so far.
+	 * @param int    $user_id  User id.
+	 * @return string
+	 */
+	public function menuSubtitle( $subtitle, $user_id ): string {
+		$employee = $user_id ? ( new \RadiusTheme\RadiusHotelBookingPro\Staff\EmployeeRepository() )->forUser( (int) $user_id ) : null;
+		if ( ! $employee ) {
+			return (string) $subtitle;
+		}
+		$parts = array_filter( array( trim( (string) $employee->job_title ), trim( (string) $employee->department ) ) );
+		return $parts ? implode( ' · ', $parts ) : (string) $subtitle;
 	}
 }
